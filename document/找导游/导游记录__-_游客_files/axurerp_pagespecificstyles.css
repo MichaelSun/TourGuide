@@ -1,0 +1,1006 @@
+body {
+    margin: 0px;
+}
+
+div {
+    background-repeat: no-repeat;
+}
+
+.raw_image {
+    width: 100%;
+    height: 100%;
+}
+
+.preload {
+    display: none;
+}
+#main_container {
+}
+
+.form_sketch {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.u0_normal {
+    background-image: url('../导游记录__-_游客_files/u0_normal.png');
+}
+
+.u0_container {
+    position:absolute;
+    left:193px;
+    top:20px;
+    width:383px;
+    height:729px;
+}
+
+#u0_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:383px;
+    height:729px;
+}
+
+.u1 {
+    position:absolute;
+    left:2px;
+    top:356px;
+    width:379px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u2 {
+    position:absolute;
+    left:255px;
+    top:147px;
+    width:52px;
+    height:14px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u3 {
+    position:absolute;
+    left:356px;
+    top:148px;
+    width:58px;
+    height:14px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u4 {
+    position:absolute;
+    left:309px;
+    top:180px;
+    width:141px;
+    height:19px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u5 {
+    position:absolute;
+    left:243px;
+    top:247px;
+    width:150px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u6_normal {
+    background-image: url('../导游记录__-_游客_files/u6_normal.png');
+}
+
+.u6_container {
+    position:absolute;
+    left:235px;
+    top:272px;
+    width:300px;
+    height:45px;
+}
+
+#u6_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:51px;
+}
+
+.u7 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u8_normal {
+    background-image: url('../导游记录__-_游客_files/u8_normal.png');
+}
+
+.u8_container {
+    position:absolute;
+    left:235px;
+    top:318px;
+    width:300px;
+    height:45px;
+}
+
+#u8_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:51px;
+}
+
+.u9 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u10_normal {
+    background-image: url('../导游记录__-_游客_files/u8_normal.png');
+}
+
+.u10_container {
+    position:absolute;
+    left:235px;
+    top:364px;
+    width:300px;
+    height:45px;
+}
+
+#u10_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:51px;
+}
+
+.u11 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u12_normal {
+    background-image: url('../导游记录__-_游客_files/u12_normal.png');
+}
+
+.u12_container {
+    position:absolute;
+    left:236px;
+    top:177px;
+    width:50px;
+    height:28px;
+}
+
+#u12_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:56px;
+    height:34px;
+}
+
+.u13 {
+    position:absolute;
+    left:2px;
+    top:5px;
+    width:46px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u14_normal {
+    background-image: url('../导游记录__-_游客_files/u14_normal.png');
+}
+
+.u14_container {
+    position:absolute;
+    left:235px;
+    top:410px;
+    width:300px;
+    height:45px;
+}
+
+#u14_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:51px;
+}
+
+.u15 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u16 {
+    position:absolute;
+    left:344px;
+    top:328px;
+    width:106px;
+    height:25px;
+    ;
+    ;
+    text-align: left;;
+    font-family:'Heiti SC';
+    font-size: 13px;
+    color:#818181;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u17_normal {
+    background-image: url('../导游记录__-_游客_files/u17_normal.png');
+}
+
+.u17_container {
+    position:absolute;
+    left:416px;
+    top:273px;
+    width:50px;
+    height:45px;
+}
+
+#u17_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:50px;
+    height:45px;
+}
+
+.u18 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:46px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u19_normal {
+    background-image: url('../导游记录__-_游客_files/u19_normal.png');
+}
+
+.u19_container {
+    position:absolute;
+    left:455px;
+    top:376px;
+    width:22px;
+    height:20px;
+}
+
+#u19_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:22px;
+    height:20px;
+}
+
+.u20 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:18px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u21 {
+    position:absolute;
+    left:466px;
+    top:322px;
+    width:61px;
+    height:38px;
+    ;
+    ;
+    ;
+    background-image: url('../resources/images/transparent.gif');
+    overflow:hidden;
+}
+
+.u22_normal {
+    background-image: url('../导游记录__-_游客_files/u22_normal.png');
+}
+
+.u22_container {
+    position:absolute;
+    left:398px;
+    top:486px;
+    width:120px;
+    height:45px;
+}
+
+#u22_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:126px;
+    height:51px;
+}
+
+.u23 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:116px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u24 {
+    position:absolute;
+    left:226px;
+    top:583px;
+    width:321px;
+    height:46px;
+    overflow:hidden;
+}
+
+#pd3u24 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u25_normal {
+    background-image: url('../导游记录__-_游客_files/u25_normal.png');
+}
+
+.u25_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u25_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u26 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u27_normal {
+    background-image: url('../导游记录__-_游客_files/u27_normal.png');
+}
+
+.u27_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u27_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u28 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u29_normal {
+    background-image: url('../导游记录__-_游客_files/u29_normal.png');
+}
+
+.u29_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u29_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u30 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u31_normal {
+    background-image: url('../导游记录__-_游客_files/u27_normal.png');
+}
+
+.u31_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u31_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u32 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#pd2u24 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u33_normal {
+    background-image: url('../导游记录__-_游客_files/u25_normal.png');
+}
+
+.u33_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u33_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u34 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u35_normal {
+    background-image: url('../导游记录__-_游客_files/u27_normal.png');
+}
+
+.u35_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u35_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u36 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u37_normal {
+    background-image: url('../导游记录__-_游客_files/u37_normal.png');
+}
+
+.u37_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u37_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u38 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u39_normal {
+    background-image: url('../导游记录__-_游客_files/u39_normal.png');
+}
+
+.u39_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u39_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u40 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#pd1u24 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u41_normal {
+    background-image: url('../导游记录__-_游客_files/u41_normal.png');
+}
+
+.u41_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u41_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u42 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u43_normal {
+    background-image: url('../导游记录__-_游客_files/u43_normal.png');
+}
+
+.u43_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u43_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u44 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u45_normal {
+    background-image: url('../导游记录__-_游客_files/u37_normal.png');
+}
+
+.u45_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u45_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u46 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u47_normal {
+    background-image: url('../导游记录__-_游客_files/u43_normal.png');
+}
+
+.u47_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u47_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u48 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#pd0u24 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u49_normal {
+    background-image: url('../导游记录__-_游客_files/u25_normal.png');
+}
+
+.u49_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u49_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u50 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u51_normal {
+    background-image: url('../导游记录__-_游客_files/u39_normal.png');
+}
+
+.u51_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u51_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u52 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u53_normal {
+    background-image: url('../导游记录__-_游客_files/u37_normal.png');
+}
+
+.u53_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u53_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u54 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u55_normal {
+    background-image: url('../导游记录__-_游客_files/u43_normal.png');
+}
+
+.u55_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u55_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u56 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+

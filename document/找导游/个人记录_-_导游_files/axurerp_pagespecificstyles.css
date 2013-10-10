@@ -1,0 +1,907 @@
+body {
+    margin: 0px;
+}
+
+div {
+    background-repeat: no-repeat;
+}
+
+.raw_image {
+    width: 100%;
+    height: 100%;
+}
+
+.preload {
+    display: none;
+}
+#main_container {
+}
+
+.form_sketch {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.u0_normal {
+    background-image: url('../个人记录_-_导游_files/u0_normal.png');
+}
+
+.u0_container {
+    position:absolute;
+    left:193px;
+    top:20px;
+    width:383px;
+    height:729px;
+}
+
+#u0_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:383px;
+    height:729px;
+}
+
+.u1 {
+    position:absolute;
+    left:2px;
+    top:356px;
+    width:379px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u2 {
+    position:absolute;
+    left:255px;
+    top:147px;
+    width:52px;
+    height:14px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u3 {
+    position:absolute;
+    left:356px;
+    top:148px;
+    width:58px;
+    height:14px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u4 {
+    position:absolute;
+    left:309px;
+    top:180px;
+    width:141px;
+    height:19px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u5 {
+    position:absolute;
+    left:236px;
+    top:243px;
+    width:288px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u6_normal {
+    background-image: url('../个人记录_-_导游_files/u6_normal.png');
+}
+
+.u6_container {
+    position:absolute;
+    left:230px;
+    top:268px;
+    width:300px;
+    height:45px;
+}
+
+#u6_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:51px;
+}
+
+.u7 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u8_normal {
+    background-image: url('../个人记录_-_导游_files/u8_normal.png');
+}
+
+.u8_container {
+    position:absolute;
+    left:230px;
+    top:314px;
+    width:300px;
+    height:45px;
+}
+
+#u8_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:51px;
+}
+
+.u9 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u10_normal {
+    background-image: url('../个人记录_-_导游_files/u10_normal.png');
+}
+
+.u10_container {
+    position:absolute;
+    left:230px;
+    top:360px;
+    width:300px;
+    height:45px;
+}
+
+#u10_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:51px;
+}
+
+.u11 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u12_normal {
+    background-image: url('../个人记录_-_导游_files/u12_normal.png');
+}
+
+.u12_container {
+    position:absolute;
+    left:508px;
+    top:370px;
+    width:22px;
+    height:20px;
+}
+
+#u12_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:22px;
+    height:20px;
+}
+
+.u13 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:18px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u14_normal {
+    background-image: url('../个人记录_-_导游_files/u12_normal.png');
+}
+
+.u14_container {
+    position:absolute;
+    left:508px;
+    top:282px;
+    width:22px;
+    height:20px;
+}
+
+#u14_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:22px;
+    height:20px;
+}
+
+.u15 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:18px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u16_normal {
+    background-image: url('../个人记录_-_导游_files/u12_normal.png');
+}
+
+.u16_container {
+    position:absolute;
+    left:508px;
+    top:328px;
+    width:22px;
+    height:20px;
+}
+
+#u16_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:22px;
+    height:20px;
+}
+
+.u17 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:18px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u18 {
+    position:absolute;
+    left:226px;
+    top:583px;
+    width:321px;
+    height:46px;
+    overflow:hidden;
+}
+
+#pd3u18 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u19_normal {
+    background-image: url('../个人记录_-_导游_files/u19_normal.png');
+}
+
+.u19_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u19_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u20 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u21_normal {
+    background-image: url('../个人记录_-_导游_files/u21_normal.png');
+}
+
+.u21_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u21_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u22 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u23_normal {
+    background-image: url('../个人记录_-_导游_files/u23_normal.png');
+}
+
+.u23_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u23_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u24 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u25_normal {
+    background-image: url('../个人记录_-_导游_files/u21_normal.png');
+}
+
+.u25_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u25_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u26 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#pd2u18 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u27_normal {
+    background-image: url('../个人记录_-_导游_files/u19_normal.png');
+}
+
+.u27_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u27_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u28 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u29_normal {
+    background-image: url('../个人记录_-_导游_files/u21_normal.png');
+}
+
+.u29_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u29_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u30 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u31_normal {
+    background-image: url('../个人记录_-_导游_files/u31_normal.png');
+}
+
+.u31_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u31_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u32 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u33_normal {
+    background-image: url('../个人记录_-_导游_files/u33_normal.png');
+}
+
+.u33_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u33_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u34 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#pd1u18 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u35_normal {
+    background-image: url('../个人记录_-_导游_files/u35_normal.png');
+}
+
+.u35_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u35_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u36 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u37_normal {
+    background-image: url('../个人记录_-_导游_files/u37_normal.png');
+}
+
+.u37_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u37_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u38 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u39_normal {
+    background-image: url('../个人记录_-_导游_files/u31_normal.png');
+}
+
+.u39_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u39_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u40 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u41_normal {
+    background-image: url('../个人记录_-_导游_files/u37_normal.png');
+}
+
+.u41_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u41_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u42 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#pd0u18 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:321px;
+    height:46px;
+    
+}
+
+.u43_normal {
+    background-image: url('../个人记录_-_导游_files/u19_normal.png');
+}
+
+.u43_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u43_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u44 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u45_normal {
+    background-image: url('../个人记录_-_导游_files/u33_normal.png');
+}
+
+.u45_container {
+    position:absolute;
+    left:81px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u45_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u46 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u47_normal {
+    background-image: url('../个人记录_-_导游_files/u31_normal.png');
+}
+
+.u47_container {
+    position:absolute;
+    left:240px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u47_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u48 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u49_normal {
+    background-image: url('../个人记录_-_导游_files/u37_normal.png');
+}
+
+.u49_container {
+    position:absolute;
+    left:160px;
+    top:0px;
+    width:80px;
+    height:45px;
+}
+
+#u49_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:86px;
+    height:51px;
+}
+
+.u50 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:76px;
+    height:18px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
