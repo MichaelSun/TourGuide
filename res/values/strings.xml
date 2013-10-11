@@ -1,41 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TourGuide</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">找导游</string>
 
-    
-        <!-- 电影页面 -->
-    <string name="movie_title">电影</string>
+    <!-- 附近导游 -->
+    <string name="nearby_guide">附近导游</string>
+    <string name="menu_show_map">地图</string>
+    <string name="menu_show_list">列表</string>
 
-    <!-- 周边 -->
-    <string name="location_title">周边</string>
-    <string name="new_book">新单</string>
-    <string name="food">美食</string>
-    <string name="play">娱乐</string>
-    <string name="movie">电影</string>
-    <string name="ktv">KTV</string>
-    <string name="wash">洗浴</string>
-    <string name="hotel">酒店</string>
-    <string name="rewards">积分</string>
-    <string name="phone">手机</string>
+    <!-- 个人记录 -->
+    <string name="profile_record">个人记录</string>
 
-    <!-- 团购 -->
-    <string name="tuangou_title">团购</string>
+    <!-- 搜索 -->
+    <string name="search">搜索</string>
 
-    <!-- 我的 -->
-    <string name="profile_title">我的</string>
-    <string name="balance">账户余额：</string>
-    <string name="yuan">元</string>
-    <string name="my_ticket">我的给力券</string>
-    <string name="my_profile">我的信息</string>
-    <string name="everyday_rec">每日推荐</string>
-    <string name="unpay">待付款订单</string>
-    <string name="payed">已付款订单</string>
-    <string name="lucky">抽奖单</string>
-    <string name="coupon">代金券</string>
-    
-    <!-- 更多 -->
-    <string name="more_title">更多</string>
+    <!-- 设置 -->
+    <string name="setting">设置</string>
+
 </resources>

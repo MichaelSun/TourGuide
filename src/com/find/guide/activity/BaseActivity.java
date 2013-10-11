@@ -22,7 +22,7 @@ public class BaseActivity extends Activity {
 
     protected void init() {
         mActionbar = getActionBar();
-        mActionbar.setDisplayHomeAsUpEnabled(true);
+//        mActionbar.setDisplayHomeAsUpEnabled(true);
         mActionbar.setDisplayShowTitleEnabled(true);
         mActionbar.setDisplayShowHomeEnabled(true);
     }
