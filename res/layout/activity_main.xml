@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/botton_region"
@@ -9,10 +9,10 @@
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/main_page_bottom_bar"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <RelativeLayout
-            android:id="@+id/location"
+            android:id="@+id/nearby_guide"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -20,27 +20,30 @@
             android:clickable="true"
             android:orientation="vertical"
             android:paddingBottom="3dp"
-            android:paddingTop="2dp">
+            android:paddingTop="2dp" >
+
             <ImageView
-                android:id="@+id/location_img"
+                android:id="@+id/nearby_guide_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/location"
+                android:layout_centerHorizontal="true"
+                android:duplicateParentState="true"
                 android:scaleType="center"
-                android:layout_centerHorizontal="true"/>
+                android:src="@drawable/ic_location" />
+
             <TextView
-                android:id="@+id/location_text"
-                android:text="周边"
-                android:gravity="center"
+                android:id="@+id/nearby_guide_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/location_img"
-                android:textColor="@color/bottom_normal_color"/>
+                android:layout_below="@id/nearby_guide_img"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/nearby_guide"
+                android:textColor="@color/bottom_text_color" />
         </RelativeLayout>
 
-
         <RelativeLayout
-            android:id="@+id/tuangou"
+            android:id="@+id/profile_record"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -48,26 +51,30 @@
             android:clickable="true"
             android:orientation="vertical"
             android:paddingBottom="3dp"
-            android:paddingTop="2dp">
+            android:paddingTop="2dp" >
+
             <ImageView
-                android:id="@+id/tuangou_img"
+                android:id="@+id/profile_record_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/tuangou"
+                android:layout_centerHorizontal="true"
+                android:duplicateParentState="true"
                 android:scaleType="center"
-                android:layout_centerHorizontal="true"/>
+                android:src="@drawable/ic_tuangou" />
+
             <TextView
-                android:id="@+id/tuangou_text"
-                android:text="团购"
-                android:gravity="center"
+                android:id="@+id/profile_record_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tuangou_img"
-                android:textColor="@color/bottom_normal_color"/>
+                android:layout_below="@id/profile_record_img"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/profile_record"
+                android:textColor="@color/bottom_text_color" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/profile"
+            android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -75,26 +82,30 @@
             android:clickable="true"
             android:orientation="vertical"
             android:paddingBottom="3dp"
-            android:paddingTop="2dp">
+            android:paddingTop="2dp" >
+
             <ImageView
-                android:id="@+id/profile_img"
+                android:id="@+id/search_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profile"
+                android:layout_centerHorizontal="true"
+                android:duplicateParentState="true"
                 android:scaleType="center"
-                android:layout_centerHorizontal="true"/>
+                android:src="@drawable/ic_profile" />
+
             <TextView
-                android:id="@+id/profile_text"
-                android:text="个人"
-                android:gravity="center"
+                android:id="@+id/search_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_img"
-                android:textColor="@color/bottom_normal_color"/>
+                android:layout_below="@id/search_img"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/search"
+                android:textColor="@color/bottom_text_color" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/more"
+            android:id="@+id/setting"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -102,32 +113,35 @@
             android:clickable="true"
             android:orientation="vertical"
             android:paddingBottom="3dp"
-            android:paddingTop="2dp">
+            android:paddingTop="2dp" >
+
             <ImageView
-                android:id="@+id/more_img"
+                android:id="@+id/setting_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/more"
+                android:layout_centerHorizontal="true"
+                android:duplicateParentState="true"
                 android:scaleType="center"
-                android:layout_centerHorizontal="true"/>
+                android:src="@drawable/ic_more" />
+
             <TextView
-                android:id="@+id/more_text"
-                android:text="更多"
-                android:gravity="center"
+                android:id="@+id/setting_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/more_img"
-                android:textColor="@color/bottom_normal_color"/>
+                android:layout_below="@id/setting_img"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/setting"
+                android:textColor="@color/bottom_text_color" />
         </RelativeLayout>
-
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_alignParentTop="true"
         android:layout_above="@id/botton_region"
-        android:contentDescription="main_fragment_container"/>
+        android:layout_alignParentTop="true"
+        android:contentDescription="main_fragment_container" />
 
 </RelativeLayout>

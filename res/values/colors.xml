@@ -25,7 +25,10 @@
 
     <color name="bottom_pressed_color">#84ae4c</color>
     <color name="bottom_normal_color">#6d737b</color>
-
+    
+    <drawable name="background">#e3e4e6</drawable>
+    
+    
     <!-- popup menu -->
     <drawable name="popup_menu_item_normal_bg">#F3F3F3</drawable>
     <drawable name="popup_menu_item_pressed_bg">#CB553B</drawable>
