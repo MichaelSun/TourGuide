@@ -41,6 +41,8 @@ public class MainActivity extends BaseActivity {
 
         initData(savedInstanceState);
         initUI();
+        
+        mActionbar.setDisplayHomeAsUpEnabled(false);
     }
 
     @Override
@@ -194,6 +196,8 @@ public class MainActivity extends BaseActivity {
         }
 
         super.onDestroy();
+        
+        System.exit(0);
     }
 
 }

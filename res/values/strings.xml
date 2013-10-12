@@ -16,5 +16,45 @@
 
     <!-- 设置 -->
     <string name="setting">设置</string>
+    <string name="setting_login_register">登陆/注册</string>
+    <string name="setting_guide_authentication">我是导游</string>
+    <string name="setting_update">检查更新</string>
+    <string name="setting_feedback">意见反馈</string>
+    <string name="setting_logout">退出登陆</string>
+
+    <!-- 登陆 -->
+    <string name="login_phone_hint">手机号</string>
+    <string name="login_password_hint">密码</string>
+    <string name="login">登陆</string>
+    <string name="register">注册</string>
+
+    <!-- 注册 -->
+    <string name="register_phone_label">手机号</string>
+    <string name="register_password_label">密码</string>
+    <string name="register_password_confirm_label">密码确认</string>
+    <string name="register_verification_code_label">验证码</string>
+
+    <!-- 导游认证 -->
+    <string name="guide_identify_title">我是导游</string>
+    <string name="guide_id_card">导游证</string>
+    <string name="guide_id_card_no">导游证号</string>
+    <string name="birthday">出生日期</string>
+    <string name="be_guide_year">领证年份</string>
+    
+    <string name="submit_check">提交审核</string>
+    
+    <string name="name">姓名</string>
+    
+    <string name="gender">性别</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    
+    <!-- 预约 -->
+    <string name="booking_title">预约导游</string>
+    <string name="city">城        市</string>
+    <string name="good_scenic">擅长景区</string>
+    <string name="guide_history">导游历史</string>
+    <string name="guide_card_id">导游证号</string>
+    <string name="goto_booking">我要预约</string>
 
 </resources>

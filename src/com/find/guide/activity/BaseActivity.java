@@ -1,5 +1,7 @@
 package com.find.guide.activity;
 
+import com.find.guide.R;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -22,9 +24,11 @@ public class BaseActivity extends Activity {
 
     protected void init() {
         mActionbar = getActionBar();
-//        mActionbar.setDisplayHomeAsUpEnabled(true);
+        mActionbar.setDisplayHomeAsUpEnabled(true);
         mActionbar.setDisplayShowTitleEnabled(true);
         mActionbar.setDisplayShowHomeEnabled(true);
+        
+        this.getWindow().setBackgroundDrawableResource(R.drawable.background);
     }
 
     protected void fragmentUpdate(int id, Fragment fragment) {
