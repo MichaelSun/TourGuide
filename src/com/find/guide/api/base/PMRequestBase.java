@@ -2,9 +2,7 @@ package com.find.guide.api.base;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
-import com.photo_me.mobile.android.config.AppConfig;
-import com.photo_me.mobile.android.setting_manager.SettingManager;
+import com.find.guide.setting.SettingManager;
 import com.plugin.internet.core.InternetStringUtils;
 import com.plugin.internet.core.NetWorkException;
 import com.plugin.internet.core.RequestBase;
