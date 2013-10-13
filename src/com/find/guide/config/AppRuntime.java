@@ -1,13 +1,14 @@
 package com.find.guide.config;
 
-import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.find.guide.fragment.SettingFragment;
+import com.find.guide.setting.SettingManager;
+import com.find.guide.utils.XMLTables;
 import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.common.utils.DeviceInfo;
 import com.plugin.common.utils.UtilsConfig;
@@ -15,7 +16,6 @@ import com.plugin.common.utils.files.DiskManager;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class AppRuntime {
 
@@ -49,6 +49,8 @@ public class AppRuntime {
         }
 
     }
+    
+    public static XMLTables gXMLTables;
 
     public static AppDeviceInfo APP_DEVICE_INFO;
 
@@ -116,6 +118,10 @@ public class AppRuntime {
                 });
             }
         }
+    }
+    
+    public static void logout() {
+        SettingManager.getInstance().clearAll();
     }
 
 }

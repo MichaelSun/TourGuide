@@ -2,6 +2,8 @@ package com.find.guide.api.base;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+
+import com.find.guide.config.AppConfig;
 import com.find.guide.setting.SettingManager;
 import com.plugin.internet.core.InternetStringUtils;
 import com.plugin.internet.core.NetWorkException;
@@ -17,6 +19,8 @@ import java.util.Vector;
 public class PMRequestBase<T> extends RequestBase<T> {
     
     public static String BASE_API_URL = "http://118.186.218.43/api/";
+    
+    public static final boolean DEBUG = false & AppConfig.DEBUG;
     
     private static final String KEY_METHOD = "method";
     private static final String KEY_HTTP_METHOD = "httpMethod";
@@ -53,8 +57,13 @@ public class PMRequestBase<T> extends RequestBase<T> {
         }
         
         if (checkTicket) {
-            if (TextUtils.isEmpty(ticket) || TextUtils.isEmpty(userSecret)) {
-                return null;
+            if (DEBUG) {
+                ticket = "BUjVQQVVgV20DM109DTBQOw0_UmFTZVIzDmcPM1VjAWA.";
+                userSecret = "0cc23bcfe33f62326aef583e3691c262";
+            } else {
+                if (TextUtils.isEmpty(ticket) || TextUtils.isEmpty(userSecret)) {
+                    return null;
+                }
             }
         }
         

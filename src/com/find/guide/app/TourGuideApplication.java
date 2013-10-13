@@ -2,17 +2,35 @@ package com.find.guide.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.MKGeneralListener;
 import com.baidu.mapapi.map.MKEvent;
+import com.find.guide.R;
 import com.find.guide.config.AppConfig;
 import com.find.guide.config.AppRuntime;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.utils.Toasts;
+import com.find.guide.utils.XMLTables;
 import com.plugin.common.utils.UtilsConfig;
+import com.plugin.common.utils.UtilsRuntime;
+import com.plugin.internet.InternetUtils;
+import com.plugin.internet.core.HttpConnectHookListener;
+import com.plugin.internet.core.NetWorkException;
+import com.plugin.internet.core.RequestBase;
 
 public class TourGuideApplication extends Application {
+
+    public static final int CODE_TICKET_INVALID = 7;
+
+    private static final int SHOW_SERVER_CODE_TIPS = 1;
+    private static final int SHOW_LOCAL_NETWORK_ERROR = 2;
+    private static final int SHOW_NETWORK_ERROR = 3;
 
     private static TourGuideApplication mInstance = null;
 
@@ -26,11 +44,20 @@ public class TourGuideApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        SettingManager.getInstance().init(this);
-        UtilsConfig.init(this);
-        AppRuntime.APP_DEVICE_INFO = new AppRuntime.AppDeviceInfo(this);
 
-        initBMapManager(this);
+        String curProcessName = UtilsRuntime.getCurProcessName(this);
+        if (!TextUtils.isEmpty(curProcessName) && curProcessName.equals(getPackageName())) {
+            SettingManager.getInstance().init(this);
+            UtilsConfig.init(this);
+            AppRuntime.APP_DEVICE_INFO = new AppRuntime.AppDeviceInfo(this);
+
+            AppRuntime.gXMLTables = new XMLTables();
+            AppRuntime.gXMLTables.loadXML(getResources().getXml(R.xml.error_tips));
+
+            setHttpHookListener();
+
+            initBMapManager(this);
+        }
     }
 
     public void initBMapManager(Context context) {
@@ -62,4 +89,90 @@ public class TourGuideApplication extends Application {
             }
         }
     }
+
+    private void setHttpHookListener() {
+        InternetUtils.setHttpHookListener(getApplicationContext(), new HttpConnectHookListener() {
+
+            @Override
+            public void onPreHttpConnect(String baseUrl, String method, Bundle requestParams) {
+            }
+
+            @Override
+            public void onPostHttpConnect(String result, int httpStatus) {
+            }
+
+            @Override
+            public void onHttpConnectError(int code, String data, Object obj) {
+                if (code > 0) {
+                    // server error code
+                    Message msg = new Message();
+                    msg.what = SHOW_SERVER_CODE_TIPS;
+                    msg.arg1 = code;
+                    mHandler.sendMessage(msg);
+                } else if (code == NetWorkException.NETWORK_NOT_AVILABLE) {
+                    Message msg = new Message();
+                    msg.what = SHOW_LOCAL_NETWORK_ERROR;
+                    mHandler.sendMessage(msg);
+                } else {
+                    Message msg = new Message();
+                    msg.what = SHOW_NETWORK_ERROR;
+                    mHandler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            RequestBase request = (RequestBase) msg.obj;
+
+            switch (msg.what) {
+            case SHOW_SERVER_CODE_TIPS:
+                if (msg.arg1 == CODE_TICKET_INVALID) {
+                    // 判断当前是否已经登录了，防止在未登录状态下发生踢出
+                    // if (SettingManager.getInstance().getUserId() <= 0
+                    // || AppRuntime.gInLogoutProcess.get()) {
+                    // return;
+                    // }
+
+                    // //invalid ticket, should logout
+                    // SettingManager.getInstance().setHasKickout(true);
+                    // if (SettingManager.getInstance().getHasKickout()
+                    // && !AppRuntime.isBackground(getApplicationContext())) {
+                    // //如果应用程序在前台的话，给MainActivity发送退出事件
+                    //
+                    // // 先设置kickout=false的目的，是为了BaseActivity中不会重复的发送kickout
+                    // SettingManager.getInstance().setHasKickout(false);
+                    // AppRuntime.sendKickoutIntent(getApplicationContext());
+                    // }
+                    // SettingManager.getInstance().setHasKickout(false);
+                    if (request == null || !request.canIgnoreResult()) {
+                        Toasts.getInstance(getApplicationContext()).show(
+                                AppRuntime.gXMLTables.getProperty(AppConfig.ROOT_CATEGORY, AppConfig.SERVER_CODE,
+                                        msg.arg1), Toast.LENGTH_SHORT);
+                    }
+                } else {
+                    if (request == null || !request.canIgnoreResult()) {
+                        Toasts.getInstance(getApplicationContext()).show(
+                                AppRuntime.gXMLTables.getProperty(AppConfig.ROOT_CATEGORY, AppConfig.SERVER_CODE,
+                                        msg.arg1), Toast.LENGTH_SHORT);
+                    }
+                }
+                break;
+            case SHOW_LOCAL_NETWORK_ERROR:
+                if (request == null || !request.canIgnoreResult()) {
+                    Toasts.getInstance(getApplicationContext()).show(
+                            AppRuntime.gXMLTables.getDefaultForCategory(AppConfig.ROOT_CATEGORY), Toast.LENGTH_SHORT);
+                }
+                break;
+            case SHOW_NETWORK_ERROR:
+                if (request == null || !request.canIgnoreResult()) {
+                    Toasts.getInstance(getApplicationContext()).show(
+                            AppRuntime.gXMLTables.getProperty(AppConfig.ROOT_CATEGORY, "internet_error", 0),
+                            Toast.LENGTH_SHORT);
+                }
+                break;
+            }
+        }
+    };
 }

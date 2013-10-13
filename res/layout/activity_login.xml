@@ -109,6 +109,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/btn_login_green"
+            android:enabled="false"
             android:gravity="center"
             android:text="@string/login"
             android:textColor="#ffffff"
