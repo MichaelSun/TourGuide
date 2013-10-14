@@ -2,8 +2,8 @@ package com.find.guide.activity;
 
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.model.LoginHelper;
-import com.find.guide.model.LoginHelper.OnLoginFinishListener;
+import com.find.guide.model.UserHelper;
+import com.find.guide.model.UserHelper.OnLoginFinishListener;
 import com.find.guide.view.TipsDialog;
 
 import android.content.Intent;
@@ -26,7 +26,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Text
     private Button mLoginBtn;
     private Button mRegisterBtn;
 
-    private LoginHelper mLoginHelper = null;
+    private UserHelper mLoginHelper = null;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -37,7 +37,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Text
         setContentView(R.layout.activity_login);
         initUI();
 
-        mLoginHelper = new LoginHelper(getApplicationContext());
+        mLoginHelper = new UserHelper(getApplicationContext());
     }
 
     private void initUI() {
@@ -93,7 +93,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Text
                 @Override
                 public void run() {
                     TipsDialog.getInstance().dismiss();
-                    if (result == LoginHelper.LOGIN_SUCCESS) {
+                    if (result == UserHelper.LOGIN_SUCCESS) {
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this, R.string.login_failed, Toast.LENGTH_SHORT).show();

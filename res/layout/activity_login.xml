@@ -28,20 +28,20 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:scaleType="fitCenter"
+                android:scaleType="center"
                 android:src="@drawable/icon_user" />
 
             <EditText
                 android:id="@+id/login_phone_et"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/login_user_iv"
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
                 android:hint="@string/login_phone_hint"
-                android:inputType="number"
+                android:inputType="phone"
                 android:maxLength="20"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -54,8 +54,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#d8d8d8" />
+            android:layout_height="1dp"
+            android:background="#c8c8c8" />
 
         <RelativeLayout
             android:id="@+id/login_password_rl"
@@ -77,7 +77,7 @@
             <EditText
                 android:id="@+id/login_password_et"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/login_password_iv"
@@ -95,40 +95,33 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/login_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:orientation="horizontal" >
+        android:layout_height="46dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_singin"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_login_green"
-            android:enabled="false"
-            android:gravity="center"
-            android:text="@string/login"
-            android:textColor="#ffffff"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/register_btn"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_login_grey"
-            android:gravity="center"
-            android:text="@string/register"
-            android:textColor="#666666"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/btn_singup"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

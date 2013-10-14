@@ -14,13 +14,13 @@ import com.baidu.mapapi.map.ItemizedOverlay;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
-import com.find.guide.view.GuideView.GuideInfo;
+import com.find.guide.model.TourGuide;
 
 public class GuideMapView extends MapView {
 
     private GuideOverlay mOverlay = null;
 
-    private List<GuideInfo> mGuides = null;
+    private List<TourGuide> mGuides = null;
 
     private OnGuideClickListener mOnGuideClickListener;
 
@@ -32,7 +32,7 @@ public class GuideMapView extends MapView {
         super(context, attrs);
     }
 
-    public void updateGuideOverlay(List<GuideInfo> guides) {
+    public void updateGuideOverlay(List<TourGuide> guides) {
         if (mOverlay == null) {
             mOverlay = new GuideOverlay(null, this);
             getOverlays().add(mOverlay);
@@ -43,9 +43,9 @@ public class GuideMapView extends MapView {
         
         if (guides != null && guides.size() > 0) {
             List<OverlayItem> items = new ArrayList<OverlayItem>();
-            for (GuideInfo guide : guides) {
+            for (TourGuide guide : guides) {
                 GuideView view = new GuideView(getContext());
-                view.setGuideInfo(guide);
+                view.setGuide(guide);
                 Bitmap bitmap = BMapUtil.getBitmapFromView(view);
 
                 double[] lnglat = parseLocation(guide.location);
@@ -82,7 +82,7 @@ public class GuideMapView extends MapView {
     }
 
     public static interface OnGuideClickListener {
-        public void onGuideClick(GuideInfo guide);
+        public void onGuideClick(TourGuide guide);
     }
 
     public void setOnGuideClickListener(OnGuideClickListener listener) {
@@ -99,7 +99,7 @@ public class GuideMapView extends MapView {
         public boolean onTap(int index) {
 //            OverlayItem item = getItem(index);
             if (mGuides != null && mGuides.size() > index) {
-                GuideInfo guide = mGuides.get(index);
+                TourGuide guide = mGuides.get(index);
                 if (mOnGuideClickListener != null) {
                     mOnGuideClickListener.onGuideClick(guide);
                 }

@@ -139,14 +139,4 @@ public class SettingManager {
         return mSharedPreferences.getString(KEY_SECRET_KEY, "");
     }
 
-    private static final String KEY_HAS_NEW_VERSION = "key_has_new_version";
-
-    public void setHasNewVersion(boolean hasVersion) {
-        mEditor.putBoolean(KEY_HAS_NEW_VERSION, hasVersion).commit();
-    }
-
-    public boolean getHasNewVersion() {
-        return mSharedPreferences.getBoolean(KEY_HAS_NEW_VERSION, false);
-    }
-
 }

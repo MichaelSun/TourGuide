@@ -16,7 +16,7 @@
 
     <!-- 设置 -->
     <string name="setting">设置</string>
-    <string name="setting_login_register">登陆/注册</string>
+    <string name="setting_login">登陆</string>
     <string name="setting_guide_authentication">我是导游</string>
     <string name="setting_update">检查更新</string>
     <string name="setting_feedback">意见反馈</string>

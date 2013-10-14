@@ -1,6 +1,7 @@
 package com.find.guide.view;
 
 import com.find.guide.R;
+import com.find.guide.model.TourGuide;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -42,27 +43,10 @@ public class GuideView extends LinearLayout {
         super.onFinishInflate();
     }
 
-    public void setGuideInfo(GuideInfo guide) {
+    public void setGuide(TourGuide guide) {
         if (guide != null) {
-            mNameTv.setText(guide.userName);
+            mNameTv.setText(guide.getUserName());
         }
-    }
-
-    public static class GuideInfo {
-
-        public int userId;
-        public String userName;
-        public String mobile;
-        public int gender;
-        public int userType;
-        public String headUrl;
-        public String goodAtScenic;
-        public long birthday;
-        public int beGuideYear;
-        public String guideCardUrl;
-        public String guideCardId;
-        public String location;
-        public int city;
     }
 
 }

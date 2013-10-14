@@ -39,7 +39,7 @@ public class SettingFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, null);
 
-        mLoginRegisterView = view.findViewById(R.id.setting_login_register);
+        mLoginRegisterView = view.findViewById(R.id.setting_login);
         mGuideAuthenticationView = view.findViewById(R.id.setting_guide_authentication);
         mUpdateView = view.findViewById(R.id.setting_update);
         mFeedBackView = view.findViewById(R.id.setting_feedback);
@@ -68,8 +68,8 @@ public class SettingFragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-        case R.id.setting_login_register:
-            loginOrRegister();
+        case R.id.setting_login:
+            login();
             break;
         case R.id.setting_guide_authentication:
             guideIdentify();
@@ -86,7 +86,7 @@ public class SettingFragment extends Fragment implements OnClickListener {
         }
     }
 
-    private void loginOrRegister() {
+    private void login() {
         if (SettingManager.getInstance().getUserId() > 0) {
             logout();
         } else {

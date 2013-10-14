@@ -1,6 +1,5 @@
 package com.find.guide.fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Fragment;
@@ -14,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -28,11 +26,13 @@ import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.R;
 import com.find.guide.activity.BookingActivity;
 import com.find.guide.app.TourGuideApplication;
+import com.find.guide.model.GuideHelper;
+import com.find.guide.model.GuideHelper.OnGetNearByGuideListener;
+import com.find.guide.model.TourGuide;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
-import com.find.guide.view.GuideView.GuideInfo;
 
-public class MapFragment extends Fragment {
+public class NearByFragment extends Fragment {
 
     private GuideMapView mMapView = null;
     private MapController mMapController = null;
@@ -44,13 +44,15 @@ public class MapFragment extends Fragment {
 
     private boolean mIsFirstLocation = true;
 
+    private GuideHelper mGuideHelper = null;
+
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
+        mGuideHelper = new GuideHelper(TourGuideApplication.getInstance());
     }
 
     @Override
@@ -72,33 +74,11 @@ public class MapFragment extends Fragment {
 
         mMapView.setOnGuideClickListener(new OnGuideClickListener() {
             @Override
-            public void onGuideClick(GuideInfo guide) {
+            public void onGuideClick(TourGuide guide) {
                 bookingGuide(guide);
             }
         });
 
-        GuideInfo guide1 = new GuideInfo();
-        guide1.userName = "张三";
-        guide1.location = "39.9518141832995,116.43643";
-        GuideInfo guide2 = new GuideInfo();
-        guide2.userName = "李四";
-        guide2.location = "39.9118141832995,116.41432";
-        GuideInfo guide3 = new GuideInfo();
-        guide3.userName = "王五";
-        guide3.location = "39.9918141832995,116.49643";
-
-        final List<GuideInfo> guides = new ArrayList<GuideInfo>();
-        guides.add(guide1);
-        guides.add(guide2);
-        guides.add(guide3);
-
-        mHandler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                mMapView.updateGuideOverlay(guides);
-            }
-        }, 200);
     }
 
     private void initMap() {
@@ -158,6 +138,8 @@ public class MapFragment extends Fragment {
                 Log.d("LocationOverlay", "receive location, animate to it");
                 mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6)));
                 myLocationOverlay.setLocationMode(LocationMode.NORMAL);
+
+                getNearByGuide(locData.latitude + "," + locData.longitude);
             }
             mIsFirstLocation = false;
         }
@@ -168,6 +150,25 @@ public class MapFragment extends Fragment {
             }
         }
     }
+
+    private void getNearByGuide(String location) {
+        mGuideHelper.getNearByGuide(location, 10, 0, 50, mOnGetNearByGuideListener);
+    }
+
+    private OnGetNearByGuideListener mOnGetNearByGuideListener = new OnGetNearByGuideListener() {
+
+        @Override
+        public void onGetNearByGuideFinish(int result, final List<TourGuide> guides) {
+            if (result == GuideHelper.GET_NEARBY_GUIDE_SUCCESS) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMapView.updateGuideOverlay(guides);
+                    }
+                });
+            }
+        }
+    };
 
     @Override
     public void onResume() {
@@ -183,10 +184,16 @@ public class MapFragment extends Fragment {
 
     @Override
     public void onDestroy() {
+        if (mGuideHelper != null) {
+            mGuideHelper.destroy();
+            mGuideHelper = null;
+        }
         if (mLocClient != null) {
             mLocClient.stop();
         }
         mMapView.destroy();
+        mHandler.removeCallbacksAndMessages(null);
+
         super.onDestroy();
     }
 
@@ -195,8 +202,8 @@ public class MapFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.location, menu);
     }
-    
-    private void bookingGuide(GuideInfo guide) {
+
+    private void bookingGuide(TourGuide guide) {
         Intent intent = new Intent(TourGuideApplication.getInstance(), BookingActivity.class);
         // TODO
         startActivity(intent);

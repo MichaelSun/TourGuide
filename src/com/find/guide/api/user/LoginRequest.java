@@ -1,4 +1,4 @@
-package com.find.guide.api;
+package com.find.guide.api.user;
 
 import com.find.guide.api.base.PMRequestBase;
 import com.plugin.internet.core.annotations.NoNeedTicket;

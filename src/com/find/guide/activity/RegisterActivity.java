@@ -5,9 +5,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.find.guide.R;
-import com.find.guide.model.LoginHelper;
-import com.find.guide.model.LoginHelper.OnGetVerifyCodeFinishListener;
-import com.find.guide.model.LoginHelper.OnRegisterFinishListener;
+import com.find.guide.model.UserHelper;
+import com.find.guide.model.UserHelper.OnGetVerifyCodeFinishListener;
+import com.find.guide.model.UserHelper.OnRegisterFinishListener;
 import com.find.guide.view.TipsDialog;
 
 import android.os.Bundle;
@@ -30,7 +30,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
     private TextView mSendVerifyCodeTv;
     private Button mRegisterBtn;
 
-    private LoginHelper mLoginHelper = null;
+    private UserHelper mLoginHelper = null;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -44,7 +44,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
         setContentView(R.layout.activity_register);
         initUI();
 
-        mLoginHelper = new LoginHelper(getApplicationContext());
+        mLoginHelper = new UserHelper(getApplicationContext());
     }
 
     private void initUI() {
@@ -119,7 +119,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (result == LoginHelper.REGISTER_SUCCESS) {
+                    if (result == UserHelper.REGISTER_SUCCESS) {
                         finish();
                     } else {
                         showError(getString(R.string.register_failed));

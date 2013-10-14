@@ -6,7 +6,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.find.guide.fragment.SettingFragment;
 import com.find.guide.setting.SettingManager;
 import com.find.guide.utils.XMLTables;
 import com.plugin.common.utils.CustomThreadPool;

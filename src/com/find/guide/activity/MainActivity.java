@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.fragment.MapFragment;
+import com.find.guide.fragment.NearByFragment;
 import com.find.guide.fragment.ProfileRecordFragment;
 import com.find.guide.fragment.SearchFragment;
 import com.find.guide.fragment.SettingFragment;
@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity {
 
         mNearbyGuideFragment = mFragmentManager.findFragmentByTag(TAG_NEARBY_GUIDE_FRAGMENT);
         if (mNearbyGuideFragment == null) {
-            mNearbyGuideFragment = new MapFragment();
+            mNearbyGuideFragment = new NearByFragment();
 
             FragmentTransaction trans = mFragmentManager.beginTransaction();
             trans.add(R.id.fragment_container, mNearbyGuideFragment, TAG_NEARBY_GUIDE_FRAGMENT);
