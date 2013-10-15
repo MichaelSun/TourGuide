@@ -7,6 +7,8 @@
     <string name="nearby_guide">附近导游</string>
     <string name="menu_show_map">地图</string>
     <string name="menu_show_list">列表</string>
+    
+    <string name="in_location">正在定位...</string>
 
     <!-- 个人记录 -->
     <string name="profile_record">个人记录</string>
@@ -31,9 +33,9 @@
     <!-- 登陆 -->
     <string name="login_phone_hint">手机号</string>
     <string name="login_password_hint">密码</string>
-    <string name="login">登陆</string>
+    <string name="login">登录</string>
     <string name="register">注册</string>
-    <string name="logining">登陆中...</string>
+    <string name="logining">登录中...</string>
     <string name="login_failed">登录失败</string>
 
     <!-- 注册 -->
@@ -72,10 +74,17 @@
     <string name="guide_history">导游历史</string>
     <string name="guide_card_id">导游证号</string>
     <string name="goto_booking">我要预约</string>
-
+    
+    <!-- 预约确认 -->
+    <string name="booking_confirm_title">预约</string>
+    <string name="booking_guide">导游</string>
+    <string name="booking_destination">我要去</string>
+    <string name="booking_start_time">出发时间</string>
+	<string name="immediately_booking">立即预约</string>
+    
     <!-- 查找 -->
     <string name="search_city">城市</string>
     <string name="search_gender">性别</string>
-    <string name="search_scenic">景点(可选)</string>
+    <string name="search_scenic">景点</string>
 
 </resources>

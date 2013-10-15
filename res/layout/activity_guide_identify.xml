@@ -32,7 +32,7 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/guide_identify_guide_card_label"
-                android:background="#ff0000" />
+                 />
         </RelativeLayout>
 
         <RelativeLayout

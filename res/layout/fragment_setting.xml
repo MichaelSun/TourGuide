@@ -10,7 +10,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_setting"
         android:orientation="vertical"
         android:padding="0dp" >
 
@@ -18,7 +17,7 @@
             android:id="@+id/setting_login"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@drawable/setting_clickable_item_bg"
+            android:background="@drawable/bg_top"
             android:clickable="true" >
 
             <TextView
@@ -41,16 +40,11 @@
                 android:src="@drawable/icon_arr" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#c8c8c8" />
-
         <RelativeLayout
             android:id="@+id/setting_guide_authentication"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@drawable/setting_clickable_item_bg"
+            android:background="@drawable/bg_middle"
             android:clickable="true" >
 
             <TextView
@@ -73,16 +67,11 @@
                 android:src="@drawable/icon_arr" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#c8c8c8" />
-
         <RelativeLayout
             android:id="@+id/setting_update"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@drawable/setting_clickable_item_bg"
+            android:background="@drawable/bg_middle"
             android:clickable="true" >
 
             <TextView
@@ -105,16 +94,11 @@
                 android:src="@drawable/icon_arr" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#c8c8c8" />
-
         <RelativeLayout
             android:id="@+id/setting_feedback"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@drawable/setting_clickable_item_bg"
+            android:background="@drawable/bg_middle"
             android:clickable="true" >
 
             <TextView
@@ -137,16 +121,11 @@
                 android:src="@drawable/icon_arr" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#c8c8c8" />
-
         <RelativeLayout
             android:id="@+id/setting_logout"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@drawable/setting_clickable_item_bg"
+            android:background="@drawable/bg_bottom"
             android:clickable="true" >
 
             <TextView

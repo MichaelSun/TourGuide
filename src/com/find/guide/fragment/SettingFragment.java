@@ -5,6 +5,7 @@ import com.find.guide.activity.GuideIdentifyActivity;
 import com.find.guide.activity.LoginActivity;
 import com.find.guide.app.TourGuideApplication;
 import com.find.guide.config.AppRuntime;
+import com.find.guide.model.Tourist;
 import com.find.guide.setting.SettingManager;
 import com.find.guide.utils.Toasts;
 
@@ -97,8 +98,10 @@ public class SettingFragment extends Fragment implements OnClickListener {
 
     private void guideIdentify() {
         if (SettingManager.getInstance().getUserId() > 0) {
-            Intent intent = new Intent(TourGuideApplication.getInstance(), GuideIdentifyActivity.class);
-            startActivity(intent);
+            if (SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURIST) {
+                Intent intent = new Intent(TourGuideApplication.getInstance(), GuideIdentifyActivity.class);
+                startActivity(intent);
+            }
         } else {
             Toasts.getInstance(TourGuideApplication.getInstance()).show(R.string.need_login, Toast.LENGTH_SHORT);
         }

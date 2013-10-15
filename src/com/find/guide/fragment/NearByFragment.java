@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -26,13 +28,17 @@ import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.R;
 import com.find.guide.activity.BookingActivity;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.model.GuideHelper;
-import com.find.guide.model.GuideHelper.OnGetNearByGuideListener;
+import com.find.guide.config.AppRuntime;
+import com.find.guide.model.help.UserHelper;
+import com.find.guide.model.help.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.model.TourGuide;
+import com.find.guide.utils.Toasts;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
 
-public class NearByFragment extends Fragment {
+public class NearByFragment extends Fragment implements View.OnClickListener {
+
+    private View mMapLocationView;
 
     private GuideMapView mMapView = null;
     private MapController mMapController = null;
@@ -43,8 +49,9 @@ public class NearByFragment extends Fragment {
     MyLocationOverlay myLocationOverlay = null;
 
     private boolean mIsFirstLocation = true;
+    private boolean mIsRequestLocation = false;
 
-    private GuideHelper mGuideHelper = null;
+    private UserHelper mUserHelper = null;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -52,7 +59,7 @@ public class NearByFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mGuideHelper = new GuideHelper(TourGuideApplication.getInstance());
+        mUserHelper = new UserHelper(TourGuideApplication.getInstance());
     }
 
     @Override
@@ -60,6 +67,8 @@ public class NearByFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_map, null);
 
         mMapView = (GuideMapView) view.findViewById(R.id.map_view);
+        mMapLocationView = view.findViewById(R.id.map_refresh_btn);
+        mMapLocationView.setOnClickListener(this);
 
         return view;
     }
@@ -116,6 +125,21 @@ public class NearByFragment extends Fragment {
         mMapView.refresh();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.map_refresh_btn:
+            requestLocation();
+            break;
+        }
+    }
+
+    private void requestLocation() {
+        mIsRequestLocation = true;
+        mLocClient.requestLocation();
+        Toasts.getInstance(TourGuideApplication.getInstance()).show(R.string.in_location, Toast.LENGTH_SHORT);
+    }
+
     public class MyLocationListenner implements BDLocationListener {
 
         @Override
@@ -132,11 +156,14 @@ public class NearByFragment extends Fragment {
             myLocationOverlay.setData(locData);
             // 更新图层数据执行刷新后生效
             mMapView.refresh();
+            
+            AppRuntime.gLocation = locData.latitude + "," + locData.longitude;
 
-            if (mIsFirstLocation) {
+            if (mIsFirstLocation || mIsRequestLocation) {
                 // 移动地图到定位点
                 Log.d("LocationOverlay", "receive location, animate to it");
                 mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6)));
+                mIsRequestLocation = false;
                 myLocationOverlay.setLocationMode(LocationMode.NORMAL);
 
                 getNearByGuide(locData.latitude + "," + locData.longitude);
@@ -152,14 +179,15 @@ public class NearByFragment extends Fragment {
     }
 
     private void getNearByGuide(String location) {
-        mGuideHelper.getNearByGuide(location, 10, 0, 50, mOnGetNearByGuideListener);
+        mUserHelper.getNearByGuide(location, 10, 0, 50, mOnGetNearByGuideListener);
     }
 
     private OnGetNearByGuideListener mOnGetNearByGuideListener = new OnGetNearByGuideListener() {
 
         @Override
         public void onGetNearByGuideFinish(int result, final List<TourGuide> guides) {
-            if (result == GuideHelper.GET_NEARBY_GUIDE_SUCCESS) {
+            
+            if (result == UserHelper.GET_NEARBY_GUIDE_SUCCESS) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -184,9 +212,9 @@ public class NearByFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        if (mGuideHelper != null) {
-            mGuideHelper.destroy();
-            mGuideHelper = null;
+        if (mUserHelper != null) {
+            mUserHelper.destroy();
+            mUserHelper = null;
         }
         if (mLocClient != null) {
             mLocClient.stop();
@@ -203,9 +231,21 @@ public class NearByFragment extends Fragment {
         inflater.inflate(R.menu.location, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_show_map) {
+            
+            return true;
+        } else if (item.getItemId() == R.id.menu_show_list) {
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void bookingGuide(TourGuide guide) {
         Intent intent = new Intent(TourGuideApplication.getInstance(), BookingActivity.class);
-        // TODO
+        intent.putExtra(BookingActivity.INTENT_EXTRA_GUIDE, guide);
         startActivity(intent);
     }
 

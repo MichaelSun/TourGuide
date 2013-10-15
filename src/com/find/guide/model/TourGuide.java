@@ -1,5 +1,8 @@
 package com.find.guide.model;
 
+import com.plugin.internet.core.json.JsonCreator;
+import com.plugin.internet.core.json.JsonProperty;
+
 /**
  * 导游信息
  * 
@@ -11,20 +14,28 @@ public class TourGuide extends Tourist {
      */
     private static final long serialVersionUID = -3945287939503647433L;
 
+    @JsonProperty("goodAtScenic")
     public String goodAtScenic;
 
+    @JsonProperty("birthday")
     public long birthday;
 
+    @JsonProperty("beGuideYear")
     public int beGuideYear;
 
+    @JsonProperty("guideCardUrl")
     public String guideCardUrl;
 
+    @JsonProperty("guideCardId")
     public String guideCardId;
 
+    @JsonProperty("location")
     public String location;
 
+    @JsonProperty("city")
     public int city;
 
+    @JsonCreator
     public TourGuide(int userId, String userName, String mobile, int gender, int userType, String headUrl,
             String goodAtScenic, long birthday, int beGuideYear, String guideCardUrl, String guideCardId,
             String location, int city) {

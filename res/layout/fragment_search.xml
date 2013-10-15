@@ -6,140 +6,133 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/bg_login_white"
-        android:orientation="vertical" >
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_top"
+        android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/city_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="@string/search_city"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/city_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="2"
+            android:singleLine="true"
+            android:textColor="#666666"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg_middle"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/gender_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="@string/search_gender"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/gender_radio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
             android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/city_label"
-                android:layout_width="0dp"
+            <RadioButton
+                android:id="@+id/male_radio"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="@string/search_city"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:checked="true"
+                android:text="@string/male" />
 
-            <Spinner
-                android:id="@+id/city_spinner"
-                android:layout_width="0dp"
+            <RadioButton
+                android:id="@+id/female_radio"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:layout_weight="2"
-                android:singleLine="true"
-                android:textColor="#666666"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#d8d8d8" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/gender_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="@string/search_gender"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:checked="false"
+                android:text="@string/female" />
 
-            <RadioGroup
-                android:id="@+id/gender_radio"
-                android:layout_width="0dp"
+            <RadioButton
+                android:id="@+id/guide_identify_female_radio"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:orientation="horizontal" >
-
-                <RadioButton
-                    android:id="@+id/male_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/male" />
-
-                <RadioButton
-                    android:id="@+id/female_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/female" />
-
-                <RadioButton
-                    android:id="@+id/guide_identify_female_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/gender_any" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#d8d8d8" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/scenic_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="@string/search_scenic"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:checked="false"
+                android:text="@string/gender_any" />
+        </RadioGroup>
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/scenic_et"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:layout_weight="2"
-                android:background="@drawable/bg_input"
-                android:padding="3dp"
-                android:textColor="#666666"
-                android:textSize="16sp" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg_bottom"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/scenic_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="@string/search_scenic"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/scenic_et"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="2"
+            android:hint="@string/search_scenic"
+            android:background="@null"
+            android:padding="3dp"
+            android:textColor="#666666"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/search_btn"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/btn_login_green"
         android:gravity="center"
         android:text="@string/search"

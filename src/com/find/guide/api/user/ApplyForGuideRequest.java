@@ -2,6 +2,7 @@ package com.find.guide.api.user;
 
 import com.find.guide.api.base.PMRequestBase;
 import com.plugin.internet.core.annotations.NeedTicket;
+import com.plugin.internet.core.annotations.OptionalParam;
 import com.plugin.internet.core.annotations.RequiredParam;
 import com.plugin.internet.core.annotations.RestMethodUrl;
 
@@ -9,7 +10,7 @@ import com.plugin.internet.core.annotations.RestMethodUrl;
 @RestMethodUrl("user/applyForGuide")
 public class ApplyForGuideRequest extends PMRequestBase<ApplyForGuideResponse> {
 
-    @RequiredParam("goodAtScenic")
+    @OptionalParam("goodAtScenic")
     private String goodAtScenic;
 
     @RequiredParam("birthday")
@@ -18,7 +19,7 @@ public class ApplyForGuideRequest extends PMRequestBase<ApplyForGuideResponse> {
     @RequiredParam("beGuideYear")
     private int beGuideYear;
 
-    @RequiredParam("guideCardUrl")
+    @OptionalParam("guideCardUrl")
     private String guideCardUrl;
 
     @RequiredParam("guideCardId")

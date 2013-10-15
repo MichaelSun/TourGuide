@@ -4,96 +4,84 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/login_phone_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_login_white"
-        android:orientation="vertical" >
+        android:background="@drawable/bg_top" >
 
-        <RelativeLayout
-            android:id="@+id/login_phone_rl"
+        <ImageView
+            android:id="@+id/login_user_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="center"
+            android:src="@drawable/icon_user" />
+
+        <EditText
+            android:id="@+id/login_phone_et"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/login_user_iv"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:hint="@string/login_phone_hint"
+            android:inputType="phone"
+            android:maxLength="20"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#232424"
+            android:textColorHint="@color/register_text_hint_color"
+            android:textCursorDrawable="@null"
+            android:textSize="19sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_password_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg_bottom" >
+
+        <ImageView
+            android:id="@+id/login_password_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="center"
+            android:src="@drawable/icon_psw" />
+
+        <EditText
+            android:id="@+id/login_password_et"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" >
-
-            <ImageView
-                android:id="@+id/login_user_iv"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:scaleType="center"
-                android:src="@drawable/icon_user" />
-
-            <EditText
-                android:id="@+id/login_phone_et"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/login_user_iv"
-                android:background="@android:color/transparent"
-                android:gravity="center_vertical"
-                android:hint="@string/login_phone_hint"
-                android:inputType="phone"
-                android:maxLength="20"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:singleLine="true"
-                android:textColor="#232424"
-                android:textColorHint="@color/register_text_hint_color"
-                android:textCursorDrawable="@null"
-                android:textSize="19sp" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#c8c8c8" />
-
-        <RelativeLayout
-            android:id="@+id/login_password_rl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" >
-
-            <ImageView
-                android:id="@+id/login_password_iv"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:scaleType="center"
-                android:src="@drawable/icon_psw" />
-
-            <EditText
-                android:id="@+id/login_password_et"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/login_password_iv"
-                android:background="@android:color/transparent"
-                android:gravity="center_vertical"
-                android:hint="@string/login_password_hint"
-                android:inputType="textPassword"
-                android:maxLength="16"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:singleLine="true"
-                android:textColor="#232424"
-                android:textColorHint="@color/register_text_hint_color"
-                android:textCursorDrawable="@null" />
-        </RelativeLayout>
-    </LinearLayout>
+            android:layout_height="55dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/login_password_iv"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:hint="@string/login_password_hint"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:singleLine="true"
+            android:textColor="#232424"
+            android:textColorHint="@color/register_text_hint_color"
+            android:textCursorDrawable="@null" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/login_btn"

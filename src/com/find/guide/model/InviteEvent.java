@@ -1,7 +1,8 @@
-package com.find.guide.api.invite;
+package com.find.guide.model;
 
 import java.io.Serializable;
 
+import com.plugin.internet.core.json.JsonCreator;
 import com.plugin.internet.core.json.JsonProperty;
 
 public class InviteEvent implements Serializable {
@@ -41,6 +42,7 @@ public class InviteEvent implements Serializable {
     @JsonProperty("satisfaction")
     private int satisfaction;
 
+    @JsonCreator
     public InviteEvent(long eventId, int userId, int guideId, int eventType, int eventStatus, long startTime,
             long endTime, String scenic, long createTime, int satisfaction) {
         this.eventId = eventId;

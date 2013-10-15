@@ -49,6 +49,8 @@ public class AppRuntime {
 
     }
     
+    public static String gLocation = null;
+    
     public static XMLTables gXMLTables;
 
     public static AppDeviceInfo APP_DEVICE_INFO;

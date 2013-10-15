@@ -5,9 +5,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.find.guide.R;
-import com.find.guide.model.UserHelper;
-import com.find.guide.model.UserHelper.OnGetVerifyCodeFinishListener;
-import com.find.guide.model.UserHelper.OnRegisterFinishListener;
+import com.find.guide.model.help.UserHelper;
+import com.find.guide.model.help.UserHelper.OnGetVerifyCodeFinishListener;
+import com.find.guide.model.help.UserHelper.OnRegisterFinishListener;
 import com.find.guide.view.TipsDialog;
 
 import android.os.Bundle;
