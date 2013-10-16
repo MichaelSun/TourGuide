@@ -4,126 +4,136 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/city_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_top"
-        android:orientation="horizontal" >
+        android:background="@drawable/bg_top" >
 
         <TextView
             android:id="@+id/city_label"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:text="@string/search_city"
             android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/city_spinner"
+        <ImageView
+            android:id="@+id/city_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/icon_arr" />
+
+        <TextView
+            android:id="@+id/city_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="2"
+            android:layout_toLeftOf="@id/city_arrow"
+            android:layout_toRightOf="@id/city_label"
+            android:gravity="right|center_vertical"
             android:singleLine="true"
+            android:text="@string/city_any"
             android:textColor="#666666"
             android:textSize="16sp" />
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/bg_middle"
-        android:orientation="horizontal" >
+        android:background="@drawable/bg_middle" >
 
         <TextView
             android:id="@+id/gender_label"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:text="@string/search_gender"
             android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <RadioGroup
             android:id="@+id/gender_radio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/gender_label"
+            android:gravity="right"
             android:orientation="horizontal" >
 
             <RadioButton
                 android:id="@+id/male_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:checked="true"
-                android:text="@string/male" />
+                android:text="@string/male"
+                android:textColor="#666666" />
 
             <RadioButton
                 android:id="@+id/female_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:checked="false"
-                android:text="@string/female" />
+                android:text="@string/female"
+                android:textColor="#666666" />
 
             <RadioButton
                 android:id="@+id/guide_identify_female_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:checked="false"
-                android:text="@string/gender_any" />
+                android:text="@string/gender_any"
+                android:textColor="#666666" />
         </RadioGroup>
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/bg_bottom"
-        android:orientation="horizontal" >
+        android:background="@drawable/bg_bottom" >
 
         <TextView
             android:id="@+id/scenic_label"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:text="@string/search_scenic"
             android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/scenic_et"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_weight="2"
-            android:hint="@string/search_scenic"
+            android:layout_toRightOf="@id/scenic_label"
             android:background="@null"
+            android:gravity="right|center_vertical"
+            android:hint="@string/search_scenic_hint"
             android:padding="3dp"
             android:textColor="#666666"
             android:textSize="16sp" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/search_btn"

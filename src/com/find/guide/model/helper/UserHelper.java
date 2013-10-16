@@ -1,4 +1,4 @@
-package com.find.guide.model.help;
+package com.find.guide.model.helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,8 @@ import com.find.guide.api.user.LoginRequest;
 import com.find.guide.api.user.LoginResponse;
 import com.find.guide.api.user.RegisterRequest;
 import com.find.guide.api.user.RegisterResponse;
+import com.find.guide.api.user.SearchGuideRequest;
+import com.find.guide.api.user.SearchGuideResponse;
 import com.find.guide.model.TourGuide;
 import com.find.guide.model.Tourist;
 import com.find.guide.setting.SettingManager;
@@ -45,6 +47,9 @@ public class UserHelper {
 
     public static final int GET_NEARBY_GUIDE_SUCCESS = 0;
     public static final int GET_NEARBY_GUIDE_FAILED = -1;
+    
+    public static final int SEARCH_GUIDE_SUCCESS = 0;
+    public static final int SEARCH_GUIDE_FAILED = -1;
 
     private OnLoginFinishListener mOnLoginFinishListener = null;
     private OnRegisterFinishListener mOnRegisterFinishListener = null;
@@ -52,6 +57,7 @@ public class UserHelper {
     private OnGetUserInfoFinishListener mOnGetUserInfoFinishListener = null;
     private OnApplyForGuideFinishListener mOnApplyForGuideFinishListener = null;
     private OnGetNearByGuideListener mGetNearByGuideListener = null;
+    private OnSearchGuideListener mOnSearchGuideListener = null;
 
     private Context mContext;
 
@@ -300,9 +306,69 @@ public class UserHelper {
                     }
                     return;
                 }
-                
+
                 if (mGetNearByGuideListener != null) {
                     mGetNearByGuideListener.onGetNearByGuideFinish(GET_NEARBY_GUIDE_FAILED, null);
+                }
+            }
+        });
+    }
+
+    public static interface OnSearchGuideListener {
+        public void onSearchGuide(int result, List<TourGuide> guides);
+    }
+
+    public void searchGuide(final int city, final int gender, final String scenic, final int start, final int rows,
+            OnSearchGuideListener listener) {
+        mOnSearchGuideListener = listener;
+        CustomThreadPool.asyncWork(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SearchGuideRequest request = new SearchGuideRequest(city, gender, scenic, start, rows);
+                    SearchGuideResponse response = InternetUtils.request(mContext, request);
+                    if (response != null) {
+                        List<TourGuide> guides = response.guides;
+                        // test
+                        if (TEST_DATA && (guides == null || guides.size() == 0)) {
+                            if (guides == null) {
+                                guides = new ArrayList<TourGuide>();
+                            }
+                            for (int i = 0; i < 3; i++) {
+                                String location = (39.933859 + 0.025 * i) + "," + (116.400191 + 0.025 * i);
+                                TourGuide guide = new TourGuide(100000 + i, "用户" + i, "1881076231" + i, 1, 1, "", "故宫",
+                                        19880910 + i, 2012, "http://img7.9158.com/200709/01/11/53/200709018758949.jpg",
+                                        "12345678" + i, location, 1);
+                                guides.add(guide);
+                            }
+                        }
+
+                        if (mOnSearchGuideListener != null) {
+                            mOnSearchGuideListener.onSearchGuide(SEARCH_GUIDE_SUCCESS, guides);
+                        }
+                        return;
+                    }
+                } catch (NetWorkException e) {
+                    e.printStackTrace();
+                }
+
+                if (TEST_DATA) {
+                    List<TourGuide> guides = new ArrayList<TourGuide>();
+                    for (int i = 0; i < 3; i++) {
+                        String location = (39.933859 + 0.025 * i) + "," + (116.400191 + 0.025 * i);
+                        TourGuide guide = new TourGuide(100000 + i, "用户" + i, "1881076231" + i, 1, 1, "", "故宫",
+                                19880910 + i, 2012, "http://img7.9158.com/200709/01/11/53/200709018758949.jpg",
+                                "12345678" + i, location, 1);
+                        guides.add(guide);
+                    }
+                    if (mOnSearchGuideListener != null) {
+                        mOnSearchGuideListener.onSearchGuide(SEARCH_GUIDE_SUCCESS, guides);
+                    }
+                    return;
+                }
+
+                if (mOnSearchGuideListener != null) {
+                    mOnSearchGuideListener.onSearchGuide(SEARCH_GUIDE_FAILED, null);
                 }
             }
         });
@@ -316,5 +382,6 @@ public class UserHelper {
         mOnGetUserInfoFinishListener = null;
         mOnApplyForGuideFinishListener = null;
         mGetNearByGuideListener = null;
+        mOnSearchGuideListener = null;
     }
 }

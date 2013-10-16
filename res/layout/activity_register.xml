@@ -11,7 +11,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_top" >
 
         <TextView
             android:id="@+id/register_phone_label"
@@ -19,7 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="@string/register_phone_label"
+            android:layout_marginLeft="10dp"
+            android:text="@string/register_phone"
             android:textColor="#232424"
             android:textSize="17sp" />
 
@@ -31,8 +33,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/register_phone_label"
-            android:background="@drawable/bg_input"
+            android:background="@null"
             android:gravity="center_vertical"
+            android:hint="@string/register_phone"
             android:inputType="phone"
             android:maxLength="20"
             android:paddingLeft="5dp"
@@ -50,7 +53,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" >
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_middle" >
 
         <TextView
             android:id="@+id/register_password_label"
@@ -58,7 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="@string/register_password_label"
+            android:layout_marginLeft="10dp"
+            android:text="@string/register_password"
             android:textColor="#232424"
             android:textSize="17sp" />
 
@@ -70,8 +75,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/register_password_label"
-            android:background="@drawable/bg_input"
+            android:background="@null"
             android:gravity="center_vertical"
+            android:hint="@string/register_password"
             android:inputType="textPassword"
             android:maxLength="20"
             android:paddingLeft="5dp"
@@ -89,7 +95,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" >
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_middle" >
 
         <TextView
             android:id="@+id/register_password_confirm_label"
@@ -97,7 +104,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="@string/register_password_confirm_label"
+            android:layout_marginLeft="10dp"
+            android:text="@string/register_password_confirm"
             android:textColor="#232424"
             android:textSize="17sp" />
 
@@ -109,8 +117,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/register_password_confirm_label"
-            android:background="@drawable/bg_input"
+            android:background="@null"
             android:gravity="center_vertical"
+            android:hint="@string/register_password_confirm"
             android:inputType="textPassword"
             android:maxLength="20"
             android:paddingLeft="5dp"
@@ -128,7 +137,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" >
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_middle" >
 
         <TextView
             android:id="@+id/register_name_label"
@@ -136,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:text="@string/name"
             android:textColor="#232424"
             android:textSize="17sp" />
@@ -148,8 +159,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/register_name_label"
-            android:background="@drawable/bg_input"
+            android:background="@null"
             android:gravity="center_vertical"
+            android:hint="@string/name"
             android:maxLength="20"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -166,7 +178,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" >
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_bottom" >
 
         <TextView
             android:id="@+id/register_verify_code_label"
@@ -174,16 +187,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="@string/register_verification_code_label"
+            android:layout_marginLeft="10dp"
+            android:text="@string/register_verification_code"
             android:textColor="#232424"
             android:textSize="17sp" />
 
         <TextView
             android:id="@+id/register_get_verify_code_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="38dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:background="@drawable/verify_sendbtn"
             android:gravity="center"
             android:text="@string/register_send_verify_code"
@@ -199,8 +214,9 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/register_get_verify_code_tv"
             android:layout_toRightOf="@id/register_verify_code_label"
-            android:background="@drawable/bg_input"
+            android:background="@null"
             android:gravity="center_vertical"
+            android:hint="@string/register_verification_code"
             android:inputType="number"
             android:maxLength="20"
             android:paddingLeft="5dp"
@@ -217,8 +233,8 @@
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/btn_login_green"
         android:gravity="center"

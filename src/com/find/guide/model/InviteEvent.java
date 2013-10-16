@@ -12,6 +12,19 @@ public class InviteEvent implements Serializable {
      */
     private static final long serialVersionUID = 7422912511389682539L;
 
+    public static final int EVENT_TYPE_ONE = 0;
+    public static final int EVENT_TYPE_BROADCASR = 1;
+
+    public static final int EVENT_STATUS_BOOKING = 0;
+    public static final int EVENT_STATUS_CANCELED = 1;
+    public static final int EVENT_STATUS_ACCEPTED = 2;
+    public static final int EVENT_STATUS_REFUSED = 3;
+    public static final int EVENT_STATUS_EVALUATE = 4;
+
+    public static final int SATISFACTION_HAVENOT = 0;
+    public static final int SATISFACTION_GOOD = 1;
+    public static final int SATISFACTION_BAD = 2;
+
     @JsonProperty("eventId")
     private long eventId;
 
@@ -140,5 +153,5 @@ public class InviteEvent implements Serializable {
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
-    
+
 }

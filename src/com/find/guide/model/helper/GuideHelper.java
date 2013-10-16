@@ -1,4 +1,4 @@
-package com.find.guide.model.help;
+package com.find.guide.model.helper;
 
 import android.content.Context;
 

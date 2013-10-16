@@ -19,26 +19,22 @@ public class Tourist implements Serializable {
     public static final int USER_TYPE_TOURIST = 0;
     public static final int USER_TYPE_TOURGUIDE = 1;
 
-    @JsonProperty("userId")
     private int userId;
 
-    @JsonProperty("userName")
     private String userName;
 
-    @JsonProperty("mobile")
     private String mobile;
 
-    @JsonProperty("gender")
     private int gender;
 
-    @JsonProperty("usrType")
     private int userType;
 
-    @JsonProperty("headUrl")
     private String headUrl;
 
     @JsonCreator
-    public Tourist(int userId, String userName, String mobile, int gender, int userType, String headUrl) {
+    public Tourist(@JsonProperty("userId") int userId, @JsonProperty("userName") String userName,
+            @JsonProperty("mobile") String mobile, @JsonProperty("gender") int gender,
+            @JsonProperty("userType") int userType, @JsonProperty("headUrl") String headUrl) {
         this.userId = userId;
         this.userName = userName;
         this.mobile = mobile;

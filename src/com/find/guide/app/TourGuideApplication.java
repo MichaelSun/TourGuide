@@ -14,6 +14,7 @@ import com.baidu.mapapi.map.MKEvent;
 import com.find.guide.R;
 import com.find.guide.config.AppConfig;
 import com.find.guide.config.AppRuntime;
+import com.find.guide.model.helper.CityManager;
 import com.find.guide.setting.SettingManager;
 import com.find.guide.utils.Toasts;
 import com.find.guide.utils.XMLTables;
@@ -53,6 +54,7 @@ public class TourGuideApplication extends Application {
 
             AppRuntime.gXMLTables = new XMLTables();
             AppRuntime.gXMLTables.loadXML(getResources().getXml(R.xml.error_tips));
+            CityManager.getInstance().loadXML(getResources().getXml(R.xml.city));
 
             setHttpHookListener();
 

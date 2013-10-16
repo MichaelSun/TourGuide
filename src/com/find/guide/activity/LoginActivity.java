@@ -2,8 +2,8 @@ package com.find.guide.activity;
 
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.model.help.UserHelper;
-import com.find.guide.model.help.UserHelper.OnLoginFinishListener;
+import com.find.guide.model.helper.UserHelper;
+import com.find.guide.model.helper.UserHelper.OnLoginFinishListener;
 import com.find.guide.view.TipsDialog;
 
 import android.content.Intent;

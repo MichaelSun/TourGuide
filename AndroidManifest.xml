@@ -60,6 +60,10 @@
             android:name="com.find.guide.activity.BookingConfirmActivity"
             android:label="@string/booking_confirm_title" >
         </activity>
+        <activity
+            android:name="com.find.guide.activity.SelectCityActivity"
+            android:label="@string/select_city_title" >
+        </activity>
 
         <service
             android:name="com.baidu.location.f"

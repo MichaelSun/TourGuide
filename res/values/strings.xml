@@ -12,19 +12,34 @@
 
     <!-- 个人记录 -->
     <string name="profile_record">个人记录</string>
+    <string name="invite_booking">预约</string>
+    <string name="invite_cancel">已取消</string>
+    <string name="invite_accepted">待评价</string>
+    <string name="invite_refused">已拒绝</string>
 
+    <string name="satisfaction_good">满意</string>
+    <string name="satisfaction_bad">不满意</string>
+    
+    <string name="invite_broadcast">广播中</string>
+    
     <!-- 搜索 -->
     <string name="search">搜索</string>
+    <string name="city_any">不限</string>
+    <string name="need_select_city">请选择城市</string>
+    <string name="searching">搜索中...</string>
+    
+    <!-- 选择城市 -->
+    <string name="select_city_title">选择城市</string>
 
     <!-- 设置 -->
     <string name="setting">设置</string>
-    <string name="setting_login">登陆</string>
+    <string name="setting_login">登录</string>
     <string name="setting_guide_authentication">我是导游</string>
     <string name="setting_update">检查更新</string>
     <string name="setting_feedback">意见反馈</string>
-    <string name="setting_logout">退出登陆</string>
+    <string name="setting_logout">退出登录</string>
     
-    <string name="logout_dialog_message">已登录，退出登录吗？</string>
+    <string name="logout_dialog_message">退出登录吗？</string>
     <string name="logout_dialog_positive">确认</string>
     <string name="logout_dialog_negative">取消</string>
     
@@ -39,10 +54,10 @@
     <string name="login_failed">登录失败</string>
 
     <!-- 注册 -->
-    <string name="register_phone_label">手机号</string>
-    <string name="register_password_label">密码</string>
-    <string name="register_password_confirm_label">密码确认</string>
-    <string name="register_verification_code_label">验证码</string>
+    <string name="register_phone">手机号</string>
+    <string name="register_password">密码</string>
+    <string name="register_password_confirm">密码确认</string>
+    <string name="register_verification_code">验证码</string>
     <string name="register_send_verify_code">发送</string>
     
     <string name="register_phone_empty">请输入电话号码</string>
@@ -86,5 +101,6 @@
     <string name="search_city">城市</string>
     <string name="search_gender">性别</string>
     <string name="search_scenic">景点</string>
+    <string name="search_scenic_hint">输入景点名</string>
 
 </resources>

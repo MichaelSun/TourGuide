@@ -11,7 +11,7 @@
     <color name="gray6">#F2F2F2</color>
     <color name="gray7">#DEDEDE</color>
     <color name="gray8">#c3c3c1</color>
-
+    
     <!-- list item color info -->
     <drawable name="default_cover">#ced0d1</drawable>
     <color name="sublist_title_color">#333333</color>
@@ -81,6 +81,7 @@
     <color name="publisher_button_backgroundd">#00ffffff</color>
     <color name="publisher_button_pressed_backgroundd">#4d000000</color>
     <color name="camera_button_text">#8622ab</color>
+    
     <color name="sliderview_character">#6a737d</color>
 
     <!-- profile page text color -->

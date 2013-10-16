@@ -7,7 +7,6 @@ import com.find.guide.app.TourGuideApplication;
 import com.find.guide.config.AppRuntime;
 import com.find.guide.model.Tourist;
 import com.find.guide.setting.SettingManager;
-import com.find.guide.utils.Toasts;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class SettingFragment extends Fragment implements OnClickListener {
 
@@ -31,9 +29,12 @@ public class SettingFragment extends Fragment implements OnClickListener {
 
     private Dialog mDialog = null;
 
+    private SettingManager mSettingManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSettingManager = SettingManager.getInstance();
     }
 
     @Override
@@ -67,6 +68,43 @@ public class SettingFragment extends Fragment implements OnClickListener {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        checkVisibility();
+    }
+    
+    private void checkVisibility() {
+        if (mSettingManager.getUserId() < 0) {
+            mLoginRegisterView.setVisibility(View.VISIBLE);
+            mGuideAuthenticationView.setVisibility(View.GONE);
+            mLogoutView.setVisibility(View.GONE);
+            mFeedBackView.setBackgroundResource(R.drawable.bg_bottom);
+        } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURIST) {
+            mLoginRegisterView.setVisibility(View.GONE);
+            mGuideAuthenticationView.setVisibility(View.VISIBLE);
+            mLogoutView.setVisibility(View.VISIBLE);
+            mGuideAuthenticationView.setBackgroundResource(R.drawable.bg_top);
+            mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
+        } else {
+            mLoginRegisterView.setVisibility(View.GONE);
+            mGuideAuthenticationView.setVisibility(View.GONE);
+            mLogoutView.setVisibility(View.VISIBLE);
+            mUpdateView.setBackgroundResource(R.drawable.bg_top);
+            mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.setting_login:
@@ -88,23 +126,13 @@ public class SettingFragment extends Fragment implements OnClickListener {
     }
 
     private void login() {
-        if (SettingManager.getInstance().getUserId() > 0) {
-            logout();
-        } else {
-            Intent intent = new Intent(TourGuideApplication.getInstance(), LoginActivity.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(TourGuideApplication.getInstance(), LoginActivity.class);
+        startActivity(intent);
     }
 
     private void guideIdentify() {
-        if (SettingManager.getInstance().getUserId() > 0) {
-            if (SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURIST) {
-                Intent intent = new Intent(TourGuideApplication.getInstance(), GuideIdentifyActivity.class);
-                startActivity(intent);
-            }
-        } else {
-            Toasts.getInstance(TourGuideApplication.getInstance()).show(R.string.need_login, Toast.LENGTH_SHORT);
-        }
+        Intent intent = new Intent(TourGuideApplication.getInstance(), GuideIdentifyActivity.class);
+        startActivity(intent);
     }
 
     private void checkUpdate() {
@@ -116,22 +144,21 @@ public class SettingFragment extends Fragment implements OnClickListener {
     }
 
     private void logout() {
-        if (SettingManager.getInstance().getUserId() > 0) {
-            dismissDialog();
-            mDialog = new AlertDialog.Builder(getActivity()).setMessage(R.string.logout_dialog_message)
-                    .setPositiveButton(R.string.logout_dialog_positive, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            AppRuntime.logout();
-                        }
-                    }).setNegativeButton(R.string.logout_dialog_negative, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+        dismissDialog();
+        mDialog = new AlertDialog.Builder(getActivity()).setMessage(R.string.logout_dialog_message)
+                .setPositiveButton(R.string.logout_dialog_positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AppRuntime.logout();
+                        checkVisibility();
+                    }
+                }).setNegativeButton(R.string.logout_dialog_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    }).create();
-            mDialog.show();
-        }
+                    }
+                }).create();
+        mDialog.show();
     }
 
     private void dismissDialog() {

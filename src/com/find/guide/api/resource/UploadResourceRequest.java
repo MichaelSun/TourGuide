@@ -19,14 +19,13 @@ public class UploadResourceRequest extends PMRequestBase<UploadResourceResponse>
 
     private RequestEntity mRequestEntity;
 
-    @RequiredParam("file")
-    private String file;
+    private String uploadFile;
 
     @RequiredParam("suffix")
     private String suffix = "jpg";
 
     public UploadResourceRequest(String file, String suffix) {
-        this.file = file;
+        this.uploadFile = file;
         this.suffix = suffix;
     }
 
@@ -37,20 +36,17 @@ public class UploadResourceRequest extends PMRequestBase<UploadResourceResponse>
         }
         mRequestEntity = new RequestEntity();
 
-        Bundle params = this.getParams();
-        String uploadFile = params.getString("file");
         if (TextUtils.isEmpty(uploadFile)) {
             throw new RuntimeException("Param file MUST NOT be null");
         }
-        params.remove("file");
-
         File upload = new File(uploadFile);
         if (!upload.exists()) {
             throw new RuntimeException("upload file : " + uploadFile + " does not exist !!!");
         }
 
+        Bundle params = this.getParams();
         mRequestEntity.setBasicParams(params);
-        mRequestEntity.addFileItem(new MultipartFileItem("data", uploadFile, upload, null, "image/jpg"));
+        mRequestEntity.addFileItem(new MultipartFileItem("file", uploadFile, upload, null, "image/jpg"));
         mRequestEntity.setContentType(RequestEntity.REQUEST_CONTENT_TYPE_MUTIPART);
         return mRequestEntity;
     }

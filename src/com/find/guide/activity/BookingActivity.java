@@ -1,7 +1,9 @@
 package com.find.guide.activity;
 
 import com.find.guide.R;
+import com.find.guide.model.CityItem;
 import com.find.guide.model.TourGuide;
+import com.find.guide.model.helper.CityManager;
 import com.plugin.common.view.WebImageView;
 
 import android.content.Intent;
@@ -59,7 +61,10 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         if (mTourGuide != null) {
             mGuideCardIv.setImageURI(new Uri.Builder().path(mTourGuide.getGuideCardUrl()).build());
             mGuideNameGenderTv.setText(mTourGuide.getUserName());
-            mCityTv.setText("" + mTourGuide.getCity());
+            CityItem cityItem = CityManager.getInstance().getCityById(mTourGuide.getCity());
+            if (cityItem != null) {
+                mCityTv.setText(cityItem.getCityName());
+            }
             mGoodAtScenicTv.setText(mTourGuide.getGoodAtScenic());
             mGuideCardIdTv.setText(mTourGuide.getGuideCardId());
         }
@@ -73,8 +78,8 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.booking_btn) {
-            Intent intent = new Intent(this, BookingConfirmActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, BookingConfirmActivity.class);
+//            startActivity(intent);
         }
     }
 }

@@ -14,31 +14,28 @@ public class TourGuide extends Tourist {
      */
     private static final long serialVersionUID = -3945287939503647433L;
 
-    @JsonProperty("goodAtScenic")
     public String goodAtScenic;
 
-    @JsonProperty("birthday")
     public long birthday;
 
-    @JsonProperty("beGuideYear")
     public int beGuideYear;
 
-    @JsonProperty("guideCardUrl")
     public String guideCardUrl;
 
-    @JsonProperty("guideCardId")
     public String guideCardId;
 
-    @JsonProperty("location")
     public String location;
 
-    @JsonProperty("city")
     public int city;
 
     @JsonCreator
-    public TourGuide(int userId, String userName, String mobile, int gender, int userType, String headUrl,
-            String goodAtScenic, long birthday, int beGuideYear, String guideCardUrl, String guideCardId,
-            String location, int city) {
+    public TourGuide(@JsonProperty("userId") int userId, @JsonProperty("userName") String userName,
+            @JsonProperty("mobile") String mobile, @JsonProperty("gender") int gender,
+            @JsonProperty("userType") int userType, @JsonProperty("headUrl") String headUrl,
+            @JsonProperty("goodAtScenic") String goodAtScenic, @JsonProperty("birthday") long birthday,
+            @JsonProperty("beGuideYear") int beGuideYear, @JsonProperty("guideCardUrl") String guideCardUrl,
+            @JsonProperty("guideCardId") String guideCardId, @JsonProperty("location") String location,
+            @JsonProperty("city") int city) {
         super(userId, userName, mobile, gender, userType, headUrl);
         this.goodAtScenic = goodAtScenic;
         this.birthday = birthday;
