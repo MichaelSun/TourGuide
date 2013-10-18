@@ -1,6 +1,5 @@
 package com.find.guide.model.helper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.find.guide.api.resource.UploadResourceRequest;
@@ -31,8 +30,6 @@ import android.text.TextUtils;
 
 public class UserHelper {
 
-    public static final boolean TEST_DATA = true;
-
     public static final int LOGIN_SUCCESS = 0;
     public static final int LOGIN_FAILED = -1;
 
@@ -47,7 +44,7 @@ public class UserHelper {
 
     public static final int GET_NEARBY_GUIDE_SUCCESS = 0;
     public static final int GET_NEARBY_GUIDE_FAILED = -1;
-    
+
     public static final int SEARCH_GUIDE_SUCCESS = 0;
     public static final int SEARCH_GUIDE_FAILED = -1;
 
@@ -80,17 +77,14 @@ public class UserHelper {
                     LoginResponse response = InternetUtils.request(mContext, request);
                     if (response != null && response.userId > 0) {
                         SettingManager.getInstance().setUserId(response.userId);
-                        SettingManager.getInstance().setTicket(response.ticket);
-                        SettingManager.getInstance().setSecretKey(response.userSecretKey);
                         SettingManager.getInstance().setUserPhoneNum(mobileNum);
-
-                        GetUserInfoRequest userInfoRequest = new GetUserInfoRequest(response.userId);
-                        GetUserInfoResponse userInfoResponse = InternetUtils.request(mContext, userInfoRequest);
-                        if (userInfoResponse != null && userInfoResponse.tourist.getUserId() > 0) {
-                            SettingManager.getInstance().setUserName(userInfoResponse.tourist.getUserName());
-                            SettingManager.getInstance().setUserGender(userInfoResponse.tourist.getGender());
-                            SettingManager.getInstance().setUserType(userInfoResponse.tourist.getUserType());
-                            SettingManager.getInstance().setUserHeader(userInfoResponse.tourist.getHeadUrl());
+                        SettingManager.getInstance().setUserName(response.userName);
+                        SettingManager.getInstance().setUserGender(response.gender);
+                        SettingManager.getInstance().setUserType(response.userType);
+                        SettingManager.getInstance().setUserHeader(response.headUrl);
+                        if (response.userPassport != null) {
+                            SettingManager.getInstance().setTicket(response.userPassport.ticket);
+                            SettingManager.getInstance().setSecretKey(response.userPassport.userSecretKey);
                         }
 
                         if (mOnLoginFinishListener != null) {
@@ -269,19 +263,6 @@ public class UserHelper {
                     GetNearByGuideResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
                         List<TourGuide> guides = response.guides;
-                        // test
-                        if (TEST_DATA && (guides == null || guides.size() == 0)) {
-                            if (guides == null) {
-                                guides = new ArrayList<TourGuide>();
-                            }
-                            for (int i = 0; i < 3; i++) {
-                                String location = (39.933859 + 0.025 * i) + "," + (116.400191 + 0.025 * i);
-                                TourGuide guide = new TourGuide(100000 + i, "用户" + i, "1881076231" + i, 1, 1, "", "故宫",
-                                        19880910 + i, 2012, "http://img7.9158.com/200709/01/11/53/200709018758949.jpg",
-                                        "12345678" + i, location, 1);
-                                guides.add(guide);
-                            }
-                        }
 
                         if (mGetNearByGuideListener != null) {
                             mGetNearByGuideListener.onGetNearByGuideFinish(GET_NEARBY_GUIDE_SUCCESS, guides);
@@ -290,21 +271,6 @@ public class UserHelper {
                     }
                 } catch (NetWorkException e) {
                     e.printStackTrace();
-                }
-
-                if (TEST_DATA) {
-                    List<TourGuide> guides = new ArrayList<TourGuide>();
-                    for (int i = 0; i < 3; i++) {
-                        String location = (39.933859 + 0.025 * i) + "," + (116.400191 + 0.025 * i);
-                        TourGuide guide = new TourGuide(100000 + i, "用户" + i, "1881076231" + i, 1, 1, "", "故宫",
-                                19880910 + i, 2012, "http://img7.9158.com/200709/01/11/53/200709018758949.jpg",
-                                "12345678" + i, location, 1);
-                        guides.add(guide);
-                    }
-                    if (mGetNearByGuideListener != null) {
-                        mGetNearByGuideListener.onGetNearByGuideFinish(GET_NEARBY_GUIDE_SUCCESS, guides);
-                    }
-                    return;
                 }
 
                 if (mGetNearByGuideListener != null) {
@@ -329,19 +295,6 @@ public class UserHelper {
                     SearchGuideResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
                         List<TourGuide> guides = response.guides;
-                        // test
-                        if (TEST_DATA && (guides == null || guides.size() == 0)) {
-                            if (guides == null) {
-                                guides = new ArrayList<TourGuide>();
-                            }
-                            for (int i = 0; i < 3; i++) {
-                                String location = (39.933859 + 0.025 * i) + "," + (116.400191 + 0.025 * i);
-                                TourGuide guide = new TourGuide(100000 + i, "用户" + i, "1881076231" + i, 1, 1, "", "故宫",
-                                        19880910 + i, 2012, "http://img7.9158.com/200709/01/11/53/200709018758949.jpg",
-                                        "12345678" + i, location, 1);
-                                guides.add(guide);
-                            }
-                        }
 
                         if (mOnSearchGuideListener != null) {
                             mOnSearchGuideListener.onSearchGuide(SEARCH_GUIDE_SUCCESS, guides);
@@ -350,21 +303,6 @@ public class UserHelper {
                     }
                 } catch (NetWorkException e) {
                     e.printStackTrace();
-                }
-
-                if (TEST_DATA) {
-                    List<TourGuide> guides = new ArrayList<TourGuide>();
-                    for (int i = 0; i < 3; i++) {
-                        String location = (39.933859 + 0.025 * i) + "," + (116.400191 + 0.025 * i);
-                        TourGuide guide = new TourGuide(100000 + i, "用户" + i, "1881076231" + i, 1, 1, "", "故宫",
-                                19880910 + i, 2012, "http://img7.9158.com/200709/01/11/53/200709018758949.jpg",
-                                "12345678" + i, location, 1);
-                        guides.add(guide);
-                    }
-                    if (mOnSearchGuideListener != null) {
-                        mOnSearchGuideListener.onSearchGuide(SEARCH_GUIDE_SUCCESS, guides);
-                    }
-                    return;
                 }
 
                 if (mOnSearchGuideListener != null) {

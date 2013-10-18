@@ -1,22 +1,15 @@
 package com.find.guide.fragment;
 
-import java.util.List;
-
 import com.find.guide.R;
+import com.find.guide.activity.GuideListActivity;
 import com.find.guide.activity.SelectCityActivity;
-import com.find.guide.app.TourGuideApplication;
 import com.find.guide.model.CityItem;
-import com.find.guide.model.TourGuide;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnSearchGuideListener;
 import com.find.guide.view.TipsDialog;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,15 +28,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private Button mSearchBtn;
     private RadioGroup mGenderGroup;
 
-    private CityItem mCityItem;
-    private UserHelper mUserHelper;
-
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private CityItem mCityItem = new CityItem("北京", "B", 20001);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserHelper = new UserHelper(TourGuideApplication.getInstance());
     }
 
     @Override
@@ -65,15 +54,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (mCityItem != null) {
+            mCityTv.setText(mCityItem.getCityName());
+        }
     }
 
     @Override
     public void onDestroy() {
         TipsDialog.getInstance().dismiss();
-        if (mUserHelper != null) {
-            mUserHelper.destroy();
-            mUserHelper = null;
-        }
         super.onDestroy();
     }
 
@@ -118,30 +106,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         if (mCityItem == null) {
             TipsDialog.getInstance().show(getActivity(), R.drawable.tips_fail, R.string.need_select_city, false, true);
         } else {
-            TipsDialog.getInstance().show(getActivity(), R.drawable.tips_loading, R.string.searching, true, true);
-            mUserHelper.searchGuide(mCityItem.getCityCode(), gender, scenic, 0, 100, mOnSearchGuideListener);
+            Intent intent = new Intent(getActivity(), GuideListActivity.class);
+            intent.putExtra(GuideListActivity.INTENT_EXTRA_CITY_INT, mCityItem.getCityCode());
+            intent.putExtra(GuideListActivity.INTENT_EXTRA_GENDER_INT, gender);
+            intent.putExtra(GuideListActivity.INTENT_EXTRA_SCENIC_STRING, scenic);
+            startActivity(intent);
         }
     }
 
-    private OnSearchGuideListener mOnSearchGuideListener = new OnSearchGuideListener() {
-
-        @Override
-        public void onSearchGuide(final int result, final List<TourGuide> guides) {
-            mHandler.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (result == UserHelper.SEARCH_GUIDE_SUCCESS) {
-                        enterGuideList(guides);
-                    } else {
-
-                    }
-                }
-            });
-        }
-    };
-
-    private void enterGuideList(List<TourGuide> guides) {
-
-    }
 }

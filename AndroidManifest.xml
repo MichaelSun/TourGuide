@@ -64,6 +64,22 @@
             android:name="com.find.guide.activity.SelectCityActivity"
             android:label="@string/select_city_title" >
         </activity>
+        <activity
+            android:name="com.find.guide.activity.GuideListActivity"
+            android:label="@string/nearby_guide" >
+        </activity>
+        <activity
+            android:name="com.find.guide.activity.OrderActivity"
+            android:label="@string/order_title" >
+        </activity>
+        <activity
+            android:name="com.find.guide.activity.SatisfactionActivity"
+            android:label="@string/satisfaction_title" >
+        </activity>
+        <activity
+            android:name="com.find.guide.activity.BroadcastActivity"
+            android:label="@string/broadcast_title" >
+        </activity>
 
         <service
             android:name="com.baidu.location.f"

@@ -12,8 +12,8 @@ public class InviteEvent implements Serializable {
      */
     private static final long serialVersionUID = 7422912511389682539L;
 
-    public static final int EVENT_TYPE_ONE = 0;
-    public static final int EVENT_TYPE_BROADCASR = 1;
+    public static final int EVENT_TYPE_ONE = 1;
+    public static final int EVENT_TYPE_BROADCASR = 2;
 
     public static final int EVENT_STATUS_BOOKING = 0;
     public static final int EVENT_STATUS_CANCELED = 1;
@@ -25,39 +25,37 @@ public class InviteEvent implements Serializable {
     public static final int SATISFACTION_GOOD = 1;
     public static final int SATISFACTION_BAD = 2;
 
-    @JsonProperty("eventId")
     private long eventId;
 
-    @JsonProperty("userId")
     private int userId;
 
-    @JsonProperty("guideId")
     private int guideId;
 
-    @JsonProperty("eventType")
     private int eventType;
 
-    @JsonProperty("eventStatus")
     private int eventStatus;
 
-    @JsonProperty("startTime")
     private long startTime;
 
-    @JsonProperty("endTime")
     private long endTime;
 
-    @JsonProperty("scenic")
     private String scenic;
 
-    @JsonProperty("createTime")
     private long createTime;
 
-    @JsonProperty("satisfaction")
     private int satisfaction;
 
+    private String guideName;
+
+    private String guideHeadUrl;
+
     @JsonCreator
-    public InviteEvent(long eventId, int userId, int guideId, int eventType, int eventStatus, long startTime,
-            long endTime, String scenic, long createTime, int satisfaction) {
+    public InviteEvent(@JsonProperty("eventId") long eventId, @JsonProperty("userId") int userId,
+            @JsonProperty("guideId") int guideId, @JsonProperty("eventType") int eventType,
+            @JsonProperty("eventStatus") int eventStatus, @JsonProperty("startTime") long startTime,
+            @JsonProperty("endTime") long endTime, @JsonProperty("scenic") String scenic,
+            @JsonProperty("createTime") long createTime, @JsonProperty("satisfaction") int satisfaction,
+            @JsonProperty("guideName") String guideName, @JsonProperty("guideHeadUrl") String guideHeadUrl) {
         this.eventId = eventId;
         this.userId = userId;
         this.guideId = guideId;
@@ -68,6 +66,8 @@ public class InviteEvent implements Serializable {
         this.scenic = scenic;
         this.createTime = createTime;
         this.satisfaction = satisfaction;
+        this.guideName = guideName;
+        this.guideHeadUrl = guideHeadUrl;
     }
 
     public long getEventId() {
@@ -150,8 +150,20 @@ public class InviteEvent implements Serializable {
         this.satisfaction = satisfaction;
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
+    public String getGuideName() {
+        return guideName;
+    }
+
+    public void setGuideName(String guideName) {
+        this.guideName = guideName;
+    }
+
+    public String getGuideHeadUrl() {
+        return guideHeadUrl;
+    }
+
+    public void setGuideHeadUrl(String guideHeadUrl) {
+        this.guideHeadUrl = guideHeadUrl;
     }
 
 }

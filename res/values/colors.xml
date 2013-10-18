@@ -12,6 +12,11 @@
     <color name="gray7">#DEDEDE</color>
     <color name="gray8">#c3c3c1</color>
     
+    <drawable name="default_header">#ced0d1</drawable>
+    
+    <color name="record_normal">#000000</color>
+    <color name="record_important">#ff0000</color>
+    
     <!-- list item color info -->
     <drawable name="default_cover">#ced0d1</drawable>
     <color name="sublist_title_color">#333333</color>

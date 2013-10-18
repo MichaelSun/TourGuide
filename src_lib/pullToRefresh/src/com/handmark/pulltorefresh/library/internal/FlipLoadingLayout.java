@@ -114,10 +114,10 @@ public class FlipLoadingLayout extends LoadingLayout {
 		mHeaderImage.setVisibility(View.VISIBLE);
 	}
 
-//	@Override
-//	protected int getDefaultDrawableResId() {
-//		return R.drawable.default_ptr_flip;
-//	}
+	@Override
+	protected int getDefaultDrawableResId() {
+		return R.drawable.default_ptr_flip;
+	}
 
 	private float getDrawableRotationAngle() {
 		float angle = 0f;
@@ -141,12 +141,6 @@ public class FlipLoadingLayout extends LoadingLayout {
 		}
 
 		return angle;
-	}
-
-	@Override
-	protected Drawable getDefaultDrawable() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

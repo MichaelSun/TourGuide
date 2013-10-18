@@ -10,20 +10,33 @@
         android:clickable="true" />
 
     <View
+        android:id="@+id/broadcast_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_refresh" />
+
+    <View
         android:id="@+id/map_refresh_btn"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="50dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/btn_refresh" />
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background"
         android:clickable="true"
-        android:visibility="gone" />
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:visibility="visible" />
 
 </RelativeLayout>

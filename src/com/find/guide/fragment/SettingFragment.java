@@ -83,11 +83,13 @@ public class SettingFragment extends Fragment implements OnClickListener {
             mLoginRegisterView.setVisibility(View.VISIBLE);
             mGuideAuthenticationView.setVisibility(View.GONE);
             mLogoutView.setVisibility(View.GONE);
+            mUpdateView.setBackgroundResource(R.drawable.bg_middle);
             mFeedBackView.setBackgroundResource(R.drawable.bg_bottom);
         } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURIST) {
             mLoginRegisterView.setVisibility(View.GONE);
             mGuideAuthenticationView.setVisibility(View.VISIBLE);
             mLogoutView.setVisibility(View.VISIBLE);
+            mUpdateView.setBackgroundResource(R.drawable.bg_middle);
             mGuideAuthenticationView.setBackgroundResource(R.drawable.bg_top);
             mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
         } else {

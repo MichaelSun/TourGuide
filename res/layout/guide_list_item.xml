@@ -9,39 +9,37 @@
         android:layout_height="50dp" >
 
         <TextView
-            android:id="@+id/scenic"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:gravity="left"
-            android:singleLine="true"
-            android:text="颐和园"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/start_time"
+            android:id="@+id/name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/scenic"
-            android:gravity="center"
+            android:layout_marginLeft="15dp"
             android:singleLine="true"
-            android:text="1990/09/12"
+            android:text="张三导"
             android:textColor="#000000"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/name"
-            android:layout_width="60dp"
+            android:id="@+id/gender"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/start_time"
+            android:layout_toRightOf="@id/name"
             android:gravity="center"
             android:singleLine="true"
-            android:text="张三导"
+            android:text="男"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/gender"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="30次"
             android:textColor="#000000"
             android:textSize="18sp" />
 
@@ -55,16 +53,16 @@
             android:src="@drawable/icon_arr" />
 
         <TextView
-            android:id="@+id/event_status"
+            android:id="@+id/stars"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/arrow"
-            android:layout_toRightOf="@id/name"
-            android:gravity="right"
+            android:layout_toRightOf="@id/num"
+            android:gravity="center"
             android:singleLine="true"
-            android:text="预约"
+            android:text="5星"
             android:textColor="#ff0000"
             android:textSize="18sp" />
     </RelativeLayout>

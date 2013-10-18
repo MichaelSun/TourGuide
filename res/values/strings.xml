@@ -12,15 +12,25 @@
 
     <!-- 个人记录 -->
     <string name="profile_record">个人记录</string>
-    <string name="invite_booking">预约</string>
+    <string name="tourguide">导游</string>
+    <string name="tourist">游客</string>
+    
+    <string name="invite_booking">预约中</string>
     <string name="invite_cancel">已取消</string>
-    <string name="invite_accepted">待评价</string>
-    <string name="invite_refused">已拒绝</string>
+    <string name="invite_accepted">被接受</string>
+    <string name="invite_refused">被拒绝</string>
+    <string name="invite_satisfaction">已评价</string>
+    <string name="invite_broadcast">广播中</string>
 
     <string name="satisfaction_good">满意</string>
     <string name="satisfaction_bad">不满意</string>
     
-    <string name="invite_broadcast">广播中</string>
+    <string name="guide_waiting">等待中</string>
+    <string name="guide_accepted">已接受</string>
+    <string name="guide_refused">已拒绝</string>
+    <string name="guide_satisfaction">被评价</string>
+    <string name="guide_cancel">被取消</string>
+    <string name="guide_accpeted_by_other">广播被其他导游接受</string>
     
     <!-- 搜索 -->
     <string name="search">搜索</string>
@@ -43,7 +53,9 @@
     <string name="logout_dialog_positive">确认</string>
     <string name="logout_dialog_negative">取消</string>
     
-    <string name="need_login">需要先登录</string>
+    <string name="login_dialog_message">您还未登录，确认登录吗？</string>
+    <string name="login_dialog_positive">确认</string>
+    <string name="login_dialog_negative">取消</string>
 
     <!-- 登陆 -->
     <string name="login_phone_hint">手机号</string>
@@ -55,9 +67,15 @@
 
     <!-- 注册 -->
     <string name="register_phone">手机号</string>
+    <string name="register_phone_hint">请输入手机号</string>
     <string name="register_password">密码</string>
+    <string name="register_password_hint">请输入密码</string>
     <string name="register_password_confirm">密码确认</string>
+    <string name="register_password_confirm_hint">请再次输入密码</string>
+    <string name="register_name">姓名</string>
+    <string name="register_name_hint">请输入姓名</string>
     <string name="register_verification_code">验证码</string>
+    <string name="register_verification_code_hint">请输入验证码</string>
     <string name="register_send_verify_code">发送</string>
     
     <string name="register_phone_empty">请输入电话号码</string>
@@ -73,28 +91,35 @@
     <string name="guide_identify_title">我是导游</string>
     <string name="guide_id_card">导游证</string>
     <string name="guide_id_card_no">导游证号</string>
+    <string name="guide_card_no_hint">请输入导游证号</string>
     <string name="birthday">出生日期</string>
+    <string name="birthday_hint">请输入出生日期</string>
     <string name="be_guide_year">领证年份</string>
+    <string name="be_guide_year_hint">请输入领证年份</string>
+    <string name="good_at_scenic">擅长景区</string>
+    <string name="good_at_scenic_hint">请输入擅长的景区</string>
     <string name="submit_check">提交审核</string>
-    <string name="name">姓名</string>
     <string name="gender">性别</string>
     <string name="male">男</string>
     <string name="female">女</string>
+    <string name="gender_unknown">未知</string>
     <string name="gender_any">不限</string>
 
     <!-- 预约 -->
     <string name="booking_title">预约导游</string>
-    <string name="city">城        市</string>
+    <string name="city">城市</string>
     <string name="good_scenic">擅长景区</string>
     <string name="guide_history">导游历史</string>
     <string name="guide_card_id">导游证号</string>
     <string name="goto_booking">我要预约</string>
+    <string name="booking">预约中...</string>
     
-    <!-- 预约确认 -->
     <string name="booking_confirm_title">预约</string>
     <string name="booking_guide">导游</string>
     <string name="booking_destination">我要去</string>
+    <string name="booking_destination_hint">请输入景区名</string>
     <string name="booking_start_time">出发时间</string>
+    <string name="booking_end_time">结束时间</string>
 	<string name="immediately_booking">立即预约</string>
     
     <!-- 查找 -->
@@ -102,5 +127,20 @@
     <string name="search_gender">性别</string>
     <string name="search_scenic">景点</string>
     <string name="search_scenic_hint">输入景点名</string>
+    
+    <!-- 预约单 -->
+    <string name="order_title">预约单</string>
+    <string name="destination">目的地</string>
+    <string name="cancel">取消</string>
+    <string name="accept">接受</string>
+    <string name="refuse">忽略</string>
+    
+    <!-- 评价 -->
+    <string name="satisfaction_title">评价</string>
+    
+    <string name="broadcast_title">广播</string>
+    <string name="send_broadcast">发起广播</string>
+    <string name="guide_gender">导游性别</string>
+    <string name="sending_broadcast">发送广播中...</string>
 
 </resources>

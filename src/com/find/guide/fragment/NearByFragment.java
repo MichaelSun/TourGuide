@@ -1,5 +1,6 @@
 package com.find.guide.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -27,6 +29,8 @@ import com.baidu.mapapi.map.MyLocationOverlay.LocationMode;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.R;
 import com.find.guide.activity.BookingActivity;
+import com.find.guide.activity.BroadcastActivity;
+import com.find.guide.adapter.GuideAdapter;
 import com.find.guide.app.TourGuideApplication;
 import com.find.guide.config.AppRuntime;
 import com.find.guide.model.helper.UserHelper;
@@ -35,13 +39,22 @@ import com.find.guide.model.TourGuide;
 import com.find.guide.utils.Toasts;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
 public class NearByFragment extends Fragment implements View.OnClickListener {
 
     private View mMapLocationView;
+    private View mBroadcastView;
 
     private GuideMapView mMapView = null;
     private MapController mMapController = null;
+
+    private PullToRefreshListView mListView;
+    private GuideAdapter mGuideAdapter;
+
+    private List<TourGuide> mTourGuides = new ArrayList<TourGuide>();
 
     LocationClient mLocClient;
     LocationData locData = null;
@@ -55,6 +68,12 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    static enum ShowMode {
+        MAP, LIST
+    }
+
+    private ShowMode mShowMode = ShowMode.MAP;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +83,24 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_map, null);
+        View view = inflater.inflate(R.layout.fragment_nearby, null);
 
         mMapView = (GuideMapView) view.findViewById(R.id.map_view);
         mMapLocationView = view.findViewById(R.id.map_refresh_btn);
         mMapLocationView.setOnClickListener(this);
+        mBroadcastView = view.findViewById(R.id.broadcast_btn);
+        mBroadcastView.setOnClickListener(this);
+
+        mListView = (PullToRefreshListView) view.findViewById(R.id.listview);
+        mListView.setVisibility(View.GONE);
+        mListView.setShowIndicator(false);
+        mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                requestLocation();
+            }
+        });
+        mGuideAdapter = new GuideAdapter(getActivity(), mTourGuides);
 
         return view;
     }
@@ -131,6 +163,9 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
         case R.id.map_refresh_btn:
             requestLocation();
             break;
+        case R.id.broadcast_btn:
+            sendBroadcast();
+            break;
         }
     }
 
@@ -156,7 +191,7 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
             myLocationOverlay.setData(locData);
             // 更新图层数据执行刷新后生效
             mMapView.refresh();
-            
+
             AppRuntime.gLocation = locData.latitude + "," + locData.longitude;
 
             if (mIsFirstLocation || mIsRequestLocation) {
@@ -185,18 +220,29 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
     private OnGetNearByGuideListener mOnGetNearByGuideListener = new OnGetNearByGuideListener() {
 
         @Override
-        public void onGetNearByGuideFinish(int result, final List<TourGuide> guides) {
-            
-            if (result == UserHelper.GET_NEARBY_GUIDE_SUCCESS) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
+        public void onGetNearByGuideFinish(final int result, final List<TourGuide> guides) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mListView.onRefreshComplete();
+                    if (result == UserHelper.GET_NEARBY_GUIDE_SUCCESS) {
+                        mTourGuides.clear();
+                        if (guides != null) {
+                            mTourGuides.addAll(guides);
+                        }
+                        mGuideAdapter.notifyDataSetChanged();
+
                         mMapView.updateGuideOverlay(guides);
                     }
-                });
-            }
+                }
+            });
         }
     };
+
+    private void sendBroadcast() {
+        Intent intent = new Intent(getActivity(), BroadcastActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onResume() {
@@ -233,11 +279,18 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_show_map) {
-            
+        if (item.getItemId() == R.id.menu_show_map && mShowMode == ShowMode.LIST) {
+            mShowMode = ShowMode.MAP;
+            mListView.setVisibility(View.GONE);
             return true;
-        } else if (item.getItemId() == R.id.menu_show_list) {
-
+        } else if (item.getItemId() == R.id.menu_show_list && mShowMode == ShowMode.MAP) {
+            mShowMode = ShowMode.LIST;
+            mListView.setVisibility(View.VISIBLE);
+            if (mListView.getRefreshableView().getAdapter() == null) {
+                mListView.setAdapter(mGuideAdapter);
+            } else {
+                mGuideAdapter.notifyDataSetChanged();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

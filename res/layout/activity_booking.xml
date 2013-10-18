@@ -11,8 +11,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="10dp" >
 
             <com.plugin.common.view.WebImageView
@@ -21,13 +21,26 @@
                 android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:scaleType="centerInside" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_header" />
+
+            <TextView
+                android:id="@+id/guide_name_gender_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/guide_card_iv"
+                android:singleLine="true"
+                android:text="张帝"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
             <View
                 android:id="@+id/guide_star1"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_alignBottom="@id/guide_card_iv"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/guide_card_iv"
                 android:background="@drawable/star_big_gold" />
@@ -77,21 +90,13 @@
                 android:layout_toRightOf="@id/guide_star5"
                 android:text="23次"
                 android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/guide_name_gender_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/guide_card_iv"
-                android:layout_marginTop="3dp"
-                android:textSize="20sp" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_top"
             android:orientation="horizontal" >
@@ -102,9 +107,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:text="@string/city"
+                android:text="城        市"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/city"
@@ -116,14 +121,14 @@
                 android:singleLine="true"
                 android:text="北京"
                 android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/bg_middle"
             android:orientation="horizontal" >
 
@@ -135,7 +140,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/good_scenic"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/good_scenic"
@@ -147,14 +152,15 @@
                 android:singleLine="true"
                 android:text="故宫"
                 android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/guide_history_layout"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/bg_middle" >
 
             <TextView
@@ -165,7 +171,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/guide_history"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/history_arrow"
@@ -181,53 +187,52 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@id/history_arrow"
                 android:layout_toRightOf="@id/guide_history_label"
+                android:gravity="right"
                 android:singleLine="true"
+                android:text="导游历史"
                 android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/bg_bottom"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/guide_card_id_label"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="1"
                 android:text="@string/guide_card_id"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/guide_card_id"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:layout_weight="2"
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
                 android:text="12831923102"
                 android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_top"
             android:orientation="horizontal" >
@@ -240,66 +245,118 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/booking_destination"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/destination_et"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
                 android:background="#00000000"
                 android:gravity="center_vertical|right"
-                android:hint="@string/booking_destination"
+                android:hint="@string/booking_destination_hint"
                 android:textColor="#666666"
                 android:textColorHint="#666666"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/start_time_layout"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/bg_bottom"
-            android:orientation="horizontal" >
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle" >
 
             <TextView
                 android:id="@+id/start_time_label"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:text="@string/booking_start_time"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/start_time_et"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="#00000000"
+            <ImageView
+                android:id="@+id/start_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/start_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/start_time_arrow"
+                android:layout_toRightOf="@id/start_time_label"
                 android:gravity="right|center_vertical"
-                android:hint="@string/booking_start_time"
-                android:paddingRight="10dp"
+                android:text="@string/booking_start_time"
                 android:textColor="#666666"
-                android:textColorHint="#666666"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/end_time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_bottom" >
+
+            <TextView
+                android:id="@+id/end_time_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:text="@string/booking_end_time"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/end_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/end_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/end_time_arrow"
+                android:layout_toRightOf="@id/end_time_label"
+                android:gravity="right|center_vertical"
+                android:text="@string/booking_end_time"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
         <Button
             android:id="@+id/booking_btn"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_login_green"
             android:gravity="center"
             android:text="@string/goto_booking"
             android:textColor="#ffffff"
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 

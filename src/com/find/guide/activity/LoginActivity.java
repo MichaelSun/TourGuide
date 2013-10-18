@@ -10,16 +10,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LoginActivity extends BaseActivity implements OnClickListener, TextWatcher {
+public class LoginActivity extends BaseActivity implements OnClickListener {
+    
+    private static final int REQUEST_CODE_REGISTER = 1;
 
     private EditText mPhoneEt;
     private EditText mPasswordEt;
@@ -45,9 +45,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Text
         mPasswordEt = (EditText) findViewById(R.id.login_password_et);
         mLoginBtn = (Button) findViewById(R.id.login_btn);
         mRegisterBtn = (Button) findViewById(R.id.register_btn);
-
-        mPhoneEt.addTextChangedListener(this);
-        mPasswordEt.addTextChangedListener(this);
 
         mLoginBtn.setOnClickListener(this);
         mRegisterBtn.setOnClickListener(this);
@@ -80,7 +77,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Text
         String phone = mPhoneEt.getText().toString();
         String password = mPasswordEt.getText().toString();
         if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password)) {
-            TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.logining, false);
+            TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.logining, true, false);
             mLoginHelper.login(phone, password, mOnLoginFinishListener);
         }
     }
@@ -105,28 +102,15 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Text
 
     private void register() {
         Intent intent = new Intent(TourGuideApplication.getInstance(), RegisterActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_REGISTER);
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String phone = mPhoneEt.getText().toString();
-        String password = mPasswordEt.getText().toString();
-        if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password)) {
-            mLoginBtn.setEnabled(true);
-        } else {
-            mLoginBtn.setEnabled(false);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_REGISTER && resultCode == RESULT_OK) {
+            finish();
         }
     }
-
+    
 }

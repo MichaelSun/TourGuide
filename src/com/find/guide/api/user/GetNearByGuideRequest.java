@@ -1,11 +1,11 @@
 package com.find.guide.api.user;
 
 import com.find.guide.api.base.PMRequestBase;
-import com.plugin.internet.core.annotations.NeedTicket;
+import com.plugin.internet.core.annotations.NoNeedTicket;
 import com.plugin.internet.core.annotations.RequiredParam;
 import com.plugin.internet.core.annotations.RestMethodUrl;
 
-@NeedTicket
+@NoNeedTicket
 @RestMethodUrl("user/getNearByGuide")
 public class GetNearByGuideRequest extends PMRequestBase<GetNearByGuideResponse> {
 

@@ -1,6 +1,5 @@
 package com.find.guide.model.helper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.find.guide.api.invite.GetHistoricalInviteEventsRequest;
@@ -13,7 +12,6 @@ import com.find.guide.api.invite.InviteRequest;
 import com.find.guide.api.invite.InviteResponse;
 import com.find.guide.api.invite.SetSatisfactionRequest;
 import com.find.guide.api.invite.SetSatisfactionResponse;
-import com.find.guide.config.AppConfig;
 import com.find.guide.model.InviteEvent;
 import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.internet.InternetUtils;
@@ -22,8 +20,6 @@ import com.plugin.internet.core.NetWorkException;
 import android.content.Context;
 
 public class InviteHelper {
-
-    private static final boolean TEST_DATA = true & AppConfig.DEBUG;
 
     public static final int SUCCESS = 0;
     public static final int FAILED = -1;
@@ -53,17 +49,6 @@ public class InviteHelper {
                     GetHistoricalInviteEventsResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
                         List<InviteEvent> inviteEvents = response.inviteEvents;
-                        // test
-                        if (TEST_DATA && (inviteEvents == null || inviteEvents.size() == 0)) {
-                            if (inviteEvents == null) {
-                                inviteEvents = new ArrayList<InviteEvent>();
-                            }
-                            for (int i = 0; i < 20; i++) {
-                                InviteEvent inviteEvent = new InviteEvent(1000000 + i, 100000 + i, 1200 + i, i % 2,
-                                        i % 5, 12308612812l, 1229310231l, "颐和园", 12329102301l, i % 2);
-                                inviteEvents.add(inviteEvent);
-                            }
-                        }
                         if (mOnGetHistoricalInviteEventsListener != null) {
                             mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(SUCCESS, inviteEvents);
                         }
@@ -71,19 +56,6 @@ public class InviteHelper {
                     }
                 } catch (NetWorkException e) {
                     e.printStackTrace();
-                }
-
-                if (TEST_DATA) {
-                    List<InviteEvent> inviteEvents = new ArrayList<InviteEvent>();
-                    for (int i = 0; i < 20; i++) {
-                        InviteEvent inviteEvent = new InviteEvent(1000000 + i, 100000 + i, 1200 + i, i % 2, i % 5,
-                                12308612812l, 1229310231l, "颐和园", 12329102301l, i % 2);
-                        inviteEvents.add(inviteEvent);
-                    }
-                    if (mOnGetHistoricalInviteEventsListener != null) {
-                        mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(SUCCESS, inviteEvents);
-                    }
-                    return;
                 }
 
                 if (mOnGetHistoricalInviteEventsListener != null) {

@@ -12,12 +12,12 @@ public class GuideRefuseRequest extends PMRequestBase<GuideRefuseResponse> {
     @RequiredParam("eventId")
     private long eventId;
 
-    @RequiredParam("guideId")
-    private int guideId;
+    @RequiredParam("userId")
+    private int userId;
 
-    public GuideRefuseRequest(long eventId, int guideId) {
+    public GuideRefuseRequest(long eventId, int userId) {
         this.eventId = eventId;
-        this.guideId = guideId;
+        this.userId = userId;
     }
 
 }
