@@ -48,7 +48,7 @@ public class GuideMapView extends MapView {
                 view.setGuide(guide);
                 Bitmap bitmap = BMapUtil.getBitmapFromView(view);
 
-                double[] lnglat = parseLocation(guide.location);
+                double[] lnglat = parseLocation(guide.getLocation());
                 double lng = 39.915;
                 double lat = 116.404;
                 if (lnglat != null && lnglat.length == 2) {

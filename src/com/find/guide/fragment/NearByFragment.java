@@ -86,6 +86,7 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_nearby, null);
 
         mMapView = (GuideMapView) view.findViewById(R.id.map_view);
+
         mMapLocationView = view.findViewById(R.id.map_refresh_btn);
         mMapLocationView.setOnClickListener(this);
         mBroadcastView = view.findViewById(R.id.broadcast_btn);
@@ -214,7 +215,7 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getNearByGuide(String location) {
-        mUserHelper.getNearByGuide(location, 10, 0, 50, mOnGetNearByGuideListener);
+        mUserHelper.getNearByGuide(location, 500, 0, 100, mOnGetNearByGuideListener);
     }
 
     private OnGetNearByGuideListener mOnGetNearByGuideListener = new OnGetNearByGuideListener() {
@@ -225,7 +226,7 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void run() {
                     mListView.onRefreshComplete();
-                    if (result == UserHelper.GET_NEARBY_GUIDE_SUCCESS) {
+                    if (result == UserHelper.SUCCESS) {
                         mTourGuides.clear();
                         if (guides != null) {
                             mTourGuides.addAll(guides);

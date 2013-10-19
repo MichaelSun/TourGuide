@@ -50,6 +50,12 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
     private TextView mEndTimeTv;
     private View mEndTimeView;
     private Button mBookingBtn;
+    private TextView mEvaluateNumTv;
+    private View mStar1;
+    private View mStar2;
+    private View mStar3;
+    private View mStar4;
+    private View mStar5;
 
     private DatePickerDialog mDialog;
 
@@ -88,6 +94,12 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         mEndTimeTv = (TextView) findViewById(R.id.end_time_tv);
         mEndTimeView = findViewById(R.id.end_time_layout);
         mBookingBtn = (Button) findViewById(R.id.booking_btn);
+        mStar1 = findViewById(R.id.guide_star1);
+        mStar2 = findViewById(R.id.guide_star2);
+        mStar3 = findViewById(R.id.guide_star3);
+        mStar4 = findViewById(R.id.guide_star4);
+        mStar5 = findViewById(R.id.guide_star5);
+        mEvaluateNumTv = (TextView) findViewById(R.id.star_evaluate_num);
 
         mGuideHistoryView.setOnClickListener(this);
         mStartTimeView.setOnClickListener(this);
@@ -97,7 +109,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 
     private void setData() {
         if (mTourGuide != null) {
-            mGuideCardIv.setImageURI(new Uri.Builder().path(mTourGuide.getGuideCardUrl()).build());
+            mGuideCardIv.setImageURI(new Uri.Builder().path(mTourGuide.getHeadUrl()).build());
             mGuideNameGenderTv.setText(mTourGuide.getUserName());
             CityItem cityItem = CityManager.getInstance().getCityById(mTourGuide.getCity());
             if (cityItem != null) {
@@ -105,6 +117,8 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
             }
             mGoodAtScenicTv.setText(mTourGuide.getGoodAtScenic());
             mGuideCardIdTv.setText(mTourGuide.getGuideCardId());
+            mEvaluateNumTv.setText(mTourGuide.getEvaluateCount() + "次");
+            setStar(mTourGuide.getEvaluateScore());
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -117,6 +131,46 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
                 + (day < 10 ? "0" + (day) : day));
         mStartTimeStamp = System.currentTimeMillis();
         mEndTimeStamp = System.currentTimeMillis() + 1;
+    }
+
+    private void setStar(int score) {
+        if (score <= 0) {
+            mStar1.setBackgroundResource(R.drawable.star_silver);
+            mStar2.setBackgroundResource(R.drawable.star_silver);
+            mStar3.setBackgroundResource(R.drawable.star_silver);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 1) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_silver);
+            mStar3.setBackgroundResource(R.drawable.star_silver);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 2) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_silver);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 3) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_gold);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 4) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_gold);
+            mStar4.setBackgroundResource(R.drawable.star_gold);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_gold);
+            mStar4.setBackgroundResource(R.drawable.star_gold);
+            mStar5.setBackgroundResource(R.drawable.star_gold);
+        }
     }
 
     @Override

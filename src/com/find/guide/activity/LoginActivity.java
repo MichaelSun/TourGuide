@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends BaseActivity implements OnClickListener {
-    
+
     private static final int REQUEST_CODE_REGISTER = 1;
 
     private EditText mPhoneEt;
@@ -90,7 +90,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 @Override
                 public void run() {
                     TipsDialog.getInstance().dismiss();
-                    if (result == UserHelper.LOGIN_SUCCESS) {
+                    if (result == UserHelper.SUCCESS) {
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this, R.string.login_failed, Toast.LENGTH_SHORT).show();
@@ -112,5 +112,5 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             finish();
         }
     }
-    
+
 }

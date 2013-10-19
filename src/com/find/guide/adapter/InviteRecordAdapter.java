@@ -4,8 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.find.guide.R;
-import com.find.guide.activity.OrderActivity;
-import com.find.guide.activity.SatisfactionActivity;
+import com.find.guide.activity.InviteEventDetailActivity;
 import com.find.guide.model.InviteEvent;
 
 import android.app.Activity;
@@ -125,17 +124,9 @@ public class InviteRecordAdapter extends BaseAdapter {
     }
 
     private void onClickRecord(InviteEvent inviteEvent) {
-        int eventStatus = inviteEvent.getEventStatus();
-        if (eventStatus == InviteEvent.EVENT_STATUS_BOOKING) {
-            Intent intent = new Intent(mActivity, OrderActivity.class);
-            intent.putExtra(OrderActivity.INTENT_EXTRA_USER_TYPE, OrderActivity.TYPE_TOURIST);
-            intent.putExtra(OrderActivity.INTENT_EXTRA_TOURIST_OBJ, inviteEvent);
-            mActivity.startActivity(intent);
-        } else if (eventStatus == InviteEvent.EVENT_STATUS_ACCEPTED) {
-            Intent intent = new Intent(mActivity, SatisfactionActivity.class);
-            intent.putExtra(SatisfactionActivity.INTENT_EXTRA_INVITE_EVENT, inviteEvent);
-            mActivity.startActivity(intent);
-        }
+        Intent intent = new Intent(mActivity, InviteEventDetailActivity.class);
+        intent.putExtra(InviteEventDetailActivity.INTENT_EXTRA_INVITE_EVENT_OBJ, inviteEvent);
+        mActivity.startActivity(intent);
     }
 
     private String getTimeStr(long time) {

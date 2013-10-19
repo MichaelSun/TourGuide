@@ -45,6 +45,8 @@ public class ProfileRecordFragment extends Fragment {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    private boolean mRefreshNeedSrcoll = true;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +80,17 @@ public class ProfileRecordFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
+            mRefreshNeedSrcoll = false;
             if (mSettingManager.getUserId() <= 0) {
                 ((BaseActivity) getActivity()).getActionBar().setTitle(R.string.profile_record);
                 if (mRecordAdapter != null) {
@@ -90,7 +98,8 @@ public class ProfileRecordFragment extends Fragment {
                     mGuideEvents.clear();
                     mRecordAdapter.notifyDataSetChanged();
                 }
-            } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
+            } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE
+                    && mSettingManager.getGuideMode() == 0) {
                 String title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
                 ((BaseActivity) getActivity()).getActionBar().setTitle(title);
                 if (mRecordAdapter == null || !(mRecordAdapter instanceof GuideRecordAdapter)) {
@@ -98,13 +107,7 @@ public class ProfileRecordFragment extends Fragment {
                     mGuideEvents.clear();
                     mInviteEvents.clear();
                     mListView.setAdapter(mRecordAdapter);
-
-                    mHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mListView.setRefreshing(true);
-                        }
-                    }, 100);
+                    mRefreshNeedSrcoll = true;
                 }
             } else {
                 String title = getString(R.string.profile_record) + "(" + getString(R.string.tourist) + ")";
@@ -114,14 +117,19 @@ public class ProfileRecordFragment extends Fragment {
                     mGuideEvents.clear();
                     mInviteEvents.clear();
                     mListView.setAdapter(mRecordAdapter);
+                    mRefreshNeedSrcoll = true;
+                }
+            }
 
-                    mHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+            if (mSettingManager.getUserId() > 0) {
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mRefreshNeedSrcoll) {
                             mListView.setRefreshing(true);
                         }
-                    }, 100);
-                }
+                    }
+                }, 100);
             }
         }
     }

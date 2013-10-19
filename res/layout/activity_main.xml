@@ -60,7 +60,7 @@
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
-                android:src="@drawable/ic_tuangou" />
+                android:src="@drawable/ic_profile" />
 
             <TextView
                 android:id="@+id/profile_record_text"
@@ -91,7 +91,7 @@
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
-                android:src="@drawable/ic_profile" />
+                android:src="@drawable/ic_tuangou" />
 
             <TextView
                 android:id="@+id/search_text"

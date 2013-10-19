@@ -46,15 +46,13 @@ public class GuideListActivity extends BaseActivity {
             if (msg.what == WHAT_SEARCH_GUIDE_SUCCESS) {
                 TipsDialog.getInstance().dismiss();
                 int result = msg.arg1;
-                if (result == UserHelper.SEARCH_GUIDE_SUCCESS) {
+                if (result == UserHelper.SUCCESS) {
                     @SuppressWarnings("unchecked")
                     List<TourGuide> guides = (List<TourGuide>) msg.obj;
                     mTourGuides.clear();
                     if (guides != null)
                         mTourGuides.addAll(guides);
                     mGuideAdapter.notifyDataSetChanged();
-                } else {
-
                 }
             }
         }

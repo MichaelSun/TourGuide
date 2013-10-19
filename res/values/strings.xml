@@ -7,52 +7,47 @@
     <string name="nearby_guide">附近导游</string>
     <string name="menu_show_map">地图</string>
     <string name="menu_show_list">列表</string>
-    
     <string name="in_location">正在定位...</string>
 
     <!-- 个人记录 -->
     <string name="profile_record">个人记录</string>
     <string name="tourguide">导游</string>
     <string name="tourist">游客</string>
-    
     <string name="invite_booking">预约中</string>
     <string name="invite_cancel">已取消</string>
     <string name="invite_accepted">被接受</string>
     <string name="invite_refused">被拒绝</string>
     <string name="invite_satisfaction">已评价</string>
     <string name="invite_broadcast">广播中</string>
-
     <string name="satisfaction_good">满意</string>
     <string name="satisfaction_bad">不满意</string>
-    
     <string name="guide_waiting">等待中</string>
     <string name="guide_accepted">已接受</string>
     <string name="guide_refused">已拒绝</string>
     <string name="guide_satisfaction">被评价</string>
     <string name="guide_cancel">被取消</string>
     <string name="guide_accpeted_by_other">广播被其他导游接受</string>
-    
+
     <!-- 搜索 -->
     <string name="search">搜索</string>
     <string name="city_any">不限</string>
     <string name="need_select_city">请选择城市</string>
     <string name="searching">搜索中...</string>
-    
+
     <!-- 选择城市 -->
     <string name="select_city_title">选择城市</string>
 
     <!-- 设置 -->
     <string name="setting">设置</string>
     <string name="setting_login">登录</string>
+    <string name="setting_profile">个人主页</string>
     <string name="setting_guide_authentication">我是导游</string>
     <string name="setting_update">检查更新</string>
     <string name="setting_feedback">意见反馈</string>
     <string name="setting_logout">退出登录</string>
-    
     <string name="logout_dialog_message">退出登录吗？</string>
     <string name="logout_dialog_positive">确认</string>
     <string name="logout_dialog_negative">取消</string>
-    
     <string name="login_dialog_message">您还未登录，确认登录吗？</string>
     <string name="login_dialog_positive">确认</string>
     <string name="login_dialog_negative">取消</string>
@@ -77,18 +72,16 @@
     <string name="register_verification_code">验证码</string>
     <string name="register_verification_code_hint">请输入验证码</string>
     <string name="register_send_verify_code">发送</string>
-    
     <string name="register_phone_empty">请输入电话号码</string>
     <string name="register_password_empty">请输入密码</string>
     <string name="register_password_diff">两次输入的密码不一致</string>
     <string name="register_name_empty">请输入姓名</string>
     <string name="register_verify_code_empty">请输入验证码</string>
-    
     <string name="registering">注册中...</string>
     <string name="register_failed">注册失败</string>
 
     <!-- 导游认证 -->
-    <string name="guide_identify_title">我是导游</string>
+    <string name="guide_identify_title">导游审核</string>
     <string name="guide_id_card">导游证</string>
     <string name="guide_id_card_no">导游证号</string>
     <string name="guide_card_no_hint">请输入导游证号</string>
@@ -113,34 +106,38 @@
     <string name="guide_card_id">导游证号</string>
     <string name="goto_booking">我要预约</string>
     <string name="booking">预约中...</string>
-    
     <string name="booking_confirm_title">预约</string>
     <string name="booking_guide">导游</string>
     <string name="booking_destination">我要去</string>
     <string name="booking_destination_hint">请输入景区名</string>
     <string name="booking_start_time">出发时间</string>
     <string name="booking_end_time">结束时间</string>
-	<string name="immediately_booking">立即预约</string>
-    
+    <string name="immediately_booking">立即预约</string>
+
     <!-- 查找 -->
     <string name="search_city">城市</string>
     <string name="search_gender">性别</string>
     <string name="search_scenic">景点</string>
     <string name="search_scenic_hint">输入景点名</string>
-    
+
     <!-- 预约单 -->
     <string name="order_title">预约单</string>
     <string name="destination">目的地</string>
     <string name="cancel">取消</string>
     <string name="accept">接受</string>
     <string name="refuse">忽略</string>
-    
+
     <!-- 评价 -->
     <string name="satisfaction_title">评价</string>
-    
     <string name="broadcast_title">广播</string>
     <string name="send_broadcast">发起广播</string>
     <string name="guide_gender">导游性别</string>
     <string name="sending_broadcast">发送广播中...</string>
+
+    <!-- 个人主页 -->
+    <string name="profile_title">个人主页</string>
+    <string name="change_head_dialog_msg">您修改了头像，确认提交吗？</string>
+    <string name="change_head_dialog_positive">提交</string>
+    <string name="change_head_dialog_negative">取消</string>
 
 </resources>

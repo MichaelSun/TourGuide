@@ -40,6 +40,33 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/setting_profile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_middle"
+            android:clickable="true" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:singleLine="true"
+                android:text="@string/setting_profile"
+                android:textColor="#232424"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/icon_arr" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/setting_guide_authentication"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -58,12 +85,24 @@
                 android:textSize="18sp" />
 
             <ImageView
+                android:id="@+id/guide_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
                 android:src="@drawable/icon_arr" />
+
+            <Switch
+                android:id="@+id/guide_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:textOff="@string/tourist"
+                android:textOn="@string/tourguide"
+                android:visibility="visible" />
         </RelativeLayout>
 
         <RelativeLayout

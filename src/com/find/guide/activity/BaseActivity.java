@@ -26,7 +26,7 @@ public class BaseActivity extends Activity {
         mActionbar = getActionBar();
         mActionbar.setDisplayHomeAsUpEnabled(true);
         mActionbar.setDisplayShowTitleEnabled(true);
-        mActionbar.setDisplayShowHomeEnabled(true);
+//        mActionbar.setDisplayShowHomeEnabled(true);
         
         this.getWindow().setBackgroundDrawableResource(R.drawable.background);
     }

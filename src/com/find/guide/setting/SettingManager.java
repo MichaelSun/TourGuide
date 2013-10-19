@@ -109,6 +109,16 @@ public class SettingManager {
         return mSharedPreferences.getInt(KEY_USER_TYPE, 0);
     }
 
+    private static final String KEY_GUIDE_MODE = "key_guide_mode";
+
+    public void setGuideMode(int mode) {
+        mEditor.putInt(KEY_GUIDE_MODE, mode).commit();
+    }
+
+    public int getGuideMode() {
+        return mSharedPreferences.getInt(KEY_GUIDE_MODE, 0);
+    }
+
     private static final String KEY_USER_PHONE_NUM = "key_user_phone_num";
 
     public void setUserPhoneNum(String phoneNum) {

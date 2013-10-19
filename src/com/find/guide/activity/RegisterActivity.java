@@ -128,7 +128,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (result == UserHelper.REGISTER_SUCCESS) {
+                    if (result == UserHelper.SUCCESS) {
                         setResult(RESULT_OK);
                         finish();
                     } else {

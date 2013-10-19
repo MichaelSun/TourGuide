@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.find.guide.R;
-import com.find.guide.activity.OrderActivity;
+import com.find.guide.activity.GuideEventDetailActivity;
 import com.find.guide.model.GuideEvent;
 
 import android.app.Activity;
@@ -125,13 +125,9 @@ public class GuideRecordAdapter extends BaseAdapter {
     }
 
     private void onClickRecord(GuideEvent guideEvent) {
-        int eventStatus = guideEvent.getEventStatus();
-        if (eventStatus == GuideEvent.EVENT_STATUS_WAITING) {
-            Intent intent = new Intent(mActivity, OrderActivity.class);
-            intent.putExtra(OrderActivity.INTENT_EXTRA_USER_TYPE, OrderActivity.TYPE_TOURGUIDE);
-            intent.putExtra(OrderActivity.INTENT_EXTRA_TOURIST_OBJ, guideEvent);
-            mActivity.startActivity(intent);
-        }
+        Intent intent = new Intent(mActivity, GuideEventDetailActivity.class);
+        intent.putExtra(GuideEventDetailActivity.INTENT_EXTRA_GUIDE_EVENT_OBJ, guideEvent);
+        mActivity.startActivity(intent);
     }
 
     private String getTimeStr(long time) {

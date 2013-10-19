@@ -9,24 +9,29 @@
         android:layout_height="match_parent"
         android:clickable="true" />
 
-    <View
+    <TextView
         android:id="@+id/broadcast_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_refresh" />
-
-    <View
-        android:id="@+id/map_refresh_btn"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="20dp"
+        android:background="@drawable/btn_login_grey"
+        android:gravity="center"
+        android:text="广播"
+        android:textColor="#539fc1"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/map_refresh_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/btn_refresh" />
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView

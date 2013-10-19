@@ -116,21 +116,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
                 android:text="北京"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/bg_middle"
-            android:orientation="horizontal" >
+            android:minHeight="50dp"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
 
             <TextView
                 android:id="@+id/good_scenic_label"
@@ -147,11 +150,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:gravity="right|center_vertical"
-                android:singleLine="true"
                 android:text="故宫"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -193,7 +195,7 @@
                 android:gravity="right"
                 android:singleLine="true"
                 android:text="导游历史"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -223,18 +225,18 @@
                 android:layout_marginRight="10dp"
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
-                android:text="12831923102"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_top"
+            android:minHeight="50dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -252,11 +254,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:background="#00000000"
                 android:gravity="center_vertical|right"
                 android:hint="@string/booking_destination_hint"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 android:textColorHint="#666666"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -299,7 +301,7 @@
                 android:layout_toRightOf="@id/start_time_label"
                 android:gravity="right|center_vertical"
                 android:text="@string/booking_start_time"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -341,7 +343,7 @@
                 android:layout_toRightOf="@id/end_time_label"
                 android:gravity="right|center_vertical"
                 android:text="@string/booking_end_time"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 android:textSize="18sp" />
         </RelativeLayout>
 

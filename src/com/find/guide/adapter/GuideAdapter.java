@@ -67,6 +67,8 @@ public class GuideAdapter extends BaseAdapter {
         } else {
             holder.gender.setText(R.string.gender_unknown);
         }
+        holder.number.setText(guide.getEvaluateCount() + "次");
+        holder.stars.setText(guide.getEvaluateScore() + "星");
 
         holder.content.setOnClickListener(new View.OnClickListener() {
             @Override

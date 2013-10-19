@@ -6,6 +6,8 @@ import com.find.guide.api.resource.UploadResourceRequest;
 import com.find.guide.api.resource.UploadResourceResponse;
 import com.find.guide.api.user.ApplyForGuideRequest;
 import com.find.guide.api.user.ApplyForGuideResponse;
+import com.find.guide.api.user.ChangeHeadRequest;
+import com.find.guide.api.user.ChangeHeadResponse;
 import com.find.guide.api.user.GetNearByGuideRequest;
 import com.find.guide.api.user.GetNearByGuideResponse;
 import com.find.guide.api.user.GetUserInfoRequest;
@@ -30,23 +32,9 @@ import android.text.TextUtils;
 
 public class UserHelper {
 
-    public static final int LOGIN_SUCCESS = 0;
-    public static final int LOGIN_FAILED = -1;
-
-    public static final int REGISTER_SUCCESS = 0;
-    public static final int REGISTER_FAILED = -1;
-
-    public static final int GET_VERIFY_CODE_SUCCESS = 0;
-    public static final int GET_VERIFY_CODE_FAILED = -1;
-
-    public static final int APPLY_FOR_GUIDE_SUCCESS = 0;
-    public static final int APPLY_FOR_GUIDE_FAILED = -1;
-
-    public static final int GET_NEARBY_GUIDE_SUCCESS = 0;
-    public static final int GET_NEARBY_GUIDE_FAILED = -1;
-
-    public static final int SEARCH_GUIDE_SUCCESS = 0;
-    public static final int SEARCH_GUIDE_FAILED = -1;
+    public static final int SUCCESS = 0;
+    public static final int FAILED = -1;
+    public static final int NETWORK_ERROR = -2;
 
     private OnLoginFinishListener mOnLoginFinishListener = null;
     private OnRegisterFinishListener mOnRegisterFinishListener = null;
@@ -55,6 +43,7 @@ public class UserHelper {
     private OnApplyForGuideFinishListener mOnApplyForGuideFinishListener = null;
     private OnGetNearByGuideListener mGetNearByGuideListener = null;
     private OnSearchGuideListener mOnSearchGuideListener = null;
+    private OnChangeHeadListener mOnChangeHeadListener = null;
 
     private Context mContext;
 
@@ -86,9 +75,10 @@ public class UserHelper {
                             SettingManager.getInstance().setTicket(response.userPassport.ticket);
                             SettingManager.getInstance().setSecretKey(response.userPassport.userSecretKey);
                         }
+                        SettingManager.getInstance().setGuideMode(0);
 
                         if (mOnLoginFinishListener != null) {
-                            mOnLoginFinishListener.onLoginFinish(LOGIN_SUCCESS);
+                            mOnLoginFinishListener.onLoginFinish(SUCCESS);
                         }
                         return;
                     }
@@ -97,7 +87,7 @@ public class UserHelper {
                 }
 
                 if (mOnLoginFinishListener != null) {
-                    mOnLoginFinishListener.onLoginFinish(LOGIN_FAILED);
+                    mOnLoginFinishListener.onLoginFinish(NETWORK_ERROR);
                 }
             }
         });
@@ -125,9 +115,10 @@ public class UserHelper {
                         SettingManager.getInstance().setUserGender(gender);
                         SettingManager.getInstance().setUserPhoneNum(mobileNum);
                         SettingManager.getInstance().setUserType(Tourist.USER_TYPE_TOURIST);
+                        SettingManager.getInstance().setGuideMode(0);
 
                         if (mOnRegisterFinishListener != null) {
-                            mOnRegisterFinishListener.onRegisterFinish(REGISTER_SUCCESS);
+                            mOnRegisterFinishListener.onRegisterFinish(SUCCESS);
                         }
                         return;
                     }
@@ -136,7 +127,7 @@ public class UserHelper {
                 }
 
                 if (mOnRegisterFinishListener != null) {
-                    mOnRegisterFinishListener.onRegisterFinish(REGISTER_FAILED);
+                    mOnRegisterFinishListener.onRegisterFinish(NETWORK_ERROR);
                 }
             }
         });
@@ -155,9 +146,15 @@ public class UserHelper {
                 try {
                     GetVerifyCodeRequest request = new GetVerifyCodeRequest(mobile);
                     GetVerifyCodeResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.result == 0) {
-                        if (mOnGetVerifyCodeFinishListener != null) {
-                            mOnGetVerifyCodeFinishListener.onGetVerifyCodeFinish(GET_VERIFY_CODE_SUCCESS);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnGetVerifyCodeFinishListener != null) {
+                                mOnGetVerifyCodeFinishListener.onGetVerifyCodeFinish(SUCCESS);
+                            }
+                        } else {
+                            if (mOnGetVerifyCodeFinishListener != null) {
+                                mOnGetVerifyCodeFinishListener.onGetVerifyCodeFinish(FAILED);
+                            }
                         }
                         return;
                     }
@@ -166,7 +163,7 @@ public class UserHelper {
                 }
 
                 if (mOnGetVerifyCodeFinishListener != null) {
-                    mOnGetVerifyCodeFinishListener.onGetVerifyCodeFinish(GET_VERIFY_CODE_FAILED);
+                    mOnGetVerifyCodeFinishListener.onGetVerifyCodeFinish(NETWORK_ERROR);
                 }
             }
         });
@@ -194,13 +191,26 @@ public class UserHelper {
                         }
                     }
 
+                    if (TextUtils.isEmpty(url)) {
+                        if (mOnApplyForGuideFinishListener != null) {
+                            mOnApplyForGuideFinishListener.onApplyForGuideFinish(FAILED);
+                        }
+                        return;
+                    }
+
                     ApplyForGuideRequest request = new ApplyForGuideRequest(goodAtScenic, birthday, beGuideYear, url,
                             guideCardId, location, city);
                     ApplyForGuideResponse response = InternetUtils.request(mContext, request);
                     if (response != null && response.result == 0) {
-                        SettingManager.getInstance().setUserType(Tourist.USER_TYPE_TOURGUIDE);
-                        if (mOnApplyForGuideFinishListener != null) {
-                            mOnApplyForGuideFinishListener.onApplyForGuideFinish(APPLY_FOR_GUIDE_SUCCESS);
+                        if (response.result == 0) {
+                            SettingManager.getInstance().setUserType(Tourist.USER_TYPE_TOURGUIDE);
+                            if (mOnApplyForGuideFinishListener != null) {
+                                mOnApplyForGuideFinishListener.onApplyForGuideFinish(SUCCESS);
+                            }
+                        } else {
+                            if (mOnApplyForGuideFinishListener != null) {
+                                mOnApplyForGuideFinishListener.onApplyForGuideFinish(FAILED);
+                            }
                         }
                         return;
                     }
@@ -209,7 +219,7 @@ public class UserHelper {
                 }
 
                 if (mOnApplyForGuideFinishListener != null) {
-                    mOnApplyForGuideFinishListener.onApplyForGuideFinish(APPLY_FOR_GUIDE_FAILED);
+                    mOnApplyForGuideFinishListener.onApplyForGuideFinish(NETWORK_ERROR);
                 }
             }
         });
@@ -263,9 +273,8 @@ public class UserHelper {
                     GetNearByGuideResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
                         List<TourGuide> guides = response.guides;
-
                         if (mGetNearByGuideListener != null) {
-                            mGetNearByGuideListener.onGetNearByGuideFinish(GET_NEARBY_GUIDE_SUCCESS, guides);
+                            mGetNearByGuideListener.onGetNearByGuideFinish(SUCCESS, guides);
                         }
                         return;
                     }
@@ -274,7 +283,7 @@ public class UserHelper {
                 }
 
                 if (mGetNearByGuideListener != null) {
-                    mGetNearByGuideListener.onGetNearByGuideFinish(GET_NEARBY_GUIDE_FAILED, null);
+                    mGetNearByGuideListener.onGetNearByGuideFinish(NETWORK_ERROR, null);
                 }
             }
         });
@@ -295,9 +304,8 @@ public class UserHelper {
                     SearchGuideResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
                         List<TourGuide> guides = response.guides;
-
                         if (mOnSearchGuideListener != null) {
-                            mOnSearchGuideListener.onSearchGuide(SEARCH_GUIDE_SUCCESS, guides);
+                            mOnSearchGuideListener.onSearchGuide(SUCCESS, guides);
                         }
                         return;
                     }
@@ -306,7 +314,54 @@ public class UserHelper {
                 }
 
                 if (mOnSearchGuideListener != null) {
-                    mOnSearchGuideListener.onSearchGuide(SEARCH_GUIDE_FAILED, null);
+                    mOnSearchGuideListener.onSearchGuide(NETWORK_ERROR, null);
+                }
+            }
+        });
+    }
+
+    public static interface OnChangeHeadListener {
+        public void onChangeHead(int result);
+    }
+
+    public void changeHead(final String headPath, OnChangeHeadListener listener) {
+        mOnChangeHeadListener = listener;
+
+        CustomThreadPool.asyncWork(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String url = null;
+                    if (!TextUtils.isEmpty(headPath)) {
+                        UploadResourceRequest urRequest = new UploadResourceRequest(headPath, "jpg");
+                        UploadResourceResponse urResponse = InternetUtils.request(mContext, urRequest);
+                        if (urResponse != null) {
+                            url = urResponse.url;
+                        }
+                    }
+
+                    if (!TextUtils.isEmpty(url)) {
+                        ChangeHeadRequest request = new ChangeHeadRequest(url);
+                        ChangeHeadResponse response = InternetUtils.request(mContext, request);
+                        if (response != null) {
+                            if (response.result == 0) {
+                                SettingManager.getInstance().setUserHeader(url);
+                                if (mOnChangeHeadListener != null) {
+                                    mOnChangeHeadListener.onChangeHead(SUCCESS);
+                                }
+                            } else {
+                                if (mOnChangeHeadListener != null) {
+                                    mOnChangeHeadListener.onChangeHead(FAILED);
+                                }
+                            }
+                            return;
+                        }
+                    }
+                } catch (NetWorkException e) {
+                    e.printStackTrace();
+                }
+                if (mOnChangeHeadListener != null) {
+                    mOnChangeHeadListener.onChangeHead(NETWORK_ERROR);
                 }
             }
         });
@@ -321,5 +376,6 @@ public class UserHelper {
         mOnApplyForGuideFinishListener = null;
         mGetNearByGuideListener = null;
         mOnSearchGuideListener = null;
+        mOnChangeHeadListener = null;
     }
 }

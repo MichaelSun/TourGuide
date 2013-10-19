@@ -14,19 +14,23 @@ public class TourGuide extends Tourist {
      */
     private static final long serialVersionUID = -3945287939503647433L;
 
-    public String goodAtScenic;
+    private String goodAtScenic;
 
-    public long birthday;
+    private long birthday;
 
-    public int beGuideYear;
+    private int beGuideYear;
 
-    public String guideCardUrl;
+    private String guideCardUrl;
 
-    public String guideCardId;
+    private String guideCardId;
 
-    public String location;
+    private String location;
 
-    public int city;
+    private int city;
+
+    private int evaluateScore;
+
+    private int evaluateCount;
 
     @JsonCreator
     public TourGuide(@JsonProperty("userId") int userId, @JsonProperty("userName") String userName,
@@ -35,7 +39,8 @@ public class TourGuide extends Tourist {
             @JsonProperty("goodAtScenic") String goodAtScenic, @JsonProperty("birthday") long birthday,
             @JsonProperty("beGuideYear") int beGuideYear, @JsonProperty("guideCardUrl") String guideCardUrl,
             @JsonProperty("guideCardId") String guideCardId, @JsonProperty("location") String location,
-            @JsonProperty("city") int city) {
+            @JsonProperty("city") int city, @JsonProperty("evaluateScore") int evaluateScore,
+            @JsonProperty("evaluateCount") int evaluateCount) {
         super(userId, userName, mobile, gender, userType, headUrl);
         this.goodAtScenic = goodAtScenic;
         this.birthday = birthday;
@@ -44,6 +49,8 @@ public class TourGuide extends Tourist {
         this.guideCardId = guideCardId;
         this.location = location;
         this.city = city;
+        this.evaluateScore = evaluateScore;
+        this.evaluateCount = evaluateCount;
     }
 
     public String getGoodAtScenic() {
@@ -100,6 +107,22 @@ public class TourGuide extends Tourist {
 
     public void setCity(int city) {
         this.city = city;
+    }
+
+    public int getEvaluateScore() {
+        return evaluateScore;
+    }
+
+    public void setEvaluateScore(int evaluateScore) {
+        this.evaluateScore = evaluateScore;
+    }
+
+    public int getEvaluateCount() {
+        return evaluateCount;
+    }
+
+    public void setEvaluateCount(int evaluateCount) {
+        this.evaluateCount = evaluateCount;
     }
 
 }

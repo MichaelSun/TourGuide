@@ -278,9 +278,9 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
                 @Override
                 public void run() {
                     TipsDialog.getInstance().dismiss();
-                    if (result == UserHelper.APPLY_FOR_GUIDE_SUCCESS) {
+                    if (result == UserHelper.SUCCESS) {
                         finish();
-                    } else {
+                    } else if (result == UserHelper.FAILED) {
                         Toasts.getInstance(TourGuideApplication.getInstance()).show("认证失败", Toast.LENGTH_SHORT);
                     }
                 }

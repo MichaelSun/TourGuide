@@ -17,23 +17,23 @@
             android:background="@drawable/bg_top" >
 
             <TextView
-                android:id="@+id/tourist_label"
+                android:id="@+id/guide_label"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:text="@string/tourist"
+                android:text="@string/tourguide"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tourist_name"
+                android:id="@+id/guide_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/tourist_label"
+                android:layout_toRightOf="@id/guide_label"
                 android:gravity="right"
                 android:text="张三"
                 android:textColor="#000000"
@@ -42,8 +42,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/bg_middle" >
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_middle"
+            android:minHeight="50dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
 
             <TextView
                 android:id="@+id/destination_label"
@@ -62,7 +65,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/destination_label"
+                android:layout_toRightOf="@+id/destination_label"
                 android:gravity="right"
                 android:text="八达岭长城"
                 android:textColor="#000000"
@@ -128,23 +131,21 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/order_btn1"
+            android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/btn_singin"
-            android:text="接受"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/order_btn2"
+            android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/btn_singup"
-            android:text="拒绝"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />

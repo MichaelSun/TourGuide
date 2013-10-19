@@ -13,11 +13,11 @@ import android.widget.TextView;
 public class GuideView extends LinearLayout {
 
     private TextView mNameTv;
-    private View mStart1;
-    private View mStart2;
-    private View mStart3;
-    private View mStart4;
-    private View mStart5;
+    private View mStar1;
+    private View mStar2;
+    private View mStar3;
+    private View mStar4;
+    private View mStar5;
 
     public GuideView(Context context) {
         this(context, null);
@@ -30,11 +30,11 @@ public class GuideView extends LinearLayout {
         setBackgroundResource(R.drawable.map_guide_bg);
 
         mNameTv = (TextView) findViewById(R.id.guide_name);
-        mStart1 = findViewById(R.id.guide_start1);
-        mStart2 = findViewById(R.id.guide_start1);
-        mStart3 = findViewById(R.id.guide_start1);
-        mStart4 = findViewById(R.id.guide_start1);
-        mStart5 = findViewById(R.id.guide_start1);
+        mStar1 = findViewById(R.id.guide_start1);
+        mStar2 = findViewById(R.id.guide_start2);
+        mStar3 = findViewById(R.id.guide_start3);
+        mStar4 = findViewById(R.id.guide_start4);
+        mStar5 = findViewById(R.id.guide_start5);
 
     }
 
@@ -46,6 +46,47 @@ public class GuideView extends LinearLayout {
     public void setGuide(TourGuide guide) {
         if (guide != null) {
             mNameTv.setText(guide.getUserName());
+            setStar(guide.getEvaluateScore());
+        }
+    }
+
+    private void setStar(int score) {
+        if (score <= 0) {
+            mStar1.setBackgroundResource(R.drawable.star_silver);
+            mStar2.setBackgroundResource(R.drawable.star_silver);
+            mStar3.setBackgroundResource(R.drawable.star_silver);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 1) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_silver);
+            mStar3.setBackgroundResource(R.drawable.star_silver);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 2) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_silver);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 3) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_gold);
+            mStar4.setBackgroundResource(R.drawable.star_silver);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else if (score == 4) {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_gold);
+            mStar4.setBackgroundResource(R.drawable.star_gold);
+            mStar5.setBackgroundResource(R.drawable.star_silver);
+        } else {
+            mStar1.setBackgroundResource(R.drawable.star_gold);
+            mStar2.setBackgroundResource(R.drawable.star_gold);
+            mStar3.setBackgroundResource(R.drawable.star_gold);
+            mStar4.setBackgroundResource(R.drawable.star_gold);
+            mStar5.setBackgroundResource(R.drawable.star_gold);
         }
     }
 

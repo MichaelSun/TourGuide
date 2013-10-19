@@ -1,195 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_top"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/destination_label"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/booking_destination"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/destination_et"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
-            android:background="#00000000"
-            android:gravity="center_vertical|right"
-            android:hint="@string/booking_destination_hint"
-            android:textColor="#666666"
-            android:textColorHint="#666666"
-            android:textSize="18sp" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_top"
+            android:minHeight="50dp"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
+
+            <TextView
+                android:id="@+id/destination_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="@string/booking_destination"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/destination_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:background="#00000000"
+                android:gravity="center_vertical|right"
+                android:hint="@string/booking_destination_hint"
+                android:textColor="#666666"
+                android:textColorHint="#666666"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle" >
+
+            <TextView
+                android:id="@+id/gender_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/guide_gender"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/gender_radio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toRightOf="@id/gender_label"
+                android:gravity="right"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/male_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/male"
+                    android:textColor="#666666"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/female_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/female"
+                    android:textColor="#666666"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/gender_any_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/gender_any"
+                    android:textColor="#666666"
+                    android:textSize="18sp" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/start_time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle" >
+
+            <TextView
+                android:id="@+id/start_time_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:text="@string/booking_start_time"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/start_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/start_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/start_time_arrow"
+                android:layout_toRightOf="@id/start_time_label"
+                android:gravity="right|center_vertical"
+                android:text="@string/booking_start_time"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/end_time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_bottom" >
+
+            <TextView
+                android:id="@+id/end_time_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:text="@string/booking_end_time"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/end_time_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/end_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/end_time_arrow"
+                android:layout_toRightOf="@id/end_time_label"
+                android:gravity="right|center_vertical"
+                android:text="@string/booking_end_time"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/broadcast_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_login_green"
+            android:gravity="center"
+            android:text="@string/send_broadcast"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/bg_middle" >
-
-        <TextView
-            android:id="@+id/gender_label"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:text="@string/guide_gender"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/gender_radio"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:layout_toRightOf="@id/gender_label"
-            android:gravity="right"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/male_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/male"
-                android:textColor="#666666"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/female_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/female"
-                android:textColor="#666666"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/gender_any_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/gender_any"
-                android:textColor="#666666"
-                android:textSize="18sp" />
-        </RadioGroup>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/start_time_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/bg_middle" >
-
-        <TextView
-            android:id="@+id/start_time_label"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
-            android:text="@string/booking_start_time"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/start_time_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/icon_arr" />
-
-        <TextView
-            android:id="@+id/start_time_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@id/start_time_arrow"
-            android:layout_toRightOf="@id/start_time_label"
-            android:gravity="right|center_vertical"
-            android:text="@string/booking_start_time"
-            android:textColor="#666666"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/end_time_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/bg_bottom" >
-
-        <TextView
-            android:id="@+id/end_time_label"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
-            android:text="@string/booking_end_time"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/end_time_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/icon_arr" />
-
-        <TextView
-            android:id="@+id/end_time_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@id/end_time_arrow"
-            android:layout_toRightOf="@id/end_time_label"
-            android:gravity="right|center_vertical"
-            android:text="@string/booking_end_time"
-            android:textColor="#666666"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/broadcast_btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn_login_green"
-        android:gravity="center"
-        android:text="@string/send_broadcast"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-</LinearLayout>
+</ScrollView>

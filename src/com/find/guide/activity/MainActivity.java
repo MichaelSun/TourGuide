@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity {
         initUI();
         
         mActionbar.setDisplayHomeAsUpEnabled(false);
+        mActionbar.setDisplayShowHomeEnabled(false);
     }
 
     @Override
