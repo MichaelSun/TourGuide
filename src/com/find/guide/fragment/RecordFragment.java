@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-public class ProfileRecordFragment extends Fragment {
+public class RecordFragment extends Fragment {
 
     private PullToRefreshListView mListView;
 
@@ -45,7 +45,7 @@ public class ProfileRecordFragment extends Fragment {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    private boolean mRefreshNeedSrcoll = true;
+    private boolean mIsRefreshing = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,18 +59,14 @@ public class ProfileRecordFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile_record, null);
+        View view = inflater.inflate(R.layout.fragment_record, null);
 
         mListView = (PullToRefreshListView) view.findViewById(R.id.listview);
         mListView.setShowIndicator(false);
         mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                if (mSettingManager.getUserId() > 0) {
-                    refresh();
-                } else {
-                    mListView.onRefreshComplete();
-                }
+                refresh();
             }
         });
         return view;
@@ -80,57 +76,60 @@ public class ProfileRecordFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-    
+
     @Override
     public void onStart() {
         super.onStart();
+        refresh();
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            mRefreshNeedSrcoll = false;
-            if (mSettingManager.getUserId() <= 0) {
-                ((BaseActivity) getActivity()).getActionBar().setTitle(R.string.profile_record);
-                if (mRecordAdapter != null) {
-                    mInviteEvents.clear();
-                    mGuideEvents.clear();
-                    mRecordAdapter.notifyDataSetChanged();
-                }
-            } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE
-                    && mSettingManager.getGuideMode() == 0) {
-                String title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
-                ((BaseActivity) getActivity()).getActionBar().setTitle(title);
-                if (mRecordAdapter == null || !(mRecordAdapter instanceof GuideRecordAdapter)) {
-                    mRecordAdapter = new GuideRecordAdapter(getActivity(), mGuideEvents);
-                    mGuideEvents.clear();
-                    mInviteEvents.clear();
-                    mListView.setAdapter(mRecordAdapter);
-                    mRefreshNeedSrcoll = true;
-                }
-            } else {
-                String title = getString(R.string.profile_record) + "(" + getString(R.string.tourist) + ")";
-                ((BaseActivity) getActivity()).getActionBar().setTitle(title);
-                if (mRecordAdapter == null || !(mRecordAdapter instanceof InviteRecordAdapter)) {
-                    mRecordAdapter = new InviteRecordAdapter(getActivity(), mInviteEvents);
-                    mGuideEvents.clear();
-                    mInviteEvents.clear();
-                    mListView.setAdapter(mRecordAdapter);
-                    mRefreshNeedSrcoll = true;
-                }
-            }
+            refresh();
+        }
+    }
 
-            if (mSettingManager.getUserId() > 0) {
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mRefreshNeedSrcoll) {
-                            mListView.setRefreshing(true);
-                        }
-                    }
-                }, 100);
+    private void refresh() {
+        if (mSettingManager.getUserId() <= 0) {
+            String title = getString(R.string.profile_record) + "(" + getString(R.string.unlogin) + ")";
+            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
+            if (mRecordAdapter != null) {
+                mInviteEvents.clear();
+                mGuideEvents.clear();
+                mRecordAdapter.notifyDataSetChanged();
             }
+        } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE && mSettingManager.getGuideMode() == 0) {
+            String title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
+            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
+            if (mRecordAdapter == null || !(mRecordAdapter instanceof GuideRecordAdapter)) {
+                mRecordAdapter = new GuideRecordAdapter(getActivity(), mGuideEvents);
+                mGuideEvents.clear();
+                mInviteEvents.clear();
+                mListView.setAdapter(mRecordAdapter);
+            }
+        } else {
+            String title = getString(R.string.profile_record) + "(" + getString(R.string.tourist) + ")";
+            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
+            if (mRecordAdapter == null || !(mRecordAdapter instanceof InviteRecordAdapter)) {
+                mRecordAdapter = new InviteRecordAdapter(getActivity(), mInviteEvents);
+                mGuideEvents.clear();
+                mInviteEvents.clear();
+                mListView.setAdapter(mRecordAdapter);
+            }
+        }
+
+        if (mSettingManager.getUserId() > 0 && !mIsRefreshing) {
+            mIsRefreshing = true;
+            if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
+                mGuideHelper.getHistoricalGuideEvents(0, 100, mGetHistoricalGuideEventsListener);
+            } else {
+                mInviteHelper.getHistoricalInviteEvents(0, 100, mGetHistoricalInviteEventsListener);
+            }
+        } else {
+            mIsRefreshing = false;
+            mListView.onRefreshComplete();
         }
     }
 
@@ -140,6 +139,8 @@ public class ProfileRecordFragment extends Fragment {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
+                    mIsRefreshing = false;
+                    mListView.onRefreshComplete();
                     if (result == InviteHelper.SUCCESS) {
                         mInviteEvents.clear();
                         if (inviteEvents != null) {
@@ -147,7 +148,6 @@ public class ProfileRecordFragment extends Fragment {
                         }
                         mRecordAdapter.notifyDataSetChanged();
                     }
-                    mListView.onRefreshComplete();
                 }
             });
         }
@@ -159,6 +159,8 @@ public class ProfileRecordFragment extends Fragment {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
+                    mIsRefreshing = false;
+                    mListView.onRefreshComplete();
                     if (result == GuideHelper.SUCCESS) {
                         mGuideEvents.clear();
                         if (guideEvents != null) {
@@ -166,21 +168,10 @@ public class ProfileRecordFragment extends Fragment {
                         }
                         mRecordAdapter.notifyDataSetChanged();
                     }
-                    mListView.onRefreshComplete();
                 }
             });
         }
     };
-
-    private void refresh() {
-        if (mSettingManager.getUserId() > 0) {
-            if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
-                mGuideHelper.getHistoricalGuideEvents(0, 100, mGetHistoricalGuideEventsListener);
-            } else {
-                mInviteHelper.getHistoricalInviteEvents(0, 100, mGetHistoricalInviteEventsListener);
-            }
-        }
-    }
 
     @Override
     public void onDestroy() {

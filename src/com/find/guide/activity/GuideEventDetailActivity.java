@@ -20,7 +20,6 @@ import com.find.guide.view.TipsDialog;
 public class GuideEventDetailActivity extends BaseActivity implements OnClickListener {
 
     public static final String INTENT_EXTRA_GUIDE_EVENT_OBJ = "intent_extra_guide_event_obj";
-
     private GuideEvent mGuideEvent = null;
 
     private TextView mTouristName;
@@ -130,12 +129,12 @@ public class GuideEventDetailActivity extends BaseActivity implements OnClickLis
     }
 
     private void accept() {
-        TipsDialog.getInstance().show(this, R.drawable.tips_loading, "接受中...", true, false);
+        TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.accepting_invite, true, false);
         mGuideHelper.accept(mGuideEvent.getEventId(), mGuideEvent.getUserId(), mOnAcceptedListener);
     }
 
     private void refuse() {
-        TipsDialog.getInstance().show(this, R.drawable.tips_loading, "忽略中...", true, false);
+        TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.refusing_invite, true, false);
         mGuideHelper.refuse(mGuideEvent.getEventId(), mGuideEvent.getUserId(), mOnRefusedListener);
     }
 
@@ -149,8 +148,9 @@ public class GuideEventDetailActivity extends BaseActivity implements OnClickLis
                     TipsDialog.getInstance().dismiss();
                     if (result == GuideHelper.SUCCESS) {
                         finish();
-                    } else {
-
+                    } else if (result == GuideHelper.FAILED) {
+                        TipsDialog.getInstance().show(GuideEventDetailActivity.this, R.drawable.tips_loading,
+                                R.string.accept_invite_failed, true);
                     }
                 }
             });
@@ -167,8 +167,9 @@ public class GuideEventDetailActivity extends BaseActivity implements OnClickLis
                     TipsDialog.getInstance().dismiss();
                     if (result == GuideHelper.SUCCESS) {
                         finish();
-                    } else {
-
+                    } else if (result == GuideHelper.FAILED) {
+                        TipsDialog.getInstance().show(GuideEventDetailActivity.this, R.drawable.tips_loading,
+                                R.string.refuse_invite_failed, true);
                     }
                 }
             });

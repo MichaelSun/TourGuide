@@ -163,7 +163,11 @@ public class BroadcastActivity extends BaseActivity implements OnClickListener {
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
                         finish();
+                    } else if (result == InviteHelper.FAILED) {
+                        TipsDialog.getInstance().show(BroadcastActivity.this, R.drawable.tips_fail,
+                                R.string.broadcast_failed, true);
                     }
+
                 }
             });
 

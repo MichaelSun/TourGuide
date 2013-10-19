@@ -14,6 +14,7 @@ import com.plugin.common.view.WebImageView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BookingActivity extends BaseActivity implements OnClickListener {
@@ -38,7 +40,9 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
     private long mEndTimeStamp = 0;
 
     private WebImageView mGuideCardIv;
-    private TextView mGuideNameGenderTv;
+    private TextView mGuideNameTv;
+    private ImageView mGuideGenderIv;
+    private TextView mGuidePhoneTv;
     private TextView mCityTv;
     private TextView mGoodAtScenicTv;
     private TextView mGuideHistoryTv;
@@ -82,7 +86,9 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 
     private void initUI() {
         mGuideCardIv = (WebImageView) findViewById(R.id.guide_card_iv);
-        mGuideNameGenderTv = (TextView) findViewById(R.id.guide_name_gender_tv);
+        mGuideNameTv = (TextView) findViewById(R.id.guide_name_tv);
+        mGuideGenderIv = (ImageView) findViewById(R.id.guide_gender_iv);
+        mGuidePhoneTv = (TextView) findViewById(R.id.guide_phone_tv);
         mCityTv = (TextView) findViewById(R.id.city);
         mGoodAtScenicTv = (TextView) findViewById(R.id.good_scenic);
         mGuideHistoryTv = (TextView) findViewById(R.id.guide_history);
@@ -105,12 +111,13 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         mStartTimeView.setOnClickListener(this);
         mEndTimeView.setOnClickListener(this);
         mBookingBtn.setOnClickListener(this);
+        mGuidePhoneTv.setOnClickListener(this);
     }
 
     private void setData() {
         if (mTourGuide != null) {
             mGuideCardIv.setImageURI(new Uri.Builder().path(mTourGuide.getHeadUrl()).build());
-            mGuideNameGenderTv.setText(mTourGuide.getUserName());
+            mGuideNameTv.setText(mTourGuide.getUserName());
             CityItem cityItem = CityManager.getInstance().getCityById(mTourGuide.getCity());
             if (cityItem != null) {
                 mCityTv.setText(cityItem.getCityName());
@@ -119,6 +126,14 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
             mGuideCardIdTv.setText(mTourGuide.getGuideCardId());
             mEvaluateNumTv.setText(mTourGuide.getEvaluateCount() + "次");
             setStar(mTourGuide.getEvaluateScore());
+            if (mTourGuide.getGender() == 1) {
+                mGuideGenderIv.setImageResource(R.drawable.icon_male);
+            } else if (mTourGuide.getGender() == 2) {
+                mGuideGenderIv.setImageResource(R.drawable.icon_female);
+            } else {
+                mGuideGenderIv.setImageDrawable(null);
+            }
+            mGuidePhoneTv.setText(mTourGuide.getMobile());
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -205,6 +220,9 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         case R.id.end_time_layout:
             selectEndTime();
             break;
+        case R.id.guide_phone_tv:
+            callGuide();
+            break;
         }
     }
 
@@ -236,7 +254,12 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
                 TipsDialog.getInstance().show(this, R.drawable.tips_fail, R.string.booking_destination_hint, true);
                 return;
             }
-            TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.booking, true, false);
+            if (mTourGuide.getUserId() == SettingManager.getInstance().getUserId()) {
+                TipsDialog.getInstance().show(this, R.drawable.tips_fail, R.string.booking_cannot_booking_yourself,
+                        true);
+                return;
+            }
+            TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.in_booking, true, false);
             mInviteHelper.invite(mTourGuide.getUserId(), destination, mStartTimeStamp, mEndTimeStamp);
         }
     }
@@ -256,8 +279,9 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
                         finish();
-                    } else {
-
+                    } else if (result == InviteHelper.FAILED) {
+                        TipsDialog.getInstance().show(BookingActivity.this, R.drawable.tips_loading,
+                                R.string.booking_failed, true);
                     }
                 }
             });
@@ -276,6 +300,35 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 
     private void enterGuideHistory() {
 
+    }
+
+    private void callGuide() {
+        if (mAlertDialog != null && mAlertDialog.isShowing()) {
+            mAlertDialog.dismiss();
+        }
+        String msg = getString(R.string.call_dialog_message);
+        if (msg != null) {
+            msg = String.format(msg, mTourGuide.getMobile());
+        }
+        mAlertDialog = new AlertDialog.Builder(this).setMessage(msg)
+                .setPositiveButton(R.string.call_dialog_positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mTourGuide.getMobile()));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+
+                        }
+                    }
+                }).setNegativeButton(R.string.call_dialog_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create();
+        mAlertDialog.show();
     }
 
     private void selectStartTime() {

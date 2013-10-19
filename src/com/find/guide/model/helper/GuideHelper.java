@@ -19,6 +19,7 @@ public class GuideHelper {
 
     public static final int SUCCESS = 0;
     public static final int FAILED = -1;
+    public static final int NETWORK_ERROR = -2;
 
     private Context mContext;
 
@@ -55,7 +56,7 @@ public class GuideHelper {
                 }
 
                 if (mOnGetHistoricalGuideEventsListener != null) {
-                    mOnGetHistoricalGuideEventsListener.onGetHistoricalGuideEvents(FAILED, null);
+                    mOnGetHistoricalGuideEventsListener.onGetHistoricalGuideEvents(NETWORK_ERROR, null);
                 }
             }
         });
@@ -74,9 +75,15 @@ public class GuideHelper {
                 try {
                     GuideAcceptRequest request = new GuideAcceptRequest(eventId, userId);
                     GuideAcceptResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.result == 0) {
-                        if (mOnAcceptedListener != null) {
-                            mOnAcceptedListener.onAccepted(SUCCESS);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnAcceptedListener != null) {
+                                mOnAcceptedListener.onAccepted(SUCCESS);
+                            }
+                        } else {
+                            if (mOnAcceptedListener != null) {
+                                mOnAcceptedListener.onAccepted(FAILED);
+                            }
                         }
                         return;
                     }
@@ -84,7 +91,7 @@ public class GuideHelper {
                     e.printStackTrace();
                 }
                 if (mOnAcceptedListener != null) {
-                    mOnAcceptedListener.onAccepted(FAILED);
+                    mOnAcceptedListener.onAccepted(NETWORK_ERROR);
                 }
             }
         });
@@ -103,9 +110,15 @@ public class GuideHelper {
                 try {
                     GuideRefuseRequest request = new GuideRefuseRequest(eventId, userId);
                     GuideRefuseResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.result == 0) {
-                        if (mOnRefusedListener != null) {
-                            mOnRefusedListener.onRefused(SUCCESS);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnRefusedListener != null) {
+                                mOnRefusedListener.onRefused(SUCCESS);
+                            }
+                        } else {
+                            if (mOnRefusedListener != null) {
+                                mOnRefusedListener.onRefused(FAILED);
+                            }
                         }
                         return;
                     }
@@ -113,7 +126,7 @@ public class GuideHelper {
                     e.printStackTrace();
                 }
                 if (mOnRefusedListener != null) {
-                    mOnRefusedListener.onRefused(FAILED);
+                    mOnRefusedListener.onRefused(NETWORK_ERROR);
                 }
             }
         });

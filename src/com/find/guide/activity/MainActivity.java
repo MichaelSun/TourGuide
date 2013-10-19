@@ -9,7 +9,7 @@ import android.view.View;
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
 import com.find.guide.fragment.NearByFragment;
-import com.find.guide.fragment.ProfileRecordFragment;
+import com.find.guide.fragment.RecordFragment;
 import com.find.guide.fragment.SearchFragment;
 import com.find.guide.fragment.SettingFragment;
 
@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
 
         mProfileRecordFragment = mFragmentManager.findFragmentByTag(TAG_PROFILE_RECORD_FRAGMENT);
         if (mProfileRecordFragment == null) {
-            mProfileRecordFragment = new ProfileRecordFragment();
+            mProfileRecordFragment = new RecordFragment();
 
             FragmentTransaction trans = mFragmentManager.beginTransaction();
             trans.add(R.id.fragment_container, mProfileRecordFragment, TAG_PROFILE_RECORD_FRAGMENT);

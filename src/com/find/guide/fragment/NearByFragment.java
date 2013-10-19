@@ -16,7 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -36,7 +37,6 @@ import com.find.guide.config.AppRuntime;
 import com.find.guide.model.helper.UserHelper;
 import com.find.guide.model.helper.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.model.TourGuide;
-import com.find.guide.utils.Toasts;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -47,6 +47,10 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
 
     private View mMapLocationView;
     private View mBroadcastView;
+
+    private View mMapHintView;
+    private ProgressBar mMapHintPb;
+    private TextView mMapHintTv;
 
     private GuideMapView mMapView = null;
     private MapController mMapController = null;
@@ -91,6 +95,10 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
         mMapLocationView.setOnClickListener(this);
         mBroadcastView = view.findViewById(R.id.broadcast_btn);
         mBroadcastView.setOnClickListener(this);
+        mMapHintView = view.findViewById(R.id.map_hint_layout);
+        mMapHintPb = (ProgressBar) view.findViewById(R.id.map_hint_pb);
+        mMapHintTv = (TextView) view.findViewById(R.id.map_hint_tv);
+        mMapHintView.setVisibility(View.GONE);
 
         mListView = (PullToRefreshListView) view.findViewById(R.id.listview);
         mListView.setVisibility(View.GONE);
@@ -124,12 +132,11 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initMap() {
-        mMapView.setBuiltInZoomControls(true);
         mMapController = mMapView.getController();
         mMapController.enableClick(true);
         mMapController.setZoom(13);
         mMapView.setBuiltInZoomControls(true);
-
+        
         GeoPoint p = new GeoPoint((int) (39.933859 * 1E6), (int) (116.400191 * 1E6));
         mMapController.setCenter(p);
     }
@@ -171,9 +178,16 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
     }
 
     private void requestLocation() {
-        mIsRequestLocation = true;
-        mLocClient.requestLocation();
-        Toasts.getInstance(TourGuideApplication.getInstance()).show(R.string.in_location, Toast.LENGTH_SHORT);
+        if (!mIsRequestLocation) {
+            mIsRequestLocation = true;
+            mLocClient.requestLocation();
+            if (mShowMode == ShowMode.MAP) {
+                mMapHintView.setVisibility(View.VISIBLE);
+                mMapHintPb.setVisibility(View.VISIBLE);
+                mMapHintTv.setVisibility(View.VISIBLE);
+                mMapHintTv.setText(R.string.loading_location);
+            }
+        }
     }
 
     public class MyLocationListenner implements BDLocationListener {
@@ -215,6 +229,13 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getNearByGuide(String location) {
+        if (mShowMode == ShowMode.MAP) {
+            mMapHintView.setVisibility(View.VISIBLE);
+            mMapHintPb.setVisibility(View.VISIBLE);
+            mMapHintTv.setVisibility(View.VISIBLE);
+            mMapHintTv.setText(R.string.loading_nearby_guide);
+        }
+
         mUserHelper.getNearByGuide(location, 500, 0, 100, mOnGetNearByGuideListener);
     }
 
@@ -234,6 +255,12 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
                         mGuideAdapter.notifyDataSetChanged();
 
                         mMapView.updateGuideOverlay(guides);
+                    }
+                    if (mShowMode == ShowMode.MAP) {
+                        mMapHintView.setVisibility(View.GONE);
+                        mMapHintPb.setVisibility(View.GONE);
+                        mMapHintTv.setVisibility(View.GONE);
+                        mMapHintTv.setText("");
                     }
                 }
             });

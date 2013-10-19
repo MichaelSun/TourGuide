@@ -128,7 +128,7 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
     }
 
     private void cancel() {
-        TipsDialog.getInstance().show(this, R.drawable.tips_loading, "取消中...", true, false);
+        TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.in_cancel, true, false);
         mInviteHelper.cancelInvite(mInviteEvent.getEventId(), mInviteEvent.getGuideId());
     }
 
@@ -150,7 +150,11 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
                         finish();
+                    } else if (result == InviteHelper.FAILED) {
+                        TipsDialog.getInstance().show(InviteEventDetailActivity.this, R.drawable.tips_fail,
+                                R.string.cancel_invite_failed, true);
                     }
+
                 }
             });
         }
@@ -158,7 +162,7 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
 
     private void setSatisfaction(int satisfaction) {
         if (mInviteEvent != null) {
-            TipsDialog.getInstance().show(this, R.drawable.tips_loading, "评价中...", true, false);
+            TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.in_statisfaction, true, false);
             mInviteHelper.setStatisfaction(mInviteEvent.getEventId(), mInviteEvent.getGuideId(), satisfaction,
                     mOnSetStatisfactionListener);
         }
@@ -173,6 +177,9 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
                         finish();
+                    } else if (result == InviteHelper.FAILED) {
+                        TipsDialog.getInstance().show(InviteEventDetailActivity.this, R.drawable.tips_loading,
+                                R.string.statisfaction_failed, true);
                     }
                 }
             });

@@ -23,6 +23,7 @@ public class InviteHelper {
 
     public static final int SUCCESS = 0;
     public static final int FAILED = -1;
+    public static final int NETWORK_ERROR = -2;
 
     private Context mContext;
 
@@ -59,7 +60,7 @@ public class InviteHelper {
                 }
 
                 if (mOnGetHistoricalInviteEventsListener != null) {
-                    mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(FAILED, null);
+                    mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(NETWORK_ERROR, null);
                 }
             }
         });
@@ -89,9 +90,15 @@ public class InviteHelper {
                 try {
                     InviteAllRequest request = new InviteAllRequest(scenic, startTime, endTime, location, gender);
                     InviteAllResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.result == 0) {
-                        if (mOnInviteListener != null) {
-                            mOnInviteListener.onInviteAll(SUCCESS);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnInviteListener != null) {
+                                mOnInviteListener.onInviteAll(SUCCESS);
+                            }
+                        } else {
+                            if (mOnInviteListener != null) {
+                                mOnInviteListener.onInviteAll(FAILED);
+                            }
                         }
                         return;
                     }
@@ -99,7 +106,7 @@ public class InviteHelper {
                     e.printStackTrace();
                 }
                 if (mOnInviteListener != null) {
-                    mOnInviteListener.onInviteAll(FAILED);
+                    mOnInviteListener.onInviteAll(NETWORK_ERROR);
                 }
             }
         });
@@ -112,9 +119,15 @@ public class InviteHelper {
                 try {
                     InviteCancelRequest request = new InviteCancelRequest(eventId, guideId);
                     InviteCancelResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.result == 0) {
-                        if (mOnInviteListener != null) {
-                            mOnInviteListener.onCancelInvite(SUCCESS);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnInviteListener != null) {
+                                mOnInviteListener.onCancelInvite(SUCCESS);
+                            }
+                        } else {
+                            if (mOnInviteListener != null) {
+                                mOnInviteListener.onCancelInvite(FAILED);
+                            }
                         }
                         return;
                     }
@@ -122,7 +135,7 @@ public class InviteHelper {
                     e.printStackTrace();
                 }
                 if (mOnInviteListener != null) {
-                    mOnInviteListener.onCancelInvite(FAILED);
+                    mOnInviteListener.onCancelInvite(NETWORK_ERROR);
                 }
             }
         });
@@ -135,9 +148,15 @@ public class InviteHelper {
                 try {
                     InviteRequest request = new InviteRequest(guideId, scenic, startTime, endTime);
                     InviteResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.result == 0) {
-                        if (mOnInviteListener != null) {
-                            mOnInviteListener.onInvite(SUCCESS);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnInviteListener != null) {
+                                mOnInviteListener.onInvite(SUCCESS);
+                            }
+                        } else {
+                            if (mOnInviteListener != null) {
+                                mOnInviteListener.onInvite(FAILED);
+                            }
                         }
                         return;
                     }
@@ -145,7 +164,7 @@ public class InviteHelper {
                     e.printStackTrace();
                 }
                 if (mOnInviteListener != null) {
-                    mOnInviteListener.onInvite(FAILED);
+                    mOnInviteListener.onInvite(NETWORK_ERROR);
                 }
             }
         });
@@ -165,9 +184,15 @@ public class InviteHelper {
                 try {
                     SetSatisfactionRequest request = new SetSatisfactionRequest(eventId, guideId, satisfaction);
                     SetSatisfactionResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.result == 0) {
-                        if (mOnSetStatisfactionListener != null) {
-                            mOnSetStatisfactionListener.onSetStatisfaction(SUCCESS);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnSetStatisfactionListener != null) {
+                                mOnSetStatisfactionListener.onSetStatisfaction(SUCCESS);
+                            }
+                        } else {
+                            if (mOnSetStatisfactionListener != null) {
+                                mOnSetStatisfactionListener.onSetStatisfaction(FAILED);
+                            }
                         }
                         return;
                     }
@@ -175,7 +200,7 @@ public class InviteHelper {
                     e.printStackTrace();
                 }
                 if (mOnSetStatisfactionListener != null) {
-                    mOnSetStatisfactionListener.onSetStatisfaction(FAILED);
+                    mOnSetStatisfactionListener.onSetStatisfaction(NETWORK_ERROR);
                 }
             }
         });

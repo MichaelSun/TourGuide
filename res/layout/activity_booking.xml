@@ -11,8 +11,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp" >
 
             <com.plugin.common.view.WebImageView
@@ -25,22 +25,54 @@
                 android:src="@drawable/default_header" />
 
             <TextView
-                android:id="@+id/guide_name_gender_tv"
+                android:id="@+id/guide_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/guide_card_iv"
+                android:maxWidth="150dp"
                 android:singleLine="true"
                 android:text="张帝"
                 android:textColor="#000000"
                 android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/guide_gender_iv"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/guide_name_tv"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_female" />
+
+            <TextView
+                android:id="@+id/guide_phone_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/guide_name_tv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/guide_card_iv"
+                android:gravity="center"
+                android:text="18810758797"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignTop="@id/guide_phone_tv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/guide_phone_tv"
+                android:background="@drawable/icon_call" />
 
             <View
                 android:id="@+id/guide_star1"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_alignBottom="@id/guide_card_iv"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/guide_card_iv"
                 android:background="@drawable/star_big_gold" />
@@ -85,7 +117,7 @@
                 android:id="@+id/star_evaluate_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/guide_star1"
+                android:layout_alignBottom="@id/guide_star1"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/guide_star5"
                 android:text="23次"
@@ -351,8 +383,8 @@
             android:id="@+id/booking_btn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_login_green"
             android:gravity="center"
