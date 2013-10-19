@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -37,6 +38,7 @@ import com.find.guide.config.AppRuntime;
 import com.find.guide.model.helper.UserHelper;
 import com.find.guide.model.helper.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.model.TourGuide;
+import com.find.guide.utils.Toasts;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -136,7 +138,7 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
         mMapController.enableClick(true);
         mMapController.setZoom(13);
         mMapView.setBuiltInZoomControls(true);
-        
+
         GeoPoint p = new GeoPoint((int) (39.933859 * 1E6), (int) (116.400191 * 1E6));
         mMapController.setCenter(p);
     }
@@ -210,13 +212,26 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
             AppRuntime.gLocation = locData.latitude + "," + locData.longitude;
 
             if (mIsFirstLocation || mIsRequestLocation) {
-                // 移动地图到定位点
-                Log.d("LocationOverlay", "receive location, animate to it");
-                mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6)));
-                mIsRequestLocation = false;
-                myLocationOverlay.setLocationMode(LocationMode.NORMAL);
+                if (location.getLatitude() <= 0.000001 && location.getLongitude() < 0.000001) {
+                    mIsRequestLocation = false;
+                    mListView.onRefreshComplete();
+                    Toasts.getInstance(getActivity()).show(R.string.location_failed, Toast.LENGTH_SHORT);
+                    if (mShowMode == ShowMode.MAP) {
+                        mMapHintView.setVisibility(View.GONE);
+                        mMapHintPb.setVisibility(View.GONE);
+                        mMapHintTv.setVisibility(View.GONE);
+                        mMapHintTv.setText("");
+                    }
+                } else {
+                    // 移动地图到定位点
+                    Log.d("LocationOverlay", "receive location, animate to it");
+                    mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6),
+                            (int) (locData.longitude * 1e6)));
+                    mIsRequestLocation = false;
+                    myLocationOverlay.setLocationMode(LocationMode.NORMAL);
 
-                getNearByGuide(locData.latitude + "," + locData.longitude);
+                    getNearByGuide(locData.latitude + "," + locData.longitude);
+                }
             }
             mIsFirstLocation = false;
         }
@@ -253,7 +268,6 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
                             mTourGuides.addAll(guides);
                         }
                         mGuideAdapter.notifyDataSetChanged();
-
                         mMapView.updateGuideOverlay(guides);
                     }
                     if (mShowMode == ShowMode.MAP) {

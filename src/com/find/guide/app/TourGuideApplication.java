@@ -78,9 +78,9 @@ public class TourGuideApplication extends Application {
         @Override
         public void onGetNetworkState(int iError) {
             if (iError == MKEvent.ERROR_NETWORK_CONNECT) {
-                Toast.makeText(getInstance().getApplicationContext(), "您的网络出错啦！", Toast.LENGTH_LONG).show();
+                Toasts.getInstance(getInstance()).show("网络错误", Toast.LENGTH_SHORT);
             } else if (iError == MKEvent.ERROR_NETWORK_DATA) {
-                Toast.makeText(getInstance().getApplicationContext(), "输入正确的检索条件！", Toast.LENGTH_LONG).show();
+                Toasts.getInstance(getInstance()).show("网络错误", Toast.LENGTH_SHORT);
             }
         }
 
@@ -88,7 +88,7 @@ public class TourGuideApplication extends Application {
         public void onGetPermissionState(int iError) {
             if (iError == MKEvent.ERROR_PERMISSION_DENIED) {
                 // 授权Key错误：
-                Toast.makeText(getInstance().getApplicationContext(), "请输入正确的授权Key！", Toast.LENGTH_LONG).show();
+                Toasts.getInstance(getInstance()).show("无效的地图授权Key", Toast.LENGTH_SHORT);
             }
         }
     }

@@ -8,6 +8,7 @@
     <string name="menu_show_map">地图</string>
     <string name="menu_show_list">列表</string>
     <string name="loading_location">正在获取您的位置...</string>
+    <string name="location_failed">定位失败</string>
     <string name="loading_nearby_guide">正在加载附近的导游...</string>
 
     <!-- 个人记录 -->

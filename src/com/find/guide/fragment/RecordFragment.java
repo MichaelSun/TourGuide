@@ -87,22 +87,29 @@ public class RecordFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
+            String title = "";
+            if (mSettingManager.getUserId() <= 0) {
+                title = getString(R.string.profile_record) + "(" + getString(R.string.unlogin) + ")";
+            } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE
+                    && mSettingManager.getGuideMode() == 0) {
+                title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
+            } else {
+                title = getString(R.string.profile_record) + "(" + getString(R.string.tourist) + ")";
+            }
+            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
+
             refresh();
         }
     }
 
     private void refresh() {
         if (mSettingManager.getUserId() <= 0) {
-            String title = getString(R.string.profile_record) + "(" + getString(R.string.unlogin) + ")";
-            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
             if (mRecordAdapter != null) {
                 mInviteEvents.clear();
                 mGuideEvents.clear();
                 mRecordAdapter.notifyDataSetChanged();
             }
         } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE && mSettingManager.getGuideMode() == 0) {
-            String title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
-            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
             if (mRecordAdapter == null || !(mRecordAdapter instanceof GuideRecordAdapter)) {
                 mRecordAdapter = new GuideRecordAdapter(getActivity(), mGuideEvents);
                 mGuideEvents.clear();
@@ -110,8 +117,6 @@ public class RecordFragment extends Fragment {
                 mListView.setAdapter(mRecordAdapter);
             }
         } else {
-            String title = getString(R.string.profile_record) + "(" + getString(R.string.tourist) + ")";
-            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
             if (mRecordAdapter == null || !(mRecordAdapter instanceof InviteRecordAdapter)) {
                 mRecordAdapter = new InviteRecordAdapter(getActivity(), mInviteEvents);
                 mGuideEvents.clear();

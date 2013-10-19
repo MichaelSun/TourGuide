@@ -18,6 +18,8 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.find.guide.R;
 import com.find.guide.model.CityItem;
@@ -36,6 +38,7 @@ public class SelectCityActivity extends BaseActivity implements OnItemClickListe
     private SlideView mSlideView;
 
     private List<CityItem> mCityItems = new ArrayList<CityItem>();
+    private Hashtable<String, List<CityItem>> mCitiesMap = new Hashtable<String, List<CityItem>>();
 
     private CityAdapter mCityAdapter;
 
@@ -60,10 +63,11 @@ public class SelectCityActivity extends BaseActivity implements OnItemClickListe
     }
 
     private void initData() {
-        Hashtable<String, List<CityItem>> cities = CityManager.getInstance().getAllCities();
-        if (cities != null) {
+        mCitiesMap = CityManager.getInstance().getAllCities();
+        if (mCitiesMap != null) {
             // sort
-            List<Entry<String, List<CityItem>>> list = new ArrayList<Entry<String, List<CityItem>>>(cities.entrySet());
+            List<Entry<String, List<CityItem>>> list = new ArrayList<Entry<String, List<CityItem>>>(
+                    mCitiesMap.entrySet());
             Collections.sort(list, new Comparator<Entry<String, List<CityItem>>>() {
                 @Override
                 public int compare(Entry<String, List<CityItem>> lhs, Entry<String, List<CityItem>> rhs) {
@@ -82,12 +86,13 @@ public class SelectCityActivity extends BaseActivity implements OnItemClickListe
 
     private void initUI() {
         mListView = (ListView) this.findViewById(R.id.listview);
-        mCityAdapter = new CityAdapter(this, mCityItems);
+        mCityAdapter = new CityAdapter(this, mCitiesMap, mCityItems);
         mListView.setAdapter(mCityAdapter);
 
         this.mOverlayThread = new OverlayThread();
         initOverlay();
         this.mSlideView = (SlideView) this.findViewById(R.id.slideview);
+        this.mSlideView.setSectionIndexer(mCityAdapter);
         this.mSlideView.setOnTouchingLetterChangedListener(new LetterListViewListener());
 
         mListView.setOnItemClickListener(this);
@@ -145,9 +150,11 @@ public class SelectCityActivity extends BaseActivity implements OnItemClickListe
 
         private Context mContext;
         private List<CityItem> mCityItems;
+        private Hashtable<String, List<CityItem>> mCitiesMap;
 
-        public CityAdapter(Context context, List<CityItem> cityItems) {
+        public CityAdapter(Context context, Hashtable<String, List<CityItem>> cities, List<CityItem> cityItems) {
             mContext = context;
+            mCitiesMap = cities;
             mCityItems = cityItems;
         }
 
@@ -202,6 +209,10 @@ public class SelectCityActivity extends BaseActivity implements OnItemClickListe
 
         @Override
         public Object[] getSections() {
+            if (mCitiesMap != null) {
+                Set<String> citySet = new TreeSet<String>(mCitiesMap.keySet());
+                return citySet.toArray(new String[citySet.size()]);
+            }
             return null;
         }
 
@@ -216,7 +227,7 @@ public class SelectCityActivity extends BaseActivity implements OnItemClickListe
                     }
                 }
             }
-            return 0;
+            return getCount();
         }
 
         @Override
