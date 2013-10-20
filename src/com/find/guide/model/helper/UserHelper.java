@@ -8,6 +8,8 @@ import com.find.guide.api.user.ApplyForGuideRequest;
 import com.find.guide.api.user.ApplyForGuideResponse;
 import com.find.guide.api.user.ChangeHeadRequest;
 import com.find.guide.api.user.ChangeHeadResponse;
+import com.find.guide.api.user.ChangeLocationRequest;
+import com.find.guide.api.user.ChangeLocationResponse;
 import com.find.guide.api.user.GetNearByGuideRequest;
 import com.find.guide.api.user.GetNearByGuideResponse;
 import com.find.guide.api.user.GetUserInfoRequest;
@@ -27,6 +29,7 @@ import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.internet.InternetUtils;
 import com.plugin.internet.core.NetWorkException;
 
+import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -44,6 +47,7 @@ public class UserHelper {
     private OnGetNearByGuideListener mGetNearByGuideListener = null;
     private OnSearchGuideListener mOnSearchGuideListener = null;
     private OnChangeHeadListener mOnChangeHeadListener = null;
+    private OnChangeLocationListener mOnChangeLocationListener = null;
 
     private Context mContext;
 
@@ -367,6 +371,41 @@ public class UserHelper {
         });
     }
 
+    public static interface OnChangeLocationListener {
+        public void onChangeLocation(int result);
+    }
+
+    public void changeLocation(final String location, OnChangeLocationListener listener) {
+        mOnChangeLocationListener = listener;
+
+        CustomThreadPool.asyncWork(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ChangeLocationRequest request = new ChangeLocationRequest(location);
+                    ChangeLocationResponse response = InternetUtils.request(mContext, request);
+                    if (response != null) {
+                        if (response.result == 0) {
+                            if (mOnChangeLocationListener != null) {
+                                mOnChangeLocationListener.onChangeLocation(SUCCESS);
+                            }
+                        } else {
+                            if (mOnChangeLocationListener != null) {
+                                mOnChangeLocationListener.onChangeLocation(FAILED);
+                            }
+                        }
+                        return;
+                    }
+                } catch (NetWorkException e) {
+                    e.printStackTrace();
+                }
+                if (mOnChangeLocationListener != null) {
+                    mOnChangeLocationListener.onChangeLocation(NETWORK_ERROR);
+                }
+            }
+        });
+    }
+
     public void destroy() {
         mContext = null;
         mOnLoginFinishListener = null;
@@ -377,5 +416,6 @@ public class UserHelper {
         mGetNearByGuideListener = null;
         mOnSearchGuideListener = null;
         mOnChangeHeadListener = null;
+        mOnChangeLocationListener = null;
     }
 }

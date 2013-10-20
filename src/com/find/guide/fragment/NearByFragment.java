@@ -34,10 +34,13 @@ import com.find.guide.activity.BookingActivity;
 import com.find.guide.activity.BroadcastActivity;
 import com.find.guide.adapter.GuideAdapter;
 import com.find.guide.app.TourGuideApplication;
+import com.find.guide.config.AppConfig;
 import com.find.guide.config.AppRuntime;
 import com.find.guide.model.helper.UserHelper;
 import com.find.guide.model.helper.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.model.TourGuide;
+import com.find.guide.model.Tourist;
+import com.find.guide.setting.SettingManager;
 import com.find.guide.utils.Toasts;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
@@ -230,7 +233,13 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
                     mIsRequestLocation = false;
                     myLocationOverlay.setLocationMode(LocationMode.NORMAL);
 
-                    getNearByGuide(locData.latitude + "," + locData.longitude);
+                    String sloc = locData.latitude + "," + locData.longitude;
+                    getNearByGuide(sloc);
+
+                    if (SettingManager.getInstance().getUserId() > 0
+                            && SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
+                        mUserHelper.changeLocation(sloc, null);
+                    }
                 }
             }
             mIsFirstLocation = false;
@@ -320,22 +329,32 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_show_map && mShowMode == ShowMode.LIST) {
-            mShowMode = ShowMode.MAP;
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem item = menu.findItem(R.id.menu_show_mode);
+        if (mShowMode == ShowMode.MAP) {
             mListView.setVisibility(View.GONE);
-            return true;
-        } else if (item.getItemId() == R.id.menu_show_list && mShowMode == ShowMode.MAP) {
-            mShowMode = ShowMode.LIST;
+            item.setTitle(R.string.menu_show_list);
+        } else {
             mListView.setVisibility(View.VISIBLE);
             if (mListView.getRefreshableView().getAdapter() == null) {
                 mListView.setAdapter(mGuideAdapter);
             } else {
                 mGuideAdapter.notifyDataSetChanged();
             }
-            return true;
+            item.setTitle(R.string.menu_show_map);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mShowMode == ShowMode.LIST) {
+            mShowMode = ShowMode.MAP;
+        } else {
+            mShowMode = ShowMode.LIST;
+        }
+        getActivity().invalidateOptionsMenu();
+        return true;
     }
 
     private void bookingGuide(TourGuide guide) {
