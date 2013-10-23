@@ -5,18 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.find.guide.R;
-import com.find.guide.app.TourGuideApplication;
-import com.find.guide.config.AppRuntime;
-import com.find.guide.model.CityItem;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnApplyForGuideFinishListener;
-import com.find.guide.utils.Toasts;
-import com.find.guide.view.TipsDialog;
-import com.plugin.common.utils.files.DiskManager;
-import com.plugin.common.utils.files.DiskManager.DiskCacheType;
-import com.plugin.common.utils.image.ImageUtils;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -40,6 +28,18 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.find.guide.R;
+import com.find.guide.app.TourGuideApplication;
+import com.find.guide.config.AppRuntime;
+import com.find.guide.model.CityItem;
+import com.find.guide.model.helper.UserHelper;
+import com.find.guide.model.helper.UserHelper.OnApplyForGuideFinishListener;
+import com.find.guide.utils.Toasts;
+import com.find.guide.view.TipsDialog;
+import com.plugin.common.utils.files.DiskManager;
+import com.plugin.common.utils.files.DiskManager.DiskCacheType;
+import com.plugin.common.utils.image.ImageUtils;
+
 public class GuideIdentifyActivity extends BaseActivity implements OnClickListener {
 
     public static final int REQUEST_GALLERY = 1;
@@ -62,7 +62,7 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
 
     private DatePickerDialog mDialog = null;
 
-    private CityItem mCityItem = null;
+    private CityItem mCityItem = new CityItem("北京", "B", 20001);
 
     private long mBirthdayTimestamp = 0l;
 
@@ -266,8 +266,10 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
         }
 
         TipsDialog.getInstance().show(this, R.drawable.tips_loading, "导游认证中...", true, false);
-        mUserHelper.applyForGuide(goodAtScenic, mBirthdayTimestamp, beGuideYear, mGuideCardPath, guideCardId,
-                AppRuntime.gLocation, gender, mApplyForGuideFinishListener);
+        mUserHelper
+                .applyForGuide(goodAtScenic, mBirthdayTimestamp, beGuideYear, mGuideCardPath, guideCardId,
+                        AppRuntime.gLocation, mCityItem != null ? mCityItem.getCityCode() : 20001,
+                        mApplyForGuideFinishListener);
     }
 
     private OnApplyForGuideFinishListener mApplyForGuideFinishListener = new OnApplyForGuideFinishListener() {

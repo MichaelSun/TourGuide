@@ -24,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="@string/search_city"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -48,7 +48,7 @@
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
                 android:text="@string/city_any"
-                android:textColor="#666666"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -66,7 +66,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="@string/search_gender"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <RadioGroup
@@ -84,9 +84,10 @@
                     android:id="@+id/male_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     android:text="@string/male"
-                    android:textColor="#666666" />
+                    android:textColor="@color/default_text_color"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/female_radio"
@@ -94,15 +95,17 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/female"
-                    android:textColor="#666666" />
+                    android:textColor="@color/default_text_color"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/gender_any_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="@string/gender_any"
-                    android:textColor="#666666" />
+                    android:textColor="@color/default_text_color"
+                    android:textSize="18sp" />
             </RadioGroup>
         </RelativeLayout>
 
@@ -123,7 +126,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="@string/search_scenic"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <EditText
@@ -138,7 +141,8 @@
                 android:gravity="right|center_vertical"
                 android:hint="@string/search_scenic_hint"
                 android:padding="3dp"
-                android:textColor="#666666"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/default_hint_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -150,7 +154,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/btn_login_green"
+            android:background="@drawable/btn_orange"
             android:gravity="center"
             android:text="@string/search"
             android:textColor="#ffffff"

@@ -1,17 +1,9 @@
 package com.find.guide.fragment;
 
-import com.find.guide.R;
-import com.find.guide.activity.GuideIdentifyActivity;
-import com.find.guide.activity.LoginActivity;
-import com.find.guide.activity.ProfileActivity;
-import com.find.guide.app.TourGuideApplication;
-import com.find.guide.config.AppRuntime;
-import com.find.guide.model.Tourist;
-import com.find.guide.setting.SettingManager;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +14,21 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.find.guide.R;
+import com.find.guide.activity.GuideIdentifyActivity;
+import com.find.guide.activity.LoginActivity;
+import com.find.guide.activity.ProfileActivity;
+import com.find.guide.app.TourGuideApplication;
+import com.find.guide.config.AppConfig;
+import com.find.guide.config.AppRuntime;
+import com.find.guide.model.Tourist;
+import com.find.guide.setting.SettingManager;
+import com.umeng.fb.FeedbackAgent;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
 
 public class SettingFragment extends Fragment implements OnClickListener {
 
@@ -178,11 +185,35 @@ public class SettingFragment extends Fragment implements OnClickListener {
     }
 
     private void checkUpdate() {
+        if (getActivity() != null) {
+            UmengUpdateAgent.forceUpdate(getActivity());
+            UmengUpdateAgent.setUpdateAutoPopup(false);
+            UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
 
+                @Override
+                public void onUpdateReturned(int arg0, UpdateResponse arg1) {
+                    switch (arg0) {
+                    case 0: // has update
+                        UmengUpdateAgent.showUpdateDialog(getActivity(), arg1);
+                        break;
+                    case 1: // has no update
+                        Toast.makeText(getActivity(), "没有更新", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2: // none wifi
+                        Toast.makeText(getActivity(), "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3: // time out
+                        Toast.makeText(getActivity(), "超时", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
+            });
+        }
     }
 
     private void feedback() {
-
+        FeedbackAgent agent = new FeedbackAgent(getActivity());
+        agent.startFeedbackActivity();
     }
 
     private void profile() {

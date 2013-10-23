@@ -27,7 +27,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="@string/booking_destination"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <EditText
@@ -39,8 +39,8 @@
                 android:background="#00000000"
                 android:gravity="center_vertical|right"
                 android:hint="@string/booking_destination_hint"
-                android:textColor="#666666"
-                android:textColorHint="#666666"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/default_hint_color"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/male"
-                    android:textColor="#666666"
+                    android:textColor="@color/default_text_color"
                     android:textSize="18sp" />
 
                 <RadioButton
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/female"
-                    android:textColor="#666666"
+                    android:textColor="@color/default_text_color"
                     android:textSize="18sp" />
 
                 <RadioButton
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/gender_any"
-                    android:textColor="#666666"
+                    android:textColor="@color/default_text_color"
                     android:textSize="18sp" />
             </RadioGroup>
         </RelativeLayout>
@@ -116,7 +116,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:text="@string/booking_start_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -139,7 +139,7 @@
                 android:layout_toRightOf="@id/start_time_label"
                 android:gravity="right|center_vertical"
                 android:text="@string/booking_start_time"
-                android:textColor="#666666"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -158,7 +158,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:text="@string/booking_end_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -181,7 +181,7 @@
                 android:layout_toRightOf="@id/end_time_label"
                 android:gravity="right|center_vertical"
                 android:text="@string/booking_end_time"
-                android:textColor="#666666"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -192,7 +192,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_login_green"
+            android:background="@drawable/btn_orange"
             android:gravity="center"
             android:text="@string/send_broadcast"
             android:textColor="#ffffff"

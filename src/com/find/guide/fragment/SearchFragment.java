@@ -1,11 +1,5 @@
 package com.find.guide.fragment;
 
-import com.find.guide.R;
-import com.find.guide.activity.GuideListActivity;
-import com.find.guide.activity.SelectCityActivity;
-import com.find.guide.model.CityItem;
-import com.find.guide.view.TipsDialog;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -17,6 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.find.guide.R;
+import com.find.guide.activity.GuideListActivity;
+import com.find.guide.activity.SelectCityActivity;
+import com.find.guide.model.CityItem;
+import com.find.guide.view.TipsDialog;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
 

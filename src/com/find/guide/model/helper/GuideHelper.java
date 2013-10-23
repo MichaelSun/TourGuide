@@ -2,6 +2,8 @@ package com.find.guide.model.helper;
 
 import java.util.List;
 
+import android.content.Context;
+
 import com.find.guide.api.guide.GetHistoricalGuideEventsRequest;
 import com.find.guide.api.guide.GetHistoricalGuideEventsResponse;
 import com.find.guide.api.guide.GuideAcceptRequest;
@@ -12,8 +14,6 @@ import com.find.guide.model.GuideEvent;
 import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.internet.InternetUtils;
 import com.plugin.internet.core.NetWorkException;
-
-import android.content.Context;
 
 public class GuideHelper {
 
@@ -33,21 +33,29 @@ public class GuideHelper {
 
     public static interface OnGetHistoricalGuideEventsListener {
         public void onGetHistoricalGuideEvents(int result, List<GuideEvent> guideEvents);
+
+        public void onGetMoreHistoricalGuideEvents(int result, List<GuideEvent> guideEvents);
     }
 
-    public void getHistoricalGuideEvents(final int start, final int rows, OnGetHistoricalGuideEventsListener listener) {
+    public void getHistoricalGuideEvents(final int userId, final int start, final int rows,
+            OnGetHistoricalGuideEventsListener listener) {
         mOnGetHistoricalGuideEventsListener = listener;
 
         CustomThreadPool.asyncWork(new Runnable() {
             @Override
             public void run() {
                 try {
-                    GetHistoricalGuideEventsRequest request = new GetHistoricalGuideEventsRequest(start, rows);
+                    GetHistoricalGuideEventsRequest request = new GetHistoricalGuideEventsRequest(userId, start, rows);
                     GetHistoricalGuideEventsResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
                         List<GuideEvent> guideEvents = response.guideEvents;
                         if (mOnGetHistoricalGuideEventsListener != null) {
-                            mOnGetHistoricalGuideEventsListener.onGetHistoricalGuideEvents(SUCCESS, guideEvents);
+                            if (start > 0) {
+                                mOnGetHistoricalGuideEventsListener
+                                        .onGetMoreHistoricalGuideEvents(SUCCESS, guideEvents);
+                            } else {
+                                mOnGetHistoricalGuideEventsListener.onGetHistoricalGuideEvents(SUCCESS, guideEvents);
+                            }
                         }
                         return;
                     }
@@ -56,7 +64,11 @@ public class GuideHelper {
                 }
 
                 if (mOnGetHistoricalGuideEventsListener != null) {
-                    mOnGetHistoricalGuideEventsListener.onGetHistoricalGuideEvents(NETWORK_ERROR, null);
+                    if (start > 0) {
+                        mOnGetHistoricalGuideEventsListener.onGetMoreHistoricalGuideEvents(NETWORK_ERROR, null);
+                    } else {
+                        mOnGetHistoricalGuideEventsListener.onGetHistoricalGuideEvents(NETWORK_ERROR, null);
+                    }
                 }
             }
         });

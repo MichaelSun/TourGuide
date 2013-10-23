@@ -3,10 +3,6 @@ package com.find.guide.adapter;
 import java.util.Calendar;
 import java.util.List;
 
-import com.find.guide.R;
-import com.find.guide.activity.InviteEventDetailActivity;
-import com.find.guide.model.InviteEvent;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -16,6 +12,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.find.guide.R;
+import com.find.guide.activity.InviteEventDetailActivity;
+import com.find.guide.model.InviteEvent;
 
 public class InviteRecordAdapter extends BaseAdapter {
 

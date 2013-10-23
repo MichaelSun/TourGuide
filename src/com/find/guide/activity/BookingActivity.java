@@ -1,20 +1,9 @@
 package com.find.guide.activity;
 
 import java.util.Calendar;
-
-import com.find.guide.R;
-import com.find.guide.model.CityItem;
-import com.find.guide.model.TourGuide;
-import com.find.guide.model.helper.CityManager;
-import com.find.guide.model.helper.InviteHelper;
-import com.find.guide.model.helper.InviteHelper.OnInviteListener;
-import com.find.guide.setting.SettingManager;
-import com.find.guide.view.TipsDialog;
-import com.plugin.common.view.WebImageView;
+import java.util.Date;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,10 +14,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.find.guide.R;
+import com.find.guide.model.CityItem;
+import com.find.guide.model.TourGuide;
+import com.find.guide.model.helper.CityManager;
+import com.find.guide.model.helper.InviteHelper;
+import com.find.guide.model.helper.InviteHelper.OnInviteListener;
+import com.find.guide.setting.SettingManager;
+import com.find.guide.view.DateTimePickerDialog;
+import com.find.guide.view.TipsDialog;
+import com.find.guide.view.DateTimePickerDialog.ICustomDateTimeListener;
+import com.plugin.common.view.WebImageView;
 
 public class BookingActivity extends BaseActivity implements OnClickListener {
 
@@ -39,13 +39,11 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
     private long mStartTimeStamp = 0;
     private long mEndTimeStamp = 0;
 
-    private WebImageView mGuideCardIv;
+    private WebImageView mGuideHeaderIv;
     private TextView mGuideNameTv;
     private ImageView mGuideGenderIv;
-    private TextView mGuidePhoneTv;
     private TextView mCityTv;
     private TextView mGoodAtScenicTv;
-    private TextView mGuideHistoryTv;
     private View mGuideHistoryView;
     private TextView mGuideCardIdTv;
     private EditText mDestinationEt;
@@ -61,7 +59,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
     private View mStar4;
     private View mStar5;
 
-    private DatePickerDialog mDialog;
+    private DateTimePickerDialog mDateTimePickerDialog;
 
     private AlertDialog mAlertDialog;
 
@@ -85,13 +83,11 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
     }
 
     private void initUI() {
-        mGuideCardIv = (WebImageView) findViewById(R.id.guide_card_iv);
+        mGuideHeaderIv = (WebImageView) findViewById(R.id.guide_header_iv);
         mGuideNameTv = (TextView) findViewById(R.id.guide_name_tv);
         mGuideGenderIv = (ImageView) findViewById(R.id.guide_gender_iv);
-        mGuidePhoneTv = (TextView) findViewById(R.id.guide_phone_tv);
         mCityTv = (TextView) findViewById(R.id.city);
         mGoodAtScenicTv = (TextView) findViewById(R.id.good_scenic);
-        mGuideHistoryTv = (TextView) findViewById(R.id.guide_history);
         mGuideHistoryView = findViewById(R.id.guide_history_layout);
         mGuideCardIdTv = (TextView) findViewById(R.id.guide_card_id);
         mDestinationEt = (EditText) findViewById(R.id.destination_et);
@@ -111,12 +107,11 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         mStartTimeView.setOnClickListener(this);
         mEndTimeView.setOnClickListener(this);
         mBookingBtn.setOnClickListener(this);
-        mGuidePhoneTv.setOnClickListener(this);
     }
 
     private void setData() {
         if (mTourGuide != null) {
-            mGuideCardIv.setImageURI(new Uri.Builder().path(mTourGuide.getHeadUrl()).build());
+            mGuideHeaderIv.setImageURI(new Uri.Builder().path(mTourGuide.getHeadUrl()).build());
             mGuideNameTv.setText(mTourGuide.getUserName());
             CityItem cityItem = CityManager.getInstance().getCityById(mTourGuide.getCity());
             if (cityItem != null) {
@@ -124,8 +119,17 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
             }
             mGoodAtScenicTv.setText(mTourGuide.getGoodAtScenic());
             mGuideCardIdTv.setText(mTourGuide.getGuideCardId());
-            mEvaluateNumTv.setText(mTourGuide.getEvaluateCount() + "次");
-            setStar(mTourGuide.getEvaluateScore());
+            if (mTourGuide.getEvaluateCount() > 0) {
+                mEvaluateNumTv.setText(mTourGuide.getEvaluateCount() + "次评价");
+            } else {
+                mEvaluateNumTv.setText("暂无评价");
+            }
+            float rating = 0f;
+            if (mTourGuide.getEvaluateCount() > 0) {
+                rating = mTourGuide.getEvaluateScore() / mTourGuide.getEvaluateCount();
+            }
+            setStar(rating);
+
             if (mTourGuide.getGender() == 1) {
                 mGuideGenderIv.setImageResource(R.drawable.icon_male);
             } else if (mTourGuide.getGender() == 2) {
@@ -133,67 +137,67 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
             } else {
                 mGuideGenderIv.setImageDrawable(null);
             }
-            mGuidePhoneTv.setText(mTourGuide.getMobile());
         }
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
         mStartTimeTv.setText(year + "/" + (month + 1 < 10 ? "0" + (month + 1) : month + 1) + "/"
-                + (day < 10 ? "0" + (day) : day));
+                + (day < 10 ? "0" + (day) : day) + " " + (hour < 10 ? "0" + (hour) : hour) + ":"
+                + (min < 10 ? "0" + (min) : min));
         mEndTimeTv.setText(year + "/" + (month + 1 < 10 ? "0" + (month + 1) : month + 1) + "/"
-                + (day < 10 ? "0" + (day) : day));
+                + (day < 10 ? "0" + (day) : day) + " " + (hour < 10 ? "0" + (hour) : hour) + ":"
+                + (min < 10 ? "0" + (min) : min));
         mStartTimeStamp = System.currentTimeMillis();
         mEndTimeStamp = System.currentTimeMillis() + 1;
     }
 
-    private void setStar(int score) {
-        if (score <= 0) {
-            mStar1.setBackgroundResource(R.drawable.star_silver);
-            mStar2.setBackgroundResource(R.drawable.star_silver);
-            mStar3.setBackgroundResource(R.drawable.star_silver);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 1) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_silver);
-            mStar3.setBackgroundResource(R.drawable.star_silver);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 2) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_silver);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 3) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_gold);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 4) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_gold);
-            mStar4.setBackgroundResource(R.drawable.star_gold);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
+    private void setStar(float score) {
+        if (score < 0.2) {
+            mStar1.setBackgroundResource(R.drawable.star_big_silver);
+            mStar2.setBackgroundResource(R.drawable.star_big_silver);
+            mStar3.setBackgroundResource(R.drawable.star_big_silver);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (score < 0.4) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_silver);
+            mStar3.setBackgroundResource(R.drawable.star_big_silver);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (score < 0.6) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_silver);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (score < 0.8) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_gold);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (score < 0.95) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_gold);
+            mStar4.setBackgroundResource(R.drawable.star_big_gold);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
         } else {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_gold);
-            mStar4.setBackgroundResource(R.drawable.star_gold);
-            mStar5.setBackgroundResource(R.drawable.star_gold);
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_gold);
+            mStar4.setBackgroundResource(R.drawable.star_big_gold);
+            mStar5.setBackgroundResource(R.drawable.star_big_gold);
         }
     }
 
     @Override
     public void onDestroy() {
-        if (mDialog != null && mDialog.isShowing()) {
-            mDialog.dismiss();
-            mDialog = null;
-        }
+        dismissDateTimePicker();
         if (mAlertDialog != null && mAlertDialog.isShowing()) {
             mAlertDialog.dismiss();
             mAlertDialog = null;
@@ -202,6 +206,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
             mInviteHelper.destroy();
             mInviteHelper = null;
         }
+        TipsDialog.getInstance().dismiss();
         super.onDestroy();
     }
 
@@ -220,31 +225,12 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         case R.id.end_time_layout:
             selectEndTime();
             break;
-        case R.id.guide_phone_tv:
-            callGuide();
-            break;
         }
     }
 
     private void bookingGuide() {
         if (SettingManager.getInstance().getUserId() <= 0) {
-            if (mAlertDialog != null && mAlertDialog.isShowing()) {
-                mAlertDialog.dismiss();
-            }
-
-            mAlertDialog = new AlertDialog.Builder(this).setMessage(R.string.login_dialog_message)
-                    .setPositiveButton(R.string.login_dialog_positive, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            login();
-                        }
-                    }).setNegativeButton(R.string.login_dialog_negative, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).create();
-            mAlertDialog.show();
+            showLoginDialog();
             return;
         }
 
@@ -278,9 +264,16 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
                 public void run() {
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
-                        finish();
+                        TipsDialog.getInstance().show(BookingActivity.this, R.drawable.tips_saved,
+                                R.string.booking_success, true);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        }, 1000);
                     } else if (result == InviteHelper.FAILED) {
-                        TipsDialog.getInstance().show(BookingActivity.this, R.drawable.tips_loading,
+                        TipsDialog.getInstance().show(BookingActivity.this, R.drawable.tips_fail,
                                 R.string.booking_failed, true);
                     }
                 }
@@ -293,36 +286,20 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         }
     };
 
-    private void login() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    private void enterGuideHistory() {
-
-    }
-
-    private void callGuide() {
+    private void showLoginDialog() {
         if (mAlertDialog != null && mAlertDialog.isShowing()) {
             mAlertDialog.dismiss();
+            mAlertDialog = null;
         }
-        String msg = getString(R.string.call_dialog_message);
-        if (msg != null) {
-            msg = String.format(msg, mTourGuide.getMobile());
-        }
-        mAlertDialog = new AlertDialog.Builder(this).setMessage(msg)
-                .setPositiveButton(R.string.call_dialog_positive, new DialogInterface.OnClickListener() {
+
+        mAlertDialog = new AlertDialog.Builder(this).setMessage(R.string.login_dialog_message)
+                .setPositiveButton(R.string.login_dialog_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mTourGuide.getMobile()));
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
-
-                        }
+                        Intent intent = new Intent(BookingActivity.this, LoginActivity.class);
+                        startActivity(intent);
                     }
-                }).setNegativeButton(R.string.call_dialog_negative, new DialogInterface.OnClickListener() {
+                }).setNegativeButton(R.string.login_dialog_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -331,45 +308,67 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         mAlertDialog.show();
     }
 
-    private void selectStartTime() {
-        if (mDialog != null) {
-            mDialog.dismiss();
-            mDialog = null;
+    private void enterGuideHistory() {
+        if (SettingManager.getInstance().getUserId() > 0) {
+            Intent intent = new Intent(this, GuideRecordActivity.class);
+            intent.putExtra(GuideRecordActivity.EXTRA_INTENT_GUIDE_ID, mTourGuide.getUserId());
+            startActivity(intent);
+        } else {
+            showLoginDialog();
         }
-        Calendar calendar = Calendar.getInstance();
-        mDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+    }
+
+    private void selectStartTime() {
+        dismissDateTimePicker();
+        mDateTimePickerDialog = new DateTimePickerDialog(this, new ICustomDateTimeListener() {
+
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String date = year + "/" + (monthOfYear + 1 < 10 ? "0" + (monthOfYear + 1) : monthOfYear + 1) + "/"
-                        + (dayOfMonth < 10 ? "0" + (dayOfMonth) : dayOfMonth);
-                mStartTimeTv.setText(date);
-                mStartTimeStamp = getTimestamp(year, monthOfYear, dayOfMonth);
+            public void onSet(Calendar calendarSelected, Date dateSelected, int year, String monthFullName,
+                    String monthShortName, int monthNumber, int date, String weekDayFullName, String weekDayShortName,
+                    int hour24, int hour12, int min, int sec, String AM_PM) {
+                String date1 = year + "/" + (monthNumber + 1 < 10 ? "0" + (monthNumber + 1) : monthNumber + 1) + "/"
+                        + (date < 10 ? "0" + (date) : date) + " " + (hour24 < 10 ? "0" + hour24 : hour24) + ":"
+                        + (min < 10 ? "0" + min : min);
+                mEndTimeTv.setText(date1);
+                mEndTimeStamp = dateSelected.getTime();
             }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        mDialog.show();
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+        mDateTimePickerDialog.showDialog();
     }
 
     private void selectEndTime() {
-        if (mDialog != null) {
-            mDialog.dismiss();
-            mDialog = null;
-        }
-        Calendar calendar = Calendar.getInstance();
-        mDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        dismissDateTimePicker();
+        mDateTimePickerDialog = new DateTimePickerDialog(this, new ICustomDateTimeListener() {
+
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String date = year + "/" + (monthOfYear + 1 < 10 ? "0" + (monthOfYear + 1) : monthOfYear + 1) + "/"
-                        + (dayOfMonth < 10 ? "0" + (dayOfMonth) : dayOfMonth);
-                mEndTimeTv.setText(date);
-                mEndTimeStamp = getTimestamp(year, monthOfYear, dayOfMonth);
+            public void onSet(Calendar calendarSelected, Date dateSelected, int year, String monthFullName,
+                    String monthShortName, int monthNumber, int date, String weekDayFullName, String weekDayShortName,
+                    int hour24, int hour12, int min, int sec, String AM_PM) {
+                String date1 = year + "/" + (monthNumber + 1 < 10 ? "0" + (monthNumber + 1) : monthNumber + 1) + "/"
+                        + (date < 10 ? "0" + (date) : date) + " " + (hour24 < 10 ? "0" + hour24 : hour24) + ":"
+                        + (min < 10 ? "0" + min : min);
+                mEndTimeTv.setText(date1);
+                mEndTimeStamp = dateSelected.getTime();
             }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        mDialog.show();
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+        mDateTimePickerDialog.showDialog();
     }
 
-    private long getTimestamp(int year, int month, int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day, 0, 0, 0);
-        return calendar.getTimeInMillis();
+    private void dismissDateTimePicker() {
+        if (mDateTimePickerDialog != null) {
+            mDateTimePickerDialog.dismissDialog();
+            mDateTimePickerDialog = null;
+        }
     }
+
 }

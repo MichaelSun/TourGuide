@@ -4,12 +4,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.find.guide.R;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnGetVerifyCodeFinishListener;
-import com.find.guide.model.helper.UserHelper.OnRegisterFinishListener;
-import com.find.guide.view.TipsDialog;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,6 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.find.guide.R;
+import com.find.guide.model.helper.UserHelper;
+import com.find.guide.model.helper.UserHelper.OnGetVerifyCodeFinishListener;
+import com.find.guide.model.helper.UserHelper.OnRegisterFinishListener;
+import com.find.guide.view.TipsDialog;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener {
 

@@ -16,14 +16,14 @@
 
         <TextView
             android:id="@+id/register_phone_label"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="@string/register_phone"
-            android:textColor="#232424"
-            android:textSize="17sp" />
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/register_phone_et"
@@ -32,19 +32,20 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/register_phone_label"
             android:background="@null"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|right"
             android:hint="@string/register_phone_hint"
             android:inputType="phone"
             android:maxLength="20"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:singleLine="true"
-            android:textColor="#232424"
-            android:textColorHint="@color/register_text_hint_color"
+            android:textColor="@color/default_text_color"
+            android:textColorHint="@color/default_hint_color"
             android:textCursorDrawable="@null"
-            android:textSize="19sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -58,14 +59,14 @@
 
         <TextView
             android:id="@+id/register_password_label"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="@string/register_password"
-            android:textColor="#232424"
-            android:textSize="17sp" />
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/register_password_et"
@@ -74,19 +75,20 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/register_password_label"
             android:background="@null"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|right"
             android:hint="@string/register_password_hint"
             android:inputType="textPassword"
             android:maxLength="20"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:singleLine="true"
-            android:textColor="#232424"
-            android:textColorHint="@color/register_text_hint_color"
+            android:textColor="@color/default_text_color"
+            android:textColorHint="@color/default_hint_color"
             android:textCursorDrawable="@null"
-            android:textSize="19sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -100,14 +102,14 @@
 
         <TextView
             android:id="@+id/register_password_confirm_label"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="@string/register_password_confirm"
-            android:textColor="#232424"
-            android:textSize="17sp" />
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/register_password_confirm_et"
@@ -116,19 +118,20 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/register_password_confirm_label"
             android:background="@null"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|right"
             android:hint="@string/register_password_confirm_hint"
             android:inputType="textPassword"
             android:maxLength="20"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:singleLine="true"
-            android:textColor="#232424"
-            android:textColorHint="@color/register_text_hint_color"
+            android:textColor="@color/default_text_color"
+            android:textColorHint="@color/default_hint_color"
             android:textCursorDrawable="@null"
-            android:textSize="19sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -142,14 +145,14 @@
 
         <TextView
             android:id="@+id/register_name_label"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="@string/register_name"
-            android:textColor="#232424"
-            android:textSize="17sp" />
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/register_name_et"
@@ -158,18 +161,19 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/register_name_label"
             android:background="@null"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|right"
             android:hint="@string/register_name_hint"
             android:maxLength="20"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:singleLine="true"
-            android:textColor="#232424"
-            android:textColorHint="@color/register_text_hint_color"
+            android:textColor="@color/default_text_color"
+            android:textColorHint="@color/default_hint_color"
             android:textCursorDrawable="@null"
-            android:textSize="19sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -183,14 +187,14 @@
 
         <TextView
             android:id="@+id/register_gender_label"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="@string/gender"
-            android:textColor="#232424"
-            android:textSize="17sp" />
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
 
         <RadioGroup
             android:id="@+id/register_radio_gender"
@@ -198,9 +202,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:layout_toRightOf="@id/register_gender_label"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|right"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -209,16 +213,16 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/male"
-                android:textColor="#232424"
-                android:textSize="19sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/register_radio_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/female"
-                android:textColor="#232424"
-                android:textSize="19sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
         </RadioGroup>
     </RelativeLayout>
 
@@ -233,14 +237,14 @@
 
         <TextView
             android:id="@+id/register_verify_code_label"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="@string/register_verification_code"
-            android:textColor="#232424"
-            android:textSize="17sp" />
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/register_get_verify_code_tv"
@@ -248,12 +252,12 @@
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:background="@null"
             android:gravity="center"
             android:text="@string/register_send_verify_code"
-            android:textColor="#232424"
-            android:textSize="17sp" />
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/register_verification_code_et"
@@ -265,17 +269,17 @@
             android:layout_toLeftOf="@id/register_get_verify_code_tv"
             android:layout_toRightOf="@id/register_verify_code_label"
             android:background="@null"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|right"
             android:hint="@string/register_verification_code_hint"
             android:inputType="number"
             android:maxLength="20"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:singleLine="true"
-            android:textColor="#232424"
-            android:textColorHint="@color/register_text_hint_color"
+            android:textColor="@color/default_text_color"
+            android:textColorHint="@color/default_hint_color"
             android:textCursorDrawable="@null"
-            android:textSize="19sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <Button
@@ -286,10 +290,10 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/btn_login_green"
+        android:background="@drawable/btn_orange"
         android:gravity="center"
         android:text="@string/register"
         android:textColor="#ffffff"
-        android:textSize="17sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -15,8 +15,9 @@ public class GetOneInviteEventResponse extends ResponseBase {
             @JsonProperty("eventStatus") int eventStatus, @JsonProperty("startTime") long startTime,
             @JsonProperty("endTime") long endTime, @JsonProperty("scenic") String scenic,
             @JsonProperty("createTime") long createTime, @JsonProperty("satisfaction") int satisfaction,
-            @JsonProperty("guideName") String guideName, @JsonProperty("guideHeadUrl") String guideHeadUrl) {
+            @JsonProperty("guideName") String guideName, @JsonProperty("guideHeadUrl") String guideHeadUrl,
+            @JsonProperty("mobile") String mobile) {
         inviteEvent = new InviteEvent(eventId, userId, guideId, eventType, eventStatus, startTime, endTime, scenic,
-                createTime, satisfaction, guideName, guideHeadUrl);
+                createTime, satisfaction, guideName, guideHeadUrl, mobile);
     }
 }

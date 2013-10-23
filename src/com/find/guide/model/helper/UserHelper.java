@@ -2,6 +2,9 @@ package com.find.guide.model.helper;
 
 import java.util.List;
 
+import android.content.Context;
+import android.text.TextUtils;
+
 import com.find.guide.api.resource.UploadResourceRequest;
 import com.find.guide.api.resource.UploadResourceResponse;
 import com.find.guide.api.user.ApplyForGuideRequest;
@@ -10,6 +13,8 @@ import com.find.guide.api.user.ChangeHeadRequest;
 import com.find.guide.api.user.ChangeHeadResponse;
 import com.find.guide.api.user.ChangeLocationRequest;
 import com.find.guide.api.user.ChangeLocationResponse;
+import com.find.guide.api.user.ChangeUserInfoRequest;
+import com.find.guide.api.user.ChangeUserInfoResponse;
 import com.find.guide.api.user.GetNearByGuideRequest;
 import com.find.guide.api.user.GetNearByGuideResponse;
 import com.find.guide.api.user.GetUserInfoRequest;
@@ -29,10 +34,6 @@ import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.internet.InternetUtils;
 import com.plugin.internet.core.NetWorkException;
 
-import android.accounts.NetworkErrorException;
-import android.content.Context;
-import android.text.TextUtils;
-
 public class UserHelper {
 
     public static final int SUCCESS = 0;
@@ -48,6 +49,7 @@ public class UserHelper {
     private OnSearchGuideListener mOnSearchGuideListener = null;
     private OnChangeHeadListener mOnChangeHeadListener = null;
     private OnChangeLocationListener mOnChangeLocationListener = null;
+    private OnChangeUserInfoListener mOnChangeUserInfoListener = null;
 
     private Context mContext;
 
@@ -263,6 +265,8 @@ public class UserHelper {
 
     public interface OnGetNearByGuideListener {
         public void onGetNearByGuideFinish(int result, List<TourGuide> guides);
+
+        public void onGetMoreNearByGuideFinish(int result, List<TourGuide> guides);
     }
 
     public void getNearByGuide(final String location, final double dist, final int start, final int rows,
@@ -278,7 +282,12 @@ public class UserHelper {
                     if (response != null) {
                         List<TourGuide> guides = response.guides;
                         if (mGetNearByGuideListener != null) {
-                            mGetNearByGuideListener.onGetNearByGuideFinish(SUCCESS, guides);
+                            if (start > 0) {
+                                mGetNearByGuideListener.onGetMoreNearByGuideFinish(SUCCESS, guides);
+                            } else {
+                                mGetNearByGuideListener.onGetNearByGuideFinish(SUCCESS, guides);
+                            }
+
                         }
                         return;
                     }
@@ -287,7 +296,11 @@ public class UserHelper {
                 }
 
                 if (mGetNearByGuideListener != null) {
-                    mGetNearByGuideListener.onGetNearByGuideFinish(NETWORK_ERROR, null);
+                    if (start > 0) {
+                        mGetNearByGuideListener.onGetMoreNearByGuideFinish(NETWORK_ERROR, null);
+                    } else {
+                        mGetNearByGuideListener.onGetNearByGuideFinish(NETWORK_ERROR, null);
+                    }
                 }
             }
         });
@@ -295,6 +308,8 @@ public class UserHelper {
 
     public static interface OnSearchGuideListener {
         public void onSearchGuide(int result, List<TourGuide> guides);
+
+        public void onSearchMoreGuide(int result, List<TourGuide> guides);
     }
 
     public void searchGuide(final int city, final int gender, final String scenic, final int start, final int rows,
@@ -309,7 +324,11 @@ public class UserHelper {
                     if (response != null) {
                         List<TourGuide> guides = response.guides;
                         if (mOnSearchGuideListener != null) {
-                            mOnSearchGuideListener.onSearchGuide(SUCCESS, guides);
+                            if (start > 0) {
+                                mOnSearchGuideListener.onSearchMoreGuide(SUCCESS, guides);
+                            } else {
+                                mOnSearchGuideListener.onSearchGuide(SUCCESS, guides);
+                            }
                         }
                         return;
                     }
@@ -318,7 +337,11 @@ public class UserHelper {
                 }
 
                 if (mOnSearchGuideListener != null) {
-                    mOnSearchGuideListener.onSearchGuide(NETWORK_ERROR, null);
+                    if (start > 0) {
+                        mOnSearchGuideListener.onSearchMoreGuide(NETWORK_ERROR, null);
+                    } else {
+                        mOnSearchGuideListener.onSearchGuide(NETWORK_ERROR, null);
+                    }
                 }
             }
         });
@@ -406,6 +429,58 @@ public class UserHelper {
         });
     }
 
+    public static interface OnChangeUserInfoListener {
+        public void onChangeUserInfo(int result);
+    }
+
+    public void changeUserInfo(final String name, final int gender, final String headPath,
+            OnChangeUserInfoListener listener) {
+        mOnChangeUserInfoListener = listener;
+
+        CustomThreadPool.asyncWork(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String url = null;
+                    if (!TextUtils.isEmpty(headPath)) {
+                        UploadResourceRequest urRequest = new UploadResourceRequest(headPath, "jpg");
+                        UploadResourceResponse urResponse = InternetUtils.request(mContext, urRequest);
+                        if (urResponse != null) {
+                            url = urResponse.url;
+                        }
+                    } else {
+                        url = SettingManager.getInstance().getUserHeader();
+                    }
+
+                    if (!TextUtils.isEmpty(url)) {
+                        ChangeUserInfoRequest request = new ChangeUserInfoRequest(name, gender, url);
+                        ChangeUserInfoResponse response = InternetUtils.request(mContext, request);
+                        if (response != null) {
+                            if (response.result == 0) {
+                                SettingManager.getInstance().setUserName(name);
+                                SettingManager.getInstance().setUserGender(gender);
+                                SettingManager.getInstance().setUserHeader(url);
+                                if (mOnChangeUserInfoListener != null) {
+                                    mOnChangeUserInfoListener.onChangeUserInfo(SUCCESS);
+                                }
+                            } else {
+                                if (mOnChangeUserInfoListener != null) {
+                                    mOnChangeUserInfoListener.onChangeUserInfo(FAILED);
+                                }
+                            }
+                            return;
+                        }
+                    }
+                } catch (NetWorkException e) {
+                    e.printStackTrace();
+                }
+                if (mOnChangeUserInfoListener != null) {
+                    mOnChangeUserInfoListener.onChangeUserInfo(NETWORK_ERROR);
+                }
+            }
+        });
+    }
+
     public void destroy() {
         mContext = null;
         mOnLoginFinishListener = null;
@@ -417,5 +492,6 @@ public class UserHelper {
         mOnSearchGuideListener = null;
         mOnChangeHeadListener = null;
         mOnChangeLocationListener = null;
+        mOnChangeUserInfoListener = null;
     }
 }

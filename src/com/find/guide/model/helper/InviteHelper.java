@@ -2,6 +2,8 @@ package com.find.guide.model.helper;
 
 import java.util.List;
 
+import android.content.Context;
+
 import com.find.guide.api.invite.GetHistoricalInviteEventsRequest;
 import com.find.guide.api.invite.GetHistoricalInviteEventsResponse;
 import com.find.guide.api.invite.InviteAllRequest;
@@ -16,8 +18,6 @@ import com.find.guide.model.InviteEvent;
 import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.internet.InternetUtils;
 import com.plugin.internet.core.NetWorkException;
-
-import android.content.Context;
 
 public class InviteHelper {
 
@@ -37,6 +37,8 @@ public class InviteHelper {
 
     public static interface OnGetHistoricalInviteEventsListener {
         public void onGetHistoricalInviteEvents(int result, List<InviteEvent> inviteEvents);
+
+        public void onGetMoreHistoricalInviteEvents(int result, List<InviteEvent> inviteEvents);
     }
 
     public void getHistoricalInviteEvents(final int start, final int rows, OnGetHistoricalInviteEventsListener listener) {
@@ -51,7 +53,12 @@ public class InviteHelper {
                     if (response != null) {
                         List<InviteEvent> inviteEvents = response.inviteEvents;
                         if (mOnGetHistoricalInviteEventsListener != null) {
-                            mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(SUCCESS, inviteEvents);
+                            if (start > 0) {
+                                mOnGetHistoricalInviteEventsListener.onGetMoreHistoricalInviteEvents(SUCCESS,
+                                        inviteEvents);
+                            } else {
+                                mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(SUCCESS, inviteEvents);
+                            }
                         }
                         return;
                     }
@@ -60,7 +67,11 @@ public class InviteHelper {
                 }
 
                 if (mOnGetHistoricalInviteEventsListener != null) {
-                    mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(NETWORK_ERROR, null);
+                    if (start > 0) {
+                        mOnGetHistoricalInviteEventsListener.onGetMoreHistoricalInviteEvents(NETWORK_ERROR, null);
+                    } else {
+                        mOnGetHistoricalInviteEventsListener.onGetHistoricalInviteEvents(NETWORK_ERROR, null);
+                    }
                 }
             }
         });

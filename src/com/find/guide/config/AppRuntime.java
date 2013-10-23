@@ -1,5 +1,8 @@
 package com.find.guide.config;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,9 +15,6 @@ import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.common.utils.DeviceInfo;
 import com.plugin.common.utils.UtilsConfig;
 import com.plugin.common.utils.files.DiskManager;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AppRuntime {
 

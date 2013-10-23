@@ -18,7 +18,7 @@ public class GuideEvent implements Serializable {
     public static final int EVENT_STATUS_SATISFACTION = 3;
     public static final int EVENT_STATUS_CANCEL = 4;
     public static final int EVENT_STATUS_ACCEPTED_BY_OTHER = 5;
-    
+
     public static final int SATISFACTION_GOOD = 1;
     public static final int SATISFACTION_BAD = 2;
 
@@ -46,13 +46,16 @@ public class GuideEvent implements Serializable {
 
     private String userHeadUrl;
 
+    private String mobile;
+
     @JsonCreator
     public GuideEvent(@JsonProperty("guideId") int guideId, @JsonProperty("eventId") long eventId,
             @JsonProperty("userId") int userId, @JsonProperty("status") int eventStatus,
             @JsonProperty("satisfaction") int satisfaction, @JsonProperty("createTime") long createTime,
             @JsonProperty("eventType") int eventType, @JsonProperty("startTime") long startTime,
             @JsonProperty("endTime") long endTime, @JsonProperty("scenic") String scenic,
-            @JsonProperty("userName") String userName, @JsonProperty("userHeadUrl") String userHeadUrl) {
+            @JsonProperty("userName") String userName, @JsonProperty("userHeadUrl") String userHeadUrl,
+            @JsonProperty("mobile") String mobile) {
         this.guideId = guideId;
         this.eventId = eventId;
         this.userId = userId;
@@ -65,6 +68,7 @@ public class GuideEvent implements Serializable {
         this.scenic = scenic;
         this.userName = userName;
         this.userHeadUrl = userHeadUrl;
+        this.mobile = mobile;
     }
 
     public int getGuideId() {
@@ -165,6 +169,14 @@ public class GuideEvent implements Serializable {
 
     public void setScenic(String scenic) {
         this.scenic = scenic;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
 }

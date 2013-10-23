@@ -3,10 +3,6 @@ package com.find.guide.adapter;
 import java.util.Calendar;
 import java.util.List;
 
-import com.find.guide.R;
-import com.find.guide.activity.GuideEventDetailActivity;
-import com.find.guide.model.GuideEvent;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -16,14 +12,25 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.find.guide.R;
+import com.find.guide.activity.GuideEventDetailActivity;
+import com.find.guide.model.GuideEvent;
+
 public class GuideRecordAdapter extends BaseAdapter {
 
     private List<GuideEvent> mGuideEvents;
 
     private Activity mActivity;
 
-    public GuideRecordAdapter(Activity activity, List<GuideEvent> guideEvents) {
+    private VisitMode mVisiMode;
+
+    public static enum VisitMode {
+        ONESELF, OTHERS
+    }
+
+    public GuideRecordAdapter(Activity activity, VisitMode mode, List<GuideEvent> guideEvents) {
         mGuideEvents = guideEvents;
+        mVisiMode = mode;
         mActivity = activity;
     }
 
@@ -69,13 +76,16 @@ public class GuideRecordAdapter extends BaseAdapter {
         holder.NameTv.setText(event.getUserName());
         setEventStatus(holder, event);
 
-        holder.content.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRecord(event);
-            }
-        });
-
+        if (mVisiMode == VisitMode.ONESELF) {
+            holder.content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickRecord(event);
+                }
+            });
+        } else {
+            holder.content.setOnClickListener(null);
+        }
         return convertView;
     }
 
@@ -103,7 +113,7 @@ public class GuideRecordAdapter extends BaseAdapter {
             holder.eventStatusTv.setTextColor(res.getColor(R.color.record_normal));
             break;
         case GuideEvent.EVENT_STATUS_SATISFACTION:
-            if (event.getEventType() == GuideEvent.SATISFACTION_BAD) {
+            if (event.getSatisfaction() == GuideEvent.SATISFACTION_BAD) {
                 holder.eventStatusTv.setText(R.string.satisfaction_bad);
             } else {
                 holder.eventStatusTv.setText(R.string.satisfaction_good);

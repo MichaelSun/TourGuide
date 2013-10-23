@@ -4,8 +4,6 @@
  */
 package com.find.guide.view;
 
-import com.find.guide.R;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -18,6 +16,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.find.guide.R;
 
 /**
  * @author Guoqing Sun Sep 10, 20124:28:18 PM

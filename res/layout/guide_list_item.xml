@@ -1,76 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.find.guide"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
 
     <RelativeLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="wrap_content" >
+
+        <com.plugin.common.view.WebImageView
+            android:id="@+id/header"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_header"
+            app:conerRadius="2dp" />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/header"
             android:singleLine="true"
             android:text="张三导"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/gender"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/name"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="男"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/num"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/gender"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="30次"
-            android:textColor="#000000"
+            android:textColor="@color/default_text_color"
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/arrow"
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/name"
+            android:src="@drawable/icon_male" />
+
+        <TextView
+            android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/icon_arr" />
+            android:layout_marginRight="10dp"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp" />
+
+        <View
+            android:id="@+id/guide_star1"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignBottom="@id/header"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/header"
+            android:background="@drawable/star_big_gold" />
+
+        <View
+            android:id="@+id/guide_star2"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignTop="@id/guide_star1"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/guide_star1"
+            android:background="@drawable/star_big_gold" />
+
+        <View
+            android:id="@+id/guide_star3"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignTop="@id/guide_star1"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/guide_star2"
+            android:background="@drawable/star_big_gold" />
+
+        <View
+            android:id="@+id/guide_star4"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignTop="@id/guide_star1"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/guide_star3"
+            android:background="@drawable/star_big_gold" />
+
+        <View
+            android:id="@+id/guide_star5"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignTop="@id/guide_star1"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/guide_star4"
+            android:background="@drawable/star_big_silver" />
 
         <TextView
-            android:id="@+id/stars"
-            android:layout_width="0dp"
+            android:id="@+id/num"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_alignBottom="@id/header"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/arrow"
-            android:layout_toRightOf="@id/num"
             android:gravity="center"
             android:singleLine="true"
-            android:text="5星"
-            android:textColor="#ff0000"
+            android:textColor="#000000"
             android:textSize="18sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@id/content"
-        android:background="@color/gray1" />
+        android:layout_height="5dp" />
 
-</RelativeLayout>
+</LinearLayout>

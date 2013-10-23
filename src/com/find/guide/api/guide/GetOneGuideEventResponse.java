@@ -13,8 +13,9 @@ public class GetOneGuideEventResponse extends ResponseBase {
             @JsonProperty("satisfaction") int satisfaction, @JsonProperty("createTime") long createTime,
             @JsonProperty("eventType") int eventType, @JsonProperty("startTime") long startTime,
             @JsonProperty("endTime") long endTime, @JsonProperty("scenic") String scenic,
-            @JsonProperty("userName") String userName, @JsonProperty("userHeadUrl") String userHeadUrl) {
+            @JsonProperty("userName") String userName, @JsonProperty("userHeadUrl") String userHeadUrl,
+            @JsonProperty("mobile") String mobile) {
         guideEvent = new GuideEvent(guideId, eventId, userId, eventStatus, satisfaction, createTime, eventType,
-                startTime, endTime, scenic, userName, userHeadUrl);
+                startTime, endTime, scenic, userName, userHeadUrl, mobile);
     }
 }

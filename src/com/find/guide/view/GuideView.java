@@ -1,14 +1,14 @@
 package com.find.guide.view;
 
-import com.find.guide.R;
-import com.find.guide.model.TourGuide;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.find.guide.R;
+import com.find.guide.model.TourGuide;
 
 public class GuideView extends LinearLayout {
 

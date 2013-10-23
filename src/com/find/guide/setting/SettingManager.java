@@ -39,7 +39,6 @@ public class SettingManager {
         mEditor.remove(KEY_USER_HEADER);
         mEditor.remove(KEY_USER_GENDER);
         mEditor.remove(KEY_USER_TYPE);
-        mEditor.remove(KEY_USER_PHONE_NUM);
         mEditor.remove(KEY_TICKET);
         mEditor.remove(KEY_SECRET_KEY);
         mEditor.commit();

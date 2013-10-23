@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#50000000"
-        android:visibility="gone"
-        android:gravity="center" >
+        android:gravity="center"
+        android:visibility="gone" >
 
         <ProgressBar
             android:id="@+id/map_hint_pb"
@@ -26,35 +26,10 @@
             android:id="@+id/map_hint_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
             android:layout_marginLeft="8dp"
+            android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/broadcast_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/btn_login_grey"
-        android:gravity="center"
-        android:text="广播"
-        android:textColor="#539fc1"
-        android:textSize="17sp"
-        android:textStyle="bold" />
-
-    <View
-        android:id="@+id/map_refresh_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/btn_refresh" />
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listview"
@@ -62,8 +37,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:clickable="true"
-        android:divider="@null"
-        android:dividerHeight="0dp"
+        android:divider="@drawable/line_gray"
+        android:dividerHeight="1dp"
         android:visibility="visible" />
 
 </RelativeLayout>

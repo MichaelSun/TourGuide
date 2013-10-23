@@ -7,6 +7,8 @@
     <string name="nearby_guide">附近导游</string>
     <string name="menu_show_map">地图</string>
     <string name="menu_show_list">列表</string>
+    <string name="menu_broadcast">广播</string>
+    <string name="menu_refresh">定位</string>
     <string name="loading_location">正在获取您的位置...</string>
     <string name="location_failed">定位失败</string>
     <string name="loading_nearby_guide">正在加载附近的导游...</string>
@@ -109,6 +111,7 @@
     <string name="goto_booking">我要预约</string>
     <string name="in_booking">预约导游中...</string>
     <string name="booking_failed">预约导游失败</string>
+    <string name="booking_success">预约导游成功</string>
     <string name="booking_confirm_title">预约</string>
     <string name="booking_guide">导游</string>
     <string name="booking_destination">我要去</string>
@@ -135,24 +138,28 @@
     <string name="refuse">忽略</string>
     <string name="in_cancel">取消预约中...</string>
     <string name="cancel_invite_failed">取消预约失败</string>
-	<string name="in_statisfaction">评价中...</string>
-	<string name="statisfaction_failed">评价失败</string>
-	<string name="accepting_invite">接受预约中...</string>
-	<string name="accept_invite_failed">接受预约失败</string>
-	<string name="refusing_invite">忽略预约中...</string>
-	<string name="refuse_invite_failed">忽略预约失败</string>
-    
+    <string name="in_statisfaction">评价中...</string>
+    <string name="statisfaction_failed">评价失败</string>
+    <string name="accepting_invite">接受预约中...</string>
+    <string name="accept_invite_failed">接受预约失败</string>
+    <string name="refusing_invite">忽略预约中...</string>
+    <string name="refuse_invite_failed">忽略预约失败</string>
     <string name="broadcast_title">广播</string>
     <string name="send_broadcast">发起广播</string>
     <string name="guide_gender">导游性别</string>
-    <string name="sending_broadcast">发送广播中...</string>
-    <string name="broadcast_failed">广播失败</string>
+    <string name="sending_broadcast">广播发送中...</string>
+    <string name="broadcast_failed">您的广播发送失败</string>
+    <string name="broadcast_success">您的广播已经发送到附近的导游，请等待他们主动联系您。</string>
 
     <!-- 个人主页 -->
     <string name="profile_title">个人主页</string>
     <string name="unlogin">未登录</string>
-    <string name="change_head_dialog_msg">您修改了头像，确认提交吗？</string>
-    <string name="change_head_dialog_positive">提交</string>
-    <string name="change_head_dialog_negative">取消</string>
+    <string name="change_user_info_dialog_msg">您修改了个人信息，确认不保存退出吗？</string>
+    <string name="change_user_info_dialog_positive">确认</string>
+    <string name="change_user_info_dialog_negative">取消</string>
+    <string name="menu_save">保存</string>
+
+    <!-- 导游历史 -->
+    <string name="guide_record_title">导游历史</string>
 
 </resources>

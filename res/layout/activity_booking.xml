@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.find.guide"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -16,24 +17,25 @@
             android:layout_marginTop="10dp" >
 
             <com.plugin.common.view.WebImageView
-                android:id="@+id/guide_card_iv"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:id="@+id/guide_header_iv"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/default_header" />
+                android:src="@drawable/default_header"
+                app:conerRadius="2dp" />
 
             <TextView
                 android:id="@+id/guide_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/guide_card_iv"
+                android:layout_toRightOf="@id/guide_header_iv"
                 android:maxWidth="150dp"
                 android:singleLine="true"
                 android:text="张帝"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="20sp" />
 
             <ImageView
@@ -43,44 +45,33 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/guide_name_tv"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_female" />
+                android:scaleType="center"
+                android:src="@drawable/icon_male" />
 
             <TextView
-                android:id="@+id/guide_phone_tv"
+                android:id="@+id/star_evaluate_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/guide_name_tv"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/guide_card_iv"
-                android:gravity="center"
-                android:text="18810758797"
-                android:textColor="#ff0000"
-                android:textSize="18sp" />
-
-            <View
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_alignTop="@id/guide_phone_tv"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="0dp"
-                android:layout_toRightOf="@id/guide_phone_tv"
-                android:background="@drawable/icon_phone" />
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/guide_header_iv"
+                android:textColor="@color/default_text_color"
+                android:textSize="20sp" />
 
             <View
                 android:id="@+id/guide_star1"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_alignBottom="@id/guide_card_iv"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_alignBottom="@id/guide_header_iv"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/guide_card_iv"
+                android:layout_toRightOf="@id/guide_header_iv"
                 android:background="@drawable/star_big_gold" />
 
             <View
                 android:id="@+id/guide_star2"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:layout_alignTop="@id/guide_star1"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star1"
@@ -88,8 +79,8 @@
 
             <View
                 android:id="@+id/guide_star3"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:layout_alignTop="@id/guide_star1"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star2"
@@ -97,8 +88,8 @@
 
             <View
                 android:id="@+id/guide_star4"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:layout_alignTop="@id/guide_star1"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star3"
@@ -106,22 +97,12 @@
 
             <View
                 android:id="@+id/guide_star5"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:layout_alignTop="@id/guide_star1"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star4"
                 android:background="@drawable/star_big_silver" />
-
-            <TextView
-                android:id="@+id/star_evaluate_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/guide_star1"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/guide_star5"
-                android:text="23次"
-                android:textSize="20sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -140,7 +121,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="城        市"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <TextView
@@ -152,7 +133,7 @@
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
                 android:text="北京"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -174,7 +155,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="@string/good_scenic"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <TextView
@@ -185,7 +166,7 @@
                 android:layout_marginRight="15dp"
                 android:gravity="right|center_vertical"
                 android:text="故宫"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -204,7 +185,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="@string/guide_history"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -227,7 +208,7 @@
                 android:gravity="right"
                 android:singleLine="true"
                 android:text="导游历史"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -246,7 +227,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="@string/guide_card_id"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <TextView
@@ -257,7 +238,7 @@
                 android:layout_marginRight="10dp"
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -278,7 +259,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="@string/booking_destination"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <EditText
@@ -290,8 +271,8 @@
                 android:background="#00000000"
                 android:gravity="center_vertical|right"
                 android:hint="@string/booking_destination_hint"
-                android:textColor="#000000"
-                android:textColorHint="#666666"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/default_hint_color"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -310,7 +291,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:text="@string/booking_start_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -333,7 +314,7 @@
                 android:layout_toRightOf="@id/start_time_label"
                 android:gravity="right|center_vertical"
                 android:text="@string/booking_start_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -352,7 +333,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:text="@string/booking_end_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -375,7 +356,7 @@
                 android:layout_toRightOf="@id/end_time_label"
                 android:gravity="right|center_vertical"
                 android:text="@string/booking_end_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -386,7 +367,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_login_green"
+            android:background="@drawable/btn_orange"
             android:gravity="center"
             android:text="@string/goto_booking"
             android:textColor="#ffffff"

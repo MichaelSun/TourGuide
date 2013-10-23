@@ -2,9 +2,16 @@ package com.find.guide.activity;
 
 import java.util.Calendar;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,7 +30,11 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
 
     private InviteEvent mInviteEvent = null;
 
+    private View mGuideNameLayout;
+    private View mPhoneLayout;
+    private View mDestinationLayout;
     private TextView mGuideName;
+    private TextView mPhoneTv;
     private TextView mDestinationTv;
     private TextView mStartTimeTv;
     private TextView mEndTimeTv;
@@ -31,6 +42,8 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
     private Button mButton2;
 
     private InviteHelper mInviteHelper = null;
+
+    private Dialog mAlertDialog;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -59,6 +72,10 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
     }
 
     private void initUI() {
+        mGuideNameLayout = findViewById(R.id.guide_layout);
+        mDestinationLayout = findViewById(R.id.destination_layout);
+        mPhoneLayout = findViewById(R.id.phone_layout);
+        mPhoneTv = (TextView) findViewById(R.id.phone_tv);
         mGuideName = (TextView) findViewById(R.id.guide_name);
         mDestinationTv = (TextView) findViewById(R.id.destination_tv);
         mStartTimeTv = (TextView) findViewById(R.id.start_time_tv);
@@ -68,11 +85,24 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
 
         mButton1.setOnClickListener(this);
         mButton2.setOnClickListener(this);
+        mPhoneLayout.setOnClickListener(this);
 
         mGuideName.setText(mInviteEvent.getGuideName());
+        mPhoneTv.setText(mInviteEvent.getMobile());
         mDestinationTv.setText(mInviteEvent.getScenic());
         mStartTimeTv.setText(getTimeStr(mInviteEvent.getStartTime()));
         mEndTimeTv.setText(getTimeStr(mInviteEvent.getEndTime()));
+
+        if (mInviteEvent.getEventType() == InviteEvent.EVENT_TYPE_BROADCASR
+                && (mInviteEvent.getEventStatus() == InviteEvent.EVENT_STATUS_BOOKING || mInviteEvent.getEventStatus() == InviteEvent.EVENT_STATUS_CANCELED)) {
+            mGuideNameLayout.setVisibility(View.GONE);
+            mPhoneLayout.setVisibility(View.GONE);
+            mDestinationLayout.setBackgroundResource(R.drawable.bg_top);
+        } else {
+            mGuideNameLayout.setVisibility(View.VISIBLE);
+            mPhoneLayout.setVisibility(View.VISIBLE);
+            mDestinationLayout.setBackgroundResource(R.drawable.bg_middle);
+        }
 
         switch (mInviteEvent.getEventStatus()) {
         case InviteEvent.EVENT_STATUS_BOOKING:
@@ -105,6 +135,10 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
             mInviteHelper.destroy();
             mInviteHelper = null;
         }
+        if (mAlertDialog != null && mAlertDialog.isShowing()) {
+            mAlertDialog.dismiss();
+            mAlertDialog = null;
+        }
         TipsDialog.getInstance().dismiss();
         super.onDestroy();
     }
@@ -124,7 +158,42 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
                 setSatisfaction(2);
             }
             break;
+        case R.id.phone_layout:
+            dialGuide();
+            break;
         }
+    }
+
+    private void dialGuide() {
+        if (mAlertDialog != null && mAlertDialog.isShowing()) {
+            mAlertDialog.dismiss();
+        }
+        if (TextUtils.isEmpty(mInviteEvent.getMobile())) {
+            return;
+        }
+        String msg = getString(R.string.call_dialog_message);
+        if (msg != null) {
+            msg = String.format(msg, mInviteEvent.getMobile());
+        }
+        mAlertDialog = new AlertDialog.Builder(this).setMessage(msg)
+                .setPositiveButton(R.string.call_dialog_positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mInviteEvent.getMobile()));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+
+                        }
+                    }
+                }).setNegativeButton(R.string.call_dialog_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create();
+        mAlertDialog.show();
     }
 
     private void cancel() {
@@ -149,7 +218,13 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
                 public void run() {
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
-                        finish();
+                        TipsDialog.getInstance().show(InviteEventDetailActivity.this, R.drawable.tips_saved, "", true);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        }, 1000);
                     } else if (result == InviteHelper.FAILED) {
                         TipsDialog.getInstance().show(InviteEventDetailActivity.this, R.drawable.tips_fail,
                                 R.string.cancel_invite_failed, true);
@@ -176,9 +251,15 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
                 public void run() {
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
-                        finish();
+                        TipsDialog.getInstance().show(InviteEventDetailActivity.this, R.drawable.tips_saved, "", true);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        }, 1000);
                     } else if (result == InviteHelper.FAILED) {
-                        TipsDialog.getInstance().show(InviteEventDetailActivity.this, R.drawable.tips_loading,
+                        TipsDialog.getInstance().show(InviteEventDetailActivity.this, R.drawable.tips_fail,
                                 R.string.statisfaction_failed, true);
                     }
                 }
@@ -192,6 +273,9 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        return year + "/" + (month + 1 < 10 ? "0" + (month + 1) : month + 1) + "/" + (day < 10 ? "0" + (day) : day);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+        return year + "/" + (month + 1 < 10 ? "0" + (month + 1) : month + 1) + "/" + (day < 10 ? "0" + (day) : day)
+                + " " + (hour < 10 ? "0" + (hour) : hour) + ":" + (min < 10 ? "0" + (min) : min);
     }
 }

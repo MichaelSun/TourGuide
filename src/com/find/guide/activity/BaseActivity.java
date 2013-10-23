@@ -1,7 +1,5 @@
 package com.find.guide.activity;
 
-import com.find.guide.R;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -9,6 +7,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.find.guide.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends Activity {
 
@@ -26,8 +27,8 @@ public class BaseActivity extends Activity {
         mActionbar = getActionBar();
         mActionbar.setDisplayHomeAsUpEnabled(true);
         mActionbar.setDisplayShowTitleEnabled(true);
-//        mActionbar.setDisplayShowHomeEnabled(true);
-        
+        // mActionbar.setDisplayShowHomeEnabled(true);
+
         this.getWindow().setBackgroundDrawableResource(R.drawable.background);
     }
 
@@ -44,12 +45,25 @@ public class BaseActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item != null) {
             switch (item.getItemId()) {
-                case android.R.id.home:
-                    finish();
-                    return true;
+            case android.R.id.home:
+                finish();
+                return true;
             }
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 }

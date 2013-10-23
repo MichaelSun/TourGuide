@@ -1,7 +1,5 @@
 package com.find.guide.view;
 
-import com.find.guide.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SectionIndexer;
+
+import com.find.guide.R;
 
 public class SlideView extends View {
 

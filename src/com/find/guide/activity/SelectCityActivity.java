@@ -1,17 +1,5 @@
 package com.find.guide.activity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.text.TextUtils;
-import android.view.*;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.*;
-import android.widget.AdapterView.OnItemClickListener;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,6 +8,25 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.SectionIndexer;
+import android.widget.TextView;
 
 import com.find.guide.R;
 import com.find.guide.model.CityItem;

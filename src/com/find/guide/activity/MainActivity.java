@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.find.guide.R;
@@ -12,6 +13,7 @@ import com.find.guide.fragment.NearByFragment;
 import com.find.guide.fragment.RecordFragment;
 import com.find.guide.fragment.SearchFragment;
 import com.find.guide.fragment.SettingFragment;
+import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends BaseActivity {
 
@@ -44,6 +46,8 @@ public class MainActivity extends BaseActivity {
         
         mActionbar.setDisplayHomeAsUpEnabled(false);
         mActionbar.setDisplayShowHomeEnabled(false);
+        
+        UmengUpdateAgent.update(this);
     }
 
     @Override
@@ -142,7 +146,7 @@ public class MainActivity extends BaseActivity {
 
         case R.id.profile_record:
             mCurrSelectedTabId = R.id.profile_record;
-            mActionbar.setTitle(R.string.profile_record);
+//            mActionbar.setTitle(R.string.profile_record);
 
             mNearbyGuideBtn.setSelected(false);
             mProfileRecordBtn.setSelected(true);
@@ -187,6 +191,14 @@ public class MainActivity extends BaseActivity {
         }
 
         tans.commitAllowingStateLoss();
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onDestory() {

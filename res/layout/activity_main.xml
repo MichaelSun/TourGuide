@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/botton_region"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/main_page_bottom_bar"
         android:orientation="horizontal" >
@@ -20,16 +20,16 @@
             android:clickable="true"
             android:orientation="vertical"
             android:paddingBottom="3dp"
-            android:paddingTop="2dp" >
+            android:paddingTop="3dp" >
 
             <ImageView
                 android:id="@+id/nearby_guide_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
-                android:src="@drawable/ic_location" />
+                android:src="@drawable/main_nearby" />
 
             <TextView
                 android:id="@+id/nearby_guide_text"
@@ -43,37 +43,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/profile_record"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/main_page_tab_btn_bg"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="3dp"
-            android:paddingTop="2dp" >
-
-            <ImageView
-                android:id="@+id/profile_record_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:duplicateParentState="true"
-                android:scaleType="center"
-                android:src="@drawable/ic_profile" />
-
-            <TextView
-                android:id="@+id/profile_record_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/profile_record_img"
-                android:duplicateParentState="true"
-                android:gravity="center"
-                android:text="@string/profile_record"
-                android:textColor="@color/bottom_text_color" />
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -82,16 +51,16 @@
             android:clickable="true"
             android:orientation="vertical"
             android:paddingBottom="3dp"
-            android:paddingTop="2dp" >
+            android:paddingTop="3dp" >
 
             <ImageView
                 android:id="@+id/search_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
-                android:src="@drawable/ic_tuangou" />
+                android:src="@drawable/main_search" />
 
             <TextView
                 android:id="@+id/search_text"
@@ -105,6 +74,37 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/profile_record"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/main_page_tab_btn_bg"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp" >
+
+            <ImageView
+                android:id="@+id/profile_record_img"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerHorizontal="true"
+                android:duplicateParentState="true"
+                android:scaleType="center"
+                android:src="@drawable/main_my" />
+
+            <TextView
+                android:id="@+id/profile_record_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_record_img"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/profile_record"
+                android:textColor="@color/bottom_text_color" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/setting"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -113,16 +113,16 @@
             android:clickable="true"
             android:orientation="vertical"
             android:paddingBottom="3dp"
-            android:paddingTop="2dp" >
+            android:paddingTop="3dp" >
 
             <ImageView
                 android:id="@+id/setting_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
-                android:src="@drawable/ic_more" />
+                android:src="@drawable/main_more" />
 
             <TextView
                 android:id="@+id/setting_text"

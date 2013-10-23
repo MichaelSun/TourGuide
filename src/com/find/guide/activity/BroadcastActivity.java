@@ -1,29 +1,30 @@
 package com.find.guide.activity;
 
 import java.util.Calendar;
+import java.util.Date;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.find.guide.R;
 import com.find.guide.config.AppRuntime;
 import com.find.guide.model.helper.InviteHelper;
 import com.find.guide.model.helper.InviteHelper.OnInviteListener;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.view.DateTimePickerDialog;
+import com.find.guide.view.DateTimePickerDialog.ICustomDateTimeListener;
 import com.find.guide.view.TipsDialog;
-
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Looper;
-import android.os.Handler;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
 public class BroadcastActivity extends BaseActivity implements OnClickListener {
 
@@ -35,8 +36,8 @@ public class BroadcastActivity extends BaseActivity implements OnClickListener {
     private View mEndTimeView;
     private Button mBroadcastBtn;
 
-    private DatePickerDialog mDateDialog;
     private AlertDialog mAlertDialog;
+    private DateTimePickerDialog mDateTimePickerDialog;
 
     private InviteHelper mInviteHelper;
 
@@ -77,10 +78,14 @@ public class BroadcastActivity extends BaseActivity implements OnClickListener {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
         mStartTimeTv.setText(year + "/" + (month + 1 < 10 ? "0" + (month + 1) : month + 1) + "/"
-                + (day < 10 ? "0" + (day) : day));
+                + (day < 10 ? "0" + (day) : day) + " " + (hour < 10 ? "0" + (hour) : hour) + ":"
+                + (min < 10 ? "0" + (min) : min));
         mEndTimeTv.setText(year + "/" + (month + 1 < 10 ? "0" + (month + 1) : month + 1) + "/"
-                + (day < 10 ? "0" + (day) : day));
+                + (day < 10 ? "0" + (day) : day) + " " + (hour < 10 ? "0" + (hour) : hour) + ":"
+                + (min < 10 ? "0" + (min) : min));
         mStartTimeStamp = System.currentTimeMillis();
         mEndTimeStamp = System.currentTimeMillis() + 1;
     }
@@ -95,10 +100,8 @@ public class BroadcastActivity extends BaseActivity implements OnClickListener {
             mAlertDialog.dismiss();
             mAlertDialog = null;
         }
-        if (mDateDialog != null && mDateDialog.isShowing()) {
-            mDateDialog.dismiss();
-            mDateDialog = null;
-        }
+        dismissDateTimePicker();
+        TipsDialog.getInstance().dismiss();
         super.onDestroy();
     }
 
@@ -162,15 +165,13 @@ public class BroadcastActivity extends BaseActivity implements OnClickListener {
                 public void run() {
                     TipsDialog.getInstance().dismiss();
                     if (result == InviteHelper.SUCCESS) {
-                        finish();
+                        broadcastSuccess();
                     } else if (result == InviteHelper.FAILED) {
                         TipsDialog.getInstance().show(BroadcastActivity.this, R.drawable.tips_fail,
                                 R.string.broadcast_failed, true);
                     }
-
                 }
             });
-
         }
 
         @Override
@@ -182,46 +183,68 @@ public class BroadcastActivity extends BaseActivity implements OnClickListener {
         }
     };
 
-    private void selectStartTime() {
-        if (mDateDialog != null) {
-            mDateDialog.dismiss();
-            mDateDialog = null;
-        }
-        Calendar calendar = Calendar.getInstance();
-        mDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+    private void broadcastSuccess() {
+        TipsDialog.getInstance().show(BroadcastActivity.this, R.drawable.tips_fail, R.string.broadcast_success, true);
+        mHandler.postDelayed(new Runnable() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String date = year + "/" + (monthOfYear + 1 < 10 ? "0" + (monthOfYear + 1) : monthOfYear + 1) + "/"
-                        + (dayOfMonth < 10 ? "0" + (dayOfMonth) : dayOfMonth);
-                mStartTimeTv.setText(date);
-                mStartTimeStamp = getTimestamp(year, monthOfYear, dayOfMonth);
+            public void run() {
+                finish();
             }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        mDateDialog.show();
+        }, 1000);
+    }
+
+    private void selectStartTime() {
+        dismissDateTimePicker();
+        mDateTimePickerDialog = new DateTimePickerDialog(this, new ICustomDateTimeListener() {
+
+            @Override
+            public void onSet(Calendar calendarSelected, Date dateSelected, int year, String monthFullName,
+                    String monthShortName, int monthNumber, int date, String weekDayFullName, String weekDayShortName,
+                    int hour24, int hour12, int min, int sec, String AM_PM) {
+                String date1 = year + "/" + (monthNumber + 1 < 10 ? "0" + (monthNumber + 1) : monthNumber + 1) + "/"
+                        + (date < 10 ? "0" + (date) : date) + " " + (hour24 < 10 ? "0" + hour24 : hour24) + ":"
+                        + (min < 10 ? "0" + min : min);
+                mStartTimeTv.setText(date1);
+                mStartTimeStamp = dateSelected.getTime();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+        mDateTimePickerDialog.showDialog();
+
     }
 
     private void selectEndTime() {
-        if (mDateDialog != null) {
-            mDateDialog.dismiss();
-            mDateDialog = null;
-        }
-        Calendar calendar = Calendar.getInstance();
-        mDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        dismissDateTimePicker();
+        mDateTimePickerDialog = new DateTimePickerDialog(this, new ICustomDateTimeListener() {
+
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String date = year + "/" + (monthOfYear + 1 < 10 ? "0" + (monthOfYear + 1) : monthOfYear + 1) + "/"
-                        + (dayOfMonth < 10 ? "0" + (dayOfMonth) : dayOfMonth);
-                mEndTimeTv.setText(date);
-                mEndTimeStamp = getTimestamp(year, monthOfYear, dayOfMonth);
+            public void onSet(Calendar calendarSelected, Date dateSelected, int year, String monthFullName,
+                    String monthShortName, int monthNumber, int date, String weekDayFullName, String weekDayShortName,
+                    int hour24, int hour12, int min, int sec, String AM_PM) {
+                String date1 = year + "/" + (monthNumber + 1 < 10 ? "0" + (monthNumber + 1) : monthNumber + 1) + "/"
+                        + (date < 10 ? "0" + (date) : date) + " " + (hour24 < 10 ? "0" + hour24 : hour24) + ":"
+                        + (min < 10 ? "0" + min : min);
+                mEndTimeTv.setText(date1);
+                mEndTimeStamp = dateSelected.getTime();
             }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        mDateDialog.show();
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+        mDateTimePickerDialog.showDialog();
     }
 
-    private long getTimestamp(int year, int month, int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day, 0, 0, 0);
-        return calendar.getTimeInMillis();
+    private void dismissDateTimePicker() {
+        if (mDateTimePickerDialog != null) {
+            mDateTimePickerDialog.dismissDialog();
+            mDateTimePickerDialog = null;
+        }
     }
 
     private void login() {

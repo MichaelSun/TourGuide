@@ -27,7 +27,7 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_login"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -54,7 +54,7 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_profile"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -81,7 +81,7 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_guide_authentication"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -120,7 +120,7 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_update"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -147,7 +147,7 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_feedback"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView
@@ -174,7 +174,7 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_logout"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <ImageView

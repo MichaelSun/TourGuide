@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import com.baidu.mapapi.map.ItemizedOverlay;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.OverlayItem;
+import com.baidu.mapapi.utils.CoordinateConvert;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.model.TourGuide;
 
@@ -40,8 +41,11 @@ public class GuideMapView extends MapView {
 
         mGuides = guides;
         mOverlay.removeAll();
-        
+
         if (guides != null && guides.size() > 0) {
+            // guides.add(new TourGuide(10001, "小宇", "1212", 1, 1, "", "",
+            // 1029312, 1231, "", "12312", "39.958981,116.434364",
+            // 200001, 1, 1));
             List<OverlayItem> items = new ArrayList<OverlayItem>();
             for (TourGuide guide : guides) {
                 GuideView view = new GuideView(getContext());
@@ -56,12 +60,15 @@ public class GuideMapView extends MapView {
                     lat = lnglat[1];
                 }
                 GeoPoint pt = new GeoPoint((int) (lng * 1E6), (int) (lat * 1E6));
-                OverlayItem item = new OverlayItem(pt, "导游1", "");
+//                pt = CoordinateConvert.fromGcjToBaidu(pt);
+//                pt = CoordinateConvert.fromWgs84ToBaidu(pt);
+                OverlayItem item = new OverlayItem(pt, guide.getUserName(), "");
                 item.setMarker(new BitmapDrawable(getResources(), bitmap));
                 items.add(item);
             }
             mOverlay.addItem(items);
         }
+
         refresh();
     }
 
@@ -97,7 +104,7 @@ public class GuideMapView extends MapView {
 
         @Override
         public boolean onTap(int index) {
-//            OverlayItem item = getItem(index);
+            // OverlayItem item = getItem(index);
             if (mGuides != null && mGuides.size() > index) {
                 TourGuide guide = mGuides.get(index);
                 if (mOnGuideClickListener != null) {

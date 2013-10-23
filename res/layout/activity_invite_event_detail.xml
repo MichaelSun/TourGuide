@@ -8,12 +8,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp" >
+        android:paddingRight="8dp"
+        android:paddingTop="10dp" >
 
         <RelativeLayout
+            android:id="@+id/guide_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/bg_top" >
 
             <TextView
@@ -23,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="@string/tourguide"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <TextView
@@ -36,11 +37,54 @@
                 android:layout_toRightOf="@id/guide_label"
                 android:gravity="right"
                 android:text="张三"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_middle"
+            android:minHeight="50dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
+
+            <TextView
+                android:id="@+id/phone_label"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="手机号"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/phone_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/phone_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/phone_arrow"
+                android:layout_toRightOf="@id/phone_label"
+                android:gravity="right"
+                android:text="128318231"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/destination_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_middle"
@@ -55,7 +99,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="@string/destination"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <TextView
@@ -68,7 +112,7 @@
                 android:layout_toRightOf="@+id/destination_label"
                 android:gravity="right"
                 android:text="八达岭长城"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -84,7 +128,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="@string/booking_start_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <TextView
@@ -97,7 +141,7 @@
                 android:layout_toRightOf="@id/start_time_label"
                 android:gravity="right"
                 android:text="2013/10/12"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -113,7 +157,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="@string/booking_end_time"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
             <TextView
@@ -126,7 +170,7 @@
                 android:layout_toRightOf="@id/end_time_label"
                 android:gravity="right"
                 android:text="2013/10/12"
-                android:textColor="#000000"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -135,7 +179,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/btn_singin"
+            android:background="@drawable/btn_orange"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -145,7 +189,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/btn_singup"
+            android:background="@drawable/btn_white"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />

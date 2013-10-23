@@ -49,13 +49,16 @@ public class InviteEvent implements Serializable {
 
     private String guideHeadUrl;
 
+    private String mobile;
+
     @JsonCreator
     public InviteEvent(@JsonProperty("eventId") long eventId, @JsonProperty("userId") int userId,
             @JsonProperty("guideId") int guideId, @JsonProperty("eventType") int eventType,
             @JsonProperty("eventStatus") int eventStatus, @JsonProperty("startTime") long startTime,
             @JsonProperty("endTime") long endTime, @JsonProperty("scenic") String scenic,
             @JsonProperty("createTime") long createTime, @JsonProperty("satisfaction") int satisfaction,
-            @JsonProperty("guideName") String guideName, @JsonProperty("guideHeadUrl") String guideHeadUrl) {
+            @JsonProperty("guideName") String guideName, @JsonProperty("guideHeadUrl") String guideHeadUrl,
+            @JsonProperty("mobile") String mobile) {
         this.eventId = eventId;
         this.userId = userId;
         this.guideId = guideId;
@@ -68,6 +71,7 @@ public class InviteEvent implements Serializable {
         this.satisfaction = satisfaction;
         this.guideName = guideName;
         this.guideHeadUrl = guideHeadUrl;
+        this.mobile = mobile;
     }
 
     public long getEventId() {
@@ -164,6 +168,14 @@ public class InviteEvent implements Serializable {
 
     public void setGuideHeadUrl(String guideHeadUrl) {
         this.guideHeadUrl = guideHeadUrl;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
 }

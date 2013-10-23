@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -34,24 +33,19 @@ import com.find.guide.activity.BookingActivity;
 import com.find.guide.activity.BroadcastActivity;
 import com.find.guide.adapter.GuideAdapter;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.config.AppConfig;
 import com.find.guide.config.AppRuntime;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.model.TourGuide;
 import com.find.guide.model.Tourist;
+import com.find.guide.model.helper.UserHelper;
+import com.find.guide.model.helper.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.setting.SettingManager;
-import com.find.guide.utils.Toasts;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
-public class NearByFragment extends Fragment implements View.OnClickListener {
-
-    private View mMapLocationView;
-    private View mBroadcastView;
+public class NearByFragment extends Fragment {
 
     private View mMapHintView;
     private ProgressBar mMapHintPb;
@@ -77,6 +71,11 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    private int ROWS = 51;
+    private double DIST = 100;
+
+    private boolean mIsGettingNearBy = false;
+
     static enum ShowMode {
         MAP, LIST
     }
@@ -96,10 +95,6 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
 
         mMapView = (GuideMapView) view.findViewById(R.id.map_view);
 
-        mMapLocationView = view.findViewById(R.id.map_refresh_btn);
-        mMapLocationView.setOnClickListener(this);
-        mBroadcastView = view.findViewById(R.id.broadcast_btn);
-        mBroadcastView.setOnClickListener(this);
         mMapHintView = view.findViewById(R.id.map_hint_layout);
         mMapHintPb = (ProgressBar) view.findViewById(R.id.map_hint_pb);
         mMapHintTv = (TextView) view.findViewById(R.id.map_hint_tv);
@@ -108,12 +103,21 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
         mListView = (PullToRefreshListView) view.findViewById(R.id.listview);
         mListView.setVisibility(View.GONE);
         mListView.setShowIndicator(false);
-        mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+        mListView.setMode(Mode.PULL_FROM_START);
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+
             @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 requestLocation();
             }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                loadMoreGuide();
+            }
+
         });
+
         mGuideAdapter = new GuideAdapter(getActivity(), mTourGuides);
 
         return view;
@@ -170,18 +174,6 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
         mMapView.refresh();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-        case R.id.map_refresh_btn:
-            requestLocation();
-            break;
-        case R.id.broadcast_btn:
-            sendBroadcast();
-            break;
-        }
-    }
-
     private void requestLocation() {
         if (!mIsRequestLocation) {
             mIsRequestLocation = true;
@@ -193,6 +185,21 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
                 mMapHintTv.setText(R.string.loading_location);
             }
         }
+    }
+
+    private void loadMoreGuide() {
+        if (mIsGettingNearBy) {
+            mListView.onRefreshComplete();
+            return;
+        }
+
+        String location = AppRuntime.gLocation;
+        int start = 0;
+        if (mTourGuides != null) {
+            start = mTourGuides.size();
+        }
+        mIsGettingNearBy = true;
+        mUserHelper.getNearByGuide(location, DIST, start, ROWS, mOnGetNearByGuideListener);
     }
 
     public class MyLocationListenner implements BDLocationListener {
@@ -215,32 +222,34 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
             AppRuntime.gLocation = locData.latitude + "," + locData.longitude;
 
             if (mIsFirstLocation || mIsRequestLocation) {
-                if (location.getLatitude() <= 0.000001 && location.getLongitude() < 0.000001) {
-                    mIsRequestLocation = false;
-                    mListView.onRefreshComplete();
-                    Toasts.getInstance(getActivity()).show(R.string.location_failed, Toast.LENGTH_SHORT);
-                    if (mShowMode == ShowMode.MAP) {
-                        mMapHintView.setVisibility(View.GONE);
-                        mMapHintPb.setVisibility(View.GONE);
-                        mMapHintTv.setVisibility(View.GONE);
-                        mMapHintTv.setText("");
-                    }
-                } else {
-                    // 移动地图到定位点
-                    Log.d("LocationOverlay", "receive location, animate to it");
-                    mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6),
-                            (int) (locData.longitude * 1e6)));
-                    mIsRequestLocation = false;
-                    myLocationOverlay.setLocationMode(LocationMode.NORMAL);
+                // TODO
+                // if (location.getLatitude() <= 0.000001 &&
+                // location.getLongitude() < 0.000001) {
+                // mIsRequestLocation = false;
+                // mListView.onRefreshComplete();
+                // Toasts.getInstance(getActivity()).show(R.string.location_failed,
+                // Toast.LENGTH_SHORT);
+                // if (mShowMode == ShowMode.MAP) {
+                // mMapHintView.setVisibility(View.GONE);
+                // mMapHintPb.setVisibility(View.GONE);
+                // mMapHintTv.setVisibility(View.GONE);
+                // mMapHintTv.setText("");
+                // }
+                // } else {
+                // 移动地图到定位点
+                Log.d("LocationOverlay", "receive location, animate to it");
+                mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6)));
+                mIsRequestLocation = false;
+                myLocationOverlay.setLocationMode(LocationMode.NORMAL);
 
-                    String sloc = locData.latitude + "," + locData.longitude;
-                    getNearByGuide(sloc);
+                String sloc = locData.latitude + "," + locData.longitude;
+                getNearByGuide(sloc);
 
-                    if (SettingManager.getInstance().getUserId() > 0
-                            && SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
-                        mUserHelper.changeLocation(sloc, null);
-                    }
+                if (SettingManager.getInstance().getUserId() > 0
+                        && SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
+                    mUserHelper.changeLocation(sloc, null);
                 }
+                // }
             }
             mIsFirstLocation = false;
         }
@@ -253,14 +262,13 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getNearByGuide(String location) {
-        if (mShowMode == ShowMode.MAP) {
-            mMapHintView.setVisibility(View.VISIBLE);
-            mMapHintPb.setVisibility(View.VISIBLE);
-            mMapHintTv.setVisibility(View.VISIBLE);
-            mMapHintTv.setText(R.string.loading_nearby_guide);
-        }
+        mMapHintView.setVisibility(View.VISIBLE);
+        mMapHintPb.setVisibility(View.VISIBLE);
+        mMapHintTv.setVisibility(View.VISIBLE);
+        mMapHintTv.setText(R.string.loading_nearby_guide);
 
-        mUserHelper.getNearByGuide(location, 500, 0, 100, mOnGetNearByGuideListener);
+        mIsGettingNearBy = true;
+        mUserHelper.getNearByGuide(location, DIST, 0, ROWS, mOnGetNearByGuideListener);
     }
 
     private OnGetNearByGuideListener mOnGetNearByGuideListener = new OnGetNearByGuideListener() {
@@ -270,30 +278,59 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
+                    mIsGettingNearBy = false;
                     mListView.onRefreshComplete();
                     if (result == UserHelper.SUCCESS) {
-                        mTourGuides.clear();
-                        if (guides != null) {
+                        if (guides == null || guides.size() == 0) {
+                            mListView.setMode(Mode.PULL_FROM_START);
+                        } else {
+                            if (guides.size() >= ROWS) {
+                                mListView.setMode(Mode.BOTH);
+                                guides.remove(guides.size() - 1);
+                            } else {
+                                mListView.setMode(Mode.PULL_FROM_START);
+                            }
+                            mTourGuides.clear();
                             mTourGuides.addAll(guides);
+                            mGuideAdapter.notifyDataSetChanged();
+                            mMapView.updateGuideOverlay(guides);
                         }
-                        mGuideAdapter.notifyDataSetChanged();
-                        mMapView.updateGuideOverlay(guides);
                     }
-                    if (mShowMode == ShowMode.MAP) {
-                        mMapHintView.setVisibility(View.GONE);
-                        mMapHintPb.setVisibility(View.GONE);
-                        mMapHintTv.setVisibility(View.GONE);
-                        mMapHintTv.setText("");
+
+                    mMapHintView.setVisibility(View.GONE);
+                    mMapHintPb.setVisibility(View.GONE);
+                    mMapHintTv.setVisibility(View.GONE);
+                    mMapHintTv.setText("");
+                }
+            });
+        }
+
+        @Override
+        public void onGetMoreNearByGuideFinish(final int result, final List<TourGuide> guides) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mIsGettingNearBy = false;
+                    mListView.onRefreshComplete();
+                    if (result == UserHelper.SUCCESS) {
+                        if (guides == null || guides.size() == 0) {
+                            mListView.setMode(Mode.PULL_FROM_START);
+                        } else {
+                            if (guides.size() >= ROWS) {
+                                mListView.setMode(Mode.BOTH);
+                                guides.remove(guides.size() - 1);
+                            } else {
+                                mListView.setMode(Mode.PULL_FROM_START);
+                            }
+                            mTourGuides.addAll(guides);
+                            mGuideAdapter.notifyDataSetChanged();
+                            mMapView.updateGuideOverlay(mTourGuides);
+                        }
                     }
                 }
             });
         }
     };
-
-    private void sendBroadcast() {
-        Intent intent = new Intent(getActivity(), BroadcastActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     public void onResume() {
@@ -335,6 +372,7 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
         if (mShowMode == ShowMode.MAP) {
             mListView.setVisibility(View.GONE);
             item.setTitle(R.string.menu_show_list);
+            item.setIcon(R.drawable.icon_action_list);
         } else {
             mListView.setVisibility(View.VISIBLE);
             if (mListView.getRefreshableView().getAdapter() == null) {
@@ -343,18 +381,34 @@ public class NearByFragment extends Fragment implements View.OnClickListener {
                 mGuideAdapter.notifyDataSetChanged();
             }
             item.setTitle(R.string.menu_show_map);
+            item.setIcon(R.drawable.icon_action_map);
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mShowMode == ShowMode.LIST) {
-            mShowMode = ShowMode.MAP;
-        } else {
-            mShowMode = ShowMode.LIST;
+        if (item.getItemId() == R.id.menu_show_mode) {
+            if (mShowMode == ShowMode.LIST) {
+                mShowMode = ShowMode.MAP;
+            } else {
+                mShowMode = ShowMode.LIST;
+            }
+            getActivity().invalidateOptionsMenu();
+        } else if (item.getItemId() == R.id.menu_broadcast) {
+            sendBroadcast();
+        } else if (item.getItemId() == R.id.menu_refresh) {
+            if (mShowMode == ShowMode.MAP) {
+                requestLocation();
+            } else {
+                mListView.setRefreshing(true);
+            }
         }
-        getActivity().invalidateOptionsMenu();
         return true;
+    }
+
+    private void sendBroadcast() {
+        Intent intent = new Intent(getActivity(), BroadcastActivity.class);
+        startActivity(intent);
     }
 
     private void bookingGuide(TourGuide guide) {

@@ -1,11 +1,5 @@
 package com.find.guide.activity;
 
-import com.find.guide.R;
-import com.find.guide.app.TourGuideApplication;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnLoginFinishListener;
-import com.find.guide.view.TipsDialog;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +10,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.find.guide.R;
+import com.find.guide.app.TourGuideApplication;
+import com.find.guide.model.helper.UserHelper;
+import com.find.guide.model.helper.UserHelper.OnLoginFinishListener;
+import com.find.guide.setting.SettingManager;
+import com.find.guide.view.TipsDialog;
 
 public class LoginActivity extends BaseActivity implements OnClickListener {
 
@@ -49,7 +50,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         mLoginBtn.setOnClickListener(this);
         mRegisterBtn.setOnClickListener(this);
 
-        mActionbar.setTitle(R.string.login);
+        String phoneNum = SettingManager.getInstance().getUserPhoneNum();
+        if (!TextUtils.isEmpty(phoneNum)) {
+            mPhoneEt.setText(phoneNum);
+            mPhoneEt.clearFocus();
+            mPasswordEt.requestFocus();
+        }
     }
 
     @Override
