@@ -131,9 +131,11 @@ public class TourGuideApplication extends Application {
 
             switch (msg.what) {
             case SHOW_SERVER_CODE_TIPS:
-                if (msg.arg1 == CODE_TICKET_INVALID) {
-                    AppRuntime.logout();
-                }
+                // if (msg.arg1 == CODE_TICKET_INVALID) {
+                // AppRuntime.logout();
+                // // 跳到主页
+                //
+                // }
                 if (request == null || !request.canIgnoreResult()) {
                     Toasts.getInstance(getApplicationContext())
                             .show(AppRuntime.gXMLTables.getProperty(AppConfig.ROOT_CATEGORY, AppConfig.SERVER_CODE,

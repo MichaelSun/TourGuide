@@ -70,21 +70,27 @@ public class UserHelper {
                 try {
                     LoginRequest request = new LoginRequest(mobileNum, password);
                     LoginResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.userId > 0) {
-                        SettingManager.getInstance().setUserId(response.userId);
-                        SettingManager.getInstance().setUserPhoneNum(mobileNum);
-                        SettingManager.getInstance().setUserName(response.userName);
-                        SettingManager.getInstance().setUserGender(response.gender);
-                        SettingManager.getInstance().setUserType(response.userType);
-                        SettingManager.getInstance().setUserHeader(response.headUrl);
-                        if (response.userPassport != null) {
+                    if (response != null) {
+                        if (response.userId > 0 && response.userPassport != null
+                                && !TextUtils.isEmpty(response.userPassport.ticket)
+                                && !TextUtils.isEmpty(response.userPassport.userSecretKey)) {
+                            SettingManager.getInstance().setUserId(response.userId);
+                            SettingManager.getInstance().setUserPhoneNum(mobileNum);
+                            SettingManager.getInstance().setUserName(response.userName);
+                            SettingManager.getInstance().setUserGender(response.gender);
+                            SettingManager.getInstance().setUserType(response.userType);
+                            SettingManager.getInstance().setUserHeader(response.headUrl);
                             SettingManager.getInstance().setTicket(response.userPassport.ticket);
                             SettingManager.getInstance().setSecretKey(response.userPassport.userSecretKey);
-                        }
-                        SettingManager.getInstance().setGuideMode(0);
+                            SettingManager.getInstance().setGuideMode(0);
 
-                        if (mOnLoginFinishListener != null) {
-                            mOnLoginFinishListener.onLoginFinish(SUCCESS);
+                            if (mOnLoginFinishListener != null) {
+                                mOnLoginFinishListener.onLoginFinish(SUCCESS);
+                            }
+                        } else {
+                            if (mOnLoginFinishListener != null) {
+                                mOnLoginFinishListener.onLoginFinish(FAILED);
+                            }
                         }
                         return;
                     }
@@ -113,18 +119,25 @@ public class UserHelper {
                 try {
                     RegisterRequest request = new RegisterRequest(mobileNum, password, name, verifyCode, gender);
                     RegisterResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.userId > 0) {
-                        SettingManager.getInstance().setUserId(response.userId);
-                        SettingManager.getInstance().setTicket(response.ticket);
-                        SettingManager.getInstance().setSecretKey(response.userSecretKey);
-                        SettingManager.getInstance().setUserName(name);
-                        SettingManager.getInstance().setUserGender(gender);
-                        SettingManager.getInstance().setUserPhoneNum(mobileNum);
-                        SettingManager.getInstance().setUserType(Tourist.USER_TYPE_TOURIST);
-                        SettingManager.getInstance().setGuideMode(0);
+                    if (response != null) {
+                        if (response.userId > 0 && !TextUtils.isEmpty(response.ticket)
+                                && !TextUtils.isEmpty(response.userSecretKey)) {
+                            SettingManager.getInstance().setUserId(response.userId);
+                            SettingManager.getInstance().setTicket(response.ticket);
+                            SettingManager.getInstance().setSecretKey(response.userSecretKey);
+                            SettingManager.getInstance().setUserName(name);
+                            SettingManager.getInstance().setUserGender(gender);
+                            SettingManager.getInstance().setUserPhoneNum(mobileNum);
+                            SettingManager.getInstance().setUserType(Tourist.USER_TYPE_TOURIST);
+                            SettingManager.getInstance().setGuideMode(0);
 
-                        if (mOnRegisterFinishListener != null) {
-                            mOnRegisterFinishListener.onRegisterFinish(SUCCESS);
+                            if (mOnRegisterFinishListener != null) {
+                                mOnRegisterFinishListener.onRegisterFinish(SUCCESS);
+                            }
+                        } else {
+                            if (mOnRegisterFinishListener != null) {
+                                mOnRegisterFinishListener.onRegisterFinish(FAILED);
+                            }
                         }
                         return;
                     }

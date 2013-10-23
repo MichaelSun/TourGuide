@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resource>
-    <category name="error_tips" default="Network is not available. Please check your connection.">
+    <category name="error_tips" default="网络不可用，请检查您的网络">
            <!-- 业务层的错误提示 -->
 		   
            <!-- 网络层的错误提示 -->
+           <!-- 
            <property name="internet_error" value="0" comment="网络正常，但无法连接到服务器">Oops...There's some connection problem. Please try again later.</property>
-		   
+		    -->
            <!-- 服务器错误提示 -->
+           <!-- 
            <property name="code" value="1" comment="System service error 系统服务错误" ignore="false">System busy.Please try again later.</property> 
            <property name="code" value="2" comment="Invalid parameter 无效的参数" ignore="false" >Server connection failed(2).</property> 
            <property name="code" value="3" comment="permission denied 用户无权限" ignore="true" ></property>
-           <property name="code" value="4" comment="User acting too frequently 用户操作过于频繁" ignore="false">Too frequent operations. Please try again later.</property> <!--无提示-->
+           <property name="code" value="4" comment="User acting too frequently 用户操作过于频繁" ignore="false">Too frequent operations. Please try again later.</property>
            <property name="code" value="5" comment="illegal content 非法内容" ignore="true" ></property>
            <property name="code" value="6" comment="Invalid app Id 无效的app id" ignore="false" >Server connection failed(6).</property>
            <property name="code" value="7" comment="Invalid ticket 无效的ticket" ignore="false">Your accout is invalid. Please logout first and login again.</property> 
@@ -19,18 +21,23 @@
            <property name="code" value="10" comment="Unknown API method request 未知接口请求" ignore="false" >Server connection failed(10).</property>  
            <property name="code" value="11" comment="Unknown results format 未知输出格式" ignore="false" >Server connection failed(11).</property>  
            <property name="code" value="12" comment="RPC return error RPC返回异常" ignore="false" >Oops! System is busy. Please try again later.</property>
-           
-           <!-- 所有Login相关 -->
-           <property name="code" value="1001" comment="Login failed" ignore="false" >Login failed. Please try again later.</property> 
-           <property name="code" value="1002" comment="Login failed. This account does not exist." >Login failed. This account does not exist.</property>
-           <property name="code" value="1003" comment="Login failed. The password is not correct." >Login failed. The password is not correct.</property>
-           <property name="code" value="1004" comment="Captcha required." /> 
-           <property name="code" value="1005" comment="The phone number already exists." >The phone number already exists.</property>
-           <property name="code" value="1006" comment="Not a verified bounded phone number." >Not a verified bounded phone number.</property>
-           <property name="code" value="1007" comment="Invalid captcha." /> 
-           <property name="code" value="1008" comment="Looping batchRun API call." /> 
-           <property name="code" value="1011" comment="Nickname less then 6 or Nickname more then 20." >Nickname less then 6 or Nickname more then 20.</property>
-           <property name="code" value="1012" comment="User not exists or password is wrong." >Incorrect phone number or password. Please check and try again.</property>
+            -->
+            
+           <property name="internet_error" value="0" comment="网络正常，但无法连接到服务器">连接服务器超时，请您稍后重试</property>
+            
+           <property name="code" value="1" comment="System service error 系统服务错误" ignore="false">服务器繁忙，请您稍后重试</property> 
+           <property name="code" value="2" comment="Invalid parameter 无效的参数" ignore="false" >服务器错误(2)</property> 
+           <property name="code" value="3" comment="permission denied 用户无权限" ignore="true" ></property>
+           <property name="code" value="4" comment="User acting too frequently 用户操作过于频繁" ignore="false">操作过于频繁，请您稍后重试</property>
+           <property name="code" value="5" comment="illegal content 非法内容" ignore="true" ></property>
+           <property name="code" value="6" comment="Invalid app Id 无效的app id" ignore="false" >服务器错误(6)</property>
+           <property name="code" value="7" comment="Invalid ticket 无效的ticket" ignore="false">您的账号已过期，请重新登录</property> 
+           <property name="code" value="8" comment="Invalid signature 无效的签名" ignore="false" >服务器错误(8)</property>
+           <property name="code" value="9" comment="Invalid version 无效的版本" ignore="false" >服务器错误(9)</property>
+           <property name="code" value="10" comment="Unknown API method request 未知接口请求" ignore="false" >服务器错误(10)</property>  
+           <property name="code" value="11" comment="Unknown results format 未知输出格式" ignore="false" >服务器错误(11)</property>  
+           <property name="code" value="12" comment="RPC return error RPC返回异常" ignore="false" >服务器繁忙，请您稍后重试</property>
+            
     </category>
 
 </resource>

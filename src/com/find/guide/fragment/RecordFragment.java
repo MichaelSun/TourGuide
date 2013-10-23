@@ -3,6 +3,7 @@ package com.find.guide.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -36,6 +37,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class RecordFragment extends Fragment {
+
+    private static final int REQUEST_CODE_LOGIN = 1;
 
     private PullToRefreshListView mListView;
 
@@ -109,48 +112,27 @@ public class RecordFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            String title = "";
             if (mSettingManager.getUserId() <= 0) {
-                title = getString(R.string.profile_record) + "(" + getString(R.string.unlogin) + ")";
                 // 登录弹窗
                 showLoginDialog();
-            } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE
-                    && mSettingManager.getGuideMode() == 0) {
-                title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
-            } else {
-                title = getString(R.string.profile_record) + "(" + getString(R.string.tourist) + ")";
             }
-            ((BaseActivity) getActivity()).getActionBar().setTitle(title);
-
+            setTitle();
             refresh();
         }
     }
 
-    private void showLoginDialog() {
-        dismissDialog();
-        if (getActivity() != null) {
-            mAlertDialog = new AlertDialog.Builder(getActivity()).setMessage(R.string.login_dialog_message)
-                    .setPositiveButton(R.string.login_dialog_positive, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            startActivity(intent);
-                        }
-                    }).setNegativeButton(R.string.login_dialog_negative, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).create();
-            mAlertDialog.show();
+    private void setTitle() {
+        String title = null;
+        if (mSettingManager.getUserId() <= 0) {
+            title = getString(R.string.profile_record) + "(" + getString(R.string.unlogin) + ")";
+            // 登录弹窗
+            showLoginDialog();
+        } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE && mSettingManager.getGuideMode() == 0) {
+            title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
+        } else {
+            title = getString(R.string.profile_record) + "(" + getString(R.string.tourist) + ")";
         }
-    }
-
-    private void dismissDialog() {
-        if (mAlertDialog != null && mAlertDialog.isShowing()) {
-            mAlertDialog.dismiss();
-            mAlertDialog = null;
-        }
+        ((BaseActivity) getActivity()).getActionBar().setTitle(title);
     }
 
     private void refresh() {
@@ -188,6 +170,41 @@ public class RecordFragment extends Fragment {
         } else {
             mIsRefreshing = false;
             mListView.onRefreshComplete();
+        }
+    }
+
+    private void showLoginDialog() {
+        dismissDialog();
+        if (getActivity() != null) {
+            mAlertDialog = new AlertDialog.Builder(getActivity()).setMessage(R.string.login_dialog_message)
+                    .setPositiveButton(R.string.login_dialog_positive, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            startActivityForResult(intent, REQUEST_CODE_LOGIN);
+                        }
+                    }).setNegativeButton(R.string.login_dialog_negative, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).create();
+            mAlertDialog.show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_LOGIN && resultCode == Activity.RESULT_OK) {
+            setTitle();
+        }
+    }
+
+    private void dismissDialog() {
+        if (mAlertDialog != null && mAlertDialog.isShowing()) {
+            mAlertDialog.dismiss();
+            mAlertDialog = null;
         }
     }
 

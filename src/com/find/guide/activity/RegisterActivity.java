@@ -131,7 +131,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
                     if (result == UserHelper.SUCCESS) {
                         setResult(RESULT_OK);
                         finish();
-                    } else {
+                    } else if (result == UserHelper.FAILED) {
                         showError(getString(R.string.register_failed));
                     }
                 }

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
@@ -97,9 +96,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 public void run() {
                     TipsDialog.getInstance().dismiss();
                     if (result == UserHelper.SUCCESS) {
+                        setResult(RESULT_OK);
                         finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, R.string.login_failed, Toast.LENGTH_SHORT).show();
+                    } else if (result == UserHelper.FAILED) {
+                        TipsDialog.getInstance().show(LoginActivity.this, R.drawable.tips_fail, R.string.login_failed,
+                                true);
                     }
                 }
             });
@@ -115,6 +116,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_REGISTER && resultCode == RESULT_OK) {
+            setResult(RESULT_OK);
             finish();
         }
     }
