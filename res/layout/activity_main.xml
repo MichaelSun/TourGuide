@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/botton_region"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="58dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/main_page_bottom_bar"
         android:orientation="horizontal" >
@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/nearby_guide_img"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
@@ -55,8 +55,8 @@
 
             <ImageView
                 android:id="@+id/search_img"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
@@ -86,8 +86,8 @@
 
             <ImageView
                 android:id="@+id/profile_record_img"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"
@@ -117,8 +117,8 @@
 
             <ImageView
                 android:id="@+id/setting_img"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:duplicateParentState="true"
                 android:scaleType="center"

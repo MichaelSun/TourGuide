@@ -24,7 +24,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +50,6 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
     private TextView mBirthdayTv;
     private View mBirthdayView;
     private EditText mBeGuideYearEt;
-    private RadioGroup mGenderRadio;
     private EditText mGoodAtScenicEt;
     private View mCityView;
     private TextView mCityTv;
@@ -88,7 +86,6 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
         mBirthdayView = findViewById(R.id.guide_identify_birthday_layout);
         mBeGuideYearEt = (EditText) findViewById(R.id.guide_identify_be_guide_year_et);
         mGoodAtScenicEt = (EditText) findViewById(R.id.guide_identify_scenic_et);
-        mGenderRadio = (RadioGroup) findViewById(R.id.guide_identify_gender_radio);
         mCityView = findViewById(R.id.city_layout);
         mCityTv = (TextView) findViewById(R.id.city_tv);
         mSubmitCheckBtn = (Button) findViewById(R.id.guide_identify_submit_check_btn);
@@ -100,10 +97,9 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
     }
 
     private void initData() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(1990, 0, 1, 0, 0, 0);
-        mBirthdayTimestamp = calendar.getTimeInMillis();
+        mBirthdayTimestamp = getTimestamp(1990, 0, 1);
         mBirthdayTv.setText("1990/01/01");
+        mCityTv.setText(mCityItem.getCityName());
     }
 
     @Override
@@ -121,6 +117,7 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
             mDialog.dismiss();
             mDialog = null;
         }
+        TipsDialog.getInstance().dismiss();
     }
 
     @Override
@@ -244,13 +241,6 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
         String sBeGuideYear = mBeGuideYearEt.getText().toString();
         String guideCardId = mGuideCardIdEt.getText().toString();
         String goodAtScenic = mGoodAtScenicEt.getText().toString();
-
-        int gender = 0;
-        if (mGenderRadio.getCheckedRadioButtonId() == R.id.guide_identify_male_radio) {
-            gender = 1;
-        } else if (mGenderRadio.getCheckedRadioButtonId() == R.id.guide_identify_male_radio) {
-            gender = 2;
-        }
 
         if (TextUtils.isEmpty(mGuideCardPath) || TextUtils.isEmpty(sBeGuideYear) || TextUtils.isEmpty(guideCardId)
                 || TextUtils.isEmpty(goodAtScenic)) {

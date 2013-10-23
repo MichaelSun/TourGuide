@@ -147,5 +147,15 @@ public class SettingManager {
     public String getSecretKey() {
         return mSharedPreferences.getString(KEY_SECRET_KEY, "");
     }
+    
+    public static final String KEY_LAST_LOCATION = "key_last_location";
+    
+    public void setLastLocation(String location) {
+        mEditor.putString(KEY_LAST_LOCATION, location).commit();
+    }
+    
+    public String getLastLocation() {
+        return mSharedPreferences.getString(KEY_LAST_LOCATION, "");
+    }
 
 }

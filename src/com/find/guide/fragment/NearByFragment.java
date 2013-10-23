@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -146,8 +147,33 @@ public class NearByFragment extends Fragment {
         mMapController.setZoom(13);
         mMapView.setBuiltInZoomControls(true);
 
-        GeoPoint p = new GeoPoint((int) (39.933859 * 1E6), (int) (116.400191 * 1E6));
+        GeoPoint p = null;
+        String location = SettingManager.getInstance().getLastLocation();
+        if (!TextUtils.isEmpty(location)) {
+            double[] latlng = parseLocation(location);
+            if (latlng != null && latlng.length >= 2) {
+                p = new GeoPoint((int) (latlng[0] * 1E6), (int) (latlng[1] * 1E6));
+            }
+        }
+        if (p == null)
+            p = new GeoPoint((int) (39.933859 * 1E6), (int) (116.400191 * 1E6));
         mMapController.setCenter(p);
+    }
+
+    private double[] parseLocation(String location) {
+        double[] lnglat = new double[2];
+        if (!TextUtils.isEmpty(location)) {
+            String[] s = location.split(",");
+            if (s != null && s.length == 2) {
+                try {
+                    lnglat[0] = Double.parseDouble(s[0]);
+                    lnglat[1] = Double.parseDouble(s[1]);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return lnglat;
     }
 
     private void initLocation() {
@@ -220,22 +246,9 @@ public class NearByFragment extends Fragment {
             mMapView.refresh();
 
             AppRuntime.gLocation = locData.latitude + "," + locData.longitude;
+            SettingManager.getInstance().setLastLocation(AppRuntime.gLocation);
 
             if (mIsFirstLocation || mIsRequestLocation) {
-                // TODO
-                // if (location.getLatitude() <= 0.000001 &&
-                // location.getLongitude() < 0.000001) {
-                // mIsRequestLocation = false;
-                // mListView.onRefreshComplete();
-                // Toasts.getInstance(getActivity()).show(R.string.location_failed,
-                // Toast.LENGTH_SHORT);
-                // if (mShowMode == ShowMode.MAP) {
-                // mMapHintView.setVisibility(View.GONE);
-                // mMapHintPb.setVisibility(View.GONE);
-                // mMapHintTv.setVisibility(View.GONE);
-                // mMapHintTv.setText("");
-                // }
-                // } else {
                 // 移动地图到定位点
                 Log.d("LocationOverlay", "receive location, animate to it");
                 mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6)));
@@ -249,7 +262,6 @@ public class NearByFragment extends Fragment {
                         && SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
                     mUserHelper.changeLocation(sloc, null);
                 }
-                // }
             }
             mIsFirstLocation = false;
         }

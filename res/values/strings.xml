@@ -94,7 +94,7 @@
     <string name="be_guide_year">领证年份</string>
     <string name="be_guide_year_hint">请输入领证年份</string>
     <string name="good_at_scenic">擅长景区</string>
-    <string name="good_at_scenic_hint">请输入擅长的景区</string>
+    <string name="good_at_scenic_hint">擅长的景区，用空格分开</string>
     <string name="submit_check">提交审核</string>
     <string name="gender">性别</string>
     <string name="male">男</string>

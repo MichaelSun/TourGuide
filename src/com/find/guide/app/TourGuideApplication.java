@@ -52,6 +52,7 @@ public class TourGuideApplication extends Application {
             SettingManager.getInstance().init(this);
             UtilsConfig.init(this);
             AppRuntime.APP_DEVICE_INFO = new AppRuntime.AppDeviceInfo(this);
+            AppRuntime.gLocation = SettingManager.getInstance().getLastLocation();
 
             AppRuntime.gXMLTables = new XMLTables();
             AppRuntime.gXMLTables.loadXML(getResources().getXml(R.xml.error_tips));

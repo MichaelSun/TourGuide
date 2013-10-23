@@ -208,57 +208,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/bg_middle" >
-
-            <TextView
-                android:id="@+id/guide_identify_gender_label"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="性        别"
-                android:textColor="@color/default_text_color"
-                android:textSize="18sp" />
-
-            <RadioGroup
-                android:id="@+id/guide_identify_gender_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="18dp"
-                android:layout_toRightOf="@id/guide_identify_gender_label"
-                android:gravity="right|center_vertical"
-                android:orientation="horizontal" >
-
-                <RadioButton
-                    android:id="@+id/guide_identify_male_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/male"
-                    android:textColor="@color/default_text_color"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/guide_identify_female_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/female"
-                    android:textColor="@color/default_text_color"
-                    android:textSize="18sp" />
-            </RadioGroup>
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/city_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
