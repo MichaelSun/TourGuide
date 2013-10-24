@@ -21,6 +21,17 @@
            <property name="code" value="10" comment="Unknown API method request 未知接口请求" ignore="false" >Server connection failed(10).</property>  
            <property name="code" value="11" comment="Unknown results format 未知输出格式" ignore="false" >Server connection failed(11).</property>  
            <property name="code" value="12" comment="RPC return error RPC返回异常" ignore="false" >Oops! System is busy. Please try again later.</property>
+           
+           <property name="code" value="1001" comment="Login failed" ignore="false" >Login failed. Please try again later.</property> 
+           <property name="code" value="1002" comment="Login failed. This account does not exist." >Login failed. This account does not exist.</property>
+           <property name="code" value="1003" comment="Login failed. The password is not correct." >Login failed. The password is not correct.</property>
+           <property name="code" value="1004" comment="Captcha required." /> 
+           <property name="code" value="1005" comment="The phone number already exists." >The phone number already exists.</property>
+           <property name="code" value="1006" comment="Not a verified bounded phone number." >Not a verified bounded phone number.</property>
+           <property name="code" value="1007" comment="Invalid captcha." /> 
+           <property name="code" value="1008" comment="Looping batchRun API call." /> 
+           <property name="code" value="1011" comment="Nickname less then 6 or Nickname more then 20." >Nickname less then 6 or Nickname more then 20.</property>
+           <property name="code" value="1012" comment="User not exists or password is wrong." >Incorrect phone number or password. Please check and try again.</property>
             -->
             
            <property name="internet_error" value="0" comment="网络正常，但无法连接到服务器">连接服务器超时，请您稍后重试</property>
@@ -37,7 +48,9 @@
            <property name="code" value="10" comment="Unknown API method request 未知接口请求" ignore="false" >服务器错误(10)</property>  
            <property name="code" value="11" comment="Unknown results format 未知输出格式" ignore="false" >服务器错误(11)</property>  
            <property name="code" value="12" comment="RPC return error RPC返回异常" ignore="false" >服务器繁忙，请您稍后重试</property>
-            
+           
+           <property name="code" value="1001" comment="Login failed" ignore="false" >登录失败</property>
+           
     </category>
 
 </resource>

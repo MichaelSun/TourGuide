@@ -73,7 +73,7 @@ public class NearByFragment extends Fragment {
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private int ROWS = 51;
-    private double DIST = 100;
+    private double DIST = 50;
 
     private boolean mIsGettingNearBy = false;
 
