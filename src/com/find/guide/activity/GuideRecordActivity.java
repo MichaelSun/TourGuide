@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.find.guide.R;
 import com.find.guide.adapter.GuideRecordAdapter;
-import com.find.guide.adapter.GuideRecordAdapter.VisitMode;
 import com.find.guide.model.GuideEvent;
 import com.find.guide.model.helper.GuideHelper;
 import com.find.guide.model.helper.GuideHelper.OnGetHistoricalGuideEventsListener;
@@ -90,7 +89,7 @@ public class GuideRecordActivity extends BaseActivity {
             }
         });
 
-        mGuideRecordAdapter = new GuideRecordAdapter(this, VisitMode.OTHERS, mGuideEvents);
+        mGuideRecordAdapter = new GuideRecordAdapter(this, mGuideEvents);
         mListView.setAdapter(mGuideRecordAdapter);
     }
 

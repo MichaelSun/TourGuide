@@ -14,15 +14,18 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.find.guide.R;
 import com.find.guide.activity.BaseActivity;
+import com.find.guide.activity.GuideEventDetailActivity;
+import com.find.guide.activity.InviteEventDetailActivity;
 import com.find.guide.activity.LoginActivity;
 import com.find.guide.adapter.GuideRecordAdapter;
 import com.find.guide.adapter.InviteRecordAdapter;
-import com.find.guide.adapter.GuideRecordAdapter.VisitMode;
 import com.find.guide.app.TourGuideApplication;
 import com.find.guide.model.GuideEvent;
 import com.find.guide.model.InviteEvent;
@@ -39,6 +42,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 public class RecordFragment extends Fragment {
 
     private static final int REQUEST_CODE_LOGIN = 1;
+    private static final int REQUEST_CODE_INVITE_RECORD = 2;
+    private static final int REQUEST_CODE_GUIDE_RECORD = 3;
 
     private PullToRefreshListView mListView;
 
@@ -94,6 +99,27 @@ public class RecordFragment extends Fragment {
             }
         });
 
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int pos = position - mListView.getRefreshableView().getHeaderViewsCount();
+                if (mRecordAdapter != null && mRecordAdapter instanceof GuideRecordAdapter) {
+                    if (pos >= 0 && pos < mGuideEvents.size()) {
+                        Intent intent = new Intent(getActivity(), GuideEventDetailActivity.class);
+                        intent.putExtra(GuideEventDetailActivity.INTENT_EXTRA_GUIDE_EVENT_OBJ, mGuideEvents.get(pos));
+                        startActivityForResult(intent, REQUEST_CODE_GUIDE_RECORD);
+                    }
+                } else if (mRecordAdapter != null && mRecordAdapter instanceof InviteRecordAdapter) {
+                    if (pos >= 0 && pos < mInviteEvents.size()) {
+                        Intent intent = new Intent(getActivity(), InviteEventDetailActivity.class);
+                        intent.putExtra(InviteEventDetailActivity.INTENT_EXTRA_INVITE_EVENT_OBJ, mInviteEvents.get(pos));
+                        startActivityForResult(intent, REQUEST_CODE_INVITE_RECORD);
+                    }
+                }
+            }
+        });
+
         return view;
     }
 
@@ -105,7 +131,7 @@ public class RecordFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        refresh();
+        // refresh();
     }
 
     @Override
@@ -144,7 +170,7 @@ public class RecordFragment extends Fragment {
             }
         } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE && mSettingManager.getGuideMode() == 0) {
             if (mRecordAdapter == null || !(mRecordAdapter instanceof GuideRecordAdapter)) {
-                mRecordAdapter = new GuideRecordAdapter(getActivity(), VisitMode.ONESELF, mGuideEvents);
+                mRecordAdapter = new GuideRecordAdapter(getActivity(), mGuideEvents);
                 mGuideEvents.clear();
                 mInviteEvents.clear();
                 mListView.setAdapter(mRecordAdapter);
@@ -196,8 +222,13 @@ public class RecordFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_LOGIN && resultCode == Activity.RESULT_OK) {
-            setTitle();
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_LOGIN) {
+                setTitle();
+                refresh();
+            } else if (requestCode == REQUEST_CODE_GUIDE_RECORD || requestCode == REQUEST_CODE_INVITE_RECORD) {
+                refresh();
+            }
         }
     }
 

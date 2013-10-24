@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
@@ -70,14 +69,6 @@ public class InviteRecordAdapter extends BaseAdapter {
         holder.guideNameTv.setText(event.getGuideName());
         setEventStatus(holder, event);
 
-        holder.content.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                onClickRecord(event);
-            }
-        });
-
         return convertView;
     }
 
@@ -121,12 +112,6 @@ public class InviteRecordAdapter extends BaseAdapter {
             holder.eventStatusTv.setTextColor(res.getColor(R.color.record_normal));
             break;
         }
-    }
-
-    private void onClickRecord(InviteEvent inviteEvent) {
-        Intent intent = new Intent(mActivity, InviteEventDetailActivity.class);
-        intent.putExtra(InviteEventDetailActivity.INTENT_EXTRA_INVITE_EVENT_OBJ, inviteEvent);
-        mActivity.startActivity(intent);
     }
 
     private String getTimeStr(long time) {

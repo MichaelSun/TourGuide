@@ -209,6 +209,7 @@ public class GuideEventDetailActivity extends BaseActivity implements OnClickLis
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                setResult(RESULT_OK);
                                 finish();
                             }
                         }, 1000);
@@ -234,6 +235,7 @@ public class GuideEventDetailActivity extends BaseActivity implements OnClickLis
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                setResult(RESULT_OK);
                                 finish();
                             }
                         }, 1000);

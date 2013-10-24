@@ -184,7 +184,7 @@ public class BroadcastActivity extends BaseActivity implements OnClickListener {
     };
 
     private void broadcastSuccess() {
-        TipsDialog.getInstance().show(BroadcastActivity.this, R.drawable.tips_fail, R.string.broadcast_success, true);
+        TipsDialog.getInstance().show(BroadcastActivity.this, R.drawable.tips_saved, R.string.broadcast_success, true);
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -46,47 +46,51 @@ public class GuideView extends LinearLayout {
     public void setGuide(TourGuide guide) {
         if (guide != null) {
             mNameTv.setText(guide.getUserName());
-            setStar(guide.getEvaluateScore());
+            int star = 0;
+            if (guide.getEvaluateCount() > 0) {
+                star = guide.getEvaluateScore() / guide.getEvaluateCount();
+            }
+            setStar(star);
         }
     }
 
-    private void setStar(int score) {
-        if (score <= 0) {
-            mStar1.setBackgroundResource(R.drawable.star_silver);
-            mStar2.setBackgroundResource(R.drawable.star_silver);
-            mStar3.setBackgroundResource(R.drawable.star_silver);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 1) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_silver);
-            mStar3.setBackgroundResource(R.drawable.star_silver);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 2) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_silver);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 3) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_gold);
-            mStar4.setBackgroundResource(R.drawable.star_silver);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
-        } else if (score == 4) {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_gold);
-            mStar4.setBackgroundResource(R.drawable.star_gold);
-            mStar5.setBackgroundResource(R.drawable.star_silver);
+    private void setStar(int star) {
+        if (star <= 0) {
+            mStar1.setBackgroundResource(R.drawable.star_big_silver);
+            mStar2.setBackgroundResource(R.drawable.star_big_silver);
+            mStar3.setBackgroundResource(R.drawable.star_big_silver);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (star == 1) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_silver);
+            mStar3.setBackgroundResource(R.drawable.star_big_silver);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (star == 2) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_silver);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (star == 3) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_gold);
+            mStar4.setBackgroundResource(R.drawable.star_big_silver);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
+        } else if (star == 4) {
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_gold);
+            mStar4.setBackgroundResource(R.drawable.star_big_gold);
+            mStar5.setBackgroundResource(R.drawable.star_big_silver);
         } else {
-            mStar1.setBackgroundResource(R.drawable.star_gold);
-            mStar2.setBackgroundResource(R.drawable.star_gold);
-            mStar3.setBackgroundResource(R.drawable.star_gold);
-            mStar4.setBackgroundResource(R.drawable.star_gold);
-            mStar5.setBackgroundResource(R.drawable.star_gold);
+            mStar1.setBackgroundResource(R.drawable.star_big_gold);
+            mStar2.setBackgroundResource(R.drawable.star_big_gold);
+            mStar3.setBackgroundResource(R.drawable.star_big_gold);
+            mStar4.setBackgroundResource(R.drawable.star_big_gold);
+            mStar5.setBackgroundResource(R.drawable.star_big_gold);
         }
     }
 

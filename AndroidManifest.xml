@@ -75,7 +75,7 @@
         </activity>
         <activity
             android:name="com.find.guide.activity.GuideListActivity"
-            android:label="@string/nearby_guide"
+            android:label="@string/tourguide"
             android:screenOrientation="portrait" >
         </activity>
         <activity

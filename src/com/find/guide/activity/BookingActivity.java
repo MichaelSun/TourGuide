@@ -124,11 +124,11 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
             } else {
                 mEvaluateNumTv.setText("暂无评价");
             }
-            float rating = 0f;
+            int star = 0;
             if (mTourGuide.getEvaluateCount() > 0) {
-                rating = mTourGuide.getEvaluateScore() / mTourGuide.getEvaluateCount();
+                star = mTourGuide.getEvaluateScore() / mTourGuide.getEvaluateCount();
             }
-            setStar(rating);
+            setStar(star);
 
             if (mTourGuide.getGender() == 1) {
                 mGuideGenderIv.setImageResource(R.drawable.icon_male);
@@ -155,32 +155,32 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
         mEndTimeStamp = System.currentTimeMillis() + 1;
     }
 
-    private void setStar(float score) {
-        if (score < 0.2) {
+    private void setStar(int star) {
+        if (star <= 0) {
             mStar1.setBackgroundResource(R.drawable.star_big_silver);
             mStar2.setBackgroundResource(R.drawable.star_big_silver);
             mStar3.setBackgroundResource(R.drawable.star_big_silver);
             mStar4.setBackgroundResource(R.drawable.star_big_silver);
             mStar5.setBackgroundResource(R.drawable.star_big_silver);
-        } else if (score < 0.4) {
+        } else if (star == 1) {
             mStar1.setBackgroundResource(R.drawable.star_big_gold);
             mStar2.setBackgroundResource(R.drawable.star_big_silver);
             mStar3.setBackgroundResource(R.drawable.star_big_silver);
             mStar4.setBackgroundResource(R.drawable.star_big_silver);
             mStar5.setBackgroundResource(R.drawable.star_big_silver);
-        } else if (score < 0.6) {
+        } else if (star == 2) {
             mStar1.setBackgroundResource(R.drawable.star_big_gold);
             mStar2.setBackgroundResource(R.drawable.star_big_gold);
             mStar3.setBackgroundResource(R.drawable.star_big_silver);
             mStar4.setBackgroundResource(R.drawable.star_big_silver);
             mStar5.setBackgroundResource(R.drawable.star_big_silver);
-        } else if (score < 0.8) {
+        } else if (star == 3) {
             mStar1.setBackgroundResource(R.drawable.star_big_gold);
             mStar2.setBackgroundResource(R.drawable.star_big_gold);
             mStar3.setBackgroundResource(R.drawable.star_big_gold);
             mStar4.setBackgroundResource(R.drawable.star_big_silver);
             mStar5.setBackgroundResource(R.drawable.star_big_silver);
-        } else if (score < 0.95) {
+        } else if (star == 4) {
             mStar1.setBackgroundResource(R.drawable.star_big_gold);
             mStar2.setBackgroundResource(R.drawable.star_big_gold);
             mStar3.setBackgroundResource(R.drawable.star_big_gold);

@@ -90,9 +90,9 @@ public class GuideAdapter extends BaseAdapter {
             holder.count.setText("暂无评价");
         }
 
-        float star = 0f;
+        int star = 0;
         if (guide.getEvaluateCount() > 0) {
-            star = guide.getEvaluateScore() * 1.0f / guide.getEvaluateCount();
+            star = guide.getEvaluateScore() / guide.getEvaluateCount();
         }
         setStar(holder, star);
 
@@ -138,32 +138,32 @@ public class GuideAdapter extends BaseAdapter {
         View content;
     }
 
-    private void setStar(ViewHolder holder, float star) {
-        if (star >= 0.99) {
+    private void setStar(ViewHolder holder, int star) {
+        if (star >= 5) {
             holder.star1.setBackgroundResource(R.drawable.star_big_gold);
             holder.star2.setBackgroundResource(R.drawable.star_big_gold);
             holder.star3.setBackgroundResource(R.drawable.star_big_gold);
             holder.star4.setBackgroundResource(R.drawable.star_big_gold);
             holder.star5.setBackgroundResource(R.drawable.star_big_gold);
-        } else if (star >= 0.8) {
+        } else if (star == 4) {
             holder.star1.setBackgroundResource(R.drawable.star_big_gold);
             holder.star2.setBackgroundResource(R.drawable.star_big_gold);
             holder.star3.setBackgroundResource(R.drawable.star_big_gold);
             holder.star4.setBackgroundResource(R.drawable.star_big_gold);
             holder.star5.setBackgroundResource(R.drawable.star_big_silver);
-        } else if (star >= 0.6) {
+        } else if (star == 3) {
             holder.star1.setBackgroundResource(R.drawable.star_big_gold);
             holder.star2.setBackgroundResource(R.drawable.star_big_gold);
             holder.star3.setBackgroundResource(R.drawable.star_big_gold);
             holder.star4.setBackgroundResource(R.drawable.star_big_silver);
             holder.star5.setBackgroundResource(R.drawable.star_big_silver);
-        } else if (star >= 0.4) {
+        } else if (star == 2) {
             holder.star1.setBackgroundResource(R.drawable.star_big_gold);
             holder.star2.setBackgroundResource(R.drawable.star_big_gold);
             holder.star3.setBackgroundResource(R.drawable.star_big_silver);
             holder.star4.setBackgroundResource(R.drawable.star_big_silver);
             holder.star5.setBackgroundResource(R.drawable.star_big_silver);
-        } else if (star >= 0.2) {
+        } else if (star == 1) {
             holder.star1.setBackgroundResource(R.drawable.star_big_gold);
             holder.star2.setBackgroundResource(R.drawable.star_big_silver);
             holder.star3.setBackgroundResource(R.drawable.star_big_silver);

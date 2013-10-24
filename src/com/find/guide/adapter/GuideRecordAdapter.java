@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.activity.GuideEventDetailActivity;
 import com.find.guide.model.GuideEvent;
 
 public class GuideRecordAdapter extends BaseAdapter {
@@ -22,15 +20,12 @@ public class GuideRecordAdapter extends BaseAdapter {
 
     private Activity mActivity;
 
-    private VisitMode mVisiMode;
-
     public static enum VisitMode {
         ONESELF, OTHERS
     }
 
-    public GuideRecordAdapter(Activity activity, VisitMode mode, List<GuideEvent> guideEvents) {
+    public GuideRecordAdapter(Activity activity, List<GuideEvent> guideEvents) {
         mGuideEvents = guideEvents;
-        mVisiMode = mode;
         mActivity = activity;
     }
 
@@ -76,16 +71,6 @@ public class GuideRecordAdapter extends BaseAdapter {
         holder.NameTv.setText(event.getUserName());
         setEventStatus(holder, event);
 
-        if (mVisiMode == VisitMode.ONESELF) {
-            holder.content.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickRecord(event);
-                }
-            });
-        } else {
-            holder.content.setOnClickListener(null);
-        }
         return convertView;
     }
 
@@ -132,12 +117,6 @@ public class GuideRecordAdapter extends BaseAdapter {
             holder.eventStatusTv.setText("");
             break;
         }
-    }
-
-    private void onClickRecord(GuideEvent guideEvent) {
-        Intent intent = new Intent(mActivity, GuideEventDetailActivity.class);
-        intent.putExtra(GuideEventDetailActivity.INTENT_EXTRA_GUIDE_EVENT_OBJ, guideEvent);
-        mActivity.startActivity(intent);
     }
 
     private String getTimeStr(long time) {

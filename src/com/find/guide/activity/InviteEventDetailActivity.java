@@ -222,6 +222,7 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                setResult(RESULT_OK);
                                 finish();
                             }
                         }, 1000);
@@ -255,6 +256,7 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                setResult(RESULT_OK);
                                 finish();
                             }
                         }, 1000);
