@@ -159,6 +159,7 @@ public class WebImageView extends ImageView implements WebImageViewStatusInterfa
                             }
                             setImageBitmap((Bitmap) msg.obj, true);
                         }
+                        notifyImageLoadStatus((Bitmap) msg.obj, url, WebImageView.this);
                     }
                     break;
                 case LOCAL_FILE_IMAGE_LOAD: //TODO

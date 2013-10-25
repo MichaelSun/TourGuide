@@ -28,6 +28,7 @@ import com.plugin.internet.core.RequestBase;
 
 public class TourGuideApplication extends Application {
 
+    public static final String ACTION_KICKOUT = "com.find.guide.kickout";
     public static final int CODE_TICKET_INVALID = 7;
 
     private static final int SHOW_SERVER_CODE_TIPS = 1;
@@ -132,15 +133,27 @@ public class TourGuideApplication extends Application {
 
             switch (msg.what) {
             case SHOW_SERVER_CODE_TIPS:
-                // if (msg.arg1 == CODE_TICKET_INVALID) {
-                // AppRuntime.logout();
-                // // 跳到主页
-                //
-                // }
                 if (request == null || !request.canIgnoreResult()) {
                     Toasts.getInstance(getApplicationContext())
                             .show(AppRuntime.gXMLTables.getProperty(AppConfig.ROOT_CATEGORY, AppConfig.SERVER_CODE,
                                     msg.arg1), Toast.LENGTH_SHORT);
+                }
+
+                if (msg.arg1 == CODE_TICKET_INVALID) {
+                    if (SettingManager.getInstance().getUserId() <= 0 || AppRuntime.gInLogoutProcess.get()) {
+                        return;
+                    }
+
+                    // invalid ticket, should logout
+                    SettingManager.getInstance().setHasKickout(true);
+                    if (SettingManager.getInstance().getHasKickout()
+                            && !AppRuntime.isBackground(getApplicationContext())) {
+                        // 如果应用程序在前台的话，给MainActivity发送退出事件
+
+                        // 先设置kickout=false的目的，是为了BaseActivity中不会重复的发送kickout
+                        SettingManager.getInstance().setHasKickout(false);
+                        AppRuntime.sendKickoutIntent(getApplicationContext());
+                    }
                 }
                 break;
             case SHOW_LOCAL_NETWORK_ERROR:

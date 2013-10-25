@@ -336,6 +336,16 @@ public class UserHelper {
                     SearchGuideResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
                         List<TourGuide> guides = response.guides;
+                        // 去掉自己
+                        if (guides != null && SettingManager.getInstance().getUserId() > 0) {
+                            for (int i = 0; i < guides.size(); i++) {
+                                TourGuide guide = guides.get(i);
+                                if (guide.getUserId() == SettingManager.getInstance().getUserId()) {
+                                    guides.remove(i);
+                                    break;
+                                }
+                            }
+                        }
                         if (mOnSearchGuideListener != null) {
                             if (start > 0) {
                                 mOnSearchGuideListener.onSearchMoreGuide(SUCCESS, guides);

@@ -47,7 +47,7 @@
            <property name="code" value="9" comment="Invalid version 无效的版本" ignore="false" >服务器错误(9)</property>
            <property name="code" value="10" comment="Unknown API method request 未知接口请求" ignore="false" >服务器错误(10)</property>  
            <property name="code" value="11" comment="Unknown results format 未知输出格式" ignore="false" >服务器错误(11)</property>  
-           <property name="code" value="12" comment="RPC return error RPC返回异常" ignore="false" >服务器繁忙，请您稍后重试</property>
+           <property name="code" value="12" comment="RPC return error RPC返回异常" ignore="false" >服务器错误(12)</property>
            
            <property name="code" value="1001" comment="Login failed" ignore="false" >登录失败</property>
            

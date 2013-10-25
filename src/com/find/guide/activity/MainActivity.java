@@ -3,9 +3,11 @@ package com.find.guide.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,10 +15,12 @@ import android.widget.Toast;
 
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
+import com.find.guide.config.AppRuntime;
 import com.find.guide.fragment.NearByFragment;
 import com.find.guide.fragment.RecordFragment;
 import com.find.guide.fragment.SearchFragment;
 import com.find.guide.fragment.SettingFragment;
+import com.find.guide.view.TipsDialog;
 import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends BaseActivity {
@@ -227,6 +231,25 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent != null && !TextUtils.isEmpty(intent.getAction())) {
+            if (intent.getAction().equals(TourGuideApplication.ACTION_KICKOUT)) {
+                if (AppRuntime.gInLogoutProcess.get()) {
+                    return;
+                }
+                AppRuntime.gInLogoutProcess.set(true);
+                AppRuntime.logout();
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                AppRuntime.gInLogoutProcess.set(false);
+
+            }
+        }
     }
 
     public void onDestory() {

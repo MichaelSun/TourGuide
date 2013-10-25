@@ -41,6 +41,7 @@ public class SettingManager {
         mEditor.remove(KEY_USER_TYPE);
         mEditor.remove(KEY_TICKET);
         mEditor.remove(KEY_SECRET_KEY);
+        mEditor.remove(KEY_HAS_KICKOUT);
         mEditor.commit();
 
     }
@@ -156,6 +157,17 @@ public class SettingManager {
     
     public String getLastLocation() {
         return mSharedPreferences.getString(KEY_LAST_LOCATION, "");
+    }
+    
+    private static final String KEY_HAS_KICKOUT = "has_kickout";
+
+    public void setHasKickout(boolean kickout) {
+        mEditor.putBoolean(KEY_HAS_KICKOUT, kickout);
+        mEditor.commit();
+    }
+
+    public boolean getHasKickout() {
+        return mSharedPreferences.getBoolean(KEY_HAS_KICKOUT, false);
     }
 
 }

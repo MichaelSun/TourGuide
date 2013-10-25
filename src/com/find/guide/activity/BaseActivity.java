@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.find.guide.R;
+import com.find.guide.config.AppRuntime;
+import com.find.guide.setting.SettingManager;
 import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends Activity {
@@ -52,6 +54,15 @@ public class BaseActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (SettingManager.getInstance().getHasKickout()) {
+            AppRuntime.sendKickoutIntent(getApplicationContext());
+        }
+        SettingManager.getInstance().setHasKickout(false);
     }
 
     @Override
