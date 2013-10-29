@@ -1,13 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/menu_show_map"
+        android:id="@+id/menu_broadcast"
+        android:showAsAction="always"
+        android:title="@string/menu_broadcast"/>
+    <item
+        android:id="@+id/menu_refresh"
+        android:showAsAction="always"
+        android:title="@string/menu_refresh"/>
+    <item
+        android:id="@+id/menu_show_mode"
+        android:icon="@drawable/icon_action_map"
         android:showAsAction="always"
         android:title="@string/menu_show_map"/>
-    
-    <item
-        android:id="@+id/menu_show_list"
-        android:showAsAction="always"
-        android:title="@string/menu_show_list"/>
 
 </menu>

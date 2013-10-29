@@ -8,9 +8,9 @@ import java.util.Set;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import com.find.guide.config.AppConfig;
-
 import android.text.TextUtils;
+
+import com.find.guide.config.AppConfig;
 
 /**
  * @author Guoqing Sun Oct 13, 20125:24:06 PM

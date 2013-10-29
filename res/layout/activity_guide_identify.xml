@@ -14,25 +14,29 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="20dp" >
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_top"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" >
 
             <TextView
                 android:id="@+id/guide_identify_guide_card_label"
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
                 android:text="@string/guide_id_card"
-                android:textColor="#232424"
-                android:textSize="17sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/guide_identify_guide_card_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/guide_identify_guide_card_label"
-                 />
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/default_header" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -40,17 +44,19 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" >
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle" >
 
             <TextView
                 android:id="@+id/guide_identify_guide_card_id_label"
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
                 android:text="@string/guide_id_card_no"
-                android:textColor="#232424"
-                android:textSize="17sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/guide_card_id_et"
@@ -59,15 +65,19 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/guide_identify_guide_card_id_label"
-                android:background="@drawable/bg_input"
-                android:gravity="center_vertical"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/guide_card_no_hint"
+                android:inputType="number"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:singleLine="true"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/default_hint_color"
                 android:textCursorDrawable="@null"
-                android:textSize="19sp" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -75,87 +85,19 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" >
-
-            <TextView
-                android:id="@+id/guide_identify_name_label"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/name"
-                android:textColor="#232424"
-                android:textSize="17sp" />
-
-            <EditText
-                android:id="@+id/guide_identify_name_et"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/guide_identify_name_label"
-                android:background="@drawable/bg_input"
-                android:gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:singleLine="true"
-                android:textColor="#232424"
-                android:textCursorDrawable="@null"
-                android:textSize="19sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" >
-
-            <TextView
-                android:id="@+id/guide_identify_birthday_label"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/birthday"
-                android:textColor="#232424"
-                android:textSize="17sp" />
-
-            <EditText
-                android:id="@+id/guide_identify_birthday_et"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/guide_identify_birthday_label"
-                android:background="@drawable/bg_input"
-                android:gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:singleLine="true"
-                android:textColor="#232424"
-                android:textCursorDrawable="@null"
-                android:textSize="19sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" >
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle" >
 
             <TextView
                 android:id="@+id/guide_identify_be_guide_year_label"
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
                 android:text="@string/be_guide_year"
-                android:textColor="#232424"
-                android:textSize="17sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/guide_identify_be_guide_year_et"
@@ -163,73 +105,163 @@
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/guide_identify_be_guide_year_label"
-                android:background="@drawable/bg_input"
-                android:gravity="center_vertical"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/be_guide_year_hint"
+                android:inputType="number"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:singleLine="true"
-                android:textColor="#232424"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/default_hint_color"
                 android:textCursorDrawable="@null"
-                android:textSize="19sp" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" >
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle"
+            android:minHeight="50dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
 
             <TextView
-                android:id="@+id/guide_identify_gender_label"
-                android:layout_width="70dp"
+                android:id="@+id/guide_identify_scenic_label"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="@string/gender"
-                android:textColor="#232424"
-                android:textSize="17sp" />
+                android:layout_marginLeft="10dp"
+                android:text="@string/good_at_scenic"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
-            <RadioGroup
-                android:id="@+id/guide_identify_gender_radio"
+            <EditText
+                android:id="@+id/guide_identify_scenic_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/guide_identify_scenic_label"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/good_at_scenic_hint"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/default_hint_color"
+                android:textCursorDrawable="@null"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/guide_identify_birthday_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle" >
+
+            <TextView
+                android:id="@+id/guide_identify_birthday_label"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/birthday"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/guide_identify_birthday_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/guide_identify_gender_label"
-                android:orientation="horizontal" >
+                android:layout_marginRight="15dp"
+                android:src="@drawable/icon_arr" />
 
-                <RadioButton
-                    android:id="@+id/guide_identify_male_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/male" />
+            <TextView
+                android:id="@+id/guide_identify_birthday_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/guide_identify_birthday_arrow"
+                android:layout_toRightOf="@id/guide_identify_birthday_label"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:text="1990/01/01"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
-                <RadioButton
-                    android:id="@+id/guide_identify_female_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/female" />
-            </RadioGroup>
+        <RelativeLayout
+            android:id="@+id/city_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_bottom" >
+
+            <TextView
+                android:id="@+id/city_label"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="城        市"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/city_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/city_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/city_arrow"
+                android:layout_toRightOf="@id/city_label"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:text="@string/city_any"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <Button
             android:id="@+id/guide_identify_submit_check_btn"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:layout_marginLeft="90dp"
-            android:layout_marginRight="90dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/btn_login_green"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_orange"
             android:gravity="center"
             android:text="@string/submit_check"
             android:textColor="#ffffff"
-            android:textSize="17sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </ScrollView>

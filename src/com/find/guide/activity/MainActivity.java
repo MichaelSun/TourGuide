@@ -3,15 +3,25 @@ package com.find.guide.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
+import com.find.guide.config.AppRuntime;
 import com.find.guide.fragment.NearByFragment;
-import com.find.guide.fragment.ProfileRecordFragment;
+import com.find.guide.fragment.RecordFragment;
 import com.find.guide.fragment.SearchFragment;
 import com.find.guide.fragment.SettingFragment;
+import com.find.guide.view.TipsDialog;
+import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends BaseActivity {
 
@@ -34,6 +44,10 @@ public class MainActivity extends BaseActivity {
     private View mSearchBtn;
     private View mSettingBtn;
 
+    private boolean mPressedBackKey = false;
+
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +55,11 @@ public class MainActivity extends BaseActivity {
 
         initData(savedInstanceState);
         initUI();
-        
+
         mActionbar.setDisplayHomeAsUpEnabled(false);
+        mActionbar.setDisplayShowHomeEnabled(false);
+
+        UmengUpdateAgent.update(this);
     }
 
     @Override
@@ -93,7 +110,7 @@ public class MainActivity extends BaseActivity {
 
         mProfileRecordFragment = mFragmentManager.findFragmentByTag(TAG_PROFILE_RECORD_FRAGMENT);
         if (mProfileRecordFragment == null) {
-            mProfileRecordFragment = new ProfileRecordFragment();
+            mProfileRecordFragment = new RecordFragment();
 
             FragmentTransaction trans = mFragmentManager.beginTransaction();
             trans.add(R.id.fragment_container, mProfileRecordFragment, TAG_PROFILE_RECORD_FRAGMENT);
@@ -141,7 +158,7 @@ public class MainActivity extends BaseActivity {
 
         case R.id.profile_record:
             mCurrSelectedTabId = R.id.profile_record;
-            mActionbar.setTitle(R.string.profile_record);
+            // mActionbar.setTitle(R.string.profile_record);
 
             mNearbyGuideBtn.setSelected(false);
             mProfileRecordBtn.setSelected(true);
@@ -188,6 +205,53 @@ public class MainActivity extends BaseActivity {
         tans.commitAllowingStateLoss();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!mPressedBackKey) {
+                mPressedBackKey = true;
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPressedBackKey = false;
+                    }
+                }, 2000);
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent != null && !TextUtils.isEmpty(intent.getAction())) {
+            if (intent.getAction().equals(TourGuideApplication.ACTION_KICKOUT)) {
+                if (AppRuntime.gInLogoutProcess.get()) {
+                    return;
+                }
+                AppRuntime.gInLogoutProcess.set(true);
+                AppRuntime.logout();
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                AppRuntime.gInLogoutProcess.set(false);
+
+            }
+        }
+    }
+
     public void onDestory() {
         TourGuideApplication app = (TourGuideApplication) getApplication();
         if (app.mBMapManager != null) {
@@ -196,7 +260,7 @@ public class MainActivity extends BaseActivity {
         }
 
         super.onDestroy();
-        
+
         System.exit(0);
     }
 

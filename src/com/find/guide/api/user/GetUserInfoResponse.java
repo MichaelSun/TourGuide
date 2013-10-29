@@ -20,10 +20,11 @@ public class GetUserInfoResponse extends ResponseBase {
             @JsonProperty("goodAtScenic") String goodAtScenic, @JsonProperty("birthday") long birthday,
             @JsonProperty("beGuideYear") int beGuideYear, @JsonProperty("guideCardUrl") String guideCardUrl,
             @JsonProperty("guideCardId") String guideCardId, @JsonProperty("location") String location,
-            @JsonProperty("city") int city) {
+            @JsonProperty("city") int city, @JsonProperty("evaluateScore") int evaluateScore,
+            @JsonProperty("evaluateCount") int evaluateCount) {
         if (userType == TYPE_TOURGUIDE) {
             tourist = new TourGuide(userId, userName, mobile, gender, userType, headUrl, goodAtScenic, birthday,
-                    beGuideYear, guideCardUrl, guideCardId, location, city);
+                    beGuideYear, guideCardUrl, guideCardId, location, city, evaluateScore, evaluateCount);
         } else {
             tourist = new Tourist(userId, userName, mobile, gender, userType, headUrl);
         }

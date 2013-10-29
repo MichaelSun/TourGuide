@@ -84,11 +84,6 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		mHeaderProgress = (ProgressBar) mInnerLayout.findViewById(R.id.pull_to_refresh_progress);
 		mSubHeaderText = (TextView) mInnerLayout.findViewById(R.id.pull_to_refresh_sub_text);
 		mHeaderImage = (ImageView) mInnerLayout.findViewById(R.id.pull_to_refresh_image);
-		
-		//Add by he.cao
-		mHeaderText.setVisibility(View.GONE);
-		mHeaderProgress.setVisibility(View.GONE);
-		mSubHeaderText.setVisibility(View.GONE);
 
 		FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mInnerLayout.getLayoutParams();
 
@@ -176,8 +171,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 
 		// If we don't have a user defined drawable, load the default
 		if (null == imageDrawable) {
-//			imageDrawable = context.getResources().getDrawable(getDefaultDrawableResId());
-			imageDrawable = getDefaultDrawable();
+			imageDrawable = context.getResources().getDrawable(getDefaultDrawableResId());
 		}
 
 		// Set Drawable, and save width/height
@@ -336,9 +330,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 	 * Callbacks for derivative Layouts
 	 */
 
-//	protected abstract int getDefaultDrawableResId();
-	protected abstract Drawable getDefaultDrawable();
-	
+	protected abstract int getDefaultDrawableResId();
 
 	protected abstract void onLoadingDrawableSet(Drawable imageDrawable);
 

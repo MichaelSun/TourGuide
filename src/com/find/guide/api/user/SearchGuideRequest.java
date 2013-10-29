@@ -2,6 +2,7 @@ package com.find.guide.api.user;
 
 import com.find.guide.api.base.PMRequestBase;
 import com.plugin.internet.core.annotations.NoNeedTicket;
+import com.plugin.internet.core.annotations.OptionalParam;
 import com.plugin.internet.core.annotations.RequiredParam;
 import com.plugin.internet.core.annotations.RestMethodUrl;
 
@@ -15,7 +16,7 @@ public class SearchGuideRequest extends PMRequestBase<SearchGuideResponse> {
     @RequiredParam("gender")
     private int gender;
 
-    @RequiredParam("scenic")
+    @OptionalParam("scenic")
     private String scenic;
 
     @RequiredParam("start")
@@ -25,7 +26,6 @@ public class SearchGuideRequest extends PMRequestBase<SearchGuideResponse> {
     private int rows;
 
     public SearchGuideRequest(int city, int gender, String scenic, int start, int rows) {
-        super();
         this.city = city;
         this.gender = gender;
         this.scenic = scenic;

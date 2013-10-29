@@ -34,8 +34,6 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.handmark.pulltorefresh.library.internal.CharmLoadingDrawable;
-import com.handmark.pulltorefresh.library.internal.CharmLoadingLayout;
 import com.handmark.pulltorefresh.library.internal.FlipLoadingLayout;
 import com.handmark.pulltorefresh.library.internal.LoadingLayout;
 import com.handmark.pulltorefresh.library.internal.RotateLoadingLayout;
@@ -48,7 +46,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	// Constants
 	// ===========================================================
 
-	static final boolean DEBUG = false;
+	static final boolean DEBUG = true;
 
 	static final boolean USE_HW_LAYERS = false;
 
@@ -1324,14 +1322,13 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		}
 
 		LoadingLayout createLoadingLayout(Context context, Mode mode, Orientation scrollDirection, TypedArray attrs) {
-//			switch (this) {
-//				case ROTATE:
-//				default:
-//					return new RotateLoadingLayout(context, mode, scrollDirection, attrs);
-//				case FLIP:
-//					return new FlipLoadingLayout(context, mode, scrollDirection, attrs);
-//			}
-			return new CharmLoadingLayout(context, mode, scrollDirection, attrs);
+			switch (this) {
+				case ROTATE:
+				default:
+					return new RotateLoadingLayout(context, mode, scrollDirection, attrs);
+				case FLIP:
+					return new FlipLoadingLayout(context, mode, scrollDirection, attrs);
+			}
 		}
 	}
 

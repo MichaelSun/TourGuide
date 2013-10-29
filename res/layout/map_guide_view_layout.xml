@@ -3,53 +3,30 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
+    <com.plugin.common.view.WebImageView
+        android:id="@+id/guide_header"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_header" />
+
     <TextView
         android:id="@+id/guide_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="张三" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:includeFontPadding="false"
+        android:text="test"
+        android:textColor="@color/default_text_color"
+        android:textSize="18sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal" >
-
-        <View
-            android:id="@+id/guide_start1"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:background="@drawable/star_gold" />
-
-        <View
-            android:id="@+id/guide_start2"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginLeft="3dp"
-            android:background="@drawable/star_gold" />
-
-        <View
-            android:id="@+id/guide_start3"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginLeft="3dp"
-            android:background="@drawable/star_gold" />
-
-        <View
-            android:id="@+id/guide_start4"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginLeft="3dp"
-            android:background="@drawable/star_gold" />
-
-        <View
-            android:id="@+id/guide_start5"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginLeft="3dp"
-            android:background="@drawable/star_gold" />
-    </LinearLayout>
+    <View
+        android:id="@+id/arrow"
+        android:layout_width="9dp"
+        android:layout_height="14dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/icon_arr" />
 
 </merge>

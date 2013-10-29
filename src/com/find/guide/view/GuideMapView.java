@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.baidu.mapapi.map.ItemizedOverlay;
@@ -16,11 +13,11 @@ import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.model.TourGuide;
 
-public class GuideMapView extends MapView {
-
-    private GuideOverlay mOverlay = null;
+public class GuideMapView extends MapView implements GuideView.OnUpdateGuideViewListener {
 
     private List<TourGuide> mGuides = null;
+
+    private GuideOverlay mGuideOverlay = null;
 
     private OnGuideClickListener mOnGuideClickListener;
 
@@ -30,55 +27,30 @@ public class GuideMapView extends MapView {
 
     public GuideMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mGuideOverlay = new GuideOverlay(null, this);
+        getOverlays().add(mGuideOverlay);
+    }
+
+    @Override
+    public void destroy() {
+        if (mGuides != null)
+            mGuides.clear();
+        super.destroy();
     }
 
     public void updateGuideOverlay(List<TourGuide> guides) {
-        if (mOverlay == null) {
-            mOverlay = new GuideOverlay(null, this);
-            getOverlays().add(mOverlay);
-        }
-
+        mGuideOverlay.removeAll();
         mGuides = guides;
-        mOverlay.removeAll();
-        
         if (guides != null && guides.size() > 0) {
             List<OverlayItem> items = new ArrayList<OverlayItem>();
-            for (TourGuide guide : guides) {
+            for (final TourGuide guide : guides) {
                 GuideView view = new GuideView(getContext());
-                view.setGuide(guide);
-                Bitmap bitmap = BMapUtil.getBitmapFromView(view);
-
-                double[] lnglat = parseLocation(guide.location);
-                double lng = 39.915;
-                double lat = 116.404;
-                if (lnglat != null && lnglat.length == 2) {
-                    lng = lnglat[0];
-                    lat = lnglat[1];
-                }
-                GeoPoint pt = new GeoPoint((int) (lng * 1E6), (int) (lat * 1E6));
-                OverlayItem item = new OverlayItem(pt, "导游1", "");
-                item.setMarker(new BitmapDrawable(getResources(), bitmap));
-                items.add(item);
+                view.setGuide(guide, this);
+                items.add(view.getOverlayItem());
             }
-            mOverlay.addItem(items);
+            mGuideOverlay.addItem(items);
         }
         refresh();
-    }
-
-    private double[] parseLocation(String location) {
-        double[] lnglat = new double[2];
-        if (!TextUtils.isEmpty(location)) {
-            String[] s = location.split(",");
-            if (s != null && s.length == 2) {
-                try {
-                    lnglat[0] = Double.parseDouble(s[0]);
-                    lnglat[1] = Double.parseDouble(s[1]);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return lnglat;
     }
 
     public static interface OnGuideClickListener {
@@ -97,7 +69,7 @@ public class GuideMapView extends MapView {
 
         @Override
         public boolean onTap(int index) {
-//            OverlayItem item = getItem(index);
+            // OverlayItem item = getItem(index);
             if (mGuides != null && mGuides.size() > index) {
                 TourGuide guide = mGuides.get(index);
                 if (mOnGuideClickListener != null) {
@@ -112,6 +84,14 @@ public class GuideMapView extends MapView {
             return false;
         }
 
+    }
+
+    @Override
+    public void onUpdate(OverlayItem item) {
+        if (item != null) {
+            mGuideOverlay.updateItem(item);
+            refresh();
+        }
     }
 
 }

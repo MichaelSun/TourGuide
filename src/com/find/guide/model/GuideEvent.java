@@ -12,30 +12,50 @@ public class GuideEvent implements Serializable {
      */
     private static final long serialVersionUID = -8399816101665079796L;
 
-    @JsonProperty("guideId")
+    public static final int EVENT_STATUS_WAITING = 0;
+    public static final int EVENT_STATUS_ACCEPTED = 1;
+    public static final int EVENT_STATUS_REFUSED = 2;
+    public static final int EVENT_STATUS_SATISFACTION = 3;
+    public static final int EVENT_STATUS_CANCEL = 4;
+    public static final int EVENT_STATUS_ACCEPTED_BY_OTHER = 5;
+
+    public static final int SATISFACTION_GOOD = 1;
+    public static final int SATISFACTION_BAD = 2;
+
     private int guideId;
 
-    @JsonProperty("eventId")
     private long eventId;
 
-    @JsonProperty("userId")
     private int userId;
 
-    @JsonProperty("eventStatus")
     private int eventStatus;
 
-    @JsonProperty("satisfaction")
     private int satisfaction;
 
-    @JsonProperty("createTime")
     private long createTime;
 
-    @JsonProperty("eventType")
     private int eventType;
 
+    private long startTime;
+
+    private long endTime;
+
+    private String scenic;
+
+    private String userName;
+
+    private String userHeadUrl;
+
+    private String mobile;
+
     @JsonCreator
-    public GuideEvent(int guideId, long eventId, int userId, int eventStatus, int satisfaction, long createTime,
-            int eventType) {
+    public GuideEvent(@JsonProperty("guideId") int guideId, @JsonProperty("eventId") long eventId,
+            @JsonProperty("userId") int userId, @JsonProperty("status") int eventStatus,
+            @JsonProperty("satisfaction") int satisfaction, @JsonProperty("createTime") long createTime,
+            @JsonProperty("eventType") int eventType, @JsonProperty("startTime") long startTime,
+            @JsonProperty("endTime") long endTime, @JsonProperty("scenic") String scenic,
+            @JsonProperty("userName") String userName, @JsonProperty("userHeadUrl") String userHeadUrl,
+            @JsonProperty("mobile") String mobile) {
         this.guideId = guideId;
         this.eventId = eventId;
         this.userId = userId;
@@ -43,6 +63,12 @@ public class GuideEvent implements Serializable {
         this.satisfaction = satisfaction;
         this.createTime = createTime;
         this.eventType = eventType;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.scenic = scenic;
+        this.userName = userName;
+        this.userHeadUrl = userHeadUrl;
+        this.mobile = mobile;
     }
 
     public int getGuideId() {
@@ -103,6 +129,54 @@ public class GuideEvent implements Serializable {
 
     public static long getSerialversionuid() {
         return serialVersionUID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserHeadUrl() {
+        return userHeadUrl;
+    }
+
+    public void setUserHeadUrl(String userHeadUrl) {
+        this.userHeadUrl = userHeadUrl;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getScenic() {
+        return scenic;
+    }
+
+    public void setScenic(String scenic) {
+        this.scenic = scenic;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
 }

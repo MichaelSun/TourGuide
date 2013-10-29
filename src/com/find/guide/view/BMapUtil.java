@@ -4,13 +4,8 @@ import android.graphics.Bitmap;
 import android.view.View;
 
 public class BMapUtil {
-    	
-	/**
-	 * ???view ????????????
-	 * @param view
-	 * @return
-	 */
-	public static Bitmap getBitmapFromView(View view) {
+
+    public static Bitmap getBitmapFromView(View view) {
         view.destroyDrawingCache();
         view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
@@ -18,5 +13,5 @@ public class BMapUtil {
         view.setDrawingCacheEnabled(true);
         Bitmap bitmap = view.getDrawingCache(true);
         return bitmap;
-	}
+    }
 }

@@ -4,12 +4,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.find.guide.R;
-import com.find.guide.model.help.UserHelper;
-import com.find.guide.model.help.UserHelper.OnGetVerifyCodeFinishListener;
-import com.find.guide.model.help.UserHelper.OnRegisterFinishListener;
-import com.find.guide.view.TipsDialog;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,7 +12,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.find.guide.R;
+import com.find.guide.model.helper.UserHelper;
+import com.find.guide.model.helper.UserHelper.OnGetVerifyCodeFinishListener;
+import com.find.guide.model.helper.UserHelper.OnRegisterFinishListener;
+import com.find.guide.view.TipsDialog;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener {
 
@@ -26,6 +27,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
     private EditText mPasswordEt;
     private EditText mPasswordConfirmEt;
     private EditText mNameEt;
+    private RadioGroup mGenderRadio;
     private EditText mVerifyCodeEt;
     private TextView mSendVerifyCodeTv;
     private Button mRegisterBtn;
@@ -52,6 +54,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
         mPasswordEt = (EditText) findViewById(R.id.register_password_et);
         mPasswordConfirmEt = (EditText) findViewById(R.id.register_password_confirm_et);
         mNameEt = (EditText) findViewById(R.id.register_name_et);
+        mGenderRadio = (RadioGroup) findViewById(R.id.register_radio_gender);
         mVerifyCodeEt = (EditText) findViewById(R.id.register_verification_code_et);
         mSendVerifyCodeTv = (TextView) findViewById(R.id.register_get_verify_code_tv);
         mRegisterBtn = (Button) findViewById(R.id.register_btn);
@@ -94,6 +97,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
         String password_confirm = mPasswordConfirmEt.getText().toString();
         String name = mNameEt.getText().toString();
         String verifyCode = mVerifyCodeEt.getText().toString();
+        int gender = 0;
+        if (mGenderRadio.getCheckedRadioButtonId() == R.id.register_radio_male) {
+            gender = 1;
+        } else if (mGenderRadio.getCheckedRadioButtonId() == R.id.register_radio_female) {
+            gender = 2;
+        }
 
         if (TextUtils.isEmpty(phone)) {
             showError(getString(R.string.register_phone_empty));
@@ -106,8 +115,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
         } else if (TextUtils.isEmpty(verifyCode)) {
             showError(getString(R.string.register_verify_code_empty));
         } else {
-            TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.registering, false);
-            mLoginHelper.register(phone, password, name, verifyCode, 1, mOnRegisterFinishListener);
+            TipsDialog.getInstance().show(this, R.drawable.tips_loading, R.string.registering, true, false);
+            mLoginHelper.register(phone, password, name, verifyCode, gender, mOnRegisterFinishListener);
         }
 
     }
@@ -119,9 +128,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (result == UserHelper.REGISTER_SUCCESS) {
+                    if (result == UserHelper.SUCCESS) {
+                        setResult(RESULT_OK);
                         finish();
-                    } else {
+                    } else if (result == UserHelper.FAILED) {
                         showError(getString(R.string.register_failed));
                     }
                 }
@@ -148,7 +158,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
                             if (mResendSeconds == 0) {
                                 mTimer.cancel();
                                 mTimer = null;
-                                
+
                                 mSendVerifyCodeTv.setText(R.string.register_send_verify_code);
                                 mSendVerifyCodeTv.setClickable(true);
                             } else {

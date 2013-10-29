@@ -7,16 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:padding="0dp" >
+        android:orientation="vertical" >
 
         <RelativeLayout
             android:id="@+id/setting_login"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_top"
             android:clickable="true" >
 
@@ -28,8 +27,35 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_login"
-                android:textColor="#232424"
-                android:textSize="19sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/icon_arr" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/setting_profile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_middle"
+            android:clickable="true" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:singleLine="true"
+                android:text="@string/setting_profile"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -43,7 +69,7 @@
         <RelativeLayout
             android:id="@+id/setting_guide_authentication"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_middle"
             android:clickable="true" >
 
@@ -55,22 +81,34 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_guide_authentication"
-                android:textColor="#232424"
-                android:textSize="19sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <ImageView
+                android:id="@+id/guide_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
                 android:src="@drawable/icon_arr" />
+
+            <Switch
+                android:id="@+id/guide_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:textOff="@string/tourist"
+                android:textOn="@string/tourguide"
+                android:visibility="visible" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/setting_update"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_middle"
             android:clickable="true" >
 
@@ -82,8 +120,8 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_update"
-                android:textColor="#232424"
-                android:textSize="19sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -97,7 +135,7 @@
         <RelativeLayout
             android:id="@+id/setting_feedback"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_middle"
             android:clickable="true" >
 
@@ -109,8 +147,8 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_feedback"
-                android:textColor="#232424"
-                android:textSize="19sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -124,7 +162,7 @@
         <RelativeLayout
             android:id="@+id/setting_logout"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_bottom"
             android:clickable="true" >
 
@@ -136,8 +174,8 @@
                 android:layout_marginLeft="18dp"
                 android:singleLine="true"
                 android:text="@string/setting_logout"
-                android:textColor="#232424"
-                android:textSize="19sp" />
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"

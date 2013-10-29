@@ -1,5 +1,8 @@
 package com.find.guide.api.base;
 
+import java.util.TreeMap;
+import java.util.Vector;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -12,9 +15,6 @@ import com.plugin.internet.core.RequestEntity;
 import com.plugin.internet.core.annotations.NeedTicket;
 import com.plugin.internet.core.annotations.NoNeedTicket;
 import com.plugin.internet.core.annotations.OptionalTicket;
-
-import java.util.TreeMap;
-import java.util.Vector;
 
 public class PMRequestBase<T> extends RequestBase<T> {
     

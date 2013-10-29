@@ -103,14 +103,8 @@ public class RotateLoadingLayout extends LoadingLayout {
 	}
 
 	@Override
-	protected Drawable getDefaultDrawable() {
-		// TODO Auto-generated method stub
-		return null;
+	protected int getDefaultDrawableResId() {
+		return R.drawable.default_ptr_rotate;
 	}
-
-//	@Override
-//	protected int getDefaultDrawableResId() {
-//		return R.drawable.default_ptr_rotate;
-//	}
 
 }

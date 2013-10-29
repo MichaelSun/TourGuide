@@ -12,13 +12,12 @@ public class GuideAcceptRequest extends PMRequestBase<GuideAcceptResponse> {
     @RequiredParam("eventId")
     private long eventId;
 
-    @RequiredParam("guideId")
-    private int guideId;
+    @RequiredParam("userId")
+    private int userId;
 
-    public GuideAcceptRequest(long eventId, int guideId) {
-        super();
+    public GuideAcceptRequest(long eventId, int userId) {
         this.eventId = eventId;
-        this.guideId = guideId;
+        this.userId = userId;
     }
 
 }

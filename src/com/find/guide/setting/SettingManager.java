@@ -39,9 +39,9 @@ public class SettingManager {
         mEditor.remove(KEY_USER_HEADER);
         mEditor.remove(KEY_USER_GENDER);
         mEditor.remove(KEY_USER_TYPE);
-        mEditor.remove(KEY_USER_PHONE_NUM);
         mEditor.remove(KEY_TICKET);
         mEditor.remove(KEY_SECRET_KEY);
+        mEditor.remove(KEY_HAS_KICKOUT);
         mEditor.commit();
 
     }
@@ -109,6 +109,16 @@ public class SettingManager {
         return mSharedPreferences.getInt(KEY_USER_TYPE, 0);
     }
 
+    private static final String KEY_GUIDE_MODE = "key_guide_mode";
+
+    public void setGuideMode(int mode) {
+        mEditor.putInt(KEY_GUIDE_MODE, mode).commit();
+    }
+
+    public int getGuideMode() {
+        return mSharedPreferences.getInt(KEY_GUIDE_MODE, 0);
+    }
+
     private static final String KEY_USER_PHONE_NUM = "key_user_phone_num";
 
     public void setUserPhoneNum(String phoneNum) {
@@ -137,6 +147,27 @@ public class SettingManager {
 
     public String getSecretKey() {
         return mSharedPreferences.getString(KEY_SECRET_KEY, "");
+    }
+    
+    public static final String KEY_LAST_LOCATION = "key_last_location";
+    
+    public void setLastLocation(String location) {
+        mEditor.putString(KEY_LAST_LOCATION, location).commit();
+    }
+    
+    public String getLastLocation() {
+        return mSharedPreferences.getString(KEY_LAST_LOCATION, "");
+    }
+    
+    private static final String KEY_HAS_KICKOUT = "has_kickout";
+
+    public void setHasKickout(boolean kickout) {
+        mEditor.putBoolean(KEY_HAS_KICKOUT, kickout);
+        mEditor.commit();
+    }
+
+    public boolean getHasKickout() {
+        return mSharedPreferences.getBoolean(KEY_HAS_KICKOUT, false);
     }
 
 }

@@ -14,31 +14,33 @@ public class TourGuide extends Tourist {
      */
     private static final long serialVersionUID = -3945287939503647433L;
 
-    @JsonProperty("goodAtScenic")
-    public String goodAtScenic;
+    private String goodAtScenic;
 
-    @JsonProperty("birthday")
-    public long birthday;
+    private long birthday;
 
-    @JsonProperty("beGuideYear")
-    public int beGuideYear;
+    private int beGuideYear;
 
-    @JsonProperty("guideCardUrl")
-    public String guideCardUrl;
+    private String guideCardUrl;
 
-    @JsonProperty("guideCardId")
-    public String guideCardId;
+    private String guideCardId;
 
-    @JsonProperty("location")
-    public String location;
+    private String location;
 
-    @JsonProperty("city")
-    public int city;
+    private int city;
+
+    private int evaluateScore;
+
+    private int evaluateCount;
 
     @JsonCreator
-    public TourGuide(int userId, String userName, String mobile, int gender, int userType, String headUrl,
-            String goodAtScenic, long birthday, int beGuideYear, String guideCardUrl, String guideCardId,
-            String location, int city) {
+    public TourGuide(@JsonProperty("userId") int userId, @JsonProperty("userName") String userName,
+            @JsonProperty("mobile") String mobile, @JsonProperty("gender") int gender,
+            @JsonProperty("userType") int userType, @JsonProperty("headUrl") String headUrl,
+            @JsonProperty("goodAtScenic") String goodAtScenic, @JsonProperty("birthday") long birthday,
+            @JsonProperty("beGuideYear") int beGuideYear, @JsonProperty("guideCardUrl") String guideCardUrl,
+            @JsonProperty("guideCardId") String guideCardId, @JsonProperty("location") String location,
+            @JsonProperty("city") int city, @JsonProperty("evaluateScore") int evaluateScore,
+            @JsonProperty("evaluateCount") int evaluateCount) {
         super(userId, userName, mobile, gender, userType, headUrl);
         this.goodAtScenic = goodAtScenic;
         this.birthday = birthday;
@@ -47,6 +49,8 @@ public class TourGuide extends Tourist {
         this.guideCardId = guideCardId;
         this.location = location;
         this.city = city;
+        this.evaluateScore = evaluateScore;
+        this.evaluateCount = evaluateCount;
     }
 
     public String getGoodAtScenic() {
@@ -103,6 +107,22 @@ public class TourGuide extends Tourist {
 
     public void setCity(int city) {
         this.city = city;
+    }
+
+    public int getEvaluateScore() {
+        return evaluateScore;
+    }
+
+    public void setEvaluateScore(int evaluateScore) {
+        this.evaluateScore = evaluateScore;
+    }
+
+    public int getEvaluateCount() {
+        return evaluateCount;
+    }
+
+    public void setEvaluateCount(int evaluateCount) {
+        this.evaluateCount = evaluateCount;
     }
 
 }

@@ -33,7 +33,6 @@ public class ApplyForGuideRequest extends PMRequestBase<ApplyForGuideResponse> {
 
     public ApplyForGuideRequest(String goodAtScenic, long birthday, int beGuideYear, String guideCardUrl,
             String guideCardId, String location, int city) {
-        super();
         this.goodAtScenic = goodAtScenic;
         this.birthday = birthday;
         this.beGuideYear = beGuideYear;
