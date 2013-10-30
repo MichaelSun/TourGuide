@@ -18,10 +18,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.model.InviteEvent;
-import com.find.guide.model.helper.InviteHelper;
-import com.find.guide.model.helper.InviteHelper.OnInviteListener;
-import com.find.guide.model.helper.InviteHelper.OnSetStatisfactionListener;
+import com.find.guide.invite.InviteEvent;
+import com.find.guide.invite.InviteHelper;
+import com.find.guide.invite.InviteHelper.OnInviteListener;
+import com.find.guide.invite.InviteHelper.OnSetStatisfactionListener;
 import com.find.guide.view.TipsDialog;
 
 public class InviteEventDetailActivity extends BaseActivity implements OnClickListener {

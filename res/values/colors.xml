@@ -27,6 +27,9 @@
     <color name="action_bar_title_color">#232224</color>
 
     <drawable name="background">#e3e4e6</drawable>
+    
+    <drawable name="transparent">#00000000</drawable>
+    <drawable name="list_item_pressed">#d3d3d1</drawable>
 
     <!-- list item color info -->
     <drawable name="default_cover">#ced0d1</drawable>
@@ -82,7 +85,6 @@
     <color name="broadcast_text_color_g">#ff5859</color>
 
     <drawable name="broadcast_default_cover">#ced0d1</drawable>
-    <drawable name="transparent">#00000000</drawable>
 
     <color name="camera_button_background">#ffffffff</color>
     <color name="camera_button_pressed_background">#1a000000</color>

@@ -9,13 +9,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.R;
-import com.find.guide.model.TourGuide;
+import com.find.guide.user.TourGuide;
 import com.plugin.common.view.WebImageView;
 import com.plugin.common.view.WebImageViewStatusListener;
 

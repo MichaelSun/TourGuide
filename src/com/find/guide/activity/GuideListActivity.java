@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.find.guide.R;
 import com.find.guide.adapter.GuideAdapter;
-import com.find.guide.model.TourGuide;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnSearchGuideListener;
+import com.find.guide.user.TourGuide;
+import com.find.guide.user.UserHelper;
+import com.find.guide.user.UserHelper.OnSearchGuideListener;
 import com.find.guide.view.TipsDialog;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -165,6 +169,20 @@ public class GuideListActivity extends BaseActivity {
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 loadMore();
+            }
+        });
+
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int pos = position - mListView.getRefreshableView().getHeaderViewsCount();
+                if (pos >= 0 && pos < mTourGuides.size()) {
+                    TourGuide guide = mTourGuides.get(pos);
+                    Intent intent = new Intent(GuideListActivity.this, BookingActivity.class);
+                    intent.putExtra(BookingActivity.INTENT_EXTRA_GUIDE, guide);
+                    startActivity(intent);
+                }
             }
         });
 

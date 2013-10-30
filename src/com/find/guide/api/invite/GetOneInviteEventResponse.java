@@ -1,6 +1,6 @@
 package com.find.guide.api.invite;
 
-import com.find.guide.model.InviteEvent;
+import com.find.guide.invite.InviteEvent;
 import com.plugin.internet.core.ResponseBase;
 import com.plugin.internet.core.json.JsonCreator;
 import com.plugin.internet.core.json.JsonProperty;

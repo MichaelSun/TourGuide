@@ -10,11 +10,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnLoginFinishListener;
+import com.find.guide.push.PushUtils;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.user.UserHelper;
+import com.find.guide.user.UserHelper.OnLoginFinishListener;
 import com.find.guide.view.TipsDialog;
 
 public class LoginActivity extends BaseActivity implements OnClickListener {
@@ -96,6 +99,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 public void run() {
                     TipsDialog.getInstance().dismiss();
                     if (result == UserHelper.SUCCESS) {
+                        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,
+                                PushUtils.getMetaValue(LoginActivity.this, "BAIDU_PUSH_APIKEY"));
                         setResult(RESULT_OK);
                         finish();
                     } else if (result == UserHelper.FAILED) {

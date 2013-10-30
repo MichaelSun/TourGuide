@@ -2,7 +2,7 @@ package com.find.guide.api.guide;
 
 import java.util.List;
 
-import com.find.guide.model.GuideEvent;
+import com.find.guide.guide.GuideEvent;
 import com.plugin.internet.core.ResponseBase;
 import com.plugin.internet.core.json.JsonProperty;
 

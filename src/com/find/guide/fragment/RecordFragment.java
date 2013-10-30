@@ -27,14 +27,15 @@ import com.find.guide.activity.LoginActivity;
 import com.find.guide.adapter.GuideRecordAdapter;
 import com.find.guide.adapter.InviteRecordAdapter;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.model.GuideEvent;
-import com.find.guide.model.InviteEvent;
-import com.find.guide.model.Tourist;
-import com.find.guide.model.helper.GuideHelper;
-import com.find.guide.model.helper.GuideHelper.OnGetHistoricalGuideEventsListener;
-import com.find.guide.model.helper.InviteHelper;
-import com.find.guide.model.helper.InviteHelper.OnGetHistoricalInviteEventsListener;
+import com.find.guide.guide.GuideEvent;
+import com.find.guide.guide.GuideHelper;
+import com.find.guide.guide.GuideHelper.OnGetHistoricalGuideEventsListener;
+import com.find.guide.invite.InviteEvent;
+import com.find.guide.invite.InviteHelper;
+import com.find.guide.invite.InviteHelper.OnGetHistoricalInviteEventsListener;
+import com.find.guide.push.NotificationHelper;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.user.Tourist;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -89,7 +90,15 @@ public class RecordFragment extends Fragment {
                 if (mSettingManager.getUserId() <= 0) {
                     showLoginDialog();
                 } else {
-                    refresh();
+                    if (!mIsRefreshing) {
+                        mIsRefreshing = true;
+                        if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE
+                                && mSettingManager.getGuideMode() == 0) {
+                            mGuideHelper.getHistoricalGuideEvents(0, 0, ROWS, mGetHistoricalGuideEventsListener);
+                        } else {
+                            mInviteHelper.getHistoricalInviteEvents(0, ROWS, mGetHistoricalInviteEventsListener);
+                        }
+                    }
                 }
             }
 
@@ -131,7 +140,7 @@ public class RecordFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // refresh();
+        // NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
     }
 
     @Override
@@ -143,7 +152,9 @@ public class RecordFragment extends Fragment {
                 showLoginDialog();
             }
             setTitle();
-            refresh();
+            refreshRecord();
+
+            NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
         }
     }
 
@@ -161,7 +172,7 @@ public class RecordFragment extends Fragment {
         ((BaseActivity) getActivity()).getActionBar().setTitle(title);
     }
 
-    private void refresh() {
+    private void refreshRecord() {
         if (mSettingManager.getUserId() <= 0) {
             if (mRecordAdapter != null) {
                 mInviteEvents.clear();
@@ -185,14 +196,12 @@ public class RecordFragment extends Fragment {
         }
 
         if (mSettingManager.getUserId() > 0) {
-            if (!mIsRefreshing) {
-                mIsRefreshing = true;
-                if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE && mSettingManager.getGuideMode() == 0) {
-                    mGuideHelper.getHistoricalGuideEvents(0, 0, ROWS, mGetHistoricalGuideEventsListener);
-                } else {
-                    mInviteHelper.getHistoricalInviteEvents(0, ROWS, mGetHistoricalInviteEventsListener);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mListView.setRefreshing(true);
                 }
-            }
+            }, 300);
         } else {
             mIsRefreshing = false;
             mListView.onRefreshComplete();
@@ -225,9 +234,9 @@ public class RecordFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_LOGIN) {
                 setTitle();
-                refresh();
+                refreshRecord();
             } else if (requestCode == REQUEST_CODE_GUIDE_RECORD || requestCode == REQUEST_CODE_INVITE_RECORD) {
-                refresh();
+                refreshRecord();
             }
         }
     }

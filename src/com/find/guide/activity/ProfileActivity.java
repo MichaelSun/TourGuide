@@ -1,20 +1,13 @@
 package com.find.guide.activity;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -27,18 +20,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnChangeUserInfoListener;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.user.UserHelper;
+import com.find.guide.user.UserHelper.OnChangeUserInfoListener;
 import com.find.guide.view.TipsDialog;
-import com.plugin.common.utils.files.DiskManager;
-import com.plugin.common.utils.files.DiskManager.DiskCacheType;
 import com.plugin.common.view.WebImageView;
 
 public class ProfileActivity extends BaseActivity implements OnClickListener {
 
-    private static final int REQUEST_GALLERY = 1;
-    private static final int REQUEST_CAMERA = 2;
+    private static final int REQUEST_CROP_IMAGE = 1;
 
     private String mHeadPath;
 
@@ -117,21 +107,11 @@ public class ProfileActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_GALLERY) {
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                mHeadPath = cursor.getString(columnIndex);
-                cursor.close();
-
-                if (!TextUtils.isEmpty(mHeadPath)) {
-                    mHeadIv.setImageURI(new Uri.Builder().path("file://" + mHeadPath).build());
-                }
-            } else if (requestCode == REQUEST_CAMERA) {
-                if (!TextUtils.isEmpty(mHeadPath)) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CROP_IMAGE) {
+            if (data != null) {
+                String path = data.getStringExtra(CropImageActivity.EXTRA_CROP_IMAGE_PATH);
+                if (!TextUtils.isEmpty(path)) {
+                    mHeadPath = path;
                     mHeadIv.setImageURI(new Uri.Builder().path("file://" + mHeadPath).build());
                 }
             }
@@ -155,24 +135,15 @@ public class ProfileActivity extends BaseActivity implements OnClickListener {
     }
 
     private void selectFromGallery() {
-        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, REQUEST_GALLERY);
+        Intent i = new Intent(this, CropImageActivity.class);
+        i.putExtra(CropImageActivity.EXTRA_SELECT_IMAGE_MODE, 2);
+        startActivityForResult(i, REQUEST_CROP_IMAGE);
     }
 
     private void selectFromCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mHeadPath = createImageFile();
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(mHeadPath)));
-        startActivityForResult(intent, REQUEST_CAMERA);
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private String createImageFile() {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
-        String path = DiskManager.tryToFetchCachePathByType(DiskCacheType.PICTURE);
-        return path + "/" + imageFileName;
+        Intent i = new Intent(this, CropImageActivity.class);
+        i.putExtra(CropImageActivity.EXTRA_SELECT_IMAGE_MODE, 1);
+        startActivityForResult(i, REQUEST_CROP_IMAGE);
     }
 
     @Override

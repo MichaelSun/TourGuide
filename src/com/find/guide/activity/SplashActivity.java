@@ -2,15 +2,15 @@ package com.find.guide.activity;
 
 import com.find.guide.R;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.Window;
-import android.view.WindowManager;
 
+@SuppressLint("HandlerLeak")
 public class SplashActivity extends Activity {
 
     private static final int WHAT_ENTER_MAIN = 1;
@@ -30,12 +30,7 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_splash);
-
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         mHandler.sendEmptyMessageDelayed(WHAT_ENTER_MAIN, 1200);
     }

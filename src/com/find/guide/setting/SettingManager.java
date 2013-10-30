@@ -42,6 +42,8 @@ public class SettingManager {
         mEditor.remove(KEY_TICKET);
         mEditor.remove(KEY_SECRET_KEY);
         mEditor.remove(KEY_HAS_KICKOUT);
+        mEditor.remove(KEY_MAX_EVENT_ID);
+        mEditor.remove(KEY_MAX_EVENT_STATUS);
         mEditor.commit();
 
     }
@@ -148,22 +150,41 @@ public class SettingManager {
     public String getSecretKey() {
         return mSharedPreferences.getString(KEY_SECRET_KEY, "");
     }
-    
+
     public static final String KEY_LAST_LOCATION = "key_last_location";
-    
+
     public void setLastLocation(String location) {
         mEditor.putString(KEY_LAST_LOCATION, location).commit();
     }
-    
+
     public String getLastLocation() {
         return mSharedPreferences.getString(KEY_LAST_LOCATION, "");
     }
-    
-    private static final String KEY_HAS_KICKOUT = "has_kickout";
+
+    public static final String KEY_MAX_EVENT_ID = "key_max_event_id";
+
+    public void setMaxEventId(long eventId) {
+        mEditor.putLong(KEY_MAX_EVENT_ID, eventId).commit();
+    }
+
+    public long getMaxEventId() {
+        return mSharedPreferences.getLong(KEY_MAX_EVENT_ID, -1);
+    }
+
+    public static final String KEY_MAX_EVENT_STATUS = "key_max_event_status";
+
+    public void setMaxEventStatus(int status) {
+        mEditor.putInt(KEY_MAX_EVENT_STATUS, status).commit();
+    }
+
+    public int getMaxEventStatus() {
+        return mSharedPreferences.getInt(KEY_MAX_EVENT_STATUS, -1);
+    }
+
+    private static final String KEY_HAS_KICKOUT = "key_has_kickout";
 
     public void setHasKickout(boolean kickout) {
-        mEditor.putBoolean(KEY_HAS_KICKOUT, kickout);
-        mEditor.commit();
+        mEditor.putBoolean(KEY_HAS_KICKOUT, kickout).commit();
     }
 
     public boolean getHasKickout() {

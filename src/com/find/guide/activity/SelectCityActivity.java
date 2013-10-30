@@ -29,8 +29,8 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.model.CityItem;
-import com.find.guide.model.helper.CityManager;
+import com.find.guide.city.CityItem;
+import com.find.guide.city.CityManager;
 import com.find.guide.view.SlideView;
 import com.find.guide.view.SlideView.OnTouchingLetterChangedListener;
 

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/com.find.guide"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/list_item_bg"
     android:orientation="vertical" >
 
     <View
@@ -12,7 +13,8 @@
     <RelativeLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:clickable="false" >
 
         <com.plugin.common.view.WebImageView
             android:id="@+id/header"

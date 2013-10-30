@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.find.guide.R;
 import com.find.guide.activity.GuideListActivity;
 import com.find.guide.activity.SelectCityActivity;
-import com.find.guide.model.CityItem;
+import com.find.guide.city.CityItem;
 import com.find.guide.view.TipsDialog;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {

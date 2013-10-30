@@ -16,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,11 +37,11 @@ import com.find.guide.activity.BroadcastActivity;
 import com.find.guide.adapter.GuideAdapter;
 import com.find.guide.app.TourGuideApplication;
 import com.find.guide.config.AppRuntime;
-import com.find.guide.model.TourGuide;
-import com.find.guide.model.Tourist;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.user.TourGuide;
+import com.find.guide.user.Tourist;
+import com.find.guide.user.UserHelper;
+import com.find.guide.user.UserHelper.OnGetNearByGuideListener;
 import com.find.guide.view.GuideMapView;
 import com.find.guide.view.GuideMapView.OnGuideClickListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -119,6 +121,20 @@ public class NearByFragment extends Fragment {
 
         });
 
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int pos = position - mListView.getRefreshableView().getHeaderViewsCount();
+                if (pos >= 0 && pos < mTourGuides.size()) {
+                    TourGuide guide = mTourGuides.get(pos);
+                    Intent intent = new Intent(getActivity(), BookingActivity.class);
+                    intent.putExtra(BookingActivity.INTENT_EXTRA_GUIDE, guide);
+                    startActivity(intent);
+                }
+            }
+        });
+
         mGuideAdapter = new GuideAdapter(getActivity(), mTourGuides);
 
         return view;
@@ -186,6 +202,11 @@ public class NearByFragment extends Fragment {
         option.setScanSpan(1000);
         mLocClient.setLocOption(option);
         mLocClient.start();
+
+        mMapHintView.setVisibility(View.VISIBLE);
+        mMapHintPb.setVisibility(View.VISIBLE);
+        mMapHintTv.setVisibility(View.VISIBLE);
+        mMapHintTv.setText(R.string.loading_location);
     }
 
     private void initLocationOverlay() {
@@ -204,12 +225,11 @@ public class NearByFragment extends Fragment {
         if (!mIsRequestLocation) {
             mIsRequestLocation = true;
             mLocClient.requestLocation();
-            if (mShowMode == ShowMode.MAP) {
-                mMapHintView.setVisibility(View.VISIBLE);
-                mMapHintPb.setVisibility(View.VISIBLE);
-                mMapHintTv.setVisibility(View.VISIBLE);
-                mMapHintTv.setText(R.string.loading_location);
-            }
+
+            mMapHintView.setVisibility(View.VISIBLE);
+            mMapHintPb.setVisibility(View.VISIBLE);
+            mMapHintTv.setVisibility(View.VISIBLE);
+            mMapHintTv.setText(R.string.loading_location);
         }
     }
 

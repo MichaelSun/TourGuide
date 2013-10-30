@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.activity.InviteEventDetailActivity;
-import com.find.guide.model.InviteEvent;
+import com.find.guide.invite.InviteEvent;
 
 public class InviteRecordAdapter extends BaseAdapter {
 

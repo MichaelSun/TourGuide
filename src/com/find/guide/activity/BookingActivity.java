@@ -19,12 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.model.CityItem;
-import com.find.guide.model.TourGuide;
-import com.find.guide.model.helper.CityManager;
-import com.find.guide.model.helper.InviteHelper;
-import com.find.guide.model.helper.InviteHelper.OnInviteListener;
+import com.find.guide.city.CityItem;
+import com.find.guide.city.CityManager;
+import com.find.guide.invite.InviteHelper;
+import com.find.guide.invite.InviteHelper.OnInviteListener;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.user.TourGuide;
 import com.find.guide.view.DateTimePickerDialog;
 import com.find.guide.view.TipsDialog;
 import com.find.guide.view.DateTimePickerDialog.ICustomDateTimeListener;
@@ -120,7 +120,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
             mGoodAtScenicTv.setText(mTourGuide.getGoodAtScenic());
             mGuideCardIdTv.setText(mTourGuide.getGuideCardId());
             if (mTourGuide.getEvaluateCount() > 0) {
-                mEvaluateNumTv.setText(mTourGuide.getEvaluateCount() + "次评价");
+                mEvaluateNumTv.setText("累计" + mTourGuide.getEvaluateCount() + "次评价");
             } else {
                 mEvaluateNumTv.setText("暂无评价");
             }

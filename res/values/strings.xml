@@ -19,7 +19,7 @@
     <string name="tourist">游客</string>
     <string name="invite_booking">预约中</string>
     <string name="invite_cancel">已取消</string>
-    <string name="invite_accepted">被接受</string>
+    <string name="invite_accepted">待评价</string>
     <string name="invite_refused">被拒绝</string>
     <string name="invite_satisfaction">已评价</string>
     <string name="invite_broadcast">广播中</string>

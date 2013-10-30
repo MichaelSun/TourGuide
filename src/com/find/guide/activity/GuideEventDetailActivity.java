@@ -18,10 +18,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.model.GuideEvent;
-import com.find.guide.model.helper.GuideHelper;
-import com.find.guide.model.helper.GuideHelper.OnAcceptedListener;
-import com.find.guide.model.helper.GuideHelper.OnRefusedListener;
+import com.find.guide.guide.GuideEvent;
+import com.find.guide.guide.GuideHelper;
+import com.find.guide.guide.GuideHelper.OnAcceptedListener;
+import com.find.guide.guide.GuideHelper.OnRefusedListener;
 import com.find.guide.view.TipsDialog;
 
 public class GuideEventDetailActivity extends BaseActivity implements OnClickListener {

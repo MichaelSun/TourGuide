@@ -1,22 +1,15 @@
 package com.find.guide.activity;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,21 +22,18 @@ import android.widget.Toast;
 
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
+import com.find.guide.city.CityItem;
 import com.find.guide.config.AppRuntime;
-import com.find.guide.model.CityItem;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnApplyForGuideFinishListener;
+import com.find.guide.user.UserHelper;
+import com.find.guide.user.UserHelper.OnApplyForGuideFinishListener;
 import com.find.guide.utils.Toasts;
 import com.find.guide.view.TipsDialog;
-import com.plugin.common.utils.files.DiskManager;
-import com.plugin.common.utils.files.DiskManager.DiskCacheType;
 import com.plugin.common.utils.image.ImageUtils;
 
 public class GuideIdentifyActivity extends BaseActivity implements OnClickListener {
 
-    public static final int REQUEST_GALLERY = 1;
-    public static final int REQUEST_CAMERA = 2;
-    public static final int REQUEST_CODE_SELECT_CITY = 3;
+    private static final int REQUEST_CROP_IMAGE = 1;
+    public static final int REQUEST_CODE_SELECT_CITY = 2;
 
     private ImageView mGuideCardIv;
     private EditText mGuideCardIdEt;
@@ -141,26 +131,18 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_GALLERY) {
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                mGuideCardPath = cursor.getString(columnIndex);
-                cursor.close();
-
-                if (!TextUtils.isEmpty(mGuideCardPath)) {
-                    mGuideCardBitmap = ImageUtils.loadBitmapWithMemSizeOrientation(mGuideCardPath, 400 * 400);
-                    mGuideCardIv.setImageBitmap(mGuideCardBitmap);
+        if (requestCode == REQUEST_CROP_IMAGE) {
+            if (resultCode == RESULT_OK && data != null) {
+                String path = data.getStringExtra(CropImageActivity.EXTRA_CROP_IMAGE_PATH);
+                if (!TextUtils.isEmpty(path)) {
+                    mGuideCardPath = path;
+                    mGuideCardBitmap = ImageUtils.loadBitmapWithSizeOrientation(mGuideCardPath);
+                    if (mGuideCardBitmap != null && !mGuideCardBitmap.isRecycled())
+                        mGuideCardIv.setImageBitmap(mGuideCardBitmap);
                 }
-            } else if (requestCode == REQUEST_CAMERA) {
-                if (!TextUtils.isEmpty(mGuideCardPath)) {
-                    mGuideCardBitmap = ImageUtils.loadBitmapWithMemSizeOrientation(mGuideCardPath, 400 * 400);
-                    mGuideCardIv.setImageBitmap(mGuideCardBitmap);
-                }
-            } else if (requestCode == REQUEST_CODE_SELECT_CITY) {
+            }
+        } else if (requestCode == REQUEST_CODE_SELECT_CITY) {
+            if (resultCode == RESULT_OK) {
                 if (data != null) {
                     mCityItem = (CityItem) data.getSerializableExtra(SelectCityActivity.INTENT_EXTRA_CITY);
                     if (mCityItem != null) {
@@ -188,24 +170,15 @@ public class GuideIdentifyActivity extends BaseActivity implements OnClickListen
     }
 
     private void selectFromGallery() {
-        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, REQUEST_GALLERY);
+        Intent i = new Intent(this, CropImageActivity.class);
+        i.putExtra(CropImageActivity.EXTRA_SELECT_IMAGE_MODE, 2);
+        startActivityForResult(i, REQUEST_CROP_IMAGE);
     }
 
     private void selectFromCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mGuideCardPath = createImageFile();
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(mGuideCardPath)));
-        startActivityForResult(intent, REQUEST_CAMERA);
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private String createImageFile() {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
-        String path = DiskManager.tryToFetchCachePathByType(DiskCacheType.PICTURE);
-        return path + "/" + imageFileName;
+        Intent i = new Intent(this, CropImageActivity.class);
+        i.putExtra(CropImageActivity.EXTRA_SELECT_IMAGE_MODE, 1);
+        startActivityForResult(i, REQUEST_CROP_IMAGE);
     }
 
     private void selectCity() {

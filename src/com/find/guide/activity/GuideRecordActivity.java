@@ -10,9 +10,9 @@ import android.widget.ListView;
 
 import com.find.guide.R;
 import com.find.guide.adapter.GuideRecordAdapter;
-import com.find.guide.model.GuideEvent;
-import com.find.guide.model.helper.GuideHelper;
-import com.find.guide.model.helper.GuideHelper.OnGetHistoricalGuideEventsListener;
+import com.find.guide.guide.GuideEvent;
+import com.find.guide.guide.GuideHelper;
+import com.find.guide.guide.GuideHelper.OnGetHistoricalGuideEventsListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;

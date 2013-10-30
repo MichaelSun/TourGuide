@@ -1,7 +1,7 @@
 package com.find.guide.api.user;
 
-import com.find.guide.model.TourGuide;
-import com.find.guide.model.Tourist;
+import com.find.guide.user.TourGuide;
+import com.find.guide.user.Tourist;
 import com.plugin.internet.core.ResponseBase;
 import com.plugin.internet.core.json.JsonCreator;
 import com.plugin.internet.core.json.JsonProperty;

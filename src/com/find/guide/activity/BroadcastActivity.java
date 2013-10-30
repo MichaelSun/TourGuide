@@ -19,8 +19,8 @@ import android.widget.TextView;
 
 import com.find.guide.R;
 import com.find.guide.config.AppRuntime;
-import com.find.guide.model.helper.InviteHelper;
-import com.find.guide.model.helper.InviteHelper.OnInviteListener;
+import com.find.guide.invite.InviteHelper;
+import com.find.guide.invite.InviteHelper.OnInviteListener;
 import com.find.guide.setting.SettingManager;
 import com.find.guide.view.DateTimePickerDialog;
 import com.find.guide.view.DateTimePickerDialog.ICustomDateTimeListener;

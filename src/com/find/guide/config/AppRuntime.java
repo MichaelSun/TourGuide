@@ -12,7 +12,6 @@ import android.net.NetworkInfo;
 
 import com.find.guide.activity.MainActivity;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.setting.SettingManager;
 import com.find.guide.utils.XMLTables;
 import com.plugin.common.utils.CustomThreadPool;
 import com.plugin.common.utils.DeviceInfo;
@@ -108,10 +107,6 @@ public class AppRuntime {
         intent.setAction(TourGuideApplication.ACTION_KICKOUT);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-    }
-
-    public static void logout() {
-        SettingManager.getInstance().clearAll();
     }
 
 }

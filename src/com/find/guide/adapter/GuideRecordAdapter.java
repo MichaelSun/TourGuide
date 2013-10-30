@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.find.guide.R;
-import com.find.guide.model.GuideEvent;
+import com.find.guide.guide.GuideEvent;
 
 public class GuideRecordAdapter extends BaseAdapter {
 

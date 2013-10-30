@@ -17,9 +17,6 @@ import com.find.guide.config.AppConfig;
  */
 public class XMLTables {
 
-    private static final boolean DEBUG = AppConfig.DEBUG;
-
-    private static final String TAG_RESOURCE = "resource";
     private static final String TAG_CATEGORY = "category";
     private static final String CATEGORY_NAME = "name";
     private static final String TAG_PROPERTY = "property";

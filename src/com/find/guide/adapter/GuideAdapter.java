@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,9 +16,8 @@ import android.widget.TextView;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.R;
-import com.find.guide.activity.BookingActivity;
 import com.find.guide.config.AppRuntime;
-import com.find.guide.model.TourGuide;
+import com.find.guide.user.TourGuide;
 import com.plugin.common.view.WebImageView;
 
 public class GuideAdapter extends BaseAdapter {
@@ -111,15 +109,6 @@ public class GuideAdapter extends BaseAdapter {
         }
         DecimalFormat df = new DecimalFormat("#.##");
         holder.distance.setText(df.format(distance / 1000) + "km");
-
-        holder.content.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mActivity, BookingActivity.class);
-                intent.putExtra(BookingActivity.INTENT_EXTRA_GUIDE, guide);
-                mActivity.startActivity(intent);
-            }
-        });
 
         return convertView;
     }

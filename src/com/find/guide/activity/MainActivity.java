@@ -7,23 +7,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+import com.baidu.android.pushservice.PushSettings;
 import com.find.guide.R;
 import com.find.guide.app.TourGuideApplication;
+import com.find.guide.config.AppConfig;
 import com.find.guide.config.AppRuntime;
 import com.find.guide.fragment.NearByFragment;
 import com.find.guide.fragment.RecordFragment;
 import com.find.guide.fragment.SearchFragment;
 import com.find.guide.fragment.SettingFragment;
-import com.find.guide.view.TipsDialog;
+import com.find.guide.push.PushUtils;
+import com.find.guide.setting.SettingManager;
 import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends BaseActivity {
+
+    public static final String ACTION_PUSH_CLICK = "com.find.guide.push.click";
 
     private static final String TAG_NEARBY_GUIDE_FRAGMENT = "nearby_guide_fragment";
     private static final String TAG_PROFILE_RECORD_FRAGMENT = "profile_record_fragment";
@@ -53,13 +59,30 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initData(savedInstanceState);
+        if (savedInstanceState != null) {
+            mCurrSelectedTabId = savedInstanceState.getInt(KEY_CURR_SELECTED_TAB_ID);
+        } else {
+            mCurrSelectedTabId = R.id.nearby_guide;
+            if (getIntent() != null && ACTION_PUSH_CLICK.equals(getIntent().getAction())) {
+                mCurrSelectedTabId = R.id.profile_record;
+            }
+        }
+
         initUI();
 
         mActionbar.setDisplayHomeAsUpEnabled(false);
         mActionbar.setDisplayShowHomeEnabled(false);
 
+        switchToTab(mCurrSelectedTabId);
+
         UmengUpdateAgent.update(this);
+
+        PushSettings.enableDebugMode(getApplicationContext(), AppConfig.DEBUG);
+        if (SettingManager.getInstance().getUserId() > 0) {
+            PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,
+                    PushUtils.getMetaValue(MainActivity.this, "BAIDU_PUSH_APIKEY"));
+        }
+
     }
 
     @Override
@@ -86,16 +109,6 @@ public class MainActivity extends BaseActivity {
         mProfileRecordBtn.setOnClickListener(tabClickListener);
         mSearchBtn.setOnClickListener(tabClickListener);
         mSettingBtn.setOnClickListener(tabClickListener);
-
-        switchToTab(mCurrSelectedTabId);
-    }
-
-    private void initData(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            mCurrSelectedTabId = savedInstanceState.getInt(KEY_CURR_SELECTED_TAB_ID);
-        } else {
-            mCurrSelectedTabId = R.id.nearby_guide;
-        }
 
         mFragmentManager = getFragmentManager();
 
@@ -134,7 +147,6 @@ public class MainActivity extends BaseActivity {
             trans.add(R.id.fragment_container, mSettingFragment, TAG_SETTING_FRAGMENT);
             trans.commit();
         }
-
     }
 
     private void switchToTab(int tabId) {
@@ -237,17 +249,20 @@ public class MainActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        if (intent != null && !TextUtils.isEmpty(intent.getAction())) {
-            if (intent.getAction().equals(TourGuideApplication.ACTION_KICKOUT)) {
+        if (intent != null) {
+            if (TourGuideApplication.ACTION_KICKOUT.equals(intent.getAction())) {
                 if (AppRuntime.gInLogoutProcess.get()) {
                     return;
                 }
                 AppRuntime.gInLogoutProcess.set(true);
-                AppRuntime.logout();
+                SettingManager.getInstance().clearAll();
+                PushManager.stopWork(getApplicationContext());
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 AppRuntime.gInLogoutProcess.set(false);
-
+            } else if (ACTION_PUSH_CLICK.equals(intent.getAction())) {
+                mCurrSelectedTabId = R.id.profile_record;
+                switchToTab(mCurrSelectedTabId);
             }
         }
     }
@@ -258,6 +273,7 @@ public class MainActivity extends BaseActivity {
             app.mBMapManager.destroy();
             app.mBMapManager = null;
         }
+        AppRuntime.gInLogoutProcess.set(false);
 
         super.onDestroy();
 

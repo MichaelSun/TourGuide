@@ -15,10 +15,13 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.find.guide.R;
-import com.find.guide.model.helper.UserHelper;
-import com.find.guide.model.helper.UserHelper.OnGetVerifyCodeFinishListener;
-import com.find.guide.model.helper.UserHelper.OnRegisterFinishListener;
+import com.find.guide.push.PushUtils;
+import com.find.guide.user.UserHelper;
+import com.find.guide.user.UserHelper.OnGetVerifyCodeFinishListener;
+import com.find.guide.user.UserHelper.OnRegisterFinishListener;
 import com.find.guide.view.TipsDialog;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener {
@@ -129,6 +132,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
                 @Override
                 public void run() {
                     if (result == UserHelper.SUCCESS) {
+                        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,
+                                PushUtils.getMetaValue(RegisterActivity.this, "BAIDU_PUSH_APIKEY"));
                         setResult(RESULT_OK);
                         finish();
                     } else if (result == UserHelper.FAILED) {
@@ -155,7 +160,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (mResendSeconds == 0) {
+                            if (mResendSeconds <= 0) {
                                 mTimer.cancel();
                                 mTimer = null;
 
@@ -176,7 +181,19 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
     OnGetVerifyCodeFinishListener mOnGetVerifyCodeFinishListener = new OnGetVerifyCodeFinishListener() {
 
         @Override
-        public void onGetVerifyCodeFinish(int result) {
+        public void onGetVerifyCodeFinish(final int result) {
+            mHandler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (result != UserHelper.SUCCESS) {
+                        if (result == UserHelper.FAILED) {
+                            showError("验证码发送失败");
+                        }
+                        mResendSeconds = 0;
+                    }
+                }
+            });
 
         }
     };

@@ -3,10 +3,10 @@ package com.find.guide.fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,15 +16,17 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.baidu.android.pushservice.PushManager;
 import com.find.guide.R;
 import com.find.guide.activity.GuideIdentifyActivity;
 import com.find.guide.activity.LoginActivity;
 import com.find.guide.activity.ProfileActivity;
 import com.find.guide.app.TourGuideApplication;
-import com.find.guide.config.AppConfig;
-import com.find.guide.config.AppRuntime;
-import com.find.guide.model.Tourist;
+import com.find.guide.push.PushHelper;
+import com.find.guide.push.PushHelper.UnbindDeviceListener;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.user.Tourist;
+import com.find.guide.view.TipsDialog;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
@@ -45,10 +47,14 @@ public class SettingFragment extends Fragment implements OnClickListener {
 
     private SettingManager mSettingManager;
 
+    private PushHelper mPushHelper = null;
+    private Handler mHandler = new Handler();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSettingManager = SettingManager.getInstance();
+        mPushHelper = new PushHelper(TourGuideApplication.getInstance());
     }
 
     @Override
@@ -93,6 +99,11 @@ public class SettingFragment extends Fragment implements OnClickListener {
     @Override
     public void onDestroy() {
         dismissDialog();
+        TipsDialog.getInstance().dismiss();
+        if (mPushHelper != null) {
+            mPushHelper.destroy();
+            mPushHelper = null;
+        }
         super.onDestroy();
     }
 
@@ -192,6 +203,8 @@ public class SettingFragment extends Fragment implements OnClickListener {
 
                 @Override
                 public void onUpdateReturned(int arg0, UpdateResponse arg1) {
+                    if (getActivity() == null)
+                        return;
                     switch (arg0) {
                     case 0: // has update
                         UmengUpdateAgent.showUpdateDialog(getActivity(), arg1);
@@ -227,8 +240,11 @@ public class SettingFragment extends Fragment implements OnClickListener {
                 .setPositiveButton(R.string.logout_dialog_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        AppRuntime.logout();
-                        checkVisibility();
+                        if (getActivity() != null) {
+                            TipsDialog.getInstance()
+                                    .show(getActivity(), R.drawable.tips_loading, "登出中...", true, false);
+                        }
+                        mPushHelper.AsyncUnbindDevice(mUnbindDeviceListener);
                     }
                 }).setNegativeButton(R.string.logout_dialog_negative, new DialogInterface.OnClickListener() {
                     @Override
@@ -238,6 +254,21 @@ public class SettingFragment extends Fragment implements OnClickListener {
                 }).create();
         mDialog.show();
     }
+
+    private UnbindDeviceListener mUnbindDeviceListener = new UnbindDeviceListener() {
+        @Override
+        public void unbindDevice(final int result) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    TipsDialog.getInstance().dismiss();
+                    checkVisibility();
+                    SettingManager.getInstance().clearAll();
+                    PushManager.stopWork(TourGuideApplication.getInstance());
+                }
+            });
+        }
+    };
 
     private void dismissDialog() {
         if (mDialog != null && mDialog.isShowing()) {
