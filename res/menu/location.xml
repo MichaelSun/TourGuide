@@ -10,7 +10,6 @@
         android:title="@string/menu_refresh"/>
     <item
         android:id="@+id/menu_show_mode"
-        android:icon="@drawable/icon_action_map"
         android:showAsAction="always"
         android:title="@string/menu_show_map"/>
 

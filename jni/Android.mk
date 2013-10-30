@@ -19,7 +19,7 @@ LOCAL_STATIC_LIBRARIES += libpng
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/libjpeg-turbo-1
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/libpng
 
-APP_ABI := armeabi armeabi-v7a 
+APP_ABI := armeabi
 
 LOCAL_LDLIBS :=  -L$(SYSROOT)/usr/lib -llog
 LOCAL_LDLIBS += -lz

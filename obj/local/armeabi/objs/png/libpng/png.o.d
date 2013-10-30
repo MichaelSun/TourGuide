@@ -1,9 +1,8 @@
-/Users/zhangdi/TourGuide/obj/local/armeabi/objs/png/libpng/png.o: \
- /Users/zhangdi/TourGuide/jni/libpng/png.c \
- /Users/zhangdi/TourGuide/jni/libpng/png.h \
+obj/local/armeabi/objs/png/libpng/png.o: jni/libpng/png.c \
+ jni/libpng/png.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zlib.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zconf.h \
- /Users/zhangdi/TourGuide/jni/libpng/pngconf.h \
+ jni/libpng/pngconf.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/stdio.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -42,13 +41,13 @@
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/asm/siginfo.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h
 
-/Users/zhangdi/TourGuide/jni/libpng/png.h:
+jni/libpng/png.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zlib.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zconf.h:
 
-/Users/zhangdi/TourGuide/jni/libpng/pngconf.h:
+jni/libpng/pngconf.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/stdio.h:
 

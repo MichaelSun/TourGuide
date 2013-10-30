@@ -1,6 +1,5 @@
-/Users/zhangdi/TourGuide/obj/local/armeabi/objs/jpng/image_process_method.o: \
- /Users/zhangdi/TourGuide/jni/image_process_method.c \
- /Users/zhangdi/TourGuide/jni/image_process_method.h \
+obj/local/armeabi/objs/jpng/image_process_method.o: \
+ jni/image_process_method.c jni/image_process_method.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/jni.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/string.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
@@ -42,19 +41,17 @@
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/linux/capability.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/pathconf.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/android/log.h \
- /Users/zhangdi/TourGuide/jni/libpng/png.h \
+ jni/libpng/png.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zlib.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zconf.h \
- /Users/zhangdi/TourGuide/jni/libpng/pngconf.h \
+ jni/libpng/pngconf.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/setjmp.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/machine/setjmp.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/time.h \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jpeglib.h \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jconfig.h \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jmorecfg.h \
- /Users/zhangdi/TourGuide/jni/image_utils.h
+ jni/libjpeg-turbo-1/jpeglib.h jni/libjpeg-turbo-1/jconfig.h \
+ jni/libjpeg-turbo-1/jmorecfg.h jni/image_utils.h
 
-/Users/zhangdi/TourGuide/jni/image_process_method.h:
+jni/image_process_method.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/jni.h:
 
@@ -138,13 +135,13 @@
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/android/log.h:
 
-/Users/zhangdi/TourGuide/jni/libpng/png.h:
+jni/libpng/png.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zlib.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/zconf.h:
 
-/Users/zhangdi/TourGuide/jni/libpng/pngconf.h:
+jni/libpng/pngconf.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/setjmp.h:
 
@@ -152,10 +149,10 @@
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/time.h:
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jpeglib.h:
+jni/libjpeg-turbo-1/jpeglib.h:
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jconfig.h:
+jni/libjpeg-turbo-1/jconfig.h:
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jmorecfg.h:
+jni/libjpeg-turbo-1/jmorecfg.h:
 
-/Users/zhangdi/TourGuide/jni/image_utils.h:
+jni/image_utils.h:

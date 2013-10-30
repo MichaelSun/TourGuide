@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
         } else {
             mCurrSelectedTabId = R.id.nearby_guide;
             if (getIntent() != null && ACTION_PUSH_CLICK.equals(getIntent().getAction())) {
-                mCurrSelectedTabId = R.id.profile_record;
+                mCurrSelectedTabId = R.id.record;
             }
         }
 
@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
 
     private void initUI() {
         mNearbyGuideBtn = findViewById(R.id.nearby_guide);
-        mProfileRecordBtn = findViewById(R.id.profile_record);
+        mProfileRecordBtn = findViewById(R.id.record);
         mSearchBtn = findViewById(R.id.search);
         mSettingBtn = findViewById(R.id.setting);
 
@@ -168,8 +168,8 @@ public class MainActivity extends BaseActivity {
             tans.hide(mSettingFragment);
             break;
 
-        case R.id.profile_record:
-            mCurrSelectedTabId = R.id.profile_record;
+        case R.id.record:
+            mCurrSelectedTabId = R.id.record;
             // mActionbar.setTitle(R.string.profile_record);
 
             mNearbyGuideBtn.setSelected(false);
@@ -261,7 +261,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(i);
                 AppRuntime.gInLogoutProcess.set(false);
             } else if (ACTION_PUSH_CLICK.equals(intent.getAction())) {
-                mCurrSelectedTabId = R.id.profile_record;
+                mCurrSelectedTabId = R.id.record;
                 switchToTab(mCurrSelectedTabId);
             }
         }

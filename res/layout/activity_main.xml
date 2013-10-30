@@ -6,134 +6,42 @@
     <LinearLayout
         android:id="@+id/botton_region"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/main_page_bottom_bar"
         android:orientation="horizontal" >
 
-        <RelativeLayout
+        <ImageView
             android:id="@+id/nearby_guide"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_page_tab_btn_bg"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp" >
+            android:scaleType="fitCenter"
+            android:src="@drawable/main_nearby" />
 
-            <ImageView
-                android:id="@+id/nearby_guide_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerHorizontal="true"
-                android:duplicateParentState="true"
-                android:scaleType="center"
-                android:src="@drawable/main_nearby" />
-
-            <TextView
-                android:id="@+id/nearby_guide_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/nearby_guide_img"
-                android:duplicateParentState="true"
-                android:gravity="center"
-                android:text="@string/nearby_guide"
-                android:textColor="@color/bottom_text_color" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <ImageView
             android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_page_tab_btn_bg"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp" >
+            android:scaleType="fitCenter"
+            android:src="@drawable/main_search" />
 
-            <ImageView
-                android:id="@+id/search_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerHorizontal="true"
-                android:duplicateParentState="true"
-                android:scaleType="center"
-                android:src="@drawable/main_search" />
-
-            <TextView
-                android:id="@+id/search_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/search_img"
-                android:duplicateParentState="true"
-                android:gravity="center"
-                android:text="@string/search"
-                android:textColor="@color/bottom_text_color" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/profile_record"
+        <ImageView
+            android:id="@+id/record"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_page_tab_btn_bg"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp" >
+            android:scaleType="fitCenter"
+            android:src="@drawable/main_my" />
 
-            <ImageView
-                android:id="@+id/profile_record_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerHorizontal="true"
-                android:duplicateParentState="true"
-                android:scaleType="center"
-                android:src="@drawable/main_my" />
-
-            <TextView
-                android:id="@+id/profile_record_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/profile_record_img"
-                android:duplicateParentState="true"
-                android:gravity="center"
-                android:text="@string/profile_record"
-                android:textColor="@color/bottom_text_color" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <ImageView
             android:id="@+id/setting"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_page_tab_btn_bg"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp" >
-
-            <ImageView
-                android:id="@+id/setting_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerHorizontal="true"
-                android:duplicateParentState="true"
-                android:scaleType="center"
-                android:src="@drawable/main_more" />
-
-            <TextView
-                android:id="@+id/setting_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/setting_img"
-                android:duplicateParentState="true"
-                android:gravity="center"
-                android:text="@string/setting"
-                android:textColor="@color/bottom_text_color" />
-        </RelativeLayout>
+            android:scaleType="fitCenter"
+            android:src="@drawable/main_setting" />
     </LinearLayout>
 
     <FrameLayout
@@ -141,7 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@id/botton_region"
-        android:layout_alignParentTop="true"
-        android:contentDescription="main_fragment_container" />
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

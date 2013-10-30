@@ -1,7 +1,5 @@
-/Users/zhangdi/TourGuide/obj/local/armeabi/objs/jpeg/jdatasrc.o: \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jdatasrc.c \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jinclude.h \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jconfig.h \
+obj/local/armeabi/objs/jpeg/jdatasrc.o: jni/libjpeg-turbo-1/jdatasrc.c \
+ jni/libjpeg-turbo-1/jinclude.h jni/libjpeg-turbo-1/jconfig.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/stdlib.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -24,13 +22,12 @@
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/memory.h \
  /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/stdio.h \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jpeglib.h \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jmorecfg.h \
- /Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jerror.h
+ jni/libjpeg-turbo-1/jpeglib.h jni/libjpeg-turbo-1/jmorecfg.h \
+ jni/libjpeg-turbo-1/jerror.h
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jinclude.h:
+jni/libjpeg-turbo-1/jinclude.h:
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jconfig.h:
+jni/libjpeg-turbo-1/jconfig.h:
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/stdlib.h:
 
@@ -76,8 +73,8 @@
 
 /Users/zhangdi/android/android-ndk-r8e/platforms/android-14/arch-arm/usr/include/stdio.h:
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jpeglib.h:
+jni/libjpeg-turbo-1/jpeglib.h:
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jmorecfg.h:
+jni/libjpeg-turbo-1/jmorecfg.h:
 
-/Users/zhangdi/TourGuide/jni/libjpeg-turbo-1/jerror.h:
+jni/libjpeg-turbo-1/jerror.h:

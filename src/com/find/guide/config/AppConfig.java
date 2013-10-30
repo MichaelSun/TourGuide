@@ -6,7 +6,7 @@ public class AppConfig {
 
     public static final boolean DEBUG = true;
 
-    public static final boolean DEBUG_MAP = false;
+    public static final boolean DEBUG_MAP = true;
 
     public static final String BMAP_KEY = DEBUG_MAP ? "0510f3eedc28fff4537f878386d9223d"
             : "C119632b163a0202be6ae1d71dd88d8e";

@@ -404,7 +404,6 @@ public class NearByFragment extends Fragment {
         if (mShowMode == ShowMode.MAP) {
             mListView.setVisibility(View.GONE);
             item.setTitle(R.string.menu_show_list);
-            item.setIcon(R.drawable.icon_action_list);
         } else {
             mListView.setVisibility(View.VISIBLE);
             if (mListView.getRefreshableView().getAdapter() == null) {
@@ -413,7 +412,6 @@ public class NearByFragment extends Fragment {
                 mGuideAdapter.notifyDataSetChanged();
             }
             item.setTitle(R.string.menu_show_map);
-            item.setIcon(R.drawable.icon_action_map);
         }
     }
 
