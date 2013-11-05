@@ -10,36 +10,41 @@ import com.plugin.internet.core.annotations.RestMethodUrl;
 @RestMethodUrl("user/applyForGuide")
 public class ApplyForGuideRequest extends PMRequestBase<ApplyForGuideResponse> {
 
-    @OptionalParam("goodAtScenic")
-    private String goodAtScenic;
+	@OptionalParam("goodAtScenic")
+	private String goodAtScenic;
 
-    @RequiredParam("birthday")
-    private long birthday;
+	@RequiredParam("birthday")
+	private long birthday;
 
-    @RequiredParam("beGuideYear")
-    private int beGuideYear;
+	@RequiredParam("beGuideYear")
+	private int beGuideYear;
 
-    @OptionalParam("guideCardUrl")
-    private String guideCardUrl;
+	@OptionalParam("guideCardUrl")
+	private String guideCardUrl;
 
-    @RequiredParam("guideCardId")
-    private String guideCardId;
+	@RequiredParam("guideCardId")
+	private String guideCardId;
 
-    @RequiredParam("location")
-    private String location;
+	@RequiredParam("location")
+	private String location;
 
-    @RequiredParam("city")
-    private int city;
+	@RequiredParam("city")
+	private int city;
 
-    public ApplyForGuideRequest(String goodAtScenic, long birthday, int beGuideYear, String guideCardUrl,
-            String guideCardId, String location, int city) {
-        this.goodAtScenic = goodAtScenic;
-        this.birthday = birthday;
-        this.beGuideYear = beGuideYear;
-        this.guideCardUrl = guideCardUrl;
-        this.guideCardId = guideCardId;
-        this.location = location;
-        this.city = city;
-    }
+	@RequiredParam("travelAgency")
+	private String travelAgency;
+
+	public ApplyForGuideRequest(String goodAtScenic, long birthday,
+			int beGuideYear, String guideCardUrl, String guideCardId,
+			String location, int city, String travelAgency) {
+		this.goodAtScenic = goodAtScenic;
+		this.birthday = birthday;
+		this.beGuideYear = beGuideYear;
+		this.guideCardUrl = guideCardUrl;
+		this.guideCardId = guideCardId;
+		this.location = location;
+		this.city = city;
+		this.travelAgency = travelAgency;
+	}
 
 }

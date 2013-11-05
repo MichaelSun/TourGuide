@@ -29,7 +29,6 @@ import com.plugin.common.utils.image.ImageDownloader.ImageFetchRequest;
 import com.plugin.common.utils.image.ImageDownloader.ImageFetchResponse;
 import com.polites.android.GestureImageView;
 
-@Deprecated
 public class WebGestureImageView extends GestureImageView {
     
     private static final String FILE_CONTENT = "file://";

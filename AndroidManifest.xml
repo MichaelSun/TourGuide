@@ -25,7 +25,6 @@
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    ￼
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -114,6 +113,16 @@
         </activity>
         <activity
             android:name="com.find.guide.activity.CropImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.find.guide.activity.ChangePasswordActivity"
+            android:label="@string/change_pwd_title"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.find.guide.activity.ViewLargeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>

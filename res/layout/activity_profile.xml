@@ -65,7 +65,7 @@
             android:layout_toRightOf="@id/name_label"
             android:background="@null"
             android:gravity="right"
-            android:maxLength="20"
+            android:maxLength="10"
             android:textColor="@color/default_text_color"
             android:textSize="18sp" />
     </RelativeLayout>

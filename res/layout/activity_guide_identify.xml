@@ -132,6 +132,49 @@
             android:paddingTop="8dp" >
 
             <TextView
+                android:id="@+id/guide_identify_agency_label"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/travel_agency"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/guide_identify_agency_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/guide_identify_agency_label"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/travel_agency_hint"
+                android:maxLength="20"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/default_hint_color"
+                android:textCursorDrawable="@null"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle"
+            android:minHeight="50dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
+
+            <TextView
                 android:id="@+id/guide_identify_scenic_label"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"

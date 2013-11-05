@@ -43,8 +43,9 @@
 
     <!-- 设置 -->
     <string name="setting">设置</string>
-    <string name="setting_login">登录</string>
+    <string name="setting_login">登        录</string>
     <string name="setting_profile">个人主页</string>
+    <string name="setting_change_pwd">修改密码</string>
     <string name="setting_guide_authentication">我是导游</string>
     <string name="setting_update">检查更新</string>
     <string name="setting_feedback">意见反馈</string>
@@ -68,18 +69,18 @@
     <string name="register_phone">手机号</string>
     <string name="register_phone_hint">请输入手机号</string>
     <string name="register_password">密码</string>
-    <string name="register_password_hint">请输入密码</string>
+    <string name="register_password_hint">请输入6-30位密码</string>
     <string name="register_password_confirm">密码确认</string>
     <string name="register_password_confirm_hint">请再次输入密码</string>
     <string name="register_name">姓名</string>
-    <string name="register_name_hint">请输入姓名</string>
+    <string name="register_name_hint">请输入1-10位姓名</string>
     <string name="register_verification_code">验证码</string>
     <string name="register_verification_code_hint">请输入验证码</string>
     <string name="register_send_verify_code">发送</string>
     <string name="register_phone_empty">请输入电话号码</string>
-    <string name="register_password_empty">请输入密码</string>
+    <string name="register_password_empty">输入的密码格式不正确</string>
     <string name="register_password_diff">两次输入的密码不一致</string>
-    <string name="register_name_empty">请输入姓名</string>
+    <string name="register_name_empty">输入姓名格式不正确</string>
     <string name="register_verify_code_empty">请输入验证码</string>
     <string name="registering">注册中...</string>
     <string name="register_failed">注册失败</string>
@@ -93,6 +94,8 @@
     <string name="birthday_hint">请输入出生日期</string>
     <string name="be_guide_year">领证年份</string>
     <string name="be_guide_year_hint">请输入领证年份</string>
+    <string name="travel_agency">旅行社</string>
+    <string name="travel_agency_hint">请输入所属旅行社</string>
     <string name="good_at_scenic">擅长景区</string>
     <string name="good_at_scenic_hint">擅长的景区，用空格分开</string>
     <string name="submit_check">提交审核</string>
@@ -119,6 +122,8 @@
     <string name="booking_cannot_booking_yourself">您不能预约自己</string>
     <string name="booking_start_time">出发时间</string>
     <string name="booking_end_time">结束时间</string>
+    <string name="booking_statisfaction">简短评价</string>
+    <string name="booking_statisfaction_hint">评价此导游</string>
     <string name="immediately_booking">立即预约</string>
     <string name="call_dialog_message">确定呼叫%s吗？</string>
     <string name="call_dialog_positive">确定</string>
@@ -139,7 +144,7 @@
     <string name="in_cancel">取消预约中...</string>
     <string name="cancel_invite_failed">取消预约失败</string>
     <string name="in_statisfaction">评价中...</string>
-    <string name="statisfaction_failed">评价失败</string>
+    <string name="satisfaction_failed">评价失败</string>
     <string name="accepting_invite">接受预约中...</string>
     <string name="accept_invite_failed">接受预约失败</string>
     <string name="refusing_invite">忽略预约中...</string>
@@ -161,5 +166,14 @@
 
     <!-- 导游历史 -->
     <string name="guide_record_title">导游历史</string>
+
+    <!-- 修改密码 -->
+    <string name="change_pwd_title">修改密码</string>
+    <string name="old_pwd">旧密码</string>
+    <string name="old_pwd_hint">6-30位数字或字母</string>
+    <string name="new_pwd">新密码</string>
+    <string name="new_pwd_hint">6-30位数字或字母</string>
+    <string name="new_pwd_confirm">确认密码</string>
+    <string name="new_pwd_confirm_hint">请再次输入新密码</string>
 
 </resources>

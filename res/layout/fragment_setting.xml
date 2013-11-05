@@ -67,6 +67,33 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/setting_change_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_middle"
+            android:clickable="true" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:singleLine="true"
+                android:text="@string/setting_change_pwd"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/icon_arr" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/setting_guide_authentication"
             android:layout_width="match_parent"
             android:layout_height="50dp"

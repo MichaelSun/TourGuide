@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.baidu.android.pushservice.PushManager;
 import com.find.guide.R;
+import com.find.guide.activity.ChangePasswordActivity;
 import com.find.guide.activity.GuideIdentifyActivity;
 import com.find.guide.activity.LoginActivity;
 import com.find.guide.activity.ProfileActivity;
@@ -34,247 +34,279 @@ import com.umeng.update.UpdateResponse;
 
 public class SettingFragment extends Fragment implements OnClickListener {
 
-    private View mLoginRegisterView;
-    private View mProfileView;
-    private View mGuideAuthenticationView;
-    private View mUpdateView;
-    private View mFeedBackView;
-    private View mLogoutView;
-    private View mGuideArrowView;
-    private Switch mGuideSwitch;
+	private View mLoginRegisterView;
+	private View mProfileView;
+	private View mChangePwdView;
+	private View mGuideAuthenticationView;
+	private View mUpdateView;
+	private View mFeedBackView;
+	private View mLogoutView;
+	private View mGuideArrowView;
+	private Switch mGuideSwitch;
 
-    private Dialog mDialog = null;
+	private Dialog mDialog = null;
 
-    private SettingManager mSettingManager;
+	private SettingManager mSettingManager;
 
-    private PushHelper mPushHelper = null;
-    private Handler mHandler = new Handler();
+	private PushHelper mPushHelper = null;
+	private Handler mHandler = new Handler();
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mSettingManager = SettingManager.getInstance();
-        mPushHelper = new PushHelper(TourGuideApplication.getInstance());
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mSettingManager = SettingManager.getInstance();
+		mPushHelper = new PushHelper(TourGuideApplication.getInstance());
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, null);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_setting, null);
 
-        mLoginRegisterView = view.findViewById(R.id.setting_login);
-        mProfileView = view.findViewById(R.id.setting_profile);
-        mGuideAuthenticationView = view.findViewById(R.id.setting_guide_authentication);
-        mUpdateView = view.findViewById(R.id.setting_update);
-        mFeedBackView = view.findViewById(R.id.setting_feedback);
-        mLogoutView = view.findViewById(R.id.setting_logout);
-        mGuideArrowView = view.findViewById(R.id.guide_arrow);
-        mGuideSwitch = (Switch) view.findViewById(R.id.guide_switch);
+		mLoginRegisterView = view.findViewById(R.id.setting_login);
+		mProfileView = view.findViewById(R.id.setting_profile);
+		mChangePwdView = view.findViewById(R.id.setting_change_pwd);
+		mGuideAuthenticationView = view
+				.findViewById(R.id.setting_guide_authentication);
+		mUpdateView = view.findViewById(R.id.setting_update);
+		mFeedBackView = view.findViewById(R.id.setting_feedback);
+		mLogoutView = view.findViewById(R.id.setting_logout);
+		mGuideArrowView = view.findViewById(R.id.guide_arrow);
+		mGuideSwitch = (Switch) view.findViewById(R.id.guide_switch);
 
-        mLoginRegisterView.setOnClickListener(this);
-        mProfileView.setOnClickListener(this);
-        mGuideAuthenticationView.setOnClickListener(this);
-        mUpdateView.setOnClickListener(this);
-        mFeedBackView.setOnClickListener(this);
-        mLogoutView.setOnClickListener(this);
+		mLoginRegisterView.setOnClickListener(this);
+		mProfileView.setOnClickListener(this);
+		mChangePwdView.setOnClickListener(this);
+		mGuideAuthenticationView.setOnClickListener(this);
+		mUpdateView.setOnClickListener(this);
+		mFeedBackView.setOnClickListener(this);
+		mLogoutView.setOnClickListener(this);
 
-        mGuideSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    SettingManager.getInstance().setGuideMode(0);
-                } else {
-                    SettingManager.getInstance().setGuideMode(1);
-                }
-            }
-        });
+		mGuideSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				if (isChecked) {
+					SettingManager.getInstance().setGuideMode(0);
+				} else {
+					SettingManager.getInstance().setGuideMode(1);
+				}
+			}
+		});
 
-        return view;
-    }
+		return view;
+	}
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+	}
 
-    @Override
-    public void onDestroy() {
-        dismissDialog();
-        TipsDialog.getInstance().dismiss();
-        if (mPushHelper != null) {
-            mPushHelper.destroy();
-            mPushHelper = null;
-        }
-        super.onDestroy();
-    }
+	@Override
+	public void onDestroy() {
+		dismissDialog();
+		TipsDialog.getInstance().dismiss();
+		if (mPushHelper != null) {
+			mPushHelper.destroy();
+			mPushHelper = null;
+		}
+		super.onDestroy();
+	}
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            checkVisibility();
-        }
-    }
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if (!hidden) {
+			checkVisibility();
+		}
+	}
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        checkVisibility();
-    }
+	@Override
+	public void onStart() {
+		super.onStart();
+		checkVisibility();
+	}
 
-    private void checkVisibility() {
-        if (mSettingManager.getUserId() < 0) {
-            mLoginRegisterView.setVisibility(View.VISIBLE);
-            mProfileView.setVisibility(View.GONE);
-            mGuideAuthenticationView.setVisibility(View.GONE);
-            mLogoutView.setVisibility(View.GONE);
-            mFeedBackView.setBackgroundResource(R.drawable.bg_bottom);
-        } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURIST) {
-            mLoginRegisterView.setVisibility(View.GONE);
-            mProfileView.setVisibility(View.VISIBLE);
-            mGuideAuthenticationView.setVisibility(View.VISIBLE);
-            mLogoutView.setVisibility(View.VISIBLE);
-            mProfileView.setBackgroundResource(R.drawable.bg_top);
-            mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
-            mGuideArrowView.setVisibility(View.VISIBLE);
-            mGuideSwitch.setVisibility(View.GONE);
-            mGuideAuthenticationView.setOnClickListener(this);
-        } else {
-            mLoginRegisterView.setVisibility(View.GONE);
-            mProfileView.setVisibility(View.VISIBLE);
-            mGuideAuthenticationView.setVisibility(View.VISIBLE);
-            mLogoutView.setVisibility(View.VISIBLE);
-            mProfileView.setBackgroundResource(R.drawable.bg_top);
-            mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
-            mGuideArrowView.setVisibility(View.GONE);
-            mGuideSwitch.setVisibility(View.VISIBLE);
-            mGuideAuthenticationView.setOnClickListener(null);
-            if (SettingManager.getInstance().getGuideMode() == 0) {
-                mGuideSwitch.setChecked(true);
-            } else {
-                mGuideSwitch.setChecked(false);
-            }
-        }
-    }
+	private void checkVisibility() {
+		if (mSettingManager.getUserId() < 0) {
+			mLoginRegisterView.setVisibility(View.VISIBLE);
+			mProfileView.setVisibility(View.GONE);
+			mChangePwdView.setVisibility(View.GONE);
+			mGuideAuthenticationView.setVisibility(View.GONE);
+			mLogoutView.setVisibility(View.GONE);
+			mFeedBackView.setBackgroundResource(R.drawable.bg_bottom);
+		} else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURIST) {
+			mLoginRegisterView.setVisibility(View.GONE);
+			mProfileView.setVisibility(View.VISIBLE);
+			mChangePwdView.setVisibility(View.VISIBLE);
+			mGuideAuthenticationView.setVisibility(View.VISIBLE);
+			mLogoutView.setVisibility(View.VISIBLE);
+			mProfileView.setBackgroundResource(R.drawable.bg_top);
+			mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
+			mGuideArrowView.setVisibility(View.VISIBLE);
+			mGuideSwitch.setVisibility(View.GONE);
+			mGuideAuthenticationView.setOnClickListener(this);
+		} else {
+			mLoginRegisterView.setVisibility(View.GONE);
+			mProfileView.setVisibility(View.VISIBLE);
+			mChangePwdView.setVisibility(View.VISIBLE);
+			mGuideAuthenticationView.setVisibility(View.VISIBLE);
+			mLogoutView.setVisibility(View.VISIBLE);
+			mProfileView.setBackgroundResource(R.drawable.bg_top);
+			mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
+			mGuideArrowView.setVisibility(View.GONE);
+			mGuideSwitch.setVisibility(View.VISIBLE);
+			mGuideAuthenticationView.setOnClickListener(null);
+			if (SettingManager.getInstance().getGuideMode() == 0) {
+				mGuideSwitch.setChecked(true);
+			} else {
+				mGuideSwitch.setChecked(false);
+			}
+		}
+	}
 
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
+	@Override
+	public void onStop() {
+		super.onStop();
+	}
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-        case R.id.setting_login:
-            login();
-            break;
-        case R.id.setting_profile:
-            profile();
-            break;
-        case R.id.setting_guide_authentication:
-            guideIdentify();
-            break;
-        case R.id.setting_update:
-            checkUpdate();
-            break;
-        case R.id.setting_feedback:
-            feedback();
-            break;
-        case R.id.setting_logout:
-            logout();
-            break;
-        }
-    }
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.setting_login:
+			login();
+			break;
+		case R.id.setting_profile:
+			profile();
+			break;
+		case R.id.setting_change_pwd:
+			changePassword();
+			break;
+		case R.id.setting_guide_authentication:
+			guideIdentify();
+			break;
+		case R.id.setting_update:
+			checkUpdate();
+			break;
+		case R.id.setting_feedback:
+			feedback();
+			break;
+		case R.id.setting_logout:
+			logout();
+			break;
+		}
+	}
 
-    private void login() {
-        Intent intent = new Intent(TourGuideApplication.getInstance(), LoginActivity.class);
-        startActivity(intent);
-    }
+	private void login() {
+		Intent intent = new Intent(TourGuideApplication.getInstance(),
+				LoginActivity.class);
+		startActivity(intent);
+	}
 
-    private void guideIdentify() {
-        Intent intent = new Intent(TourGuideApplication.getInstance(), GuideIdentifyActivity.class);
-        startActivity(intent);
-    }
+	private void guideIdentify() {
+		Intent intent = new Intent(TourGuideApplication.getInstance(),
+				GuideIdentifyActivity.class);
+		startActivity(intent);
+	}
 
-    private void checkUpdate() {
-        if (getActivity() != null) {
-            UmengUpdateAgent.forceUpdate(getActivity());
-            UmengUpdateAgent.setUpdateAutoPopup(false);
-            UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+	private void checkUpdate() {
+		if (getActivity() != null) {
+			UmengUpdateAgent.forceUpdate(getActivity());
+			UmengUpdateAgent.setUpdateAutoPopup(false);
+			UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
 
-                @Override
-                public void onUpdateReturned(int arg0, UpdateResponse arg1) {
-                    if (getActivity() == null)
-                        return;
-                    switch (arg0) {
-                    case 0: // has update
-                        UmengUpdateAgent.showUpdateDialog(getActivity(), arg1);
-                        break;
-                    case 1: // has no update
-                        Toast.makeText(getActivity(), "没有更新", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2: // none wifi
-                        Toast.makeText(getActivity(), "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 3: // time out
-                        Toast.makeText(getActivity(), "超时", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                }
-            });
-        }
-    }
+				@Override
+				public void onUpdateReturned(int arg0, UpdateResponse arg1) {
+					if (getActivity() == null)
+						return;
+					switch (arg0) {
+					case 0: // has update
+						UmengUpdateAgent.showUpdateDialog(getActivity(), arg1);
+						break;
+					case 1: // has no update
+						TipsDialog.getInstance().show(getActivity(),
+								R.drawable.tips_fail, "已经是最新版本", true);
+						break;
+					case 2: // none wifi
+						TipsDialog.getInstance().show(getActivity(),
+								R.drawable.tips_fail, "没有wifi连接， 请先连接wifi",
+								true);
+						break;
+					case 3: // time out
+						TipsDialog.getInstance().show(getActivity(),
+								R.drawable.tips_fail, "请求超时", true);
+						break;
+					}
+				}
+			});
+		}
+	}
 
-    private void feedback() {
-        FeedbackAgent agent = new FeedbackAgent(getActivity());
-        agent.startFeedbackActivity();
-    }
+	private void feedback() {
+		FeedbackAgent agent = new FeedbackAgent(getActivity());
+		agent.startFeedbackActivity();
+	}
 
-    private void profile() {
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        startActivity(intent);
-    }
+	private void profile() {
+		Intent intent = new Intent(getActivity(), ProfileActivity.class);
+		startActivity(intent);
+	}
 
-    private void logout() {
-        dismissDialog();
-        mDialog = new AlertDialog.Builder(getActivity()).setMessage(R.string.logout_dialog_message)
-                .setPositiveButton(R.string.logout_dialog_positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (getActivity() != null) {
-                            TipsDialog.getInstance()
-                                    .show(getActivity(), R.drawable.tips_loading, "登出中...", true, false);
-                        }
-                        mPushHelper.AsyncUnbindDevice(mUnbindDeviceListener);
-                    }
-                }).setNegativeButton(R.string.logout_dialog_negative, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+	private void changePassword() {
+		Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
+		startActivity(intent);
+	}
 
-                    }
-                }).create();
-        mDialog.show();
-    }
+	private void logout() {
+		dismissDialog();
+		mDialog = new AlertDialog.Builder(getActivity())
+				.setMessage(R.string.logout_dialog_message)
+				.setPositiveButton(R.string.logout_dialog_positive,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								if (getActivity() != null) {
+									TipsDialog.getInstance().show(
+											getActivity(),
+											R.drawable.tips_loading, "登出中...",
+											true, false);
+								}
+								mPushHelper
+										.AsyncUnbindDevice(mUnbindDeviceListener);
+							}
+						})
+				.setNegativeButton(R.string.logout_dialog_negative,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
 
-    private UnbindDeviceListener mUnbindDeviceListener = new UnbindDeviceListener() {
-        @Override
-        public void unbindDevice(final int result) {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    TipsDialog.getInstance().dismiss();
-                    checkVisibility();
-                    SettingManager.getInstance().clearAll();
-                    PushManager.stopWork(TourGuideApplication.getInstance());
-                }
-            });
-        }
-    };
+							}
+						}).create();
+		mDialog.show();
+	}
 
-    private void dismissDialog() {
-        if (mDialog != null && mDialog.isShowing()) {
-            mDialog.dismiss();
-            mDialog = null;
-        }
-    }
+	private UnbindDeviceListener mUnbindDeviceListener = new UnbindDeviceListener() {
+		@Override
+		public void unbindDevice(final int result) {
+			mHandler.post(new Runnable() {
+				@Override
+				public void run() {
+					TipsDialog.getInstance().dismiss();
+					checkVisibility();
+					SettingManager.getInstance().clearAll();
+					PushManager.stopWork(TourGuideApplication.getInstance());
+				}
+			});
+		}
+	};
+
+	private void dismissDialog() {
+		if (mDialog != null && mDialog.isShowing()) {
+			mDialog.dismiss();
+			mDialog = null;
+		}
+	}
 
 }
