@@ -61,7 +61,7 @@
             <EditText
                 android:id="@+id/guide_card_id_et"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
@@ -70,50 +70,9 @@
                 android:background="@null"
                 android:gravity="right|center_vertical"
                 android:hint="@string/guide_card_no_hint"
-                android:inputType="number"
+                android:maxLength="30"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:singleLine="true"
-                android:textColor="@color/default_text_color"
-                android:textColorHint="@color/default_hint_color"
-                android:textCursorDrawable="@null"
-                android:textSize="18sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/bg_middle" >
-
-            <TextView
-                android:id="@+id/guide_identify_be_guide_year_label"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="@string/be_guide_year"
-                android:textColor="@color/default_text_color"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/guide_identify_be_guide_year_et"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/guide_identify_be_guide_year_label"
-                android:background="@null"
-                android:gravity="right|center_vertical"
-                android:hint="@string/be_guide_year_hint"
-                android:inputType="number"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:singleLine="true"
                 android:textColor="@color/default_text_color"
                 android:textColorHint="@color/default_hint_color"
                 android:textCursorDrawable="@null"
@@ -160,6 +119,51 @@
                 android:textColor="@color/default_text_color"
                 android:textColorHint="@color/default_hint_color"
                 android:textCursorDrawable="@null"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/guide_identify_be_guide_year_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle" >
+
+            <TextView
+                android:id="@+id/guide_identify_be_guide_year_label"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/be_guide_year"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/guide_identify_be_guide_year_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/guide_identify_be_guide_year_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/guide_identify_be_guide_year_arrow"
+                android:layout_toRightOf="@id/guide_identify_be_guide_year_label"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:text="2012"
+                android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -239,8 +243,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@id/guide_identify_birthday_arrow"
                 android:layout_toRightOf="@id/guide_identify_birthday_label"
                 android:gravity="right|center_vertical"

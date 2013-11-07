@@ -71,6 +71,7 @@ public class CropImageActivity extends Activity implements OnClickListener {
 
 	private void initUI() {
 		mImageView = (GestureImageView) findViewById(R.id.image);
+		mImageView.setIsCrop(true);
 
 		findViewById(R.id.crop_cancel).setOnClickListener(this);
 		findViewById(R.id.crop_save).setOnClickListener(this);
