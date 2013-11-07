@@ -53,6 +53,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 	private View mEndTimeView;
 	private Button mBookingBtn;
 	private TextView mEvaluateNumTv;
+	private TextView mTravelAgencyTv;
 	private View mStar1;
 	private View mStar2;
 	private View mStar3;
@@ -103,6 +104,7 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 		mStar4 = findViewById(R.id.guide_star4);
 		mStar5 = findViewById(R.id.guide_star5);
 		mEvaluateNumTv = (TextView) findViewById(R.id.star_evaluate_num);
+		mTravelAgencyTv = (TextView) findViewById(R.id.travel_agency);
 
 		mGuideHeaderIv.setOnClickListener(this);
 		mGuideHistoryView.setOnClickListener(this);
@@ -124,11 +126,12 @@ public class BookingActivity extends BaseActivity implements OnClickListener {
 			mGoodAtScenicTv.setText(mTourGuide.getGoodAtScenic());
 			mGuideCardIdTv.setText(mTourGuide.getGuideCardId());
 			if (mTourGuide.getEvaluateCount() > 0) {
-				mEvaluateNumTv.setText("累计" + mTourGuide.getEvaluateCount()
+				mEvaluateNumTv.setText(mTourGuide.getEvaluateCount()
 						+ "次评价");
 			} else {
 				mEvaluateNumTv.setText("暂无评价");
 			}
+			mTravelAgencyTv.setText(mTourGuide.getTravelAgency());
 			int star = 0;
 			if (mTourGuide.getEvaluateCount() > 0) {
 				star = mTourGuide.getEvaluateScore()

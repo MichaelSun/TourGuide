@@ -4,7 +4,7 @@ import com.plugin.common.utils.UtilsConfig;
 
 public class AppConfig {
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	public static final boolean DEBUG_MAP = false;
 

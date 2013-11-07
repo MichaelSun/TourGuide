@@ -49,16 +49,16 @@
                 android:src="@drawable/icon_male" />
 
             <TextView
-                android:id="@+id/star_evaluate_num"
+                android:id="@+id/travel_agency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/guide_name_tv"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
+                android:singleLine="true"
                 android:layout_toRightOf="@id/guide_header_iv"
-                android:text="10次评价"
                 android:textColor="@color/default_text_color"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <View
                 android:id="@+id/guide_star1"

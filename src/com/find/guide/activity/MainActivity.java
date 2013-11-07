@@ -75,6 +75,7 @@ public class MainActivity extends BaseActivity {
 
         switchToTab(mCurrSelectedTabId);
 
+        UmengUpdateAgent.setUpdateAutoPopup(true);
         UmengUpdateAgent.update(this);
 
         PushSettings.enableDebugMode(getApplicationContext(), AppConfig.DEBUG);
