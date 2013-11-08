@@ -92,6 +92,7 @@ public class RecordFragment extends Fragment {
                 } else {
                     if (!mIsRefreshing) {
                         mIsRefreshing = true;
+                        checkAdapter();
                         if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE
                                 && mSettingManager.getGuideMode() == 0) {
                             mGuideHelper.getHistoricalGuideEvents(0, 0, ROWS, mGetHistoricalGuideEventsListener);
@@ -152,7 +153,7 @@ public class RecordFragment extends Fragment {
                 showLoginDialog();
             }
             setTitle();
-            refreshRecord();
+            autoRefreshRecord();
 
             NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
         }
@@ -172,7 +173,21 @@ public class RecordFragment extends Fragment {
         ((BaseActivity) getActivity()).getActionBar().setTitle(title);
     }
 
-    private void refreshRecord() {
+    private void autoRefreshRecord() {
+        if (mSettingManager.getUserId() > 0) {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mListView.setRefreshing(true);
+                }
+            }, 300);
+        } else {
+            mIsRefreshing = false;
+            mListView.onRefreshComplete();
+        }
+    }
+
+    private void checkAdapter() {
         if (mSettingManager.getUserId() <= 0) {
             if (mRecordAdapter != null) {
                 mInviteEvents.clear();
@@ -193,18 +208,6 @@ public class RecordFragment extends Fragment {
                 mInviteEvents.clear();
                 mListView.setAdapter(mRecordAdapter);
             }
-        }
-
-        if (mSettingManager.getUserId() > 0) {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mListView.setRefreshing(true);
-                }
-            }, 300);
-        } else {
-            mIsRefreshing = false;
-            mListView.onRefreshComplete();
         }
     }
 
@@ -234,9 +237,9 @@ public class RecordFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_LOGIN) {
                 setTitle();
-                refreshRecord();
+                autoRefreshRecord();
             } else if (requestCode == REQUEST_CODE_GUIDE_RECORD || requestCode == REQUEST_CODE_INVITE_RECORD) {
-                refreshRecord();
+                autoRefreshRecord();
             }
         }
     }

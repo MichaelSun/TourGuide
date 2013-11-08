@@ -56,7 +56,7 @@ public class UtilsConfig {
         }
     }
 
-    public static String jsonFormatter(String uglyJSONString){
+    public static String jsonFormatter(String uglyJSONString) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonParser jp = new JsonParser();
         JsonElement je = jp.parse(uglyJSONString);
