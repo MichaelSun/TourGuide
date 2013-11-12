@@ -6,12 +6,44 @@ import com.plugin.internet.core.json.JsonProperty;
 public class RegisterResponse extends ResponseBase {
 
     @JsonProperty("userId")
-    public long userId;
+    public int userId;
 
-    @JsonProperty("ticket")
-    public String ticket;
+    @JsonProperty("userName")
+    public String userName;
 
-    @JsonProperty("userSecretKey")
-    public String userSecretKey;
+    @JsonProperty("mobile")
+    public String mobile;
+
+    @JsonProperty("gender")
+    public int gender;
+
+    @JsonProperty("userType")
+    public int userType;
+
+    @JsonProperty("headUrl")
+    public String headUrl;
+
+    @JsonProperty("userPassport")
+    public UserPassport userPassport;
+
+    public static class UserPassport {
+        @JsonProperty("userId")
+        public int userId;
+
+        @JsonProperty("ticket")
+        public String ticket;
+
+        @JsonProperty("appId")
+        public int appId;
+
+        @JsonProperty("accountOrigin")
+        public int accountOrigin;
+
+        @JsonProperty("createTime")
+        public long createTime;
+
+        @JsonProperty("userSecretKey")
+        public String userSecretKey;
+    }
 
 }

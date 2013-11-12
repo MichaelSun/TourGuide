@@ -121,11 +121,12 @@ public class UserHelper {
                     RegisterRequest request = new RegisterRequest(mobileNum, password, name, verifyCode, gender);
                     RegisterResponse response = InternetUtils.request(mContext, request);
                     if (response != null) {
-                        if (response.userId > 0 && !TextUtils.isEmpty(response.ticket)
-                                && !TextUtils.isEmpty(response.userSecretKey)) {
+                        if (response.userId > 0 && response.userPassport != null
+                                && !TextUtils.isEmpty(response.userPassport.ticket)
+                                && !TextUtils.isEmpty(response.userPassport.userSecretKey)) {
                             SettingManager.getInstance().setUserId(response.userId);
-                            SettingManager.getInstance().setTicket(response.ticket);
-                            SettingManager.getInstance().setSecretKey(response.userSecretKey);
+                            SettingManager.getInstance().setTicket(response.userPassport.ticket);
+                            SettingManager.getInstance().setSecretKey(response.userPassport.userSecretKey);
                             SettingManager.getInstance().setUserName(name);
                             SettingManager.getInstance().setUserGender(gender);
                             SettingManager.getInstance().setUserPhoneNum(mobileNum);
