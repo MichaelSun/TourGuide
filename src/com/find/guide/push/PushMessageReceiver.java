@@ -12,6 +12,7 @@ import com.baidu.android.pushservice.PushConstants;
 import com.find.guide.activity.MainActivity;
 import com.find.guide.config.AppConfig;
 import com.find.guide.setting.SettingManager;
+import com.find.guide.user.Tourist;
 import com.plugin.internet.core.JsonUtils;
 
 /**
@@ -35,6 +36,10 @@ public class PushMessageReceiver extends BroadcastReceiver {
             if (!TextUtils.isEmpty(message) && SettingManager.getInstance().getUserId() > 0) {
                 Message msg = JsonUtils.parse(message, Message.class);
                 if (msg != null && msg.toId == SettingManager.getInstance().getUserId()) {
+                    if (SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURGUIDE
+                            && SettingManager.getInstance().getGuideMode() == 1) {
+                        SettingManager.getInstance().setGuideMode(0);
+                    }
                     NotificationHelper.getInstance(context).notifyMessage(msg);
                 }
             }

@@ -27,19 +27,34 @@
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/guide_name"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/name_arrow"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
+                android:src="@drawable/icon_arr" />
+
+            <TextView
+                android:id="@+id/guide_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/name_arrow"
                 android:layout_toRightOf="@id/guide_label"
                 android:gravity="right"
-                android:text="张三"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/phone_layout"
@@ -78,10 +93,16 @@
                 android:layout_toLeftOf="@id/phone_arrow"
                 android:layout_toRightOf="@id/phone_label"
                 android:gravity="right"
-                android:text="128318231"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/destination_layout"
@@ -111,10 +132,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@+id/destination_label"
                 android:gravity="right"
-                android:text="八达岭长城"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -140,10 +167,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/start_time_label"
                 android:gravity="right"
-                android:text="2013/10/12"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/end_time_layout"
@@ -170,10 +203,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/end_time_label"
                 android:gravity="right"
-                android:text="2013/10/12"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <LinearLayout
             android:id="@+id/statisfaction_layout"

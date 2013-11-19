@@ -45,6 +45,13 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -102,6 +109,13 @@
             </RadioGroup>
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
+
         <RelativeLayout
             android:id="@+id/start_time_layout"
             android:layout_width="match_parent"
@@ -143,6 +157,13 @@
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/end_time_layout"

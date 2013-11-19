@@ -105,11 +105,11 @@
     <string name="gender_unknown">未知</string>
     <string name="gender_any">不限</string>
 
-    <!-- 预约 -->
-    <string name="booking_title">预约导游</string>
-    <string name="city">城市</string>
+    <!-- 导游个人页 -->
+    <string name="guide_profile_title">导游信息</string>
+    <string name="guide_city">导游城市</string>
     <string name="good_scenic">擅长景区</string>
-    <string name="guide_history">导游历史</string>
+    <string name="guide_history">导游记录</string>
     <string name="guide_card_id">导游证号</string>
     <string name="goto_booking">我要预约</string>
     <string name="in_booking">预约导游中...</string>
@@ -165,7 +165,7 @@
     <string name="menu_save">保存</string>
 
     <!-- 导游历史 -->
-    <string name="guide_record_title">导游历史</string>
+    <string name="guide_record_title">导游记录</string>
 
     <!-- 修改密码 -->
     <string name="change_pwd_title">修改密码</string>

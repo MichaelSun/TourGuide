@@ -39,6 +39,13 @@
                 android:src="@drawable/default_header" />
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -78,6 +85,13 @@
                 android:textCursorDrawable="@null"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -121,6 +135,13 @@
                 android:textCursorDrawable="@null"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/guide_identify_be_guide_year_layout"
@@ -167,6 +188,13 @@
                 android:textSize="18sp" />
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -203,11 +231,19 @@
                 android:hint="@string/good_at_scenic_hint"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
+                android:maxLines="30"
                 android:textColor="@color/default_text_color"
                 android:textColorHint="@color/default_hint_color"
                 android:textCursorDrawable="@null"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/guide_identify_birthday_layout"
@@ -253,6 +289,13 @@
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/city_layout"

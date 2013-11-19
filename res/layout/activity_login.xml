@@ -49,6 +49,13 @@
                 android:textSize="19sp" />
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/card_line" />
+
         <RelativeLayout
             android:id="@+id/login_password_rl"
             android:layout_width="match_parent"

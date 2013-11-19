@@ -95,6 +95,7 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
         mButton1.setOnClickListener(this);
         mButton2.setOnClickListener(this);
         mPhoneLayout.setOnClickListener(this);
+        mGuideNameLayout.setOnClickListener(this);
 
         mGuideName.setText(mInviteEvent.getGuideName());
         mPhoneTv.setText(mInviteEvent.getMobile());
@@ -192,7 +193,16 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
         case R.id.phone_layout:
             contactGuide();
             break;
+        case R.id.guide_layout:
+            guideProfile();
+            break;
         }
+    }
+
+    private void guideProfile() {
+        Intent intent = new Intent(this, GuideProfileActivity.class);
+        intent.putExtra(GuideProfileActivity.INTENT_EXTRA_GUIDE_ID, mInviteEvent.getGuideId());
+        startActivity(intent);
     }
 
     private void contactGuide() {

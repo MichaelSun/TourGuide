@@ -31,7 +31,7 @@ import com.baidu.mapapi.map.MyLocationOverlay;
 import com.baidu.mapapi.map.MyLocationOverlay.LocationMode;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.find.guide.R;
-import com.find.guide.activity.BookingActivity;
+import com.find.guide.activity.GuideProfileActivity;
 import com.find.guide.activity.BroadcastActivity;
 import com.find.guide.adapter.GuideAdapter;
 import com.find.guide.app.TourGuideApplication;
@@ -74,8 +74,8 @@ public class NearByFragment extends Fragment {
 
 	private Handler mHandler = new Handler(Looper.getMainLooper());
 
-	private int ROWS = 51;
-	private double DIST = 50;
+	private int ROWS = 101;
+	private double DIST = 100;
 
 	private boolean mIsGettingNearBy = false;
 
@@ -135,8 +135,8 @@ public class NearByFragment extends Fragment {
 				if (pos >= 0 && pos < mTourGuides.size()) {
 					TourGuide guide = mTourGuides.get(pos);
 					Intent intent = new Intent(getActivity(),
-							BookingActivity.class);
-					intent.putExtra(BookingActivity.INTENT_EXTRA_GUIDE, guide);
+							GuideProfileActivity.class);
+					intent.putExtra(GuideProfileActivity.INTENT_EXTRA_GUIDE, guide);
 					startActivity(intent);
 				}
 			}
@@ -457,8 +457,8 @@ public class NearByFragment extends Fragment {
 
 	private void bookingGuide(TourGuide guide) {
 		Intent intent = new Intent(TourGuideApplication.getInstance(),
-				BookingActivity.class);
-		intent.putExtra(BookingActivity.INTENT_EXTRA_GUIDE, guide);
+				GuideProfileActivity.class);
+		intent.putExtra(GuideProfileActivity.INTENT_EXTRA_GUIDE, guide);
 		startActivity(intent);
 	}
 

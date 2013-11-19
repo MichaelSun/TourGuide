@@ -88,6 +88,13 @@ public class RecordFragment extends Fragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 if (mSettingManager.getUserId() <= 0) {
+                    if (mRecordAdapter != null) {
+                        mInviteEvents.clear();
+                        mGuideEvents.clear();
+                        mRecordAdapter.notifyDataSetChanged();
+                    }
+                    mIsRefreshing = false;
+                    mListView.onRefreshComplete();
                     showLoginDialog();
                 } else {
                     if (!mIsRefreshing) {
@@ -148,23 +155,24 @@ public class RecordFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            if (mSettingManager.getUserId() <= 0) {
-                // 登录弹窗
-                showLoginDialog();
-            }
             setTitle();
             autoRefreshRecord();
 
             NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
         }
     }
+    
+    public void forceRefresh() {
+        if (!mIsRefreshing) {
+            autoRefreshRecord();
+        }
+        NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
+    }
 
     private void setTitle() {
         String title = null;
         if (mSettingManager.getUserId() <= 0) {
             title = getString(R.string.profile_record) + "(" + getString(R.string.unlogin) + ")";
-            // 登录弹窗
-            showLoginDialog();
         } else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURGUIDE && mSettingManager.getGuideMode() == 0) {
             title = getString(R.string.profile_record) + "(" + getString(R.string.tourguide) + ")";
         } else {
@@ -174,17 +182,16 @@ public class RecordFragment extends Fragment {
     }
 
     private void autoRefreshRecord() {
-        if (mSettingManager.getUserId() > 0) {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mListView.setRefreshing(true);
-                }
-            }, 300);
-        } else {
-            mIsRefreshing = false;
+        if (SettingManager.getInstance().getUserId() <= 0) {
             mListView.onRefreshComplete();
+            mIsRefreshing = false;
         }
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mListView.setRefreshing(true);
+            }
+        }, 300);
     }
 
     private void checkAdapter() {

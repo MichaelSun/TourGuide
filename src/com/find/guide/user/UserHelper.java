@@ -247,9 +247,7 @@ public class UserHelper {
     }
 
     public static interface OnGetUserInfoFinishListener {
-        public void onGetUserInfoSuccess(Tourist tourist);
-
-        public void onGetUserInfoFailed();
+        public void onGetUserInfo(int result, Tourist tourist);
     }
 
     public void getUserInfo(final int userId, OnGetUserInfoFinishListener listener) {
@@ -261,18 +259,23 @@ public class UserHelper {
                 try {
                     GetUserInfoRequest request = new GetUserInfoRequest(userId);
                     GetUserInfoResponse response = InternetUtils.request(mContext, request);
-                    if (response != null && response.tourist.getUserId() > 0) {
-                        if (mOnGetUserInfoFinishListener != null) {
-                            mOnGetUserInfoFinishListener.onGetUserInfoSuccess(response.tourist);
+                    if (response != null) {
+                        if (response.tourist != null && response.tourist.getUserId() > 0) {
+                            if (mOnGetUserInfoFinishListener != null) {
+                                mOnGetUserInfoFinishListener.onGetUserInfo(SUCCESS, response.tourist);
+                            }
+                        } else {
+                            if (mOnGetUserInfoFinishListener != null) {
+                                mOnGetUserInfoFinishListener.onGetUserInfo(FAILED, null);
+                            }
                         }
                         return;
                     }
                 } catch (NetWorkException e) {
                     e.printStackTrace();
                 }
-
                 if (mOnGetUserInfoFinishListener != null) {
-                    mOnGetUserInfoFinishListener.onGetUserInfoFailed();
+                    mOnGetUserInfoFinishListener.onGetUserInfo(NETWORK_ERROR, null);
                 }
             }
         });

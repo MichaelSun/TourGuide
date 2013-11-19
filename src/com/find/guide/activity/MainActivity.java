@@ -23,6 +23,7 @@ import com.find.guide.fragment.NearByFragment;
 import com.find.guide.fragment.RecordFragment;
 import com.find.guide.fragment.SearchFragment;
 import com.find.guide.fragment.SettingFragment;
+import com.find.guide.push.NotificationHelper;
 import com.find.guide.push.PushUtils;
 import com.find.guide.setting.SettingManager;
 import com.umeng.update.UmengUpdateAgent;
@@ -65,6 +66,7 @@ public class MainActivity extends BaseActivity {
             mCurrSelectedTabId = R.id.nearby_guide;
             if (getIntent() != null && ACTION_PUSH_CLICK.equals(getIntent().getAction())) {
                 mCurrSelectedTabId = R.id.record;
+                NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
             }
         }
 
@@ -171,7 +173,6 @@ public class MainActivity extends BaseActivity {
 
         case R.id.record:
             mCurrSelectedTabId = R.id.record;
-            // mActionbar.setTitle(R.string.profile_record);
 
             mNearbyGuideBtn.setSelected(false);
             mProfileRecordBtn.setSelected(true);
@@ -231,7 +232,7 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (!mPressedBackKey) {
                 mPressedBackKey = true;
-                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "再按一次退出找导游", Toast.LENGTH_SHORT).show();
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -264,6 +265,10 @@ public class MainActivity extends BaseActivity {
             } else if (ACTION_PUSH_CLICK.equals(intent.getAction())) {
                 mCurrSelectedTabId = R.id.record;
                 switchToTab(mCurrSelectedTabId);
+                
+                if (mProfileRecordFragment != null && mProfileRecordFragment instanceof RecordFragment) {
+                    ((RecordFragment)mProfileRecordFragment).forceRefresh();
+                }
             }
         }
     }

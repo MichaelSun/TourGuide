@@ -11,13 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 
 import com.baidu.android.pushservice.PushManager;
 import com.find.guide.R;
-import com.find.guide.activity.ChangePasswordActivity;
 import com.find.guide.activity.GuideIdentifyActivity;
 import com.find.guide.activity.LoginActivity;
 import com.find.guide.activity.ProfileActivity;
@@ -36,13 +36,14 @@ public class SettingFragment extends Fragment implements OnClickListener {
 
 	private View mLoginRegisterView;
 	private View mProfileView;
-	private View mChangePwdView;
 	private View mGuideAuthenticationView;
 	private View mUpdateView;
 	private View mFeedBackView;
 	private View mLogoutView;
 	private View mGuideArrowView;
 	private Switch mGuideSwitch;
+	private View mLine1;
+	private View mLine2;
 
 	private Dialog mDialog = null;
 
@@ -65,7 +66,6 @@ public class SettingFragment extends Fragment implements OnClickListener {
 
 		mLoginRegisterView = view.findViewById(R.id.setting_login);
 		mProfileView = view.findViewById(R.id.setting_profile);
-		mChangePwdView = view.findViewById(R.id.setting_change_pwd);
 		mGuideAuthenticationView = view
 				.findViewById(R.id.setting_guide_authentication);
 		mUpdateView = view.findViewById(R.id.setting_update);
@@ -73,10 +73,11 @@ public class SettingFragment extends Fragment implements OnClickListener {
 		mLogoutView = view.findViewById(R.id.setting_logout);
 		mGuideArrowView = view.findViewById(R.id.guide_arrow);
 		mGuideSwitch = (Switch) view.findViewById(R.id.guide_switch);
+		mLine1 = view.findViewById(R.id.line1);
+		mLine2 = view.findViewById(R.id.line2);
 
 		mLoginRegisterView.setOnClickListener(this);
 		mProfileView.setOnClickListener(this);
-		mChangePwdView.setOnClickListener(this);
 		mGuideAuthenticationView.setOnClickListener(this);
 		mUpdateView.setOnClickListener(this);
 		mFeedBackView.setOnClickListener(this);
@@ -131,15 +132,17 @@ public class SettingFragment extends Fragment implements OnClickListener {
 		if (mSettingManager.getUserId() < 0) {
 			mLoginRegisterView.setVisibility(View.VISIBLE);
 			mProfileView.setVisibility(View.GONE);
-			mChangePwdView.setVisibility(View.GONE);
 			mGuideAuthenticationView.setVisibility(View.GONE);
+			mLine1.setVisibility(View.GONE);
+			mLine2.setVisibility(View.GONE);
 			mLogoutView.setVisibility(View.GONE);
 			mFeedBackView.setBackgroundResource(R.drawable.bg_bottom);
 		} else if (mSettingManager.getUserType() == Tourist.USER_TYPE_TOURIST) {
 			mLoginRegisterView.setVisibility(View.GONE);
 			mProfileView.setVisibility(View.VISIBLE);
-			mChangePwdView.setVisibility(View.VISIBLE);
 			mGuideAuthenticationView.setVisibility(View.VISIBLE);
+			mLine1.setVisibility(View.VISIBLE);
+            mLine2.setVisibility(View.VISIBLE);
 			mLogoutView.setVisibility(View.VISIBLE);
 			mProfileView.setBackgroundResource(R.drawable.bg_top);
 			mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
@@ -149,8 +152,9 @@ public class SettingFragment extends Fragment implements OnClickListener {
 		} else {
 			mLoginRegisterView.setVisibility(View.GONE);
 			mProfileView.setVisibility(View.VISIBLE);
-			mChangePwdView.setVisibility(View.VISIBLE);
 			mGuideAuthenticationView.setVisibility(View.VISIBLE);
+			mLine1.setVisibility(View.VISIBLE);
+            mLine2.setVisibility(View.VISIBLE);
 			mLogoutView.setVisibility(View.VISIBLE);
 			mProfileView.setBackgroundResource(R.drawable.bg_top);
 			mFeedBackView.setBackgroundResource(R.drawable.bg_middle);
@@ -178,9 +182,6 @@ public class SettingFragment extends Fragment implements OnClickListener {
 			break;
 		case R.id.setting_profile:
 			profile();
-			break;
-		case R.id.setting_change_pwd:
-			changePassword();
 			break;
 		case R.id.setting_guide_authentication:
 			guideIdentify();
@@ -249,11 +250,6 @@ public class SettingFragment extends Fragment implements OnClickListener {
 
 	private void profile() {
 		Intent intent = new Intent(getActivity(), ProfileActivity.class);
-		startActivity(intent);
-	}
-
-	private void changePassword() {
-		Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
 		startActivity(intent);
 	}
 

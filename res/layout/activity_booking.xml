@@ -34,7 +34,6 @@
                 android:layout_toRightOf="@id/guide_header_iv"
                 android:maxWidth="150dp"
                 android:singleLine="true"
-                android:text="张帝"
                 android:textColor="@color/default_text_color"
                 android:textSize="20sp" />
 
@@ -49,14 +48,14 @@
                 android:src="@drawable/icon_male" />
 
             <TextView
-                android:id="@+id/travel_agency"
+                android:id="@+id/star_evaluate_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/guide_name_tv"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
-                android:singleLine="true"
+                android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/guide_header_iv"
+                android:singleLine="true"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
@@ -67,7 +66,7 @@
                 android:layout_alignBottom="@id/guide_header_iv"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/guide_header_iv"
-                android:background="@drawable/star_big_gold" />
+                android:background="@drawable/star_big_silver" />
 
             <View
                 android:id="@+id/guide_star2"
@@ -76,7 +75,7 @@
                 android:layout_alignTop="@id/guide_star1"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star1"
-                android:background="@drawable/star_big_gold" />
+                android:background="@drawable/star_big_silver" />
 
             <View
                 android:id="@+id/guide_star3"
@@ -85,7 +84,7 @@
                 android:layout_alignTop="@id/guide_star1"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star2"
-                android:background="@drawable/star_big_gold" />
+                android:background="@drawable/star_big_silver" />
 
             <View
                 android:id="@+id/guide_star4"
@@ -94,7 +93,7 @@
                 android:layout_alignTop="@id/guide_star1"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star3"
-                android:background="@drawable/star_big_gold" />
+                android:background="@drawable/star_big_silver" />
 
             <View
                 android:id="@+id/guide_star5"
@@ -104,17 +103,6 @@
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/guide_star4"
                 android:background="@drawable/star_big_silver" />
-
-            <TextView
-                android:id="@+id/star_evaluate_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/guide_star5"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/guide_star5"
-                android:text="10次评价"
-                android:textColor="@color/default_text_color"
-                android:textSize="18sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -132,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:text="城        市"
+                android:text="@string/guide_city"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
 
@@ -144,10 +132,131 @@
                 android:layout_marginRight="15dp"
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
-                android:text="北京"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/guide_card_id_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="@string/guide_card_id"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/guide_card_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle"
+            android:minHeight="50dp"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
+
+            <TextView
+                android:id="@+id/travel_agency_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="旅行社"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/travel_agency_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_middle"
+            android:minHeight="50dp"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
+
+            <TextView
+                android:id="@+id/be_guide_year_label"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="领证年份"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/be_guide_year_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,10 +286,16 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="15dp"
                 android:gravity="right|center_vertical"
-                android:text="故宫"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/guide_history_layout"
@@ -188,7 +303,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/bg_middle" >
+            android:background="@drawable/bg_bottom" >
 
             <TextView
                 android:id="@+id/guide_history_label"
@@ -219,42 +334,13 @@
                 android:layout_toRightOf="@id/guide_history_label"
                 android:gravity="right"
                 android:singleLine="true"
-                android:text="导游历史"
+                android:text="@string/guide_history"
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/bg_bottom"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/guide_card_id_label"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:text="@string/guide_card_id"
-                android:textColor="@color/default_text_color"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/guide_card_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:gravity="right|center_vertical"
-                android:singleLine="true"
-                android:textColor="@color/default_text_color"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
+            android:id="@+id/destination_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -288,6 +374,14 @@
                 android:textColorHint="@color/default_hint_color"
                 android:textSize="18sp" />
         </LinearLayout>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/start_time_layout"
@@ -330,6 +424,14 @@
                 android:textColor="@color/default_text_color"
                 android:textSize="18sp" />
         </RelativeLayout>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/card_line" />
 
         <RelativeLayout
             android:id="@+id/end_time_layout"
@@ -390,7 +492,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:background="@null" />
+            android:background="@drawable/card_line" />
     </LinearLayout>
 
 </ScrollView>

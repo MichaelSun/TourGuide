@@ -179,8 +179,8 @@ public class GuideListActivity extends BaseActivity {
                 int pos = position - mListView.getRefreshableView().getHeaderViewsCount();
                 if (pos >= 0 && pos < mTourGuides.size()) {
                     TourGuide guide = mTourGuides.get(pos);
-                    Intent intent = new Intent(GuideListActivity.this, BookingActivity.class);
-                    intent.putExtra(BookingActivity.INTENT_EXTRA_GUIDE, guide);
+                    Intent intent = new Intent(GuideListActivity.this, GuideProfileActivity.class);
+                    intent.putExtra(GuideProfileActivity.INTENT_EXTRA_GUIDE, guide);
                     startActivity(intent);
                 }
             }
