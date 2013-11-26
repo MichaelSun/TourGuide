@@ -65,6 +65,8 @@ public class RecordFragment extends Fragment {
 
     private int ROWS = 21;
 
+    private boolean mForceRefresh = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,8 +125,12 @@ public class RecordFragment extends Fragment {
                 int pos = position - mListView.getRefreshableView().getHeaderViewsCount();
                 if (mRecordAdapter != null && mRecordAdapter instanceof GuideRecordAdapter) {
                     if (pos >= 0 && pos < mGuideEvents.size()) {
+                        GuideEvent event = mGuideEvents.get(pos);
+                        if (event.getEventStatus() == GuideEvent.EVENT_STATUS_ACCEPTED_BY_OTHER) {
+                            return;
+                        }
                         Intent intent = new Intent(getActivity(), GuideEventDetailActivity.class);
-                        intent.putExtra(GuideEventDetailActivity.INTENT_EXTRA_GUIDE_EVENT_OBJ, mGuideEvents.get(pos));
+                        intent.putExtra(GuideEventDetailActivity.INTENT_EXTRA_GUIDE_EVENT_OBJ, event);
                         startActivityForResult(intent, REQUEST_CODE_GUIDE_RECORD);
                     }
                 } else if (mRecordAdapter != null && mRecordAdapter instanceof InviteRecordAdapter) {
@@ -148,7 +154,17 @@ public class RecordFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
+        if (mForceRefresh) {
+            mForceRefresh = false;
+
+            setTitle();
+            autoRefreshRecord();
+            NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
+        }
+    }
+
+    public void forceRefresh() {
+        mForceRefresh = true;
     }
 
     @Override
@@ -157,16 +173,8 @@ public class RecordFragment extends Fragment {
         if (!hidden) {
             setTitle();
             autoRefreshRecord();
-
             NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
         }
-    }
-    
-    public void forceRefresh() {
-        if (!mIsRefreshing) {
-            autoRefreshRecord();
-        }
-        NotificationHelper.getInstance(TourGuideApplication.getInstance()).cancelAll();
     }
 
     private void setTitle() {
@@ -187,6 +195,7 @@ public class RecordFragment extends Fragment {
             mIsRefreshing = false;
         }
         mHandler.postDelayed(new Runnable() {
+
             @Override
             public void run() {
                 mListView.setRefreshing(true);

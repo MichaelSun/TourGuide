@@ -116,7 +116,10 @@ public class GuideEventDetailActivity extends BaseActivity implements OnClickLis
             } else if (mGuideEvent.getSatisfaction() == GuideEvent.SATISFACTION_BAD) {
                 satisfaction = "(不满意) ";
             }
-            mSatisfactionTv.setText(satisfaction + mGuideEvent.getSaContent());
+            if (!TextUtils.isEmpty(mGuideEvent.getSaContent())) {
+                satisfaction += mGuideEvent.getSaContent();
+            }
+            mSatisfactionTv.setText(satisfaction);
         } else {
             mEndTimeLayout.setBackgroundResource(R.drawable.bg_bottom);
             mSatisfactionLayout.setVisibility(View.GONE);
@@ -172,7 +175,7 @@ public class GuideEventDetailActivity extends BaseActivity implements OnClickLis
         }
 
         String[] items = new String[] { "打电话", "发短信" };
-        mAlertDialog = new AlertDialog.Builder(this).setTitle("联系导游")
+        mAlertDialog = new AlertDialog.Builder(this).setTitle("联系游客")
                 .setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

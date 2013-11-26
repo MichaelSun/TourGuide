@@ -36,9 +36,13 @@ public class PushMessageReceiver extends BroadcastReceiver {
             if (!TextUtils.isEmpty(message) && SettingManager.getInstance().getUserId() > 0) {
                 Message msg = JsonUtils.parse(message, Message.class);
                 if (msg != null && msg.toId == SettingManager.getInstance().getUserId()) {
-                    if (SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURGUIDE
-                            && SettingManager.getInstance().getGuideMode() == 1) {
-                        SettingManager.getInstance().setGuideMode(0);
+                    if (SettingManager.getInstance().getUserType() == Tourist.USER_TYPE_TOURGUIDE) {
+                        if (msg.type == Message.MSG_TYPE_INVITE || msg.type == Message.MSG_TYPE_BROADCAST
+                                || msg.type == Message.MSG_TYPE_EVALUATED) {
+                            SettingManager.getInstance().setGuideMode(0);
+                        } else if (msg.type == Message.MSG_TYPE_ACCEPTED || msg.type == Message.MSG_TYPE_REFUSED) {
+                            SettingManager.getInstance().setGuideMode(1);
+                        }
                     }
                     NotificationHelper.getInstance(context).notifyMessage(msg);
                 }

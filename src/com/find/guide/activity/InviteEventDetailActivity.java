@@ -130,7 +130,10 @@ public class InviteEventDetailActivity extends BaseActivity implements OnClickLi
             } else if (mInviteEvent.getSatisfaction() == InviteEvent.SATISFACTION_BAD) {
                 satisfaction = "(不满意) ";
             }
-            mSatisfactionTv.setText(satisfaction + mInviteEvent.getSaContent());
+            if (!TextUtils.isEmpty(mInviteEvent.getSaContent())) {
+                satisfaction += mInviteEvent.getSaContent();
+            }
+            mSatisfactionTv.setText(satisfaction);
         } else {
             mEndTimeLayout.setBackgroundResource(R.drawable.bg_bottom);
             mSatisfactionLayout.setVisibility(View.GONE);
